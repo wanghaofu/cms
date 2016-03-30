@@ -1,0 +1,34 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>AddPage</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="fpdf.css">
+</HEAD>
+<BODY>
+<H2>AddPage</H2>
+<TT>AddPage([<B>string</B> orientation])</TT>
+<H4 CLASS='st'>版本</H4>
+1.0
+<H4 CLASS='st'>内容</H4>
+加入新的一页到文件里。如果已经有一页存在，Footer()功能会先则行，并且会为先前一页则行结尾，然后才加入新的一页。加入新的一页后，新一页的左上角会定义为目前位置，根据这个位置来定义顶部边缘和左边边缘，而且，Header()也会则行，并且显示页头。字型会自动使用之前使用过的字型。如果你想继续使用之前同样字型，你就没有需要再则行SetFont()这个功能来定义新的字型。同样地，颜色和线宽也不需要从新定义。<br>
+系统会自动调整到基本的设定，把坐标起始位置设成左上角，并且增加纵坐标(y)，使到坐标向下移。
+<H4 CLASS='st'>参数</H4>
+<TT><U>orientation</U></TT>
+<BLOCKQUOTE>
+orientation(整页的方向)。定义整页的方向。可用下面的数值：
+<UL>
+<LI><TT>P or Portrait</TT>: 直向
+<LI><TT>L or Landscape</TT>: 横向
+</UL>
+默认值是通过FPDF()来定义。
+</BLOCKQUOTE>
+<H4 CLASS='st'>参见</H4>
+<A HREF="fpdf.htm">FPDF()</A>,
+<A HREF="header.htm">Header()</A>,
+<A HREF="footer.htm">Footer()</A>,
+<A HREF="setmargins.htm">SetMargins()</A>.
+<H6></H6>
+<HR>
+<DIV ALIGN="CENTER"><A HREF="index.htm">索引</A></DIV>
+</BODY>
+</HTML>

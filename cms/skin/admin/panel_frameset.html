@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>[$cms_version]</title>
+<meta name="robots" content="noindex">
+<style type="text/css">
+body {padding:0 0 0 0;width:100%;height:100%}
+</style>
+</head>
+<body onload="loadframe()" scroll="no">
+<script type="text/javascript">
+
+function FixPrototypeForGecko(){
+function element_prototype_get_runtimeStyle(){
+ //return style instead...
+ return this.style;
+}
+function window_prototype_get_event(){
+ return SearchEvent();
+}
+function event_prototype_get_srcElement(){
+ return this.target;
+}
+function SearchEvent(){
+	if(document.all){//IE
+		return window.event;
+	}
+	func=SearchEvent.caller;
+	while(func!=null){
+		var arg0=func.arguments[0];
+		if(arg0){
+			if(arg0.constructor==Event || arg0.constructor=="[object MouseEvent]"){
+				return arg0;
+			}
+		}
+	func=func.caller;
+	}
+	return null;
+}
+function nocontextmenu(){
+	event.cancelBubble=true
+	event.returnValue=false;
+	return false;
+}
+function rightclick(e){
+	if(e.which==2||e.which==3){
+		window.removeEventListener("mouseup",rightclick,false);
+		e.srcElement.oncontextmenu.call;
+	}
+}
+function norightclick(e){
+	if(window.Event){
+		if(e.which==2||e.which==3){
+			if(e.srcElement.oncontextmenu!=null && typeof(e.srcElement.oncontextmenu)=="function"){
+				window.addEventListener("mouseup",rightclick,false);
+			}
+			return false;
+		}
+  }else if(event.button==2||event.button==3){
+		event.cancelBubble=true;
+		event.returnValue=false;
+		return false; 
+	}
+}
+function getElementPos(obj){
+	var ua = navigator.userAgent.toLowerCase();
+	var isOpera = (ua.indexOf('opera') != -1);
+	var isIE = (ua.indexOf('msie') != -1 && !isOpera); // not opera spoof
+	if(obj.parentNode === null || obj.style.display == 'none'){
+		return false;
+	}
+	var parent = null;
+	var pos = [];
+	var box;
+	if(obj.getBoundingClientRect){//IE
+		box = obj.getBoundingClientRect();
+		var scrollTop = Math.max(document.documentElement.scrollTop,document.body.scrollTop);
+		var scrollLeft = Math.max(document.documentElement.scrollLeft,document.body.scrollLeft);
+		return {x:box.left + scrollLeft, y:box.top + scrollTop};
+	}
+	else if(document.getBoxObjectFor){// gecko
+		box = document.getBoxObjectFor(obj);
+		var borderLeft = (obj.style.borderLeftWidth)?parseInt(obj.style.borderLeftWidth):0;
+		var borderTop = (obj.style.borderTopWidth)?parseInt(obj.style.borderTopWidth):0;
+		pos = [box.x - borderLeft, box.y - borderTop];
+	}else{// safari & opera
+		pos = [obj.offsetLeft, obj.offsetTop];
+		parent = obj.offsetParent;
+		if(parent != obj){
+			while(parent){
+				pos[0] += parent.offsetLeft;
+				pos[1] += parent.offsetTop;
+				parent = parent.offsetParent;
+			}
+		}
+		if(ua.indexOf('opera') != -1 || (ua.indexOf('safari') != -1 && obj.style.position == 'absolute' )){
+			pos[0] -= document.body.offsetLeft;
+			pos[1] -= document.body.offsetTop;
+		}
+	}
+	if(obj.parentNode){
+		parent = obj.parentNode;
+	}else{
+		parent = null;
+	}
+	while(parent && parent.tagName != 'BODY' && parent.tagName != 'HTML'){ // account for any scrolled ancestors 
+		pos[0] -= parent.scrollLeft; 
+		pos[1] -= parent.scrollTop; 
+		if(parent.parentNode){
+			parent = parent.parentNode;
+		}else{
+			parent = null;
+		}
+	}
+	return {x:pos[0], y:pos[1]};
+}
+	function __createPopup(){
+		var SetElementStyles = function( element, styleDict ){
+			var style = element.style;
+			for(var styleName in styleDict ){
+				style[ styleName ] = styleDict[ styleName ] ;
+			}
+		}
+		
+		var eDiv = top.document.createElement( 'div' );
+		SetElementStyles(eDiv,{
+															'position': 'absolute',
+															'top': 0 + 'px',
+															'left': 0 + 'px',
+															'width': 0 + 'px',
+															'height': 0 + 'px',
+															'zIndex': 1000,
+															'display' : 'none',
+															'overflow' : 'hidden',
+															'background:' : 'red'
+														});
+		eDiv.body = eDiv;
+		var opened = false ;
+		var setOpened = function( b ) {
+			opened = b;
+		}
+		var getOpened = function() {
+			return opened ;
+		}
+		return {
+			htmlTxt : '',
+			document : eDiv,
+			isOpen : getOpened(),
+			isShow : false,
+			hide : function() {
+				SetElementStyles( eDiv, {
+																	'top': 0 + 'px',
+																	'left': 0 + 'px',
+																	'width': 0 + 'px',
+																	'height': 0 + 'px',
+																	'display' : 'none'
+																	} );
+				eDiv.innerHTML = '' ;
+				this.isShow = false ;
+			},
+			show : function( iX, iY, iWidth, iHeight, oElement ) {
+				if (!getOpened()) {
+					top.document.body.appendChild( eDiv ) ;
+					setOpened( true ) ; 
+				};
+				this.htmlTxt = eDiv.innerHTML ;
+				if (this.isShow) {
+					this.hide();
+				};
+				eDiv.innerHTML = this.htmlTxt ;
+				var pos = getElementPos( oElement ) ;
+				eDiv.style.left = ( iX ) + 'px' ;
+				eDiv.style.top = ( iY ) + 'px' ;
+				eDiv.style.width = iWidth + 'px' ;
+				eDiv.style.height = iHeight + 'px' ;
+				eDiv.style.display = 'block' ;
+				this.isShow = true ;
+			}
+		}
+	}
+return function(win,a){
+	a=a||{};
+	win=win||window;
+	not_ie=navigator.userAgent.indexOf("Firefox")>0;
+	if(not_ie){
+		win.constructor.prototype.__defineGetter__("event",window_prototype_get_event);
+		win.Event.prototype.__defineGetter__("srcElement",event_prototype_get_srcElement);
+	}
+	if(a.runtimeStyle&&not_ie)HTMLElement.prototype.__defineGetter__("runtimeStyle",element_prototype_get_runtimeStyle);
+	if(a.oncontextmenu&&not_ie)win.document.oncontextmenu=nocontextmenu;//for IE5+
+	if(a.onmousedown&&not_ie)win.document.onmousedown=norightclick;//for all others
+	if(a.createPopup)win.createPopup=win.createPopup||function(){return __createPopup();};win.getElementPos=getElementPos;
+	return true;
+}
+}
+</script>
+<div style="left:0px;top:0px;position:absolute;width:100%;height:100%;float:left;clear:both;">
+<iframe id="main" width="100%" height="100%" src="about:blank" frameborder="0" scrolling="no"></iframe>
+</div>
+<div style="left:0px;top:0px;position:absolute;display:none"><textarea id="source">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" >
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>[$cms_version]</title>
+<meta name="robots" content="noindex">
+<script type="text/javascript">
+function loadCols(){
+	var frames = document.getElementsByTagName('frameset'),i,name;
+	var do_fix = window.addEventListener && !document.all;
+	for(i=0;i<frames.length;i+=1){
+		name = frames[i].name || frames[i].getAttribute('name');
+		if(name&&name!=''){
+			eval('top[name]='+name+';');
+		}
+	}
+	if(window.addEventListener){
+		frames[0].rows='91,*';
+	}
+	frames = document.getElementsByTagName('frame');
+	for(i=0;i<frames.length;i+=1){
+		name = frames[i].name || frames[i].getAttribute('name');
+		if(name&&name!=''){
+			eval('top[name]='+name+';');
+		}
+	}
+
+	try{
+		panelMain.load("mnpFrames.data");
+	}catch(e){
+		return;
+	}
+	var colWidth = panelMain.getAttribute("colWidth");
+	if (colWidth){
+		panelMain.cols = colWidth + ",*";
+		if (colWidth == "0"){
+			top.panelHeader.MNP_showtoc.style.display = "";
+		}
+	}
+}
+function saveCols(){
+	panelMain.setAttribute("colWidth", fstMenuColumn.offsetWidth);
+	try{
+		panelMain.save("mnpFrames.data");
+	}catch(e){}
+}
+</script>
+</head>
+<frameset rows="60,*" frameborder="0" framespacing="0" border="0" >
+	<frame name="panelHeader" scrolling="no" noresize="true" src="[$base_url]o=sys::view&extra=header">
+	<frameset name="panelMain" cols="216,*" framespacing="6" frameborder="1" border="6" id="panelMain" style="behavior:url(#default#userdata);" onresize="saveCols()" onmouseover="if(typeof(top.panelHeader.oPopup)!='undefined') top.panelHeader.oPopup.hide();">
+		<frameset framespacing="0" frameborder="0" border="0" id="fstMenuColumn" rows="21,*,0,0" name="fstMenuColumn" >
+			<frame name="panelBox" scrolling="no" src="[$base_url]o=sys::view&extra=box" >
+			<frame name="panelMenu" scrolling="yes" src="[$base_url]o=sys::view&extra=menu">
+			<frame name="actionFrame" scrolling="yes" src="" marginheight="0" marginwidth="0" framespacing="1" frameborder="1"  border="1">
+			<frame name="CrawlerTaskFrame" scrolling="yes" src="[$base_url]o=sys::view&extra=initMultiThread" marginheight="0" marginwidth="0" framespacing="1" frameborder="1"  border="1">
+		</frameset>
+		<frameset name="panelMain1" rows="*,0" framespacing="3"  frameborder="1"  scrolling="no"  id="panelMain1"  >
+			<frame name="panelWork" frameborder="0"   src="[$base_url]o=sys::view&extra=workarea" scrolling="yes" >
+			<!--  <frame src="admin_collection.php?sId=[$sId]&o=initMultiThread"  frameborder="0" name="CrawlerTaskFrame" scrolling="no"  framespacing="0"   >-->
+			<frame src="[$base_url]o=sys::view&extra=taskInfo" name="TaskInfoFrame" scrolling="yes"     >
+		</frameset>
+	</frameset>
+</frameset>
+<noframes>{lang:browser_not_support_frame_mode}</noframes>
+</html>
+</textarea></div>
+<script type="text/javascript">
+function loadframe(){
+var iframe = document.getElementById("main");
+iframe.contentWindow.document.write(document.getElementById("source").value);
+while(iframe.contentWindow.loadCols&&typeof(iframe.contentWindow.loadCols)=='function'){
+iframe.contentWindow.loadCols();
+break;
+}
+}
+</script>
+</body>
+</html>

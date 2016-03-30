@@ -1,0 +1,500 @@
+<include: file="header.html">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>.text{border:1 solid buttonface;background-color:buttonhighlight}
+.button{
+	height:18;
+	background-color:#FFFFFF;
+	border: 1 solid #CCCCCC;
+	font-family: "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+}
+
+.tablelist {
+	background-color: #FFFFFF;
+}
+select {
+	font-family: "Arial", "Helvetica", "sans-serif";
+	font-size: 12px;
+}
+</style>
+<script>
+function submit1(){
+   
+    dm=document.content; 
+<if $eInfo.title ==1>
+  
+    if (dm.title.value == "" ){
+		alert  ("{lang:wenzhangmingbunengweikong}！");
+		return false;
+	}
+</if>
+<if $eInfo.author ==1>
+
+	if (dm.author.value == "" ){
+		alert ("{lang:zuozhebunengweikong}！");
+		return false;
+	}
+</if>	
+	setMode(false);
+	setMode(true);
+	setMode(false);
+	setMode(true);
+     dm.doc_content.value=dm.SaveContent.value;
+	 dm.preview.value="";
+     dm.submit();
+
+  
+}
+
+function submit2(){
+ 
+    dm=document.content; 
+    if (dm.title.value == "" ){
+		alert ("{lang:wenzhangmingbunengweikong}！");
+		return false;
+	}
+	if (dm.author.value == "" ){
+		alert ("{lang:zuozhebunengweikong}！");
+		return false;
+	}
+	//alert ("{lang:wenzhangmingbunengweikong}！");
+	dm.preview.value="viewcontent";
+	setMode(false);
+	setMode(true);
+	setMode(false);
+	setMode(true);
+     dm.doc_content.value=dm.SaveContent.value;
+	
+      
+     dm.submit();
+	 
+
+  
+}
+function choosephoto(){
+  Today = new Date();
+newName=Today.valueOf();
+
+ url="../html/js/img.php?cId=" + document.content.cId.value + "&newName=" + newName;
+ ab=showMeDialog(url,"color","dialogWidth:477pt;dialogHeight:240pt;help:0;status:0");
+//pattern="/\'(http:\/\/[^\"><\s]+)\'/ise";
+
+
+//document.write(ab)
+myRe=/\'(http:\/\/[^\"\']+)\'/ig;
+myArray = myRe.exec(ab);
+//document.write(myArray[1])
+  if (ab!="") {
+    document.content.photo_url.value=myArray[1];
+  }
+  document.content.photo_url.focus();
+}
+function chooseRelateDoc(cId) {
+url="make.php?action=make_list&cId=" + cId;
+var tplname=showMeDialog(url,"color","dialogWidth:530pt;dialogHeight:270pt;help:0;status:0");
+//while (tplname=="%reload%") {
+//	tplname=showMeDialog(url,"color","dialogWidth:200pt;dialogHeight:200pt;help:0;status:0");
+
+//}
+//window.open(url,"","scrollbars")
+if (tplname != null) document.content._relatelink.value=document.content._relatelink.value + tplname;
+
+document.content._relatelink.focus();
+
+}
+function choosecolor() {
+  if (!Error()) return;
+  var arr = showMeDialog("../html/js/color.htm","color","dialogWidth:200pt;dialogHeight:175pt;help:0;status:0");
+  if (arr != null) document.content._highlight.value=arr ;
+ document.content._highlight.focus();	
+}
+function show(MenuID)
+{
+ if(MenuID=="photo")
+ {
+  document.all.photo.style.display="";
+
+ }else{
+ document.all.photo.style.display="none";
+document.content.photo_url.value="";
+ } 
+
+ 
+}
+</script>
+
+
+<script src="../html/js/edit_source.js"></script>
+<table border=0   align=center cellPadding=0 cellSpacing=0  >
+ <tr> 
+      <td height=10> </td>
+</tr>
+</table>
+
+<table width="98%" border=0   align=center cellPadding=0 cellSpacing=1 class="Tablebg" >
+   <form method="POST" action="[$base_url]o=edit_submit&type=main&cId=[$cInfo.cId]&pId=[$pInfo.pId]&mId=[$pInfo.mId]" name="content"   ><!--target="operation"-->
+
+  <tbody>
+    <tr > 
+      <td  align="center" class="Tableheaderbg"> 
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" height=20>
+	   
+          <tr> 
+            <td align="left" >&nbsp;<img src="../html/images/icon.gif" width="12" height="12">&nbsp;<font color="#FFFFFF"><strong>[$cms_version] 
+              Editor </strong>   &raquo; [$edit_info]</font></td>
+          </tr>
+        </table>
+		
+		</td>
+    </tr>
+ 
+    <tr bgcolor="EFEFEF"> 
+      <td bgcolor="EFEFEF"><table width="100%" border="0">
+	 
+          <tr> 
+            <td> <script src="../html/js/html.js"></script>
+			</td>
+          </tr>
+		  
+          <tr> 
+            <td> </td>
+          </tr>
+        </table> 
+		
+          <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#CCCCCC">
+            <tr class="tablelist"> 
+              <td colspan="2"> <Iframe name=EditContent  frameborder=0 class=button style="width:100%;height:350;" > 
+                </Iframe> <textarea name=SaveContent   class=button  style="height:350;overflow:auto;display:none; background-color:#FFFFFF;scrollbar-face-color: #FFFFFF;scrollbar-highlight-color: #FFFFFF;scrollbar-shadow-color: #cccccc;scrollbar-3dlight-color: #cccccc;scrollbar-arrow-color:  #cccccc;scrollbar-track-color: #FFFFFF;scrollbar-darkshadow-color: #cccccc;" >
+[$pInfo.mContent]
+			</textarea> 
+              </td>
+            </tr>
+<if $eInfo.title ==1>
+            <tr class="tablelist"> 
+              <td width="200">{lang:biaoti}：</td>
+              <td> <input name="title" type="text" class="button" id="title" value='[$pInfo.mTitle]' size="40"> 
+              </td>
+            </tr>
+</if>
+
+<if $eInfo.author ==1>
+            <tr class="tablelist"> 
+              <td width="200">{lang:zuozhe}：</td>
+              <td> <input name="author" type="text" class="button" id="author2" value='[$pInfo.mAuthor]' size="40"> 
+              </td>
+            </tr>
+</if>
+
+<if $eInfo.editor ==1>
+			<tr class="tablelist"> 
+              <td width="200">{lang:zerenbianji}：</td>
+              <td> <input name="offer" type="text" class="button" id="author23" value='[$pInfo.mEditor]' size="40"> 
+              </td>
+            </tr>
+</if>
+<if $eInfo.keywords ==1>
+			<tr class="tablelist"> 
+              <td>{lang:guanjianci}：</td>
+              <td> <input name="keywords" type="text" class="button" id="keywords" value='[$pInfo.mKeywords]' size="40"> 
+                &nbsp;[{lang:fengefu}"|"] </td>
+            </tr>
+</if>
+
+<if $eInfo.FId ==1>
+            <tr class="tablelist"> 
+              <td>{lang:wenzhangsuoshufenlei}：</td>
+              <td> <select name="cate" disabled>     
+		<loop $catelist key=key var=var> 
+			 <if $var.cId == $pInfo.mCId>
+          <option value="[$var.cId]" selected>[$var.cHeader@repeat::&nbsp;&nbsp;&nbsp;&nbsp;]-&nbsp;[$var.cName]</option>
+			 <else>
+	      <option value="[$var.cId]">[$var.cHeader@repeat::&nbsp;&nbsp;&nbsp;&nbsp;]-&nbsp;[$var.cName]</option>
+		 </if>
+          </loop>
+		  
+		  </select>&nbsp;&nbsp;&nbsp;&nbsp;<input name="checkbox1" type="checkbox" id="checkbox12" onclick=usecate() value="checkbox">  <label for="checkbox12">{lang:xiugaigsuoshufenlei}</label>
+                </td>
+            </tr>
+
+</if>
+<if $eInfo.PublishTime ==1>
+            <tr class="tablelist"> 
+              <td>{lang:wenzhangfaburiqi}：</td>
+              <td> <input name="year" type="text" class="button" id="dTime" onFocus="CreateMonthView(this)"   onBlur="DeleteMonthView(this)" value="[$year]"> 
+                <select name="hour">
+                 [$hour]
+				  
+                  
+                </select>
+                {lang:shi} 
+                <select name="minute">
+                    [$minute]
+				  
+                  
+                </select>
+                {lang:fen} <select name="second">
+                    [$second]
+				  
+                  
+                </select>
+                {lang:miao} </td>
+            </tr>
+</if>
+
+<if $eInfo.type ==1>
+
+            <tr class="tablelist"> 
+              <td>{lang:wenzhangleixing}：</td>
+              <td>
+                    <if $mdocinfo.mType=='1'> 
+                   <input name="_type" type="radio" value="0" checked onclick="show('none')" id="_type_1"><label for ="_type_1">   {lang:wenben}</label>
+                  <input name="_type" type="radio" value="1"  onclick="show('photo')"  id="_type_2"><label for ="_type_2">    {lang:tuwen}</label>
+                    <else>
+                   <input name="_type" type="radio" value="0" onclick="show('none')" id="_type_1"><label for ="_type_1">   {lang:wenben}</label>
+                  <input name="_type" type="radio" value="1" checked onclick="show('photo')"  id="_type_2"><label for ="_type_2">   {lang:tuwen}</label>
+                    </if> </td>
+            </tr>
+            <if $mdocinfo.mPhoto!=''>
+            <tr class="tablelist" id=photo> 
+              <td>{lang:tuwentupian}：</td>
+              <td><input name="photo_url" type="text" class="button" id="photo_url" value="[$pInfo.mPhoto]"  >
+                <a href="javascript:void(0)" onclick=choosephoto()><img src="../html/images/search.gif" width="16" height="16" border="0"></a></td>
+            </tr>
+            <else>
+            <tr class="tablelist" style="display:none" id=photo> 
+              <td>{lang:tuwentupian}：</td>
+              <td><input name="photo_url" type="text" class="button" id="photo_url" value="[$pInfo.mPhoto]"  >
+                <a href="javascript:void(0)" onclick=choosephoto()><img src="../html/images/search.gif" width="16" height="16" border="0"></a></td>
+            </tr>
+            </if>
+            <tr bgcolor="EFEFEF" > 
+              <td colspan="2">&nbsp; </td>
+            </tr>
+</if>
+
+
+
+<if $eInfo.from ==1>
+              <td>{lang:laiyuanwangzhan}：</td>
+              <td> {lang:mingcheng}： 
+                <input name="from_site" type="text" class="button" id="author23" value="[$mdocinfo.mFromSite]" size="25"> 
+                &nbsp;&nbsp;&nbsp;&nbsp;<u>URL</u>: 
+                <input name="from_site_link" type="text" class="button" id="offer" value="[$mdocinfo.mFromSiteLink]" size="25"> 
+              </td>
+            </tr>
+</if>
+<if $eInfo.intro ==1>
+            <tr class="tablelist"> 
+              <td>{lang:wenzhangjianjie}：</td>
+              <td><textarea name="_intro" class="button" id="_intro" style="height:70;width=80%;overflow:auto; background-color:#FFFFFF;scrollbar-face-color: #FFFFFF;scrollbar-highlight-color: #FFFFFF;scrollbar-shadow-color: #cccccc;scrollbar-3dlight-color: #cccccc;scrollbar-arrow-color:  #cccccc;scrollbar-track-color: #FFFFFF;scrollbar-darkshadow-color: #cccccc;" >[$pInfo.mIntro]</textarea></td>
+            </tr>
+</if>
+<if $eInfo.relateDoc ==1>
+            <tr class="tablelist"> 
+              <td>{lang:xiangguanwenzhang}：</td>
+              <td><textarea name="_relatelink" class="button" id="_relatelink" style="height:100;width=80%;overflow:auto; background-color:#FFFFFF;scrollbar-face-color: #FFFFFF;scrollbar-highlight-color: #FFFFFF;scrollbar-shadow-color: #cccccc;scrollbar-3dlight-color: #cccccc;scrollbar-arrow-color:  #cccccc;scrollbar-track-color: #FFFFFF;scrollbar-darkshadow-color: #cccccc;">[$pInfo.mRelateDoc]</textarea>
+                <a href="javascript:void(0)" onclick=chooseRelateDoc('[$cId]')> <img src="../html/images/search.gif" width="16" height="16" border="0"></a> 
+              </td>
+            </tr>
+</if>
+<if $eInfo.isRecommend ==1>
+           <td>{lang:shifoutuijian}：</td>
+              <td>
+                   
+                    <if $mdocinfo.mIsRecommend=='1'> 
+                   <input type="radio" name="isrecommend" value="1" checked id="isrecommend_1">
+                   <label for="isrecommend_1">{lang:shi}</label> 
+                   <input name="isrecommend" type="radio" value="0"  id="isrecommend_2">
+                    <label for="isrecommend_2">{lang:fou}</label> 
+					<else> 
+                   <input type="radio" name="isrecommend" value="1"  id="isrecommend_1">
+                   <label for="isrecommend_1">{lang:shi}</label> 
+                   <input name="isrecommend" type="radio" value="0"  id="isrecommend_2" checked>
+                    <label for="isrecommend_2">{lang:fou}</label> 
+                    </if>
+					
+					</td>
+            </tr>
+</if>
+
+<if $eInfo.isTop ==1>
+            <tr class="tablelist"> 
+              <td>{lang:shifouwangu}：</td>
+              <td>
+                    <if $mdocinfo.mIsTop=='1'> 
+                   <input type="radio" name="istop" value="1" checked id="istop_1">
+                   <label for="istop_1">{lang:shi}</label> 
+                   <input name="istop" type="radio" value="0"  id="istop_2">
+                    <label for="istop_2">{lang:fou}</label> 
+					<else> 
+                   <input type="radio" name="istop" value="1"  id="istop_1">
+                   <label for="istop_1">{lang:shi}</label> 
+                   <input name="istop" type="radio" value="0"  id="istop_2" checked>
+                    <label for="istop_2">{lang:fou}</label> 
+                    </if>
+
+			  
+		</td>
+            </tr>
+</if>
+
+<if $eInfo.isStrong ==1>
+            <tr class="tablelist"> 
+              <td>{lang:biaotijiacu}：</td>
+              <td>
+	                    <if $mdocinfo.mIsStrong=='1'> 
+                   <input type="radio" name="isstrong" value="1" checked id="isstrong_1">
+                   <label for="isstrong_1">{lang:shi}</label> 
+                   <input name="isstrong" type="radio" value="0"  id="isstrong_2">
+                    <label for="isstrong_2">{lang:fou}</label> 
+					<else> 
+                   <input type="radio" name="isstrong" value="1"  id="isstrong_1">
+                   <label for="isstrong_1">{lang:shi}</label> 
+                   <input name="isstrong" type="radio" value="0"  id="isstrong_2" checked>
+                    <label for="isstrong_2">{lang:fou}</label> 
+                    </if>
+					</td>
+            </tr>
+</if>
+
+<if $eInfo.isColor ==1>
+            <tr class="tablelist"> 
+              <td width="200">{lang:qiyongcaisexianshi}：</td>
+              <td><table border="0">
+                  <tr> 
+                    <td align="center"> <input name="_highlight" type="text" class="button" id="_highlight" value="[$mdocinfo.mHighLight]" size="25" > 
+                      <a href="javascript:void(0);" onclick=choosecolor('[$cId]')><img src="../html/images/search.gif" width="16" height="16" border="0"></a> 
+                    </td>
+                  </tr>
+                </table></td>
+            </tr>
+</if>
+<if $eInfo.newTpl ==1>
+            <tr class="tablelist"> 
+              <td>{lang:qiyongxinmoban}：</td>
+              <td> <select name="tpl" id="select" disabled>
+                        <option value="-">{lang:shiyongmoren}</option>
+<loop $tInfo var=var>
+                       <option value="[$var.tName]">[$var.tName]</option>
+</loop>
+                      </select>
+					  
+					  &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" onclick=usetpl() name="checkbox" id="usertpl" value="checkbox">
+					<label for="usertpl">{lang:qiyong}</label> 
+                   </td>
+            </tr>
+</if>
+            <tr bgcolor="EFEFEF" > 
+              <td colspan="2">&nbsp; </td>
+            </tr>
+
+<loop $extraInfo key=key var=var>
+            <tr class="tablelist"> 
+              <td width="200">[$var.rName]：</td>
+              <td>
+			  <if $var.fieldInput == 'text'>
+	                  <input name="data_[$var.fieldName]" type="text" > 
+				<if $var.fieldValue != ''>
+			   <select name="[$var.fieldName]_select"  onchange="if(this.options[this.selectedIndex].value != '') { 
+this.form.data_[$var.fieldName].value= this.options[this.selectedIndex].value;
+} "> 				<option value="">{lang:kexuanzhi}:</option>
+
+				<loop $var.selectValue var=varIn>
+				<option value="[$varIn]">[$varIn]</option>
+				</loop>
+				</select>
+				</if>
+			  <elseif  $var.fieldInput == 'textaera'>
+				<textarea name="data_[$var.fieldName]" class="button" id="[$var.fieldName]" style="height:70;width=80%;overflow:auto; background-color:#FFFFFF;scrollbar-face-color: #FFFFFF;scrollbar-highlight-color: #FFFFFF;scrollbar-shadow-color: #cccccc;scrollbar-3dlight-color: #cccccc;scrollbar-arrow-color:  #cccccc;scrollbar-track-color: #FFFFFF;scrollbar-darkshadow-color: #cccccc;" ></textarea>
+			  <elseif  $var.fieldInput == 'checkbox'>
+				<loop $var.selectValue key=keyIn var=varIn>
+				<input type="checkbox" name="data_[$var.fieldName][]" value="[$varIn]" id="[$var.fieldName]_[$keyIn]" > 
+						<label for="[$var.fieldName]_[$keyIn]"  >[$varIn]</label> 
+
+				</loop>
+			  <elseif  $var.fieldInput == 'radio'>
+				<loop $var.selectValue key=keyIn var=varIn>
+				<input type="radio" name="data_[$var.fieldName]" value="[$varIn]" id="[$var.rName]_[$keyIn]" > 
+						<label for="[$var.rName]_[$keyIn]"  >[$varIn]</label> 
+
+				</loop>
+						
+		      <elseif  $var.fieldInput == 'select'>
+				<select name="data_[$var.fieldName]"  > 
+				<loop $var.selectValue  var=varIn>
+				<option value="[$varIn]">[$varIn]</option>
+				</loop>
+				</select>
+
+			  <elseif  $var.fieldInput == 'password'>
+	                  <input name="data_[$var.fieldName]" type="password" >
+			  </if>			  
+			  </td>
+            </tr>
+
+</loop>
+
+            <tr class="tablelist"> 
+              <td colspan="2"><div align="center"> 
+                  <input name="preview" type="hidden" id="preview">
+                    <input name="referer" type="hidden" id="referer" value="[$referer]">
+                <input name="doc_content" type="hidden">
+                  <input name="cId" type="hidden" value="[$cInfo.cId]">
+                   <input name="sId" type="hidden" value="[$sId]">
+                 <input type="button" name="Submit4" onmouseover="msover();" onmouseout="msout();" value=" {lang:tijiao} " class="button" onClick=submit1()>
+                  &nbsp; 
+              
+                  <input type="reset" name="Submit3" onmouseover="msover();" onmouseout="msout();" class="button"value=" {lang:chongzhi} ">
+                </div></td>
+            </tr>
+          </table>
+       </td>
+		 
+    </tr>
+ <Iframe name=operation src="" frameborder=0 class=button style="display:none" > 
+                                </Iframe>
+
+   </form>
+</table>
+
+ <br>
+ <br><a name=footer></a>
+</body>
+</html>
+
+<script>
+EditContent.document.designMode="On";
+  idEdit = EditContent
+   var sContents=document.all.SaveContent.value
+    // var sHeader='<link href="include/editor.css" rel="stylesheet" type="text/css">'+
+	 //  '<body topmargin="0" leftmargin="0">';
+      idEdit.document.open()
+      idEdit.document.write(sHeader+sContents)
+      idEdit.document.close()
+      idEdit.focus();
+	function usetpl() {
+		if(content.tpl.disabled==false) {
+			content.tpl.disabled=true;
+		}else {
+			content.tpl.disabled=false
+		}
+	}
+	
+	function msover(){
+		event.srcElement.style.backgroundColor="#FFF6DC";
+		event.srcElement.style.cursor = "hand";
+	}
+
+	function msout(){
+		event.srcElement.style.backgroundColor="#FFFFFF";
+		event.srcElement.style.cursor = "auto";
+	}
+	function usecate() {
+		if(content.cate.disabled==false) {
+			content.cate.disabled=true;
+		}else {
+			content.cate.disabled=false
+		}
+	}
+</script>
+<include: file="footer.html">

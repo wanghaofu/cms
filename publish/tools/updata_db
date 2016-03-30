@@ -1,0 +1,187 @@
+
+<?php
+//s 取值为1 或0 默认为0
+echo '<html>
+<head>
+<META http-equiv=Content-Type content="text/html; charset=utf-8">
+<style>
+body{font-size:12px;}
+b{font-size:12px;}
+td{font-size:11px;}
+select ,option{text-align:center;}
+table{background-color:#ffffff;border:2px solid #222}
+th{font-size:12px;background-color:#eeeeee;padding:3px 3px;}
+td{background-color:#eeeeee;padding:3px 3px;text-align:center;}
+h3{font-size:14px;font-weight:100;padding:3px 20px;background-color:#acaccf;}
+</style>
+</head>';
+set_time_limit(0);
+echo date('y-d-m H:i:s');
+
+
+$section = $_GET['section'];
+$where = $_GET['w'];
+if ( !$_GET['section'] ){
+	$section =1;
+}
+
+
+
+//数据库连接配置参数
+define("DB_USER", "dba9wayshanghai");
+define("DB_PASS", "9waycnshanghai20070508");
+
+class DB
+{
+	var $conn;
+	//打开数库连接据
+	function  DB($db_dsn)
+	{
+		$this->conn = new PDO($db_dsn, DB_USER, DB_PASS );
+	}
+	function getRow($sql){
+		if ( !$sql ) return false;
+		//		$res=$this->conn->query($sql);
+		$sth = $this->conn->prepare($sql);
+		$sth->execute();
+		$result = $sth->fetch(PDO::FETCH_ASSOC);
+		return $result;
+	}
+	function getRows($sql){
+		if ( !$sql ) return false;
+		//		$res=$this->conn->query($sql);
+		$sth = $this->conn->prepare($sql);
+		$sth->execute();
+		$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+		return $result;
+	}
+	function displayRows($arr){
+		echo "<style>
+body{font-size:12px;}
+b{font-size:12px;}
+td{font-size:11px;}
+select ,option{text-align:center;}
+table{background-color:#ffffff;border:2px solid #222}
+th{font-size:12px;background-color:#eeeeee;padding:3px 3px;}
+td{background-color:#eeeeee;padding:3px 3px;text-align:center;}
+h3{font-size:14px;font-weight:100;padding:3px 20px;background-color:#acaccf;}
+</style>";
+		if ( is_array($arr) && $arr){
+			echo "<table style='border:1px solid #ccc;' >";
+			echo '<tr>';
+			foreach ( current($arr) as $key=>$value  ){
+				echo "<th>$key</th>";
+			}
+			echo '</tr>';
+			foreach( $arr as $key2=>$value2 ){
+				echo '<tr>';
+				foreach ( $value2 as $key3=>$value3  )
+				{
+					echo "<td>{$value3}</td>";
+				}
+				echo '</tr>';
+			}
+			echo "</table>";
+		}
+	}
+}
+
+/**
+ * 执行sql
+ *
+ * @param str $host example : 192.168.0.30;
+ * @param int $start example : 1; 起始扩展库
+ * @param int $end example :10  结束扩展库
+ */
+
+function execsql( $host,$sql,$start=0,$end=0,$main=0 ){
+
+	if ( !$start || !$end  ) die('请设之起始和结束数据库');
+	for($i=$start;$i<=$end;$i++)
+	{
+		echo "<h3>{$i}</h3>";
+		if ( !$main ){
+			$db_dsn="mysql:host=222.73.205.5;dbname=football_ext{$i}";
+		} else {
+			//			$db_dsn="mysql:host=192.168.0.10;dbname=football_gm_new";
+			$db_dsn="mysql:host=192.168.0.10;dbname=football";
+		}
+		echo $sql[$section].'<br/>';
+		echo $db_dsn;
+		try {
+
+			$db = new DB($db_dsn);
+			if ( !$db )
+			{
+				throw new Exception('db is error',001);
+			}
+			$conn = $db->conn;
+			$conn->query ( "set names utf8 ");
+			//			if ( !$_GET['type'] ){
+			$res = $conn->exec($sql);
+			//			} else {
+			//				$rows = $db->getRows($sql[$section]);
+			//				$db->displayRows( $rows );
+			//			}
+			$dbErro=$conn->errorInfo();
+			if($dbErro[0]==00000){
+				echo '执行成功！';
+			} else {
+				die("<b ><span style='color:red;font-size:15px;'>sql错误:</span>\" <span style='color:blue;font-size:12px'> {$dbErro[2]}  </span>\" </b><br/>{$sql} ");
+			}
+			if ( !$res )
+			{
+				echo '<pre>';
+				echo 'no effect!';
+				echo '</pre>';
+			} else {
+				echo "<span style='color:green;font-size:12px;'><br/>effect {$res} rows</span> ";
+			}
+		}catch ( Exception $e )	{
+			echo '<pre>';
+			if ($e[0]==00000){
+				echo 'ok';
+			}else {
+				print_r($e);
+				print_r($dbErro);
+			}
+			echo '</pre>';
+		}
+		echo "<a href='http://zq2.50zq.com/modules/updata_Db.php'>返回</a>";
+		echo '</html>';
+	}
+}
+
+//$sql[32]="update club_scouts set expence=250,detective=rand()*1,capability=rand()*1,intelligence=rand()*1";
+$sql[32]="update club_scouts set expence=250";
+//for( $j=8;$j<=10;$j++)
+//{
+//	execsql( $host , $sql[$j] , $start=2 , $end=10 );
+//}
+/*扩展库*/
+//$runArray=array(29);  //运行的sql段
+$runArray=array(32);  //运行的sql段
+
+foreach($runArray as $key=>$value){
+	if ( is_array( $sql[$value] ) )
+	{
+		foreach ( $sql[$value] as $key2=>$value2 ) {
+			execsql( $host , $value2 , $start=1 , $end=10 );
+		}
+	}else {
+		execsql( $host , $sql[$value] , $start=1 , $end=10 );
+	}
+}
+/*主库*/
+//foreach($runArray as $key=>$value){
+//	if ( is_array($sql[$value]) )
+//	{
+//		foreach ($sql[$value] as $key2=>$value2){
+//			execsql( $host , $value2 , $start=1 , $end=1,1 );
+//		}
+//	}else{
+//		execsql( $host , $sql[$value] , $start=1 , $end=1,1 );
+//	}
+//}
+?>

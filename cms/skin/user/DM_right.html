@@ -1,0 +1,51 @@
+<include: file="header.html" >
+
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
+  <tr>
+    <td><table width="90%" border="0" cellpadding="2" cellspacing="2" >
+        <tr> 
+          <td id=large style='border-bottom:1px solid #4C77B6' >{lang:welcometo} [$cms_version] {lang:user_control_panel} </td>
+        </tr>
+      </table>
+      <table width="98%" border="0" align="center" cellpadding="1" cellspacing="1">
+        <tr>
+          <td id='subtitle'>{lang:user_statistics} </td>
+        </tr>
+        <tr>
+          <td><table  border="0"  cellpadding="3" cellspacing="2">
+              <tr> 
+                <td > <b>{lang:shangcidenglushijian}</b>:</td><td id='small'>[@date('Y-m-d  H:i', $userInfo.LastLoginDate)]</td>
+              </tr>
+              <tr> 
+                <td id='subtitle' >{lang:contribution_statistics}</td><td id='small'></td>
+              </tr>
+   			  <tr> 
+                <td > <b> {lang:zhubiandahui}</b>: </td><td id='small'>[$userInfo.CallBackNum]</td>
+              </tr>
+ 			  <tr> 
+                <td > <b> {lang:weitougaoshu}</b>: </td><td id='small'>[$userInfo.NoContributionNum]</td>
+              </tr>
+ 			  <tr> 
+                <td > <b> {lang:daishenheshu}</b>: </td><td id='small'>[$userInfo.ContributionNum]</td>
+              </tr>
+        
+              <tr> 
+                <td > <b>{lang:biluyongshu}</b>: </td><td id='small'>[$userInfo.ApproveNum]</td>
+              </tr>
+			 <tr> 
+                <td ><b>{lang:zongji}</b>: </td><td id='small'>[$userInfo.TotalNum]</td>
+              </tr>
+
+        </table></td>
+        </tr>
+      </table>
+      
+
+      <table width="90%" border="0" cellpadding="2" cellspacing="2" >
+        <tr> 
+          <td id=large style='border-bottom:1px solid #4C77B6' >&nbsp;</td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<include: file="footer.html">

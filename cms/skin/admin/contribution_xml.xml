@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="[$charset]"?>
+<tree>
+<loop $NodeInfo key=key var=var>
+ <if $var.haveSon == 1 && $var.WorkFlow != 0>
+	<tree text="[@htmlspecialchars($var.Name)]" action="admin_contribution.php?op=sId::[$sId];o::list;NodeID::[$var.NodeID];type::main"  src="admin_tree.php?op=sId::[$sId];o::contribution_xml;NodeID::[$var.NodeID]"  target="panelWork" cId="[$var.NodeID]"  />
+<elseif $var.haveSon == 1 && $var.WorkFlow == 0>
+	<tree text="&lt;FONT COLOR=#CCCCCC&gt;[@htmlspecialchars($var.Name)]&lt;/font&gt;" action=""  src="admin_tree.php?op=sId::[$sId];o::contribution_xml;NodeID::[$var.NodeID]"  target="panelWork" cId="[$var.NodeID]"  />
+<elseif $var.WorkFlow != 0>
+	<tree text="[@htmlspecialchars($var.Name)]" action="admin_contribution.php?op=sId::[$sId];o::list;NodeID::[$var.NodeID];type::main"  target="panelWork"  cId="[$var.NodeID]"  />
+</if>
+ </loop>
+</tree>

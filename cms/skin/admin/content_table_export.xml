@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="[$charset]"?>
+<ContentTable>
+<Name>[@htmlentities($TableInfo.Name)]</Name>
+<TableID>[$TableInfo.TableID]</TableID>
+<Fields>
+<loop name="FieldsInfo" var="var" key="key">
+
+	<Field>
+		<FieldTitle>[@htmlentities($var.FieldTitle)]</FieldTitle>
+		<FieldName>[@htmlentities($var.FieldName)]</FieldName>
+		<FieldType>[@htmlentities($var.FieldType)]</FieldType>
+		<FieldSize>[@htmlentities($var.FieldSize)]</FieldSize>
+		<FieldInput>[@htmlentities($var.FieldInput)]</FieldInput>
+		<FieldDefaultValue>[@htmlentities($var.FieldDefaultValue)]</FieldDefaultValue>
+		<FieldInputFilter>[@htmlentities($var.FieldInputFilter)]</FieldInputFilter>
+		<FieldInputPicker>[@htmlentities($var.FieldInputPicker)]</FieldInputPicker>
+		<FieldInputTpl>[@htmlentities($var.FieldInputTpl)]</FieldInputTpl> 
+		<FieldDescription>[@htmlentities($var.FieldDescription)]</FieldDescription>
+		<FieldOrder>[@htmlentities($var.FieldOrder)]</FieldOrder>
+		<FieldListDisplay>[@htmlentities($var.FieldListDisplay)]</FieldListDisplay>
+		<IsMainField>[@htmlentities($var.IsMainField)]</IsMainField>
+		<IsTitleField>[@htmlentities($var.IsTitleField)]</IsTitleField>
+		<FieldSearchable>[@htmlentities($var.FieldSearchable)]</FieldSearchable>
+		<EnableContribution>[@htmlentities($var.EnableContribution)]</EnableContribution>
+		<EnableCollection>[@htmlentities($var.EnableCollection)]</EnableCollection>
+		<EnablePublish>[@htmlentities($var.EnablePublish)]</EnablePublish> 
+	</Field>
+</loop>
+
+</Fields>
+</ContentTable>

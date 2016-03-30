@@ -1,0 +1,171 @@
+#position {
+	BORDER-TOP-WIDTH: 0px; CLEAR: both; BORDER-LEFT-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; PADDING-BOTTOM: 10px; MARGIN: auto; VERTICAL-ALIGN: bottom; WIDTH: 870px; PADDING-TOP: 10px; HEIGHT: 20px; TEXT-ALIGN: left; BORDER-RIGHT-WIDTH: 0px
+}
+A:link {
+	COLOR: #8051a3; TEXT-DECORATION: underline
+}
+A:visited {
+	COLOR: #8051a3; TEXT-DECORATION: underline
+}
+A:hover {
+	COLOR: #ff0000
+}
+UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+UL LI {
+	LINE-HEIGHT: 25px; LIST-STYLE-TYPE: none
+}
+#tmain {
+	MARGIN: auto; WIDTH: 870px
+}
+#tleft {
+	FLOAT: left; WIDTH: 180px; MARGIN-RIGHT: 15px
+}
+#tcenter {
+	FLOAT: left; WIDTH: 480px; MARGIN-RIGHT: 15px
+}
+#tright {
+	FLOAT: left; WIDTH: 180px
+}
+#t_right {
+	FLOAT: left; WIDTH: 658px
+}
+.formelement {
+	BORDER-RIGHT: #cac4e8 1px dotted; BORDER-TOP: #cac4e8 1px dotted; FONT-SIZE: 12px; BORDER-LEFT: #cac4e8 1px dotted; BORDER-BOTTOM: #cac4e8 1px dotted; FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #fdfcff; TEXT-ALIGN: left
+}
+.formelement1 {
+	BORDER-RIGHT: #aaa 1px solid; BORDER-TOP: #aaa 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #aaa 1px solid; BORDER-BOTTOM: #aaa 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.lanmu_title {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #ffffff; BACKGROUND-COLOR: #666699; TEXT-ALIGN: left
+}
+.lanmu_content {
+	MARGIN-BOTTOM: 8px; BACKGROUND-COLOR: #cac4e8; TEXT-ALIGN: left
+}
+.lanmu_content UL LI {
+	BORDER-TOP: #e8e5f8 1px solid; LINE-HEIGHT: 20px; LIST-STYLE-TYPE: none
+}
+.border {
+	BORDER-RIGHT: #cac4e8 1px solid; BORDER-TOP: #cac4e8 1px solid; MARGIN-BOTTOM: 8px; BORDER-LEFT: #cac4e8 1px solid; BORDER-BOTTOM: #cac4e8 1px solid; BACKGROUND-COLOR: #f7f5ff
+}
+.title {
+	BORDER-TOP: #fff 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND-COLOR: #e8e5f8; TEXT-ALIGN: left
+}
+.block {
+	BORDER-BOTTOM: #f7f5ff 8px solid; TEXT-ALIGN: left
+}
+.block UL LI {
+	BORDER-TOP: #ccc 1px dashed; LINE-HEIGHT: 20px; LIST-STYLE-TYPE: none
+}
+.list {
+	LINE-HEIGHT: 20px; TEXT-ALIGN: left
+}
+.question {
+	TEXT-ALIGN: left
+}
+.ti A:link {
+	COLOR: #666699; TEXT-ALIGN: left; TEXT-DECORATION: underline
+}
+.ti A:visited {
+	COLOR: #666699; TEXT-ALIGN: left; TEXT-DECORATION: underline
+}
+#left_sort {
+	FLOAT: left; WIDTH: 200px; MARGIN-RIGHT: 12px
+}
+.num {
+	COLOR: #ff86e1
+}
+.li {
+	BORDER-TOP: #e8e5f8 1px solid; PADDING-TOP: 3px
+}
+#main {
+	BACKGROUND-COLOR: #ffffff
+}
+#search {
+	PADDING-RIGHT: 16px; BORDER-TOP: #fff 1px solid; PADDING-LEFT: 16px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; BACKGROUND-COLOR: #e8e5f8
+}
+.search {
+	WIDTH: 624px; LINE-HEIGHT: 20px
+}
+.search_submit {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; CURSOR: pointer; BORDER-BOTTOM: medium none
+}
+.questionAdd {
+	WIDTH: 624px; LINE-HEIGHT: 20px; TEXT-ALIGN: right
+}
+.weizhi {
+	MARGIN: 6px 0px 4px
+}
+.answerNum {
+	COLOR: #999
+}
+#new_ques {
+	BACKGROUND-COLOR: #ffffff
+}
+.des {
+	FONT-WEIGHT: lighter; COLOR: #666
+}
+.red {
+	COLOR: #ff0000
+}
+.question {
+	WIDTH: 600px
+}
+#ques_title {
+	MARGIN: 8px 0px 6px
+}
+#ques_sort {
+	MARGIN: 8px 0px 6px
+}
+#ques_content {
+	MARGIN-TOP: 10px; MARGIN-BOTTOM: 10px; MARGIN-LEFT: 10px
+}
+.ques_content {
+	VERTICAL-ALIGN: top
+}
+#username {
+	MARGIN: 6px 0px
+}
+.ques_login {
+	COLOR: #999
+}
+.login_submit {
+	MARGIN: 10px 0px 6px
+}
+.pages {
+	FONT-SIZE: 12px; TEXT-ALIGN: center
+}
+.pre_next {
+	FONT-SIZE: 12px; MARGIN: 8px 28px 22px 30px; COLOR: #000; LINE-HEIGHT: 22px
+}
+#questionAdd {
+	CLEAR: both; PADDING-BOTTOM: 20px; VERTICAL-ALIGN: top; WIDTH: 624px; PADDING-TOP: 10px
+}
+#question_title {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; FLOAT: left; COLOR: #339900
+}
+#myquestion {
+	FLOAT: right
+}
+#author {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; MARGIN-BOTTOM: 12px; PADDING-BOTTOM: 8px; PADDING-TOP: 10px; BACKGROUND-COLOR: #f7f5ff
+}
+#question {
+	MARGIN-TOP: 6px; COLOR: #000; LINE-HEIGHT: 19px
+}
+#hit {
+	MARGIN-TOP: 8px; COLOR: #888; TEXT-ALIGN: right
+}
+#answer {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; FONT-WEIGHT: bold; MARGIN-BOTTOM: 12px; PADDING-BOTTOM: 8px; PADDING-TOP: 10px; BACKGROUND-COLOR: #f7f5ff
+}
+#answer_content {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; PADDING-BOTTOM: 0px; COLOR: #000; LINE-HEIGHT: 20px; PADDING-TOP: 0px
+}
+#answer_author {
+	MARGIN-TOP: 10px; COLOR: #888; TEXT-ALIGN: right
+}
+.hr {
+	BORDER-RIGHT: #ccc 1px dashed; BORDER-TOP: #ccc 1px dashed; BORDER-LEFT: #ccc 1px dashed; BORDER-BOTTOM: #ccc 1px dashed
+}

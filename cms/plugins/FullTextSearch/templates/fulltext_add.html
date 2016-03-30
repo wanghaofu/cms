@@ -1,0 +1,76 @@
+<include: file="header.html">
+<script>
+function tplSelect(tpl,form, element) 
+{
+	//showModalDialog
+	var arr = showModalDialog("admin_select.php?sId=[$sId]&o=tpl&tpl=" + tpl,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+	if(arr != null) {
+		with(form){
+
+			eval(element + ".value= '" +  arr + "'")
+
+		}
+
+
+	}
+	 //window.open("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"psnselect","toolbar=0,resizable=yes,width=415,height=235,scrollbars=no")
+	 // if (arr != null) format('forecolor',arr);
+	 // else idEdit.focus();
+}
+</script>
+<TABLE width="95%" border=0 align=center cellSpacing=0 cellPadding=0  >
+  <form name="add_cate" method="post" action="[$base_url]o=index::fulltext_add_submit&TableID=[$TableID]" onsubmit="if(document.add_cate.SearchName.value==''){alert('{lang:search_name}  null');return false;}">
+    <TBODY>
+<TR>
+        <TD vAlign=top align=middle width="50%">
+		<TABLE cellspacing="1" cellpadding="4" width="100%"  border=0 class="table_border">
+            <TBODY>
+              <TR class="table_header" > 
+                <TD height=25 colSpan=2 id=id2 ><strong>{lang:topic}</strong></TD>
+              </TR>
+              <tr >
+                <td class="table_td1">{lang:search_name}</td>
+                <td class="table_td2">
+                  <INPUT name="SearchName" id="SearchName" size=20  class='flat'>
+                </td>
+              </tr>
+			     <TR class="table_header" >
+                   <TD height=25 colSpan=2 id=id2 ><strong>{lang:search_setting}</strong></TD>
+	          </TR>
+			     <tr >
+                   <td width="210" class="table_td1">{lang:search_fields}</td>
+                   <td class="table_td2" style="line-height: 30px;">
+				  
+				  <table width="95%"  border="0" cellspacing="2" cellpadding="3">
+ <?php for($i=1;$i<=$this->_tpl_vars['fieldNum'];$i++): ?>
+  <tr>
+    <td>
+	   <select name="Fields[]" >
+	   <option value="">{lang:ignore}</option>
+                    <loop $ContentModel key=key var=var>
+					 <if $var.FieldType == 'varchar' || $var.FieldType =='text' || $var.FieldType =='mediumtext'|| $var.FieldType == 'longtext'>
+                    <option value="[$var.FieldName]">[$var.FieldTitle]&nbsp;([$var.FieldName])</option>
+                    </if>
+					 </loop>
+                     </select>
+	</td>
+  </tr>
+   <?php endfor;?>
+   
+</table>
+			       
+					
+                   </td>
+	          </tr>
+              <TR class="table_td1"> 
+                <TD height=30 colSpan=2 align=middle > <INPUT name="submit" type=submit value="{lang::global:submit_value}" class="button"> 
+                  &nbsp;&nbsp; <INPUT name="reset" type=reset value="{lang::global:reset_value}"  class="button"> 
+                </TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+</TR></TBODY><INPUT type=hidden value=edit_submit name=action></form></TABLE>
+<br>
+<p>&nbsp;</p>
+
+<include: file="footer.html">

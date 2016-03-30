@@ -1,0 +1,121 @@
+<include: file="header.html">
+<script language="JavaScript">
+function psnSelect(psn,form, psn_element,url_element) {
+//showMeDialog
+var arr = showMeDialog("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+if(arr != null) {
+	var PSN = '{PSN:'+ arr;
+	var URL = '{PSN-URL:'+ arr;
+	with(form){
+
+	eval(psn_element + ".value= '" + PSN + "'")
+	eval(url_element + ".value= '" + URL + "'")
+
+}
+
+
+}
+ //window.open("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"psnselect","toolbar=0,resizable=yes,width=415,height=235,scrollbars=no")
+ // if (arr != null) format('forecolor',arr);
+ // else idEdit.focus();
+}
+
+
+function tplSelect(tpl,form, element) {
+//showMeDialog
+var arr = showMeDialog("admin_select.php?sId=[$sId]&o=tpl&tpl=" + tpl,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+if(arr != null) {
+	with(form){
+
+		eval(element + ".value= '" +  arr + "'")
+
+	}
+
+
+}
+ //window.open("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"psnselect","toolbar=0,resizable=yes,width=415,height=235,scrollbars=no")
+ // if (arr != null) format('forecolor',arr);
+ // else idEdit.focus();
+}
+</script>
+   <form action='[$base_url]o=add_submit' method='post' enctype="multipart/form-data" name='clientform' id=clientform onSubmit='return cate_submit(this);'>
+  <table border="0" cellspacing="1" cellpadding="4" width="95%"  align=center class="table_border">
+    <tr> 
+      <td colspan="2" class="table_header">{lang:fenleiguanli-xinjianfenlei}</td>
+    </tr>
+    
+    <tr > 
+      <td class="table_td1" width="20%" >{lang:fenleimingcheng}:</td>
+      <td class="table_td2">     <input name="data_ParentID" type="hidden" id="data_ParentID" value="[$ParentID]"> 
+<INPUT name=data_Name id="data_Name" size=15  class='flat' ></td>
+    </tr>
+    <tr id="makedir1"> 
+      <td class="table_td1"> {lang:neirongmoxingtaoyong}:</td>
+      <td class="table_td2"> <select name="data_TableID" id="data_TableID"  class='flat' onchange="document.location='admin_cate.php?op=sId::[$sId];o::add;ParentID::[$ParentID];TableID::' + this.options[this.selectedIndex].value">
+          <loop $tableInfo key=key var=var> 
+		  <if $TableID == $var.TableID>
+          <option value="[$var.TableID]" selected>[$var.Name]</option>
+		  <else>
+          <option value="[$var.TableID]">[$var.Name]</option>
+		  </if>
+          </loop> 
+        </select>
+        {lang:yidanxianzejianbukezaigenggai} </td>
+    </tr>
+<tr class='tablelist'> 
+              <td   class="table_td1">{lang:morentougaozhujiedian}:</td>
+              <td class="table_td2"><select  name="TargetNodeID" id = "TargetNodeID">
+<loop $NODE_LIST var=var>
+<if $var.WorkFlow != 0 && $var.TableID == $TableID >
+<option value="[$var.NodeID]">[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+</if>
+ </loop></select>
+ 
+</td>
+</tr>
+<tr class='tablelist'> 
+              <td  class="table_td1">{lang:morentougaoxulianjiejiedian}:</td>
+              <td class="table_td2">
+<select  name="SubTargetNodeID[]" id = "SubTargetNodeID"  size="10" multiple>
+<option value="" >{lang:wu}</option>
+ <loop $NODE_LIST var=var>
+<if $var.WorkFlow != 0 && $var.TableID == $TableID >
+<option value="[$var.NodeID]">[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+</if>
+
+ </loop>
+ </select>			  
+			  
+			  </td>
+</tr>
+
+<tr class='tablelist'> 
+              <td  class="table_td1">{lang:morentougaosuoyinlianjiejiedianjiedian}:</td>
+              <td class="table_td2">
+<select  name="IndexTargetNodeID[]" id = "IndexTargetNodeID"  size="10" multiple>
+<option value="" >{lang:wu}</option>
+ <loop $NODE_LIST var=var>
+<if $var.WorkFlow != 0 && $var.TableID == $TableID >
+<option value="[$var.NodeID]">[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+</if>
+
+ </loop>
+ </select>			  
+			  
+			  </td>
+</tr>
+
+    <tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value=' {lang:tijiao} ' tabindex='13'> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value=" {lang:chongzhi} "></td>
+    </tr>
+  </table>
+</form>
+
+<script language='JavaScript'>
+
+function cate_submit(form)
+{
+}					
+</script> 		
+<include: file="footer.html">

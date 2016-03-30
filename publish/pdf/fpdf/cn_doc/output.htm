@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>Output</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="fpdf.css">
+</HEAD>
+<BODY>
+<H2>Output</H2>
+<TT><B>string</B> Output([<B>string</B> name [, <B>string</B> dest]])</TT>
+<H4 CLASS='st'>版本</H4>
+1.0
+<H4 CLASS='st'>内容</H4>
+送出文件到指定目标，例如：字符串，本地档案或浏览器。 在最后一个步骤，可能会用到外挂程序("若存在")或强行则行下载("另存" 对话盒)。<br>
+若需要终断文件，Output()这个功能会首先则行Close()。
+<H4 CLASS='st'>参数</H4>
+<TT><U>name</U></TT>
+<BLOCKQUOTE>
+文件名称。如果没有提供文件名称，当文件存送到浏览器(dest <TT>I</TT>)时，文件名称会自动定义为doc.pdf。
+</BLOCKQUOTE>
+<TT><U>dest</U></TT>
+<BLOCKQUOTE>
+送出文件的目标位置。可用下面任何一个值：
+<UL>
+<LI><TT>I</TT>：送出档案到浏览器上。如果有外挂程序存在的话，也可同时使用。使用者可透过连结去另存PDF档案，文件名称会由 (name 参数)定义。
+<LI><TT>D</TT>：存送到浏览器，并且强行下载存档，文件名称会由 (name 参数)定义。
+<LI><TT>F</TT>：储存到本机档案，文件名称会由 (name 参数)定义。
+<LI><TT>S</TT>：透过字符串反回文件，文件名称不需要使用。假如，dest的参数没有定义，但已经定义了文件名称，那 dest的参数会自动定义为<TT>F</TT>。若果什么参数都没有定义的话，那 dest的参数会自动定义为<TT>I</TT>。<br><br>
+注意：为了兼容之前的版本，boolean 值是也会接受的。(错误为<TT>F</TT>、正确为<TT>D</TT>)
+</BLOCKQUOTE>
+<H4 CLASS='st'>参见</H4>
+<A HREF="close.htm">Close()</A>.
+<H6></H6>
+<HR>
+<DIV ALIGN="CENTER"><A HREF="index.htm">索引</A></DIV>
+</BODY>
+</HTML>

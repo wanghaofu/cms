@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>日记 - 开心网</title>
+<link href="http://img.kaixin001.com.cn/css/s.css" rel="stylesheet" type="text/css" />
+
+<script src="./js/common-1.js" type="text/javascript"></script>
+
+<script src=".js/s.js" language="JavaScript" type="text/javascript"></script>
+<script src=".js/cookie.js" type="text/javascript"></script>
+<script src=".js/dialog.js" language="JavaScript" type="text/javascript"></script>
+<script src=".js/app_friend.js" language="JavaScript" type="text/javascript"></script>
+
+
+<script src=".js/webeditor/editor-1.js" language="JavaScript" type="text/javascript"></script>
+
+<script src=".js/diary.js" type="text/javascript"></script>
+
+
+</head>
+
+<body >
+
+
+<script type="text/javascript">
+var fs_data = [];
+var fs_mode = 1;
+var g_saveDraft_title = "";
+var g_saveDraft_content = "";
+function _bodyonload()
+{
+	fs_superView();
+	
+	if (fs_data.length)
+	{
+		fs_dirty = true;
+	}
+	setTimeout(checkTaguser, 5000);
+	
+	if(flag & 1)
+	{
+		setInterval("saveDraft('autodraft')",1000*60*3);
+		//setInterval("saveDraft('autodraft')",1000*10);
+	}
+	if(!(flag & 2))
+	{
+		s("tagdiv");
+		s("classiddiv");
+	}
+	
+	g_saveDraft_title = document.writeform.title2.value;
+	g_saveDraft_content = content_editor.getHtml();
+}
+
+var g_getallfriend = false;
+var g_allfriendinfo = [];
+function checkTaguser()
+{
+	if (fs_dirty)
+	{
+		return;
+	}
+	if (!g_getallfriend)
+	{
+		g_getallfriend = true;
+		getAllFriend();
+		return;
+	}
+	
+	fs_data = [];
+	var content = content_editor.getText();
+	var uid = "230092";
+	for (i=0; i<g_allfriendinfo.length; i++)
+	{
+		if (0 <= content.indexOf(g_allfriendinfo[i].real_name_unsafe) && uid != g_allfriendinfo[i].uid)
+		{
+			fs_data[fs_data.length] = g_allfriendinfo[i];
+			fs_data[fs_data.length-1].type = "static";
+		}
+	}
+	fs_superView();
+}
+
+function getAllFriend()
+{
+	var url = "/interface/suggestfriend.php";
+	var pars = "type=all";
+	var myAjax = new Ajax.Request(url, {method: "get", parameters: pars, onComplete: function (req) { eval("getAllFriendShow(req)"); } });
+}
+
+function getAllFriendShow(req)
+{
+	var r = req.responseText;
+	eval("g_allfriendinfo="+r);
+	checkTaguser();
+	setInterval(checkTaguser, 5000);
+}
+
+var flag = parseInt("" == "" ? 1 : "");
+var savetype = "";  //  1.autodraft 2.persondraft 3.personsubmit
+var g_saveDraftcount = 0;
+var g_saveDraft_done = false;
+function saveDraft(type)
+{
+	g_saveDraft_done = false;
+	savetype = type;
+	document.writeform.target = "draftframe";
+	document.writeform.draft.value = "1";
+	if (writeSubmit(document.writeform))
+	{
+		document.writeform.submit();
+	}
+}
+
+function saveDraftReq(v_did)
+{
+	g_saveDraftcount -= 1;
+	document.writeform.did.value = v_did;
+	g_saveDraft_done = true;
+	
+	if(savetype == "persondraft")
+	{
+		$("savedraft").childNodes[0].innerHTML = "草稿已保存到你的暂存草稿夹中，请继续写吧！";
+		$("savedraft").parentNode.style.width = "550px";
+	}
+	else
+	{
+		var date = new Date();
+		var hour = date.getHours();
+		hour = parseInt(hour)<10 ? "0"+hour : hour;
+		var minute = date.getMinutes();
+		minute = parseInt(minute)<10 ? "0"+minute : minute;
+		$("savedraft").childNodes[0].innerHTML = hour+":"+minute+" 草稿已自动暂存到你的暂存草稿夹中。 ";
+		$("savedraft").parentNode.style.width = "545px";
+	}
+	savetype = "";
+	
+}
+
+function gotoback()
+{
+	window.history.go(g_saveDraftcount-1);
+}
+
+function saveDiary(v_btn, v_prompt)
+{
+	savetype = "personsubmit";
+	document.writeform.target = "";
+	document.writeform.draft.value = "0";
+	if(flag & 1)
+	{
+		document.writeform.ctimeupdate.value = "1";
+	}
+	if (writeSubmit(document.writeform))
+	{
+		if (v_btn) v_btn.disabled = true;
+		if ($(v_prompt)) s(v_prompt);
+		
+		document.writeform.submit();
+	}
+}
+
+function writeSubmit(v_form)
+{
+	v_form.content.value = content_editor.getHtml();
+	v_form.texttype.value = content_editor.getTextType();
+	v_form.uploadfile.value = content_editor.uploadfile;
+	v_form.tags.value = "";
+	if(false == v_form.privacy.checked)
+	{
+		for(var i=0; i<fs_data.length ; i++)
+		{
+			if(fs_data[i].type == "static")
+			{
+				v_form.tags.value += fs_data[i].uid+":"+fs_data[i].real_name_unsafe+"#";
+			}
+		}
+	}
+	v_form.title.value = v_form.title2.value;
+	if(savetype == "personsubmit")
+	{
+		
+		if (v_form.title2.value.length == 0)
+		{
+			alert("你还没有写日记的标题呢！");
+			v_form.title2.focus();
+			return false;
+		}
+		if (v_form.content.value.length == 0)
+		{
+			alert("日记里一点内容都还没写，这样不好吧？");
+			content_editor.getFocus();
+			return false;
+		}
+	}
+	else
+	{
+		if(v_form.title.value.length == 0)
+		{
+			var thedate = new Date();
+			var month = thedate.getMonth() + 1;
+			var today = thedate.getDate();
+			v_form.title.value =month+"月"+today+"日无标题日记草稿";
+		}
+		if(v_form.content.value.length == 0)
+		{
+			return false;
+		}
+		g_saveDraft_title = v_form.title.value;
+		g_saveDraft_content = v_form.content.value;
+	}
+	return true;
+}
+
+
+function checkPrivacy(thisobj)
+{
+	if(thisobj.checked)
+	{
+		h("tagdiv");
+		h("classiddiv");
+		$("savebutton").value = $("savebutton").title = "保存";
+	}
+	else
+	{
+		s("tagdiv");
+		s("classiddiv");
+		if (flag == 1)
+		{
+			$("savebutton").value = $("savebutton").title = "发表";
+		}
+		else
+		{
+			$("savebutton").value = $("savebutton").title = "保存";
+		}
+	}
+}
+
+
+function _bodyonbeforeunload(evnt)
+{
+	evt = evnt || window.event;
+	if(document.writeform.title2.value.length == 0 && content_editor.getHtml().length==0)
+	{
+		return;
+	}
+	if(savetype == "personsubmit")
+	{
+		return;
+	}
+	if (content_editor.getHtml() == g_saveDraft_content)
+	{
+		if (document.writeform.title2.value.length)
+		{
+			if (g_saveDraft_title == document.writeform.title2.value)
+			{
+				return;
+			}
+		}
+		else
+		{
+			if (g_saveDraft_title == document.writeform.title.value)
+			{
+				return;
+			}
+		}
+	}
+	evt.returnValue = "╭──────────────────╮\nㄧ  你写的日记还没保存,确定要离开吗?  ㄧ\n╰──────────────────╯";
+}
+
+</script>
+
+	<div class="m2 wr1"><div id="r2_2">
+	<iframe id=draftframe name=draftframe style="display:none;"></iframe>
+	<form action=write_submit.php method=post name=writeform onsubmit="javascript:return writeSubmit(this);">
+	<input type="hidden" name="did" value="">
+	<input type="hidden" name="start" value="">
+	<input type="hidden" name="content" value="">
+	<input type="hidden" name="texttype" value="">
+	<input type="hidden" name="uploadfile" value="">
+	<input type="hidden" name="tags" value="">
+	<input type="hidden" name="draft" value="">
+	<input type="hidden" name="title" value="">
+	<input type="hidden" name="ctimeupdate" value="">
+		<div id="r3">
+			<div class="l"><img src=".i/ico_rj.gif" align="absmiddle" alt="写日记"/> <b class="f14">写日记</b></div>
+			<div class="r"><a href="javascript:gotoback();" class="sl">&lt;&lt;返回上一页</a></div>
+			<div class="c"></div>
+		</div>
+
+		<div class="p30" style="padding-top:10px;">
+	
+
+			<div class="fbrj_d">
+				<div class="bj_t f14" >标题：</div>
+				<div class="l"><span class="it_s"><input type="text" name=title2 value="" size="72" class="it1" onfocus="this.className='it2';" onblur="this.className='it1';" style="height:18px;color:#000000; font-size:14px;" /></span></div>
+				<div class="c"></div>
+			</div>
+			<div style="padding-left:40px;margin-top:-18px;margin-bottom:15px;"><input type="checkbox" name=privacy value=1  onclick="javascript:checkPrivacy(this);">私密日记</div>
+			<div id=classiddiv class="fbrj_d" style="display:none;">
+				<div class="bj_t f14" >分类：</div>
+				<div class="l">
+				<select name=classid>
+
+<option value="290652" >随笔日记</option>
+<option value="290653" >我的文章</option>
+<option value="290654" >网络转载</option>
+				</select> [<a href="clist.php" class=sl>分类管理</a>]
+				</div>
+				<div class="c"></div>
+			</div>
+
+			<div class="fbrj_d">
+				<div class="bj_t f14" >内容：</div>
+				<div class="l"><div id="content_div" name="content_div"></div></div>
+				<script type="text/javascript">
+				var e_bold = true;
+				var e_italic = true;
+				var e_underline = true;
+				var e_font = true;
+				var e_fontsize = true;
+				var e_color = true;
+				var e_img = true;
+				var e_link = true;
+				var e_media = true;
+				var e_uploadimg = true;
+				content_editor = new webEditor("content_editor" , $("content_div") , 518, 300);
+				content_editor.init("");
+				</script>
+				
+				<div class="sc4" style="width:653px;" ><div id="savedraft" style="display:none;"><span class="l" style="color:#419933;">每隔3分钟，系统自动将已写文字存为草稿，保存在暂存草稿夹中。&nbsp;&nbsp;</span><span class="tj_s"><input type="button" value="暂存草稿"  title="暂存草稿到暂存草稿夹中,以防&#10;电脑或网络故障丢失日记" style="height:21px;padding-top:1px;cursor:pointer;font-size:12px;"  onclick="javascript:saveDraft('persondraft');" /></span></div></div>
+				<script type="text/javascript">
+					if(flag & 1)
+					{
+						$("savedraft").style.display = "block";
+					}
+				</script>
+				<div class="c"></div>
+			</div>
+
+	
+				<div class="c"></div>
+				<div class="fbrj1" style="width:208px;">&nbsp;</div>
+				<div class="rbs1"><input id=savebutton type="button" value="发表" title="发表" class="rb1" onmouseover="this.className='rb2';" onmouseout="this.className='rb1';" onclick="javascript:saveDiary(this, 'addcommentprompt');"  style="padding:3px 15px;" /></div>
+				<div class="flw20">&nbsp;</div>
+				<div class="gbs1"><input type="button" value="取消" class="gb1" onmouseover="this.className='gb2';" onmouseout="this.className='gb1';" onclick="javascript:gotoback();" style="padding:3px 15px;" /></div><div class="flw5">&nbsp;</div><div id="addcommentprompt" style="display:none;" class="c6 p010 mt15">提交中...</div>
+				<div class="c"></div>
+		</div>
+		<div class="h100"></div>
+		</div>
+	</form>
+	</div><div class="c"></div></div>
+<script language=javascript>
+outputTail();
+</script>
+</body>
+</html>

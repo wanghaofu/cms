@@ -1,0 +1,6 @@
+.buildpath
+.idea
+.project
+views/*
+config.php
+.settings

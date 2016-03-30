@@ -1,0 +1,885 @@
+<include: file="header.html">
+<STYLE type=text/css>
+TD {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "MS Shell Dlg"
+}
+.tab {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 12px; PADDING-BOTTOM: 1px; CURSOR: hand; PADDING-TOP: 5px; LETTER-SPACING: 1px
+}
+</STYLE>
+
+<script language="JavaScript">
+function prepareSubmit(){
+		select_submit('clientform', 'TargetPermissionReadG', 'data_PermissionReadG');
+		select_submit('clientform', 'TargetPermissionWriteG', 'data_PermissionWriteG');
+		select_submit('clientform', 'TargetPermissionReadU', 'data_PermissionReadU');
+		select_submit('clientform', 'TargetPermissionWriteU', 'data_PermissionWriteU');
+		select_submit('clientform', 'TargetPermissionManageG', 'data_PermissionManageG');
+		select_submit('clientform', 'TargetPermissionManageU', 'data_PermissionManageU');
+
+		select_submit('clientform', 'TargetPermissionApproveG', 'data_PermissionApproveG');
+		select_submit('clientform', 'TargetPermissionApproveU', 'data_PermissionApproveU');
+
+		select_submit('clientform', 'TargetPermissionPublishG', 'data_PermissionPublishG');
+		select_submit('clientform', 'TargetPermissionPublishU', 'data_PermissionPublishU');
+
+		return true;
+}
+
+function setPermissionInherit(mode)
+{
+	switch(mode) {
+		case 0 :
+			Layer_PermissionInherit.style.display = 'none';
+			break;
+		case 1 : 
+ 			Layer_PermissionInherit.style.display = '';
+			break;
+	}
+}
+
+function tabClick(idx) 
+{
+
+  
+	for (i = 0; i < 2; i++) {
+    
+
+		if (i == idx) {
+
+			var tabImgLeft = eval("document.all.tabImgLeft__" + idx);
+
+			var tabImgRight = eval("document.all.tabImgRight__" + idx);
+      
+			var tabLabel = eval("document.all.tabLabel__" + idx);
+      
+			var tabContent = eval("document.all.tabContent__" + idx);
+
+      
+			tabImgLeft.src = "../html/images/mpc/tab_active_left.gif";
+      
+			tabImgRight.src = "../html/images/mpc/tab_active_right.gif";
+      
+			tabLabel.background = "../html/images/mpc/tab_active_bg.gif";
+      
+			tabContent.style.visibility = "visible";
+      
+			tabContent.style.display = "block";
+     
+		}
+  else {
+			var tabImgLeft = eval("document.all.tabImgLeft__" + i);
+		
+			var tabImgRight = eval("document.all.tabImgRight__" + i);
+		
+			var tabLabel = eval("document.all.tabLabel__" + i);
+		
+			var tabContent = eval("document.all.tabContent__" + i);
+
+		
+			tabImgLeft.src = "../html/images/mpc/tab_unactive_left.gif";
+		
+			tabImgRight.src = "../html/images/mpc/tab_unactive_right.gif";
+		
+			tabLabel.background = "../html/images/mpc/tab_unactive_bg.gif";
+		
+			tabContent.style.visibility = "hidden";
+		
+			tabContent.style.display = "none";
+  
+		
+		}  
+
+	}
+
+
+}
+function psnSelect(psn,form, psn_element,url_element) {
+//showMeDialog
+var arr = showMeDialog("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+if(arr != null) {
+	var PSN = '{PSN:'+ arr;
+	var URL = '{PSN-URL:'+ arr;
+	with(form){
+
+	eval(psn_element + ".value= '" + PSN + "'")
+	eval(url_element + ".value= '" + URL + "'")
+
+	}
+
+
+}
+ //window.open("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"psnselect","toolbar=0,resizable=yes,width=415,height=235,scrollbars=no")
+ // if (arr != null) format('forecolor',arr);
+ // else idEdit.focus();
+}
+
+
+
+
+
+function PublishFileFormat(form,element)
+{
+ 	with(form){
+		eval("var value1 = " + element + ".value")
+	}
+	var arr = showMeDialog('../html/PublishFileFormat.html?value1=' + value1 ,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+	if(arr != null && arr !='') {
+		with(form){
+
+			eval(element + ".value= '" +  arr + "'")
+
+		}
+
+
+	}
+
+}
+
+function tplSelect(tpl,form, element) 
+{
+	//showMeDialog
+	var arr = showMeDialog("admin_select.php?sId=[$sId]&o=tpl&tpl=" + tpl,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+	if(arr != null) {
+		with(form){
+
+			eval(element + ".value= '" +  arr + "'")
+
+		}
+
+
+	}
+	 //window.open("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"psnselect","toolbar=0,resizable=yes,width=415,height=235,scrollbars=no")
+	 // if (arr != null) format('forecolor',arr);
+	 // else idEdit.focus();
+}
+
+function setPublishMode(mode)
+{
+	switch(mode) {
+		case 0 :
+			document.clientform.data_ContentPSN.disabled = true;
+			document.clientform.data_ContentURL.disabled = true;
+			document.clientform.data_ResourceURL.disabled = true;
+			document.clientform.data_ResourcePSN.disabled = true;
+			UI_content_psn.style.display = 'none';
+			UI_content_url.style.display = 'none';
+			UI_resource_psn.style.display = 'none';
+			UI_resource_url.style.display = 'none';
+			UI_content_psn.style.display = 'none';
+			UI_auto_publish.style.display = 'none';
+			UI_tpl_setting.style.display = 'none';
+			UI_index_tpl.style.display = 'none';
+			UI_content_tpl.style.display = 'none';
+			UI_img_tpl.style.display = 'none';
+			UI_static_publish_setting.style.display = 'none';
+			UI_index_name.style.display = 'none';
+			UI_sub_dir.style.display = 'none';
+			UI_publish_file_format.style.display = 'none';
+
+			UI_dynamic_publish_setting.style.display = 'none';
+			UI_content_portal_url.style.display = 'none';
+			UI_index_portal_url.style.display = 'none';
+			break;
+		case 1 :
+			document.clientform.data_ContentPSN.disabled = false;
+			document.clientform.data_ContentURL.disabled = false;
+			document.clientform.data_ResourceURL.disabled = false;
+			document.clientform.data_ResourcePSN.disabled = false;
+			UI_content_psn.style.display = '';
+			UI_content_url.style.display = '';
+			UI_resource_psn.style.display = '';
+			UI_resource_url.style.display = '';
+			UI_auto_publish.style.display = '';
+			UI_tpl_setting.style.display = '';
+			UI_index_tpl.style.display = '';
+			UI_content_tpl.style.display = '';
+			UI_img_tpl.style.display = '';
+			UI_static_publish_setting.style.display = '';
+			UI_index_name.style.display = '';
+			UI_sub_dir.style.display = '';
+			UI_publish_file_format.style.display = '';
+
+			UI_dynamic_publish_setting.style.display = 'none';
+			UI_content_portal_url.style.display = 'none';
+			UI_index_portal_url.style.display = 'none';
+			break;
+		case 2 :
+			document.clientform.data_ContentPSN.disabled = true;
+			document.clientform.data_ContentURL.disabled = true;
+			document.clientform.data_ResourceURL.disabled = false;
+			document.clientform.data_ResourcePSN.disabled = false;
+			UI_resource_psn.style.display = '';
+			UI_resource_url.style.display = '';
+			UI_auto_publish.style.display = '';
+			UI_tpl_setting.style.display = '';
+			UI_index_tpl.style.display = '';
+			UI_content_tpl.style.display = '';
+			UI_img_tpl.style.display = '';
+			UI_content_psn.style.display = 'none';
+			UI_content_url.style.display = 'none';
+			UI_static_publish_setting.style.display = 'none';
+			UI_index_name.style.display = 'none';
+			UI_sub_dir.style.display = 'none';
+			UI_publish_file_format.style.display = 'none';
+
+			UI_dynamic_publish_setting.style.display = '';
+			UI_content_portal_url.style.display = '';
+			UI_index_portal_url.style.display = '';
+			break;
+		case 3 :
+			document.clientform.data_ContentPSN.disabled = false;
+			document.clientform.data_ContentURL.disabled = false;
+			document.clientform.data_ResourceURL.disabled = false;
+			document.clientform.data_ResourcePSN.disabled = false;
+			UI_resource_psn.style.display = '';
+			UI_resource_url.style.display = '';
+			UI_auto_publish.style.display = '';
+			UI_tpl_setting.style.display = '';
+			UI_index_tpl.style.display = '';
+			UI_content_tpl.style.display = '';
+			UI_img_tpl.style.display = '';
+			UI_content_psn.style.display = '';
+			UI_content_url.style.display = '';
+			UI_static_publish_setting.style.display = '';
+			UI_index_name.style.display = 'none';
+			UI_sub_dir.style.display = '';
+			UI_publish_file_format.style.display = '';
+
+			UI_dynamic_publish_setting.style.display = '';
+			UI_content_portal_url.style.display = 'none';
+			UI_index_portal_url.style.display = '';
+			break;
+
+	}
+}
+</script>
+<body onload="setPublishMode([$NodeInfo.PublishMode])">
+
+<TABLE cellSpacing=0 cellPadding=0 width="96%" align=center border=0>
+
+<TBODY>
+  <TR>
+    <TD style=" HEIGHT: 22px" background="../html/images/mpc/tab_top_bg.gif"
+    style="PADDING-LEFT: 2px;">
+      <TABLE cellSpacing=0 cellPadding=0 border=0 >
+        <TBODY >
+        <TR  >
+          <TD >
+            <TABLE height=22 cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD width=3><IMG id=tabImgLeft__0 height=22 
+                  src="../html/images/mpc/tab_active_left.gif" 
+                  width=3 ></TD>
+                <TD class=tab id=tabLabel__0 onclick=tabClick(0) 
+                background="../html/images/mpc/tab_active_bg.gif" 
+                UNSELECTABLE="on" ><label>&nbsp;&nbsp;{lang:base_setting}&nbsp;&nbsp; </label></TD>
+                <TD width=3><IMG id=tabImgRight__0 height=22 
+                  src="../html/images/mpc/tab_active_right.gif" 
+                  width=3></TD></TR></TBODY></TABLE></TD>
+          <TD  >
+            <TABLE height=22 cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD width=3><IMG id=tabImgLeft__1 height=22 
+                  src="../html/images/mpc/tab_unactive_left.gif" 
+                  width=3></TD>
+                <TD class=tab id=tabLabel__1 onclick=tabClick(1) 
+                background="../html/images/mpc/tab_unactive_bg.gif" 
+                UNSELECTABLE="on"><label> &nbsp;&nbsp;{lang:permission_setting}&nbsp;&nbsp; </label></TD>
+                <TD width=3><IMG id=tabImgRight__1 height=22 
+                  src="../html/images/mpc/tab_unactive_right.gif" 
+                  width=3></TD></TR></TBODY></TABLE></TD>
+           
+				  
+ 
+				  
+				  
+				  </TR></TBODY></TABLE></TD>					  
+				  </TR>
+  <TR>
+    <TD  >
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+<form action='[$base_url]o=edit_submit&NodeID=[$NodeInfo.NodeID]' method='post' enctype="multipart/form-data" name='clientform' id=clientform onSubmit='return cate_submit(this);'>
+          <TD 
+          style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; PADDING-TOP: 0px; " 
+          vAlign=top class="bigborder" >
+		  
+<!--{{{1-->
+
+<DIV id=tabContent__0 style="DISPLAY: block; VISIBILITY: visible">
+  <table border="0" cellspacing="1" cellpadding="4" width="100%"  align=center class="table_border">
+    <!--<tr> 
+      <td colspan="2" class="table_header">{lang:topic}</td>
+    </tr>-->
+    <tr > 
+      <td width="20%" class="table_td1">{lang:parent_node} :</td>
+      <td class="table_td2"> [$ParentNodeName]</td>
+    </tr>
+    <tr > 
+      <td class="table_td1">{lang:node_name_id} :</td>
+      <td class="table_td2"> <INPUT name="data_NodeGUID" id="data_NodeGUID" size=30  class='flat' value="[$NodeInfo.NodeGUID]" >{lang:node_name_id_help}</td>
+    </tr>
+
+    <tr > 
+      <td class="table_td1">{lang:node_name} :</td>
+      <td class="table_td2"> <INPUT name=data_Name id="data_Name" size=15  class='flat' value="[@htmlspecialchars($NodeInfo.Name)]"></td>
+    </tr>
+
+
+
+	   <tr id="makedir1"> 
+      <td class="table_td1">{lang:publish_mode}:</td>
+      <td class="table_td2">
+	  <if $NodeInfo.PublishMode == 1>
+	  <input name="data_PublishMode" type="radio" value="1" id="publishMode_1" checked onclick="setPublishMode(1);"> 
+        <label for="publishMode_1"  >{lang:static_publish}</label> <input name="data_PublishMode" type="radio" value="2" id="publishMode_2" onclick="setPublishMode(2);"> 
+        <label for="publishMode_2"  >{lang:dynamic_publish}</label> 
+		
+		<input name="data_PublishMode" type="radio" id="publishMode_3" value="3" onclick="setPublishMode(3);"> 
+        <label for="publishMode_3"  >{lang:d_s_publish}</label>
+
+		<input name="data_PublishMode" type="radio" id="publishMode_0" value="0" onclick="setPublishMode(0);"> 
+        <label for="publishMode_0"  >{lang:unpublish}</label>
+	  <elseif $NodeInfo.PublishMode == 2>
+	  <input name="data_PublishMode" type="radio" value="1" id="publishMode_1" onclick="setPublishMode(1);"> 
+        <label for="publishMode_1"  >{lang:static_publish}</label> <input name="data_PublishMode" type="radio" value="2" id="publishMode_2" checked onclick="setPublishMode(2);"> 
+        <label for="publishMode_2"  >{lang:dynamic_publish}</label> 
+				<input name="data_PublishMode" type="radio" id="publishMode_3" value="3" onclick="setPublishMode(3);"> 
+        <label for="publishMode_3"  >{lang:d_s_publish}</label>
+
+		<input name="data_PublishMode" type="radio" id="publishMode_0" value="0" onclick="setPublishMode(0);"> 
+        <label for="publishMode_0"  >{lang:unpublish}</label>
+	  <elseif $NodeInfo.PublishMode == 3>
+	  <input name="data_PublishMode" type="radio" value="1" id="publishMode_1" onclick="setPublishMode(1);"> 
+        <label for="publishMode_1"  >{lang:static_publish}</label> <input name="data_PublishMode" type="radio" value="2" id="publishMode_2"  onclick="setPublishMode(2);"> 
+        <label for="publishMode_2"  >{lang:dynamic_publish}</label> 
+				<input name="data_PublishMode" type="radio" id="publishMode_3" value="3" onclick="setPublishMode(3);" checked> 
+        <label for="publishMode_3"  >{lang:d_s_publish}</label>
+
+		<input name="data_PublishMode" type="radio" id="publishMode_0" value="0" onclick="setPublishMode(0);"> 
+        <label for="publishMode_0"  >{lang:unpublish}</label>
+	  <else>
+	  <input name="data_PublishMode" type="radio" value="1" id="publishMode_1"  onclick="setPublishMode(1);"> 
+        <label for="publishMode_1"  >{lang:static_publish}</label> <input name="data_PublishMode" type="radio" value="2" id="publishMode_2" onclick="setPublishMode(2);"> 
+        <label for="publishMode_2"  >{lang:dynamic_publish}</label> 
+				<input name="data_PublishMode" type="radio" id="publishMode_3" value="3" onclick="setPublishMode(3);"> 
+        <label for="publishMode_3"  >{lang:d_s_publish}</label>
+
+		
+		<input name="data_PublishMode" type="radio" id="publishMode_0" value="0"  checked onclick="setPublishMode(0);"> 
+        <label for="publishMode_0"  >{lang:unpublish}</label>
+	  </if>
+
+		
+		</td>
+    </tr>
+    <tr id="UI_resource_psn"> 
+      <td class="table_td1">{lang:resource_psn} :</td>
+      <td class="table_td2"> <input name=data_ResourcePSN  class='flat' id="data_ResourcePSN"   size=50  value="[$NodeInfo.ResourcePSN]">
+        <input name="button5" type='button' tabindex='13' value='...' onclick="psnSelect('[$NodeInfo.ResourcePSN]',this.form,'data_ResourcePSN','data_ResourceURL')"></td>
+    </tr>
+    <tr id="UI_resource_url"> 
+      <td class="table_td1"> {lang:resource_url} :</td>
+      <td class="table_td2"> <INPUT name=data_ResourceURL id="data_ResourceURL" size=50  class='flat'   value="[$NodeInfo.ResourceURL]">
+         </td>
+    </tr>
+    <tr id="makedir1"> 
+      <td class="table_td1"> {lang:content_model_inherit}:</td>
+      <td class="table_td2"> <select name="data_TableID" id="data_TableID"  class='flat' disabled>
+          <loop $tableInfo key=key var=var>
+		  <if  $NodeInfo.TableID == $var.TableID >
+          <option value="[$var.TableID]" selected>[$var.Name]</option>
+		  <else>
+          <option value="[$var.TableID]">[$var.Name]</option>
+		  </if>
+          </loop> </select>
+         </td>
+    </tr>
+
+
+	  <tr id="UI_auto_publish"> 
+      <td class="table_td1">{lang:auto_publish}:</td>
+      <td class="table_td2">
+	  	  <if $NodeInfo.AutoPublish == 1>
+
+	  <input name="data_AutoPublish" type="radio" value="1" id="AutoPublish_2" checked > 
+        <label for="AutoPublish_2"  >{lang::global:yes}</label> <input name="data_AutoPublish" type="radio" value="2" id="AutoPublish_3" > 
+        <label for="AutoPublish_3"  >{lang::global:no}</label> 
+	  <else>
+	  <input name="data_AutoPublish" type="radio" value="1" id="AutoPublish_2"> 
+        <label for="AutoPublish_2"  >{lang::global:yes}</label> <input name="data_AutoPublish" type="radio" value="2" id="AutoPublish_3"   checked > 
+        <label for="AutoPublish_3"  >{lang::global:no}</label> 
+
+	  </if>
+
+		
+		</td>
+    </tr>   
+  <tr id="makedir1"> 
+      <td class="table_td1"> {lang:editor}:</td>
+      <td class="table_td2"> <select name="data_Editor" id="data_Editor"  class='flat' >
+          <loop $EditorInfo key=key var=var>
+		  <if  $NodeInfo.Editor == $var.Editor >
+          <option value="[$var.Editor]" selected>[$var.EditorName]</option>
+		  <else>
+		   <option value="[$var.Editor]" >[$var.EditorName]</option>
+
+		  </if>
+          </loop> </select>
+         </td>
+    </tr>
+
+  <tr id="makedir1"> 
+      <td class="table_td1"> {lang:pager}:</td>
+      <td class="table_td2"> <select name="data_Pager" id="data_Pager"  class='flat' >
+          <loop $PagerInfo key=key var=var>
+		  <if  $NodeInfo.Pager == $var.Pager >
+          <option value="[$var.Pager]" selected>[$var.PagerName]</option>
+		  <else>
+          <option value="[$var.Pager]">[$var.PagerName]</option>
+		  </if>
+          </loop> </select>
+         </td>
+    </tr>
+ <tr id="makedir1"> 
+      <td class="table_td1"> {lang:workflow}:</td>
+      <td class="table_td2"> <select name="data_WorkFlow" id="data_WorkFlow"  class='flat' >
+		  <if test="$NodeInfo.WorkFlow == 0">
+		  <option value="0" selected>{lang:no_workflow}</option>
+		  <else>
+		  <option value="0"  >{lang:no_workflow}</option>
+
+		  </if>
+          <loop $workflowInfo key=key var=var>
+
+
+		  <if  $NodeInfo.WorkFlow == $var.wID >
+          <option value="[$var.wID]" selected>[$var.Name]</option>
+
+		  <else>
+          <option value="[$var.wID]">[$var.Name]</option>
+		  </if>
+          </loop> </select>
+         </td>
+    </tr>
+
+    <tr id="UI_tpl_setting"> 
+      <td colspan="2" class="table_header">{lang:tpl_setting}</td>
+    </tr>
+    <tr id="UI_index_tpl""> 
+      <td class="table_td1">{lang:index_tpl} :</td>
+      <td class="table_td2"> <INPUT name=data_IndexTpl id="data_IndexTpl" size=50  class='flat'  value="[$NodeInfo.IndexTpl]">
+        <input type='button' tabindex='13' value='...' onclick="tplSelect('[$NodeInfo.IndexTpl]',this.form,'data_IndexTpl')"> </td>
+    </tr>
+    <tr id="UI_content_tpl"> 
+      <td class="table_td1">{lang:content_tpl} :</td>
+      <td class="table_td2"> <INPUT name=data_ContentTpl id="data_ContentTpl" size=50  class='flat' value="[$NodeInfo.ContentTpl]">
+        <input name="button" type='button' tabindex='13' value='...' onclick="tplSelect('[$NodeInfo.ContentTpl]',this.form,'data_ContentTpl')"> </td>
+    </tr>
+    <tr id="UI_img_tpl"> 
+      <td class="table_td1">{lang:img_tpl} :</td>
+      <td class="table_td2"> <INPUT name=data_ImageTpl id="data_ImageTpl" size=50  class='flat'  value="[$NodeInfo.ImageTpl]">
+        <input name="button2" type='button' tabindex='13' value='...' onclick="tplSelect('[$NodeInfo.ImageTpl]',this.form,'data_ImageTpl')"> </td>
+    </tr>
+    <tr id="UI_static_publish_setting"> 
+      <td colspan="2" class="table_header">{lang:static_publish_setting}</td>
+    </tr>
+	    <tr id="UI_content_psn"> 
+      <td class="table_td1">{lang:content_psn} :</td>
+      <td class="table_td2"> <input name=data_ContentPSN  class='flat' id="data_ContentPSN"   size=50  value="[$NodeInfo.ContentPSN]">
+        <input name="button6" type='button' tabindex='13' value='...' onclick="psnSelect('[$NodeInfo.ContentPSN]',this.form,'data_ContentPSN','data_ContentURL')"></td>
+    </tr>
+    <tr id="UI_content_url"> 
+      <td class="table_td1"> {lang:content_url} :</td>
+      <td class="table_td2"> <INPUT name=data_ContentURL id="data_ContentURL" size=50  class='flat' value="[$NodeInfo.ContentURL]">
+         </td>
+    </tr>
+
+    <tr id="UI_index_name">
+      <td class="table_td1">{lang:index_name} :</td>
+      <td class="table_td2"> <INPUT name=data_IndexName id="data_IndexName" size=50  class='flat'  value="[$NodeInfo.IndexName]">
+        </td>
+    </tr>
+
+	<tr id="UI_sub_dir"> 
+      <td  class="table_td1">{lang:sub_dir} :</td>
+      <td  class="table_td2"> <INPUT name="data_SubDir" class='flat'  id="RsubDirs"   size=15 value="[$NodeInfo.SubDir]"> 
+        &nbsp; <select name="select" class='flat' onchange="
+this.form.data_SubDir.value= this.options[this.selectedIndex].value;
+ ">
+          <option value="">-</option>
+          <option value="">none</option>
+          <option value="Y-m-d">Y-m-d</option>
+          <option value="Y/m/d">Y/m/d</option>
+          <option value="Y-m">Y-m</option>
+          <option value="Y">Y</option>
+          <option value="auto">auto</option>
+        </select> </td>
+    </tr>
+    <tr  id="UI_publish_file_format"> 
+      <td  class="table_td1">{lang:publish_file_format} :</td>
+      <td  class="table_td2"> <input name=data_PublishFileFormat  class='flat' size=50  id="data_PublishFileFormat" value="[@htmlspecialchars($NodeInfo.PublishFileFormat)]" >
+        <input name="button7" type='button' tabindex='13' value='...' onclick="PublishFileFormat(this.form,'data_PublishFileFormat')"> </td>
+    </tr>
+
+	<tr id="UI_dynamic_publish_setting" style="display:none"> 
+      <td colspan="2" class="table_header">{lang:dynamic_publish_setting}</td>
+    </tr>
+    <tr  id="UI_index_portal_url" style="display:none"> 
+      <td  class="table_td1">{lang:index_portal_url} :</td>
+      <td  class="table_td2"> <input name="data_IndexPortalURL"  class='flat' size="100%"  id="data_IndexPortalURL" value="[$NodeInfo.IndexPortalURL]" >
+        </td>
+    </tr>
+    <tr  id="UI_content_portal_url" style="display:none"> 
+      <td  class="table_td1">{lang:content_portal_url} :</td>
+      <td  class="table_td2"> <input name="data_ContentPortalURL"  class='flat' size="100%"  id="data_ContentPortalURL" value="[$NodeInfo.ContentPortalURL]" >
+        </td>
+    </tr>   
+     <tr > 
+      <td colspan="2" class="table_header">{lang:node_extra_field}</td>
+    </tr>
+	
+	<include file="node_extra_field.html" />
+
+  </table>
+
+</DIV>
+
+<!--1}}}-->
+
+<!--{{{2-->
+<DIV id=tabContent__1 style="DISPLAY: none; VISIBILITY: hidden">
+  <table border="0" cellspacing="1" cellpadding="4" width="100%"  align=center class="table_border">
+	<tr> 
+      <td class="table_td1">{lang:cate_creator} :</td>
+      <td class="table_td2">[@userAdmin::getInfo($NodeInfo.CreationUserID,'uName')]
+	  
+	  </td>
+    </tr>
+ 
+	    <tr> 
+      <td class="table_td1" width="20%">{lang:inherit}:</td>
+      <td class="table_td2"> 
+  
+	  <TABLE cellSpacing=1 cellPadding=1 border=0>
+                <TR>
+                	<TD>
+					<if test="$NodeInfo.PermissionInherit">
+                  <input type="radio" name="data_PermissionInherit" value="1" id="data_PermissionInherit1" checked onclick="setPermissionInherit(0);">
+                  <label for="data_PermissionInherit1"  >{lang::global:yes}</label>
+                  <input name="data_PermissionInherit" type="radio" value="0"  id="data_PermissionInherit2" onclick="setPermissionInherit(1);">
+                  <label for="data_PermissionInherit2"  >{lang::global:no}</label>
+					<else>
+                  <input type="radio" name="data_PermissionInherit" value="1" id="data_PermissionInherit1"  onclick="setPermissionInherit(0);">
+                  <label for="data_PermissionInherit1"  >{lang::global:yes}</label>
+                  <input name="data_PermissionInherit" type="radio" value="0"  id="data_PermissionInherit2" checked onclick="setPermissionInherit(1);">
+                  <label for="data_PermissionInherit2"  >{lang::global:no}</label>
+					</if>
+</TD>
+                	<TD></TD>
+                </TR>
+                </TABLE>
+	   </td>
+    </tr>
+<if test="$NodeInfo.PermissionInherit">
+<tbody id="Layer_PermissionInherit" style="display:none">
+<else>
+<tbody id="Layer_PermissionInherit" >
+</if>
+<tr  > 
+      <td colspan="2" class="table_header">{lang:permission_group_setting}</td>
+    </tr>
+<!--{{{ PermissionManageG -->
+    <tr> 
+      <td class="table_td1">{lang:mode_ManageG}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_group}<br><select name="SrcPermissionManageG"  onDblClick="select_move_to(this.form, 'SrcPermissionManageG', 'TargetPermissionManageG')" size="10" style="width:100px;">
+          <loop name="SrcPermissionManageG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionManageG', 'TargetPermissionManageG')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionManageG', 'SrcPermissionManageG')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionManageG', 'TargetPermissionManageG')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionManageG', 'SrcPermissionManageG')"></td> 
+<td>{lang:select_group}<br><select name="TargetPermissionManageG" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionManageG', 'SrcPermissionManageG')">
+<loop name="TargetPermissionManageG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionManageG }}}-->
+<!--{{{ PermissionReadG -->
+    <tr> 
+      <td class="table_td1">{lang:ReadG}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_group}<br><select name="SrcPermissionReadG"  onDblClick="select_move_to(this.form, 'SrcPermissionReadG', 'TargetPermissionReadG')" size="10" style="width:100px;">
+          <loop name="SrcPermissionReadG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionReadG', 'TargetPermissionReadG')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionReadG', 'SrcPermissionReadG')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionReadG', 'TargetPermissionReadG')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionReadG', 'SrcPermissionReadG')"></td> 
+<td>{lang:select_group}<br><select name="TargetPermissionReadG" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionReadG', 'SrcPermissionReadG')">
+<loop name="TargetPermissionReadG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> 
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionReadG }}}-->
+    
+<!--{{{ PermissionWriteG -->
+    <tr> 
+      <td class="table_td1">{lang:WriteG}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_group}<br><select name="SrcPermissionWriteG"  onDblClick="select_move_to(this.form, 'SrcPermissionWriteG', 'TargetPermissionWriteG')" size="10" style="width:100px;">
+          <loop name="SrcPermissionWriteG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionWriteG', 'TargetPermissionWriteG')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionWriteG', 'SrcPermissionWriteG')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionWriteG', 'TargetPermissionWriteG')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionWriteG', 'SrcPermissionWriteG')"></td> 
+<td>{lang:select_group}<br><select name="TargetPermissionWriteG" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionWriteG', 'SrcPermissionWriteG')">
+<loop name="TargetPermissionWriteG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionWriteG }}}-->
+
+
+<!--{{{ PermissionApproveG -->
+    <tr> 
+      <td class="table_td1">{lang:mode_ApproveG}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_group}<br><select name="SrcPermissionApproveG"  onDblClick="select_move_to(this.form, 'SrcPermissionApproveG', 'TargetPermissionApproveG')" size="10" style="width:100px;">
+          <loop name="SrcPermissionApproveG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionApproveG', 'TargetPermissionApproveG')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionApproveG', 'SrcPermissionApproveG')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionApproveG', 'TargetPermissionApproveG')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionApproveG', 'SrcPermissionApproveG')"></td> 
+<td>{lang:select_group}<br><select name="TargetPermissionApproveG" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionApproveG', 'SrcPermissionApproveG')">
+<loop name="TargetPermissionApproveG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionApproveG }}}-->
+<!--{{{ PermissionPublishG -->
+    <tr> 
+      <td class="table_td1">{lang:mode_PublishG}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_group}<br><select name="SrcPermissionPublishG"  onDblClick="select_move_to(this.form, 'SrcPermissionPublishG', 'TargetPermissionPublishG')" size="10" style="width:100px;">
+          <loop name="SrcPermissionPublishG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionPublishG', 'TargetPermissionPublishG')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionPublishG', 'SrcPermissionPublishG')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionPublishG', 'TargetPermissionPublishG')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionPublishG', 'SrcPermissionPublishG')"></td> 
+<td>{lang:select_group}<br><select name="TargetPermissionPublishG" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionPublishG', 'SrcPermissionPublishG')">
+<loop name="TargetPermissionPublishG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionPublishG }}}-->
+
+<tr  > 
+      <td colspan="2" class="table_header">{lang:permission_user_setting}</td>
+    </tr>
+
+<!--{{{ PermissionManageU -->
+    <tr> 
+      <td class="table_td1">{lang:mode_ManageU}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_user}<br><select name="SrcPermissionManageU"  onDblClick="select_move_to(this.form, 'SrcPermissionManageU', 'TargetPermissionManageU')" size="10" style="width:100px;">
+          <loop name="SrcPermissionManageU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionManageU', 'TargetPermissionManageU')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionManageU', 'SrcPermissionManageU')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionManageU', 'TargetPermissionManageU')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionManageU', 'SrcPermissionManageU')"></td> 
+<td>{lang:select_user}<br><select name="TargetPermissionManageU" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionManageU', 'SrcPermissionManageU')">
+<loop name="TargetPermissionManageU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionManageU }}}-->
+<!--{{{ PermissionReadU -->
+    <tr> 
+      <td class="table_td1">{lang:ReadU}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_user}<br><select name="SrcPermissionReadU"  onDblClick="select_move_to(this.form, 'SrcPermissionReadU', 'TargetPermissionReadU')" size="10" style="width:100px;">
+          <loop name="SrcPermissionReadU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionReadU', 'TargetPermissionReadU')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionReadU', 'SrcPermissionReadU')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionReadU', 'TargetPermissionReadU')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionReadU', 'SrcPermissionReadU')"></td> 
+<td>{lang:select_user}<br><select name="TargetPermissionReadU" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionReadU', 'SrcPermissionReadU')">
+<loop name="TargetPermissionReadU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionReadU }}}-->
+
+<!--{{{ PermissionWriteU -->
+    <tr> 
+      <td class="table_td1">{lang:WriteU}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_user}<br><select name="SrcPermissionWriteU"  onDblClick="select_move_to(this.form, 'SrcPermissionWriteU', 'TargetPermissionWriteU')" size="10" style="width:100px;">
+          <loop name="SrcPermissionWriteU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionWriteU', 'TargetPermissionWriteU')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionWriteU', 'SrcPermissionWriteU')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionWriteU', 'TargetPermissionWriteU')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionWriteU', 'SrcPermissionWriteU')"></td> 
+<td>{lang:select_user}<br><select name="TargetPermissionWriteU" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionWriteU', 'SrcPermissionWriteU')">
+<loop name="TargetPermissionWriteU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionWriteU }}}-->
+
+
+
+
+
+
+<!--{{{ PermissionApproveU -->
+    <tr> 
+      <td class="table_td1">{lang:mode_ApproveU}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_user}<br><select name="SrcPermissionApproveU"  onDblClick="select_move_to(this.form, 'SrcPermissionApproveU', 'TargetPermissionApproveU')" size="10" style="width:100px;">
+          <loop name="SrcPermissionApproveU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionApproveU', 'TargetPermissionApproveU')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionApproveU', 'SrcPermissionApproveU')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionApproveU', 'TargetPermissionApproveU')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionApproveU', 'SrcPermissionApproveU')"></td> 
+<td>{lang:select_user}<br><select name="TargetPermissionApproveU" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionApproveU', 'SrcPermissionApproveU')">
+<loop name="TargetPermissionApproveU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionApproveU }}}-->
+
+<!--{{{ PermissionPublishU -->
+    <tr> 
+      <td class="table_td1">{lang:mode_PublishU}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_user}<br><select name="SrcPermissionPublishU"  onDblClick="select_move_to(this.form, 'SrcPermissionPublishU', 'TargetPermissionPublishU')" size="10" style="width:100px;">
+          <loop name="SrcPermissionPublishU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionPublishU', 'TargetPermissionPublishU')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionPublishU', 'SrcPermissionPublishU')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionPublishU', 'TargetPermissionPublishU')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionPublishU', 'SrcPermissionPublishU')"></td> 
+<td>{lang:select_user}<br><select name="TargetPermissionPublishU" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionPublishU', 'SrcPermissionPublishU')">
+<loop name="TargetPermissionPublishU" var="var"> 
+          <option value="[$var.uId]">[$var.uName]</option>
+          </loop> 
+
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionPublishU }}}-->
+
+</tbody>  
+</table>
+</DIV>
+
+<!--2}}}-->
+
+
+</TD>
+       </TR></TBODY></TABLE><BR>
+
+<CENTER><input type='submit' name='submit' value='{lang::global:submit_value}' tabindex='13' onClick="return prepareSubmit();"> <INPUT TYPE="hidden" name="data_PermissionReadG"> <INPUT TYPE="hidden" name="data_PermissionWriteG"> <INPUT TYPE="hidden" name="data_PermissionReadU"><INPUT TYPE="hidden" name="data_PermissionWriteU"> <INPUT TYPE="hidden" name="data_PermissionManageG"><INPUT TYPE="hidden" name="data_PermissionManageU">
+<INPUT TYPE="hidden" name="data_PermissionApproveG"><INPUT TYPE="hidden" name="data_PermissionApproveU">
+<INPUT TYPE="hidden" name="data_PermissionPublishG"><INPUT TYPE="hidden" name="data_PermissionPublishU">
+
+<INPUT TYPE="hidden" name="referer" value="[*IN.referer]">
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="{lang::global:reset_value}">
+</CENTER>	   
+	   </TD>
+	   </form>
+
+	   </TR>
+ </TBODY></TABLE>
+
+
+
+<script language='JavaScript'>
+
+function cate_submit(form)
+{
+	
+	//form.Submit();
+}					
+</script> 		
+<include: file="footer.html">

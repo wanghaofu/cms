@@ -1,0 +1,376 @@
+<include: file="header.html">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<BODY  style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px">
+<link rel='stylesheet' type='text/css' href='../html/configuration.css' />
+
+<script language='JavaScript'>
+var doImage = doImage;
+var TType = TType;
+
+function mhHover(tbl, idx, cls)
+{
+	var t, d;
+	if (document.getElementById)
+		t = document.getElementById(tbl);
+	else
+		t = document.all(tbl);
+	if (t == null) return;
+	if (t.getElementsByTagName)
+		d = t.getElementsByTagName("TD");
+	else
+		d = t.all.tags("TD");
+	if (d == null) return;
+	if (d.length <= idx) return;
+	d[idx].className = cls;
+}
+
+</script>
+<SCRIPT>
+var elo;
+var loadmenuok=false;
+var type = 'main';
+var cId = '[$cInfo.cId]';
+function initrightmenu(){
+	loadmenuok = true;
+}
+
+function newDoc() {
+	var toolMenu = new WebFXMenu;
+
+	toolMenu.add(new WebFXMenuItem('{lang:xinjianwendangchakanneirong}'));
+	toolMenu.add(new WebFXMenuItem('{lang:xinjianwendangbianjiwendang}'));
+	toolMenu.add(new WebFXMenuItem('{lang:xinjianwendangshanchuwendang}'));
+	//toolMenu.add(new WebFXMenuSeparator());
+
+	menudata.innerHTML = toolMenu 
+
+	elo=window.event.srcElement;
+	toolMenu.left = window.event.clientX;
+	toolMenu.top = window.event.clientY+document.body.scrollTop;
+	toolMenu.show();
+}
+
+function going(action, pId) {
+	switch(action) {
+		case 'viewpublish':
+			eval('var mPath = mPath_' + pId + '.href');
+			window.open(mPath,"","")
+
+			break;
+		case 'del':
+			if(!confirm("{lang:querenshanchuma}?")) {
+				break;
+			}
+		default:
+			document.location = '[$base_url]' + 'o=' + action + '&type=' + type + '&pId=' + pId + '&cId=' + cId + '&referer=' + document.location;
+
+	}
+	//sId=6891856b84ee23f2330ee8359cd3f60d&o=view&type=main&pId=41&cId=4
+}
+function rightMenu(pId, published) {
+	var toolMenu = new WebFXMenu;
+
+	toolMenu.add(new WebFXMenuItem('{lang:chakan}','javascript:doing("view","'+ pId +'")','{lang:chakanwendang}'));
+	toolMenu.add(new WebFXMenuItem('{lang:bianji}','javascript:going("edit","'+ pId +'")','{lang:bianjiwendang}'));
+	toolMenu.add(new WebFXMenuItem('{lang:shanchu}','javascript:going("del","'+ pId +'")', '{lang:shanchuwendang}'));
+	toolMenu.add(new WebFXMenuItem('{lang:jianqie}','#bottom', '{lang:jianqiewendang}'));
+	toolMenu.add(new WebFXMenuItem('{lang:fuzhi}','#bottom', '{lang:fuzhiwendang}'));
+	toolMenu.add(new WebFXMenuItem('{lang:zhuanyi}','javascript:doing("cut","'+ pId +'")', '{lang:zhuanyiwendang}'));
+	toolMenu.add(new WebFXMenuSeparator());
+
+	if(published == 0) {
+		toolMenu.add(new WebFXMenuItem('{lang:fabu}','javascript:going("publish","'+ pId +'")','{lang:fabuwendang}'));
+	
+	} else {
+		toolMenu.add(new WebFXMenuItem('{lang:liulanfabu}','javascript:going("viewpublish","'+ pId +'")','{lang:liulanfabu}'));
+		toolMenu.add(new WebFXMenuItem('{lang:genxinfabu}','javascript:going("refresh","'+ pId +'")','{lang:genxinfabu}'));
+		toolMenu.add(new WebFXMenuItem('{lang:quxiaofabu}','javascript:going("unpublish","'+ pId +'")','{lang:quxiaofabu}'));
+	
+	}
+
+	 
+	menudata.innerHTML = toolMenu 
+
+	elo=window.event.srcElement;
+	toolMenu.left = window.event.clientX;
+	toolMenu.top = window.event.clientY+document.body.scrollTop;
+	toolMenu.show();
+
+	//initrightmenu();
+
+}
+</SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+
+function changelocation(locationid)
+    {
+    document.frmHeaderList.dmsys_class_id.length = 0;
+    var locationid=locationid;
+    var i;
+    for (i=0;i < onecount; i++)
+        {
+            if (subcat[i][1] == locationid)
+            {
+                document.frmHeaderList.dmsys_class_id.options[document.frmHeaderList.dmsys_class_id.length] = new Option(subcat[i][0], subcat[i][2]);
+            }
+        }
+       
+    }
+
+
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall' && e.name !='copy')       e.checked = form.chkall.checked; 
+   }
+  }
+
+function delselect(form) {
+		if(!confirm("{lang:querenpiliangshanchuma}?")) return false;
+		form.action+="&o=del&multi=1";
+		form.submit();
+		return;	
+		
+}
+
+function refreshselect(form) {
+	
+	 
+		form.action+="&o=refresh&multi=1";
+		form.submit();
+		return;	
+		
+}
+
+function publishselect(form) {
+	
+		if(!confirm("{lang:querenpiliangfabuma}?")) return false;
+	 
+		form.action+="&o=publish&multi=1";
+		form.submit();
+		return;	
+		
+}
+function checkselect() {
+	
+	dm2=document.documentlist;
+		dm2.action+="?target=multiple";
+		dm2.action+="&action=check";
+		dm2.submit();
+		return;	
+
+}
+function MoveTo(form) {
+	
+		if(!confirm("{lang:querenpiliangfuzhizhuanyifabuma}?")) return false;
+	 
+		form.action+="&o=changeC";
+		form.submit();
+		return;	
+		
+}//-->
+
+function doing(action)
+{
+	switch(action) {
+		case 'createContent':
+			break;
+		case 'extraPublish':
+			break;
+		case 'setting':
+			break;
+		case 'advanced_search':
+			break;
+		case 'setting':
+			break;
+		case 'refresh_view':
+			break;
+		
+	}
+}
+</script>
+<script>
+var mousemovecolor="#D4D4D4";
+var selectcolor ="#DDDDDD";
+var oldcolor;
+
+function GetRow(oElem)
+{
+	while (oElem)
+	{	//alert(oElem.tagName.toLowerCase())
+		if (oElem.tagName.toLowerCase() == "tr" || oElem.parentElement.tagName.toLowerCase() == "tbody") 
+		    return oElem;
+		if (oElem.tagName.toLowerCase() == "table" || oElem.tagName.toLowerCase() == "th") return false;
+		oElem = oElem.parentElement;
+	}
+}
+
+
+function selected()
+{	//alert(pid)
+
+	var trstyle = GetRow( window.event.srcElement );
+	var a;
+	if( !trstyle )
+		return false;
+
+	if( trstyle.style.backgroundColor.toLowerCase() == selectcolor.toLowerCase())
+	{
+		trstyle.style.backgroundColor = "";
+		a=eval("p_"+ trstyle.id);	
+		//alert(trstyle.id)
+		if (a!=null || a.checked) 
+			a.checked=false
+		oldcolor = "";
+	}
+	else
+	{		
+		trstyle.style.backgroundColor = selectcolor;
+		a=eval("p_"+ trstyle.id);
+		//alert(trstyle.id)
+		if (a!=null) 
+			a.checked=true
+		oldcolor = selectcolor;
+
+	
+	}
+}
+</script>
+<div id="menudata"></div>
+<div id="msviLocalToolbar">
+  <table cellpadding="0" cellspacing="2" width="100%" height="19" border="0">
+    <tr> 
+      <td class="lt0" height="30" nowrap="nowrap"  ><font id=large>[$NodeInfo.Name]</font> <font id=description> [ID : [$NodeInfo.NodeID]]</font></td>
+      <td><span class="ltsep">|</span></td>
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 2, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 2, 'lt0')" onclick="doing('createContent')">{lang:tianjiawendang}</td>
+      <td><span class="ltsep">|</span></td>
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 4, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 4, 'lt0')" onclick="doing('extraPublish')">{lang:fudaifabuguanli}</td>
+      <td><span class="ltsep">|</span></td>
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 6, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 6, 'lt0')" onclick="doing('setting')">{lang:canshushezhi}</td>
+      <td><span class="ltsep">|</span></td>
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 8, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 8, 'lt0')" onclick="doing('advanced_search')">{lang:gaojisousuo}</td>
+       <td><span class="ltsep">|</span></td>
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 10, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 10, 'lt0')" onclick="doing('refresh_view')">{lang:shuaxinxianshi}</td>
+     <td ><span class="ltsep">|</span></td>
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 12, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 12, 'lt0')" onclick="doing('refresh_view')">{lang:chakanshouye}</td>
+	  <td><span class="ltsep">|</span></td>
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 14, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 14, 'lt0')" onclick="doing('refresh_view')">{lang:shuaxinshouye}</td>
+     <td>&nbsp;</td>
+
+      <td width="100%"></td>
+    </tr>
+  </table>
+</div>
+
+<div id="msviLocalToolbar">
+  <table cellpadding="0" cellspacing="2" width="100%" height="19" border="0">
+    <tr> 
+      <td  height="20" nowrap="nowrap" >{lang:xianshi}:</td>
+	<td   height="20" nowrap="nowrap" >
+	<select name="FId" id="select2" >
+          <option>{lang:suoyouwenzhang}</option>
+          <option value="">{lang:suoyouweiguidangwenzhang}</option>
+          <option value="">{lang:suoyouweishenhewenzhang}</option>
+          <option value="">{lang:suoyouweifabuwenzhang}</option>
+        </select></td>
+      <td height="20" align="right" nowrap="nowrap" >{lang:anriqichaxu}:</td>
+	  <td height="20" align="left" nowrap="nowrap"   > 
+        <INPUT TYPE="text" NAME="Input2" onFocus="CreateMonthView(this)"   onBlur="DeleteMonthView(this)"> 
+        <INPUT name="Go" TYPE="button" value="Go">
+      </td>
+      <td height="20" align="right" nowrap="nowrap" >{lang:guanjianzichaxu}: </td>
+	  <td   height="20" nowrap="nowrap" > <INPUT TYPE="text" NAME="Input"  > 
+        <INPUT name="Go" TYPE="submit" value="Go">
+   </td> </tr>
+  </table>
+</div>
+
+<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1"  class="table_border" >
+  <TBODY>
+  <form method="post" action="[$base_url]type=main&cId=[$cInfo.cId]" name="documentlist" >
+    <tr align="right" > 
+      <td height=20 colspan="11" class="table_header">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" >
+          <tr> 
+            <td>
+		
+			</td>
+            <td align="right">
+            </td>
+          </tr>
+        </table>
+        </td>
+    </tr>
+    <tr class="table_td2"> 
+      <td> </td>
+      <td align="center">ID</td>
+      <td align="center">{lang:biaoti}</td>
+      <td align="center">{lang:zuozhe}</td>
+      <td align="center">{lang:tigongzhe}</td>
+      <td align="center">{lang:jiarushijian}</td>
+      <td colspan="5" align="center">{lang:caozuo}</td>
+    </tr>
+
+
+<loop $pList key=key var=var>
+<!------onmouseover='this.style.backgroundColor="#FFFFFF"' 
+                    onmouseout='this.style.backgroundColor=""'------>
+    <tr class="table_td1" id="[$var.pId]" onmouseover='this.style.backgroundColor="#FFFFFF"' 
+                    onmouseout='this.style.backgroundColor=""'> 
+      <td noWrap > <input type='checkbox' name='pData[]' value='[$var.pId]' id="p_[$var.pId]" ></td>
+      <td align="center" noWrap   >[$var.mId]</td>
+      <td align="center" noWrap  style="cursor:hand" id="[$var.pId]"><A HREF="[$base_url]o=view&type=main&pId=[$var.pId]&cId=[$cInfo.cId]" style="cursor:hand"   oncontextmenu="rightMenu('[$var.pId]', '[$var.published]');return false;">[$var.mTitle@CsubStr::10]</A></td>
+      <td align="center" noWrap  >[$var.mAuthor]</td>
+      <td align="center" noWrap  >[$var.mOffer]</td>
+      <td align="center" noWrap >[$var.mAddTime@dateformat::Y-m-d H:i]</td>
+      <td colspan="5" align="center" noWrap>
+	    <if $cInfo.cPublishMode != 0 && $var.published == 0>
+	  <A HREF="[$base_url]o=publish&type=main&pId=[$var.pId]&cId=[$cInfo.cId]">{lang:fabu}</A>
+	  <elseif $cInfo.cPublishMode != 0 && $var.published == 1>
+	  <A HREF="[$var.mPath]" target="_blank" id="mPath_[$var.pId]">{lang:liulan}</A>
+	  </if>
+	  <if $var.published == 1>
+	  <A HREF="[$base_url]o=refresh&type=main&pId=[$var.pId]&cId=[$cInfo.cId]">{lang:gengxin}</A>
+	  </if>
+	  <A HREF="[$base_url]o=edit&type=main&pId=[$var.pId]&cId=[$cInfo.cId]">{lang:bianji}</A>
+	  <A HREF="[$base_url]o=del&type=main&pId=[$var.pId]&cId=[$cInfo.cId]&mId=[$var.mId]" onclick="return confirm('{lang:querenshanchuma}？')">{lang:shanchu}</A> 
+	
+
+	  
+	  </td>
+    </tr>
+
+</loop>
+
+    <tr class="Tablelistbg"> 
+      <td colspan="11" align="left" bgcolor="#F5F5F5"> <table border="0" align="center"  cellpadding="0" cellspacing="0" width="100%">
+          <tr> 
+            <td align=left> <input type="hidden" name="father_id" value=""> 
+              <input type="hidden" name="dir_name" value="">
+            <input type="checkbox" name="chkall" value="on" onclick="CheckAll(this.form)" id="chkall"  > 
+              <label for="chkall" >{lang:quaxuan}</label>&nbsp;&nbsp;<input type="button" value="{lang:pilianggengxin}" class=button onclick="refreshselect(this.form)"> 
+              &nbsp;&nbsp;<input type="button" value="{lang:piliangfabu}" class=button onclick="publishselect(this.form)"> &nbsp;&nbsp;<input type="button" value="{lang:piliangshanchu}" class=button onclick="delselect(this.form)">  </td>
+            <td align=right><input name="copy" type="checkbox" id="copy" value="yes" checked>
+              <label for="copy">{lang:fuzhi}</label> 
+              <input type="button" value="{lang:zhuanyidao}" class=button onclick="MoveTo(this.form)">
+              <select name="FId" id="select2" >
+			               <loop $catelist key=key var=var> 
+			 
+          <option value="[$var.cId]">[$var.cHeader@repeat::&nbsp;&nbsp;&nbsp;&nbsp;]-&nbsp;[$var.cName]</option>
+          </loop>
+
+			  </select>
+            </td>
+          </tr>
+        </table></td>
+    </tr>
+  </form>
+  <tr class="Tablelistbg"> 
+    <td colspan="11" align=right> [$pagelist]&nbsp; </td>
+  </tr>
+  </tbody> 
+</table>
+
+<include: file="footer.html">

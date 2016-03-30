@@ -1,0 +1,21 @@
+ <if test="$PageInfo.CommentNum==''">
+ <op exp="$PageInfo.CommentNum=0">
+ </if>
+ <div class="pinglun-title">
+ <table cellpadding='0' cellspacing='0' border='0' width="100%" style="padding:0 0;margin:0 0;">
+ <tr>
+ <td width="30%"><a href="[$PUBLISH_URL]comment.php?o=display&Id=[$IndexID]"><img src="/skin/sesoe/images/em01.gif" border="0" /></a></td>
+  <td  style="text-align:right;width:50%;"><a href="[$PUBLISH_URL]comment.php?o=display&Id=[$IndexID]">已有[$PageInfo.CommentNum]位对此文感兴趣的网友发表了看法 </a></td>
+ <td style="text-align:center;width:20%;"><a href="[$PUBLISH_URL]comment.php?o=display&Id=[$IndexID]">查看发表</a></td></tr></table>
+ </div>
+ <div class="pinglun-content">
+
+<CMS action="COMMENT" return="List" IndexID="{$IndexID}" Num="8" hiddenIp="1" /> 
+
+<dl id="list_review">
+ <LOOP name="List" key="key" var="var"> 
+ <dt> 网友笔名：<b>[$var.Author]</b>&nbsp;&nbsp;发表时间：<i>[@date('Y-m-d H:i', $var.CreationDate)] </i> &nbsp;&nbsp;IP地址：[$var.Ip]   </dt>
+ <dd>[@CsubStr(nl2br($var.Comment), 0, 200)] </dd>				 
+</LOOP> 
+</dl>
+	</div>			

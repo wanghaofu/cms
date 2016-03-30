@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" >
+<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <title>[$cms_version]</title>
+    <meta name="robots" content="noindex">
+    <script>
+					window.onload = loadCols;
+					
+					function loadCols()
+					{
+						try { panelMain.load("mnpFrames.data"); }
+						catch(e) { return; }
+						var colWidth = panelMain.getAttribute("colWidth");
+						if (colWidth)
+						{
+				
+							panelMain.cols = colWidth + ",*";
+				
+							if (colWidth == "0")
+								top.panelHeader.MNP_showtoc.style.display = "";
+						}				
+					}
+					
+					function saveCols()
+					{
+						panelMain.setAttribute("colWidth", fstMenuColumn.offsetWidth);
+						try { panelMain.save("mnpFrames.data"); }
+						catch(e) {}
+					}
+				</script>
+  </head>
+  <frameset rows="89,*" frameborder="0" framespacing="0"  >
+    <frame name="panelHeader" scrolling="no" noresize="true" src="[$base_url]o=sys::view&extra=header">
+    <frameset name="panelMain" cols="216,*" framespacing="6" frameborder="1" id="panelMain" style="behavior:url(#default#userdata)" onresize="saveCols()">
+      <frameset framespacing="0" frameborder="0" id="fstMenuColumn" rows="20,*,0,0">
+        <frame name="panelBox" scrolling="no" src="[$base_url]o=sys::view&extra=box">
+        <frame name="panelMenu" scrolling="yes" src="[$base_url]o=sys::view&extra=menu">
+        <frame name="actionFrame" scrolling="no" src="">
+		<frame src="[$base_url]o=task::view" name="taskFrame"  marginheight="0" marginwidth="0"  scrolling="no" 
+		frameborder="no" >
+      </frameset>
+      <frame name="panelWork" frameborder="0" bordercolor="#003399" src="[$base_url]o=sys::view&extra=workarea">
+    </frameset>
+  </frameset>
+</html>
+
+

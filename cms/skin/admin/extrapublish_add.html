@@ -1,0 +1,128 @@
+<include: file="header.html">
+<script type="text/javascript" language="javascript">
+var sId = '[$sId]';
+
+function doing(action)
+{
+	if(document.clientform.data_TplName.value=='') {
+		alert("{lang:please_input_tplname}");
+		return false;
+	}
+	var leftPos = (screen.availWidth-800) / 2
+	var topPos = (screen.availHeight-600) / 2 
+	switch(action) {
+		case 'editor':
+			 window.open('admin_tpl.php?sId=[$sId]&o=editor_frameset&extra=add&NodeID=[$NodeInfo.NodeID]', '','width=800,height=600,scrollbars=no,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos); 
+			break;
+		case 'upload':
+ 			window.open("admin_tpl.php?sId=[$sId]&o=upload&NodeID=[$NodeInfo.NodeID]", '','width=350,height=100,scrollbars=no,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+			 
+			break;
+ 
+			
+		
+	}
+
+}
+
+function InputPicker(action, form, element)
+{
+	
+	switch(action) {
+		case 'color':
+			var arr = showMeDialog("../html/color.htm","color","dialogWidth:200pt;dialogHeight:175pt;help:0;status:0");	break;
+		case 'date':
+			showCalendar(element, 'y-mm-dd');
+			break;
+		case 'upload':
+			var arr = showMeDialog('upload.php?sId='+ sId +'&o=display&mode=one&type=img_picker&NodeID=' + NodeID,"color","dialogWidth:390px;dialogHeight:120px;help:0;status:0;scroll:no");
+			break;
+		case 'tpl':
+			with(form){
+
+				eval("var varlue1=" + element + ".value;")
+
+			}
+
+			var arr = showMeDialog("admin_select.php?sId=[$sId]&o=tpl&tpl=" + varlue1,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+			break;	
+		case 'psn':
+			with(form){
+
+				eval("var varlue1=" + element + ".value;")
+
+			}
+			
+			var info = showMeDialog("admin_select.php?sId=[$sId]&o=psn_picker&psn=" + varlue1 ,"color","dialogWidth:600px;dialogHeight:266px;help:0;status:0;scroll:no");
+			if(info['filename'] != null) {
+				var arr= '{PSN-URL:'+ info['PSNID'] + "}" +info['filename'];
+			}
+			break;
+	}
+
+	if(arr != null) {
+		with(form){
+
+			eval(element + ".value= '" +  arr + "'")
+
+		}
+
+
+	}
+
+}
+
+
+function psnSelect(psn,form, psn_element,url_element) {
+	var arr = showMeDialog("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+	if(arr != null) {
+		var PSN = '{PSN:'+ arr;
+		var URL = '{PSN-URL:'+ arr;
+		with(form){
+
+		eval(psn_element + ".value= '" + PSN + "'")
+		eval(url_element + ".value= '" + URL + "'")
+
+		}
+	}
+
+}
+
+</script>
+ 
+  <table border="0" cellspacing="1" cellpadding="4" width="95%"  align="center" class="table_border">
+<form name='clientform' id="clientform" method='post' action='[$base_url]o=add_submit&NodeID=[$NodeInfo.NodeID]' >
+     <tr> 
+      <td colspan="2" class="table_header">{lang:extrapublish_add} </td>
+    </tr>
+	 
+    <tr> 
+      <td class="table_td1" width="200">{lang:publish_name} :</td>
+      <td class="table_td2"><input name='data_PublishName' type='text' class='flat' id="data_PublishName" tabindex='8'   size='25'  >
+ 	  </td>
+    </tr>
+
+<tr>
+<td class="table_td1"  >{lang:PublishFileName}:</td>
+              <td class="table_td2"><input name='data_PublishFileName' id="data_PublishFileName" type='text'   size=80% value="[@time('')].html" >  </td></tr>
+<tr>
+<td class="table_td1"  >{lang:publish_tpl}:</td>
+              <td class="table_td2"><input name='data_Tpl' id="data_Tpl" type='text' value='' size=80%  >&nbsp;<input name="button5" type='button' tabindex='13' value='...' onclick="InputPicker('tpl',this.form,'data_Tpl')"> </td></tr>
+<td class="table_td1"  >{lang:SelfPSN}:</td>
+              <td class="table_td2"><input name='data_SelfPSN' id="data_SelfPSN" type='text' value='' size=80%  >&nbsp;<input name="button6" type='button' tabindex='13' value='...' onclick="psnSelect('',this.form,'data_SelfPSN','data_SelfPSNURL')"> </td></tr>
+<tr><td class="table_td1"  >{lang:SelfPSNURL}:</td>
+              <td class="table_td2"><input name='data_SelfPSNURL' id="data_SelfPSNURL" type='text' value='' size=80%  >&nbsp;</td></tr>
+
+  <tr> 
+      <td class="table_td1">{lang:extranote}:</td>
+      <td class="table_td2"><TEXTAREA NAME="data_Intro" ROWS="8" COLS="45"></TEXTAREA> </td>
+    </tr>
+    
+    <tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value='{lang::global:submit_value}' tabindex='13'  > <INPUT TYPE="hidden" name="referer" value="[$referer]">
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="{lang::global:reset_value}"></td>
+    </tr>
+</form>
+  </table>
+
+<include: file="footer.html">

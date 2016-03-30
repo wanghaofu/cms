@@ -1,0 +1,86 @@
+<include file="TplConfig.html" /><!--#CW#  引入产品模块环境变量。  Add By CWTM #CW#-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[$NodeInfo.Name] - [$SITE_NAME]</title>
+<link href="[$SKIN_URL]/product/css/css.css" rel="stylesheet" type="text/css" />
+<link href="[$SKIN_URL]common/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="../common/header.html" />
+<div class="content">
+  <div class="left">
+<!--#CW#  按现有栏目，取出产品并生成列表。  Add By CWTM #CW#-->
+<CMS action="NODELIST" return="List" Type="sub" NodeID="{$pdHomeNodeID}" Ignore="" />
+<loop name="List" key="key" var="var" start="1" >
+    <div class="topside01"><a href="[$var.NodeURL]"> [$var.NodeName] </a></div>
+    <div class="center01">
+      <div class="imgages">
+        <ul>
+<!--#CW#  根据上面取出的结点ID，取出相应的产品内容并生成列表。  Add By CWTM #CW#-->
+<CMS action="LIST" return="ListProduct" NodeID="{$var.NodeID}" Num="4" /> 
+<LOOP name="ListProduct" var="var1" key="key1"> 
+          <li>
+				<a href="[$var1.URL]" target="_blank" title="[$var1.Title]">
+				 	<img src="[$var1.Photo]" width="135px" height="115px" alt="[$var1.Title]"/>
+				</a>
+				<span>
+					<a href="[$var1.URL]" target="_blank" title="[$var1.Title]">[@CsubStr($var1.Title, 0, 8, '...')]</a>
+				</span>
+			 </li>
+</LOOP>
+        </ul>
+      </div>
+    </div>
+    <div class="bottomside01"></div>
+<!--#CW#  嵌入广告代码  Add By CWTM #CW#-->
+<if test="$key == 1">
+	 <include file="inc/ads_1.html" />
+<elseif test="$key == 2">
+	 <include file="inc/ads_2.html" />
+<elseif test="$key == 3">
+	 <include file="inc/ads_3.html" />
+<elseif test="$key == 4">
+	 <include file="inc/ads_4.html" />
+</if>
+</loop>
+  </div>
+
+ <div class="right">
+    <div class="right-topside"></div>
+<!--#CW#  取出产品相关文章  Add By CWTM #CW#-->
+<CMS action="LIST" return="ProductNews" NodeID="{$AboutPdNodeID}" TableID="1" num="10" />
+<if test="!empty($ProductNews)">
+<!--#CW#  右侧区块开始  Add By CWTM #CW#-->
+    <div class="right-center">
+      <div class="title1">产品相关文章</div>
+      <ul>
+<LOOP name="ProductNews" var="var" key="key" start="1">
+        <li><a href="[$var.URL]">[@CsubStr($var.Title, 0, 14)]</a></li>
+</LOOP>
+      </ul>
+    </div>
+    <div class="right-bottomside"></div>
+    <div class="right-topside"></div>
+</if>
+
+    <div class="right-center">
+      <div class="title2">热门产品</div>
+      <ul>
+<!--#CW#  取出热门产品  Add By CWTM #CW#-->
+<CMS action="LIST" return="HotProduct" NodeID="{$pdAllNodeID}" TableID="{$pdTableID}" num="15" orderby="Hits_Total" />
+<LOOP name="HotProduct" var="var" key="key" start="1">
+        <li><a href="[$var.URL]">[@CsubStr($var.Title, 0, 14)]</a> [$var.Price]</li>
+</LOOP>
+      </ul>
+    </div>
+    <div class="right-bottomside"></div>
+  </div>
+</div>
+
+<!--#CW#  引入页脚  Add By CWTM #CW#-->
+<include file="../common/footer.html" />
+
+</body>
+</html>

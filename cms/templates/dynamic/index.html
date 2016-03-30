@@ -1,0 +1,422 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>CMSware演示网站 － Powered By CMSware</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8"><LINK 
+href="[$PUBLISH_URL]images/style.css" rel=stylesheet>
+<style>
+
+div.titleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 165;
+	text-overflow: ellipsis;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;			
+}	
+</style>
+
+<META content="MSHTML 6.00.3790.118" name=GENERATOR></HEAD>
+<BODY bgColor=#999999 leftMargin=0 background=[$PUBLISH_URL]images/bg.gif topMargin=5>
+<DIV align=center>
+<TABLE cellSpacing=3 cellPadding=0 width=778 align=center bgColor=#ffffff 
+border=0>
+  <TBODY>
+  <TR>
+    <TD bgColor=#eeeeee height=25>
+      <TABLE cellSpacing=0 cellPadding=0 width=770 align=center border=0>
+        <TBODY>
+        <TR>
+          
+          <TD  >
+<php>
+<if test="$Member.UserName !=''">
+欢迎你:[$Member.UserName] - 您的 积分 [$Member.Credit] 点 / 头衔: [$Member.GroupName] - [$Member.GroupID] <span class="smalltxt">[<a href="[$BBS_URL]logging.php?action=logout">注销</a>]
+<else>
+<table width="100%"  border="0">
+<form method="post" action="[$BBS_URL]logging.php?action=login">
+  <tr>
+    <td>用户:</td>
+    <td><input type="text" name="username" size="10" maxlength="40" tabindex="1"></td>
+    <td>密码:</td>
+    <td><input type="password" name="password" size="10" tabindex="2"></td>
+    <td><input type="submit" name="loginsubmit" value="会员登录"></td>
+    <td>&nbsp; 
+      <input type="hidden"   name="cookietime" value="2592000">     <span class="smalltxt"><a href="[$BBS_URL]register.php">立即注册</a>&nbsp;<a href="[$BBS_URL]member.php?action=lostpasswd">取回密码</a></span></td>
+  </tr>
+  </form>
+</table>
+</if>
+</php>	  
+		  
+
+
+
+</TD>
+          <TD>
+            <DIV align=right> 
+                  ·<A   href="http://www.localhost.com/" 
+            target=_blank>官方首页</A> ·<A 
+            href="http://www.localhost.com/buy" 
+            target=_blank>联系购买</A>                  ·<FONT color=#ff0000><A 
+            href="http://www.localhost.com/bbs">技术支持论坛</A></FONT> &nbsp;&nbsp;</DIV></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=778 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=3 bgColor=#ffffff><IMG height=1 src="" width=1></TD>
+                <TD width=130 bgColor=#ffffff><A href="http://www.localhost.com"><IMG 
+              src="[$PUBLISH_URL]images/logo125_80.gif"   border=0></A></TD>
+          <TD bgColor=#ffffff>
+            <TABLE cellSpacing=0 cellPadding=0 width=630 align=center 
+              border=0><TBODY>
+              <TR>
+                <TD>
+                  <TABLE cellSpacing=0 cellPadding=0 width=640 align=center 
+                  bgColor=#ffffff border=0>
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=top bgColor=#cc0000 height=50>
+                        <TABLE cellSpacing=0 cellPadding=0 width="100%" 
+                        align=center border=0>
+                          <TBODY>
+                          <TR>
+                            <TD bgColor=#000000 height=5><IMG height=1 src="" 
+                              width=1></TD></TR></TBODY></TABLE>
+                        <TABLE cellSpacing=0 cellPadding=0 width="100%" 
+                        align=center border=0>
+                          <TBODY>
+                          <TR>
+                            <TD height=3><IMG height=1 src="" 
+                          width=1></TD></TR></TBODY></TABLE>
+                                <TABLE cellSpacing=2 cellPadding=0 width="95%" 
+                        align=center border=0>
+                                  <TBODY>
+                                    <TR> 
+                                      <TD><A href="/"><FONT 
+                              color=#ffffff>网站首页</FONT></A><FONT color=#ffffff> 
+                                        | </FONT><A 
+                              href="/gov"><FONT 
+                              color=#ffffff>政府在线</FONT></A><FONT color=#ffffff> 
+                                        | </FONT><A 
+                              href="/news"><FONT 
+                              color=#ffffff>新闻中心</FONT></A><FONT color=#ffffff> 
+                                        | </FONT>&nbsp;<A 
+                              href="/it"><FONT 
+                              color=#ffffff>I&nbsp;T频道</FONT></A><FONT color=#ffffff> 
+                                        | </FONT><A 
+                              href="/sport"><FONT 
+                              color=#ffffff>体育频道</FONT></A><FONT color=#ffffff> 
+                                        | </FONT><A 
+                              href="/finance"><FONT 
+                              color=#ffffff>财经频道</FONT></A><FONT color=#ffffff> 
+                                        | </FONT><A 
+                              href="/military"><FONT 
+                              color=#ffffff>军事频道</FONT></A><FONT color=#ffffff> 
+                                        | </FONT><A 
+                              href="/science"><FONT 
+                              color=#ffffff>科技频道 </FONT></A><A href="/photolib"><FONT 
+                              color=#ffffff><FONT color=#ffffff>| </FONT><FONT 
+                              color=#ffffff>图片库</FONT><FONT color=#ffffff>&nbsp;</FONT></FONT></A></TD>
+                                    </TR>
+                                    <TR> 
+                                      <TD><A href="http://download.cmsware.com"><FONT 
+                              color=#ffffff>下载中心 </FONT></A><FONT color=#ffffff>| 
+                                        </FONT> <a href="/edu"><FONT color=#ffffff>教育频道 
+                                        </FONT></a><FONT color=#ffffff>| </FONT> 
+                                        <A href="/book"><FONT color=#ffffff>读书频道</FONT> 
+                                        </A><FONT color=#ffffff>|</FONT> <A href="/music"> 
+                                        <FONT color=#ffffff>音乐频道</FONT></A> <FONT color=#ffffff> 
+                                        |</FONT> <A href="/tour"><FONT 
+                              color=#ffffff>旅游频道</FONT></A><FONT color=#ffffff> 
+                                        |</FONT> <A 
+                              href="/health"><FONT color=#ffffff>健康频道</FONT></A> 
+                                        <FONT color=#ffffff> | </FONT><A 
+                              href="/house"><FONT color=#ffffff>房产频道</FONT></A> 
+                                        <FONT color=#ffffff> | </FONT><A href="/entertainment"><FONT 
+                              color=#ffffff>文娱频道</FONT></A></TD>
+                                    </TR>
+                                    <TR> 
+                                      <TD><A href="http://www.localhost.com"><FONT 
+                              color=#ffffff>官方首页 </FONT></A><FONT color=#ffffff>| 
+                                        </FONT> <A href="http://www.localhost.com/bbs"><font color="#ffffff">技术论坛</font> 
+                                        </A><FONT color=#ffffff>|</FONT> <A href="http://www.localhost.com/doc"> 
+                                        <FONT color=#ffffff>文档中心</FONT></A> <FONT color=#ffffff> 
+                                        |</FONT> <A href="http://www.localhost.com/user"><FONT 
+                              color=#ffffff>客户中心</FONT></A><FONT color=#ffffff> 
+                                        |</FONT> <A 
+                              href="http://www.localhost.com/buy"><FONT color=#ffffff>联系购买</FONT></A> 
+                                        <FONT color=#ffffff> | </FONT><A 
+                              href="http://www.localhost.com/agent"> <FONT color=#ffffff>代理合作</FONT></A> 
+                                        <FONT color=#ffffff>| </FONT><A href="http://www.localhost.com/joinus"><FONT color=#ffffff>加盟我们</FONT></A>&nbsp;</TD>
+                                    </TR>
+                                  </TBODY>
+                                </TABLE>
+                                <TABLE cellSpacing=0 cellPadding=0 width="100%" 
+                        align=center border=0>
+                          <TBODY>
+                          <TR>
+                            <TD height=3><IMG height=1 src="" 
+                          width=1></TD></TR></TBODY></TABLE>
+                        <TABLE cellSpacing=0 cellPadding=0 width="100%" 
+                        align=center border=0>
+                          <TBODY>
+                          <TR>
+                            <TD bgColor=#dbdbdb height=5><IMG height=1 src="" 
+                              width=1></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+
+<TABLE width=778 border=0 align=center cellPadding=0 cellSpacing=3 bgColor=#ffffff>
+  <TR>
+    <TD height=25>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%"       background=[$PUBLISH_URL]images/mbg.gif border=0>  
+        <TR>
+            <TD vAlign=bottom width="26%" height=30><IMG height=25   src="[$PUBLISH_URL]images/title.gif" width=201 border=0></TD>
+            <TD vAlign=bottom width="74%">
+            
+			<TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ffffff      border=0>
+              <TBODY>
+              <TR bgColor=#33cccc>
+                  <TD height=23 align="center" bgColor=#666666> 
+                    <DIV align=center><a href="[$NodeInfo.URL]"><FONT 
+                  color=#ffffff>频道首页</FONT></a></DIV></TD>
+                 
+				  
+		<CMS action="NODELIST" return="List" Type="sub" />		 
+        <loop name="List" var="var" key="key" >
+		<TD align="center" bgColor=#cc0000> <a href="[$var.URL]"><FONT  color=#ffffff>[$var.Title]</FONT></a></td>
+		</loop>
+                  </TR></TABLE></TD></TR></TABLE></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=778 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD height=3><IMG height=1 src="" width=1></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=0 cellPadding=0 width=778 align=center border=0>
+ 
+  <TR>
+    <TD vAlign=top>
+      <TABLE cellSpacing=3 cellPadding=0 width=575 bgColor=#ffffff border=0>
+        <TBODY>
+        <TR>
+              <TD height=80><A href="http://www.localhost.com" target=_blank><IMG 
+            height=80 src="[$PUBLISH_URL]images/banner.jpg" width=569 
+        border=0></A></TD>
+            </TR></TBODY></TABLE>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+        <TBODY>
+        <TR>
+          <TD height=3><IMG height=1 src="" width=1></TD></TR></TBODY></TABLE>
+      <TABLE cellSpacing=3 cellPadding=0 width=575 bgColor=#ffffff border=0>
+        <TBODY>
+        <TR>
+          <TD width=25 bgColor=#ff6600 height=25>
+            <DIV align=center><IMG height=7 src="[$PUBLISH_URL]images/arrow.gif" 
+            width=7></DIV></TD>
+          <TD width=544 bgColor=#666666 height=25>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                      <TD><FONT 
+                  color=#ffffff>&nbsp;<STRONG><B>[$NodeInfo.Name]</B></STRONG></FONT></TD>
+                <TD width=65>&nbsp;</TD></TR></TBODY></TABLE></TD></TR>
+        <TR vAlign=top bgColor=#eeeeee>
+              <TD colSpan=2 height=650> 
+                <TABLE cellSpacing=0 cellPadding=0 width="85%" align=center 
+border=0>
+              <TBODY>
+              <TR>
+                <TD><BR>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr> 
+<CMS action="LIST" return="List" NodeID="self" Num="6" where="c.Photo !=''" /> 
+<loop name="List" var="var" key="key" >
+<if test="$key==0">
+
+<TD align=middle height=90>
+<A href=" [$var.URL] " target="_blank" title=" [$var.Title] ">
+<img src="[@AutoMini($var.Photo, '160*120', $var)]" border="0" >
+</A>
+<BR>
+<A href=" [$var.URL] " target="_blank" title=" [$var.Title] ">[@CsubStr( $var.Title , 0, 10)]</A> 
+</td>
+<elseif test="$key % 3 ==0">
+</tr><tr>
+<TD align=middle height=90>
+<A href=" [$var.URL] " target="_blank" title=" [$var.Title] ">
+<img src="[@AutoMini($var.Photo, '160*120', $var)]" border="0" >
+</A>
+<BR>
+<A href=" [$var.URL] " target="_blank" title=" [$var.Title] ">[@CsubStr( $var.Title , 0, 10)]</A> 
+</td>
+<else>
+<TD align=middle height=90>
+<A href=" [$var.URL] " target="_blank" title=" [$var.Title] ">
+<img src="[@AutoMini($var.Photo, '160*120', $var)]" border="0" >
+</A>
+<BR>
+<A href=" [$var.URL] " target="_blank" title=" [$var.Title] ">[@CsubStr( $var.Title , 0, 10)]</A> 
+</td>
+</if>
+</LOOP>
+			
+ </tr>
+</table>
+		
+<br><br>
+	<CMS action="LIST" return="List" type="Node" NodeID="self" Num="page-30" OrderBy="PublishDate"  order="DESC" /> 
+ <TABLE cellSpacing=0 cellPadding=0 width=550 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD class=c>
+                        <UL>
+<loop name="List" var="var" key="key" >
+  <LI>
+  <A title="[$var.Title]"     href="[$var.URL]" 
+                          target=_blank>[$var.Title]</A> <FONT 
+                          color=#999999>[[@date('Y-m-d H:i:s', $var.PublishDate)]]</FONT><BR>
+		</LOOP>  
+</LI></UL> 
+                         
+    <TABLE cellSpacing=3 cellPadding=3 width="95%" 
+                        align=center>
+                          <TBODY>  
+                          <TR>
+   <TD align=right>页次：<FONT   
+                              color=red><B>[$PageInfo.CurrentPage]</FONT>/<B>[$PageInfo.TotalPage]</B>&nbsp;&nbsp;每页<B>2</B>篇&nbsp;&nbsp;共<B>[$PageInfo.TotalNum]</B>篇&nbsp;&nbsp;
+							  分页：
+							  [@IndexPage($PageInfo.TotalPage, $PageInfo.CurrentPage, $PageInfo.URL)]
+							  <!--   [*cmsware.page.PageList]
+							   [<FONT color=red><B>1</B></FONT>][<A 
+                              href="//info/list.asp?boardid=4&page=2">2</A>]-->
+							  
+							  </TD></TR></TBODY></TABLE>
+							  <BR></TD></TR></TBODY>
+					
+	</TABLE>
+
+                 
+                        
+							  
+							  <BR>
+							  </TD></TR></TBODY></TABLE>
+              </TD>
+            </TR></TBODY></TABLE></TD>
+    <TD vAlign=top width=200>
+      <TABLE cellSpacing=3 cellPadding=0 width="100%" bgColor=#ffffff 
+        border=0>
+	
+        <TR>
+          <TD width=25 bgColor=#ff6600 height=25>
+            <DIV align=center><IMG height=7 src="[$PUBLISH_URL]images/arrow.gif" 
+            width=7></DIV></TD>
+          <TD width=166 bgColor=#666666 height=25>&nbsp;&nbsp;<FONT 
+            color=#ffffff>新闻搜索</FONT></TD></TR>
+        <TR bgColor=#eeeeee>
+            <TD colSpan=2> <TABLE height=40 cellSpacing=0 cellPadding=3 width="100%">
+
+
+			 <FORM action="[$PUBLISH_URL]search.php?o=search&TableID=1" 
+              method=post>
+              <TBODY>
+              <TR>
+                <TD align=middle colSpan=2><INPUT name=Keywords id="Keywords" size=12> <INPUT type=submit value=搜索 name=submit  onClick="if(this.form.Keywords.value=='') {alert('请输入关键字');return false;}">
+                          <input name="Field" type="hidden" id="field" value="Content"> 
+                          </TD></TR></FORM>
+
+               
+              </TABLE></TD></TR></TABLE>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+        <TBODY>
+        <TR>
+          <TD height=3><IMG height=1 src="" width=1></TD></TR></TBODY></TABLE>
+      <TABLE cellSpacing=3 cellPadding=0 width="100%" bgColor=#ffffff 
+        border=0><TBODY>
+        <TR>
+          <TD width=25 bgColor=#ff6600 height=25>
+            <DIV align=center><IMG height=7 src="[$PUBLISH_URL]images/arrow.gif" 
+            width=7></DIV></TD>
+              <TD width=166 bgColor=#666666 height=25>&nbsp;&nbsp;<FONT 
+            color=#ffffff>最热新闻</FONT></TD>
+            </TR>
+        <TR bgColor=#eeeeee>
+          <TD colSpan=2>
+            <TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD vAlign=top height=200>
+<CMS action="LIST" return="List" orderby="Hits_Total" TableID="1" num="10" />
+ <TABLE cellSpacing=1 cellPadding=1 width=100% border=0>
+            <TBODY>
+             <TR> 
+                <TD width=10 height=5></TD>
+                <TD width=330></TD>
+              </TR>
+<loop name="List" var="var" key="key" >
+
+<TR> 
+      <TD class=f14 vAlign=top>·</TD>
+        <TD class=f14><A class=a05   href="[$var.URL]">[$var.Title]</A><span class="process">(<font color="#FF6600">[$var.Hits_Total]</font>)</span></TD>
+</TR>
+			
+</LOOP>		
+</TBODY></TABLE>	
+                </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" align=center border=0>
+        <TBODY>
+        <TR>
+          <TD height=3><IMG height=1 src="" width=1></TD></TR></TBODY></TABLE>
+      <TABLE cellSpacing=3 cellPadding=0 width="100%" bgColor=#ffffff 
+        border=0><TBODY>
+        <TR>
+          <TD width=25 bgColor=#ff6600 height=25>
+            <DIV align=center><IMG height=7 src="[$PUBLISH_URL]images/arrow.gif" 
+            width=7></DIV></TD>
+              <TD width=166 bgColor=#666666 height=25>&nbsp;&nbsp;<FONT 
+            color=#ffffff>最新新闻</FONT></TD>
+            </TR>
+        <TR bgColor=#eeeeee>
+          <TD colSpan=2 height=106>
+            <TABLE cellSpacing=2 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                      <TD vAlign=top height=415> 
+<CMS action="LIST" return="List"  TableID="1" num="10" />
+ <TABLE cellSpacing=1 cellPadding=1 width=100% border=0>
+            <TBODY>
+             <TR> 
+                <TD width=10 height=5></TD>
+                <TD width=330></TD>
+              </TR>
+<loop name="List" var="var" key="key" >
+
+<TR> 
+      <TD class=f14 vAlign=top>·</TD>
+        <TD class=f14><A class=a05   href="[$var.URL]">[$var.Title]</A> <span class="process" style="font-size:9px; ">([@date('m-d H:i', $var.PublishDate)])</span></TD>
+</TR>
+			
+</LOOP>		
+</TBODY></TABLE>	
+</CMS>
+                      </TD>
+                    </TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+      </TD>
+    </TR></TBODY></TABLE><TABLE cellSpacing=0 cellPadding=0 width=778 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD height=3><IMG height=1 src="" width=1></TD></TR></TBODY></TABLE>
+<TABLE cellSpacing=3 cellPadding=0 width=778 align=center bgColor=#ffffff 
+border=0>
+  <TBODY>
+  <TR>
+    <TD bgColor=#f6f6f6 height=80>
+      <DIV align=center><A href="#" 
+      target=_blank>广告联系</A> - <A href="#" 
+      target=_blank>关于我们</A> - <A 
+      href="#" target=_blank>诚聘英才</A> - <A href="#" 
+      target=_blank>联系我们</A> - <A 
+      href="#" 
+      target=_blank>合作伙伴</A><BR>
+          版权所有：<a href="http://www.localhost.com">CMS</a> 2003-2004 <FONT 
+      face="Arial, Helvetica, sans-serif">www.localhost.com, All Rights Reserved</FONT></DIV></TD></TR></TBODY></TABLE>
+	  </BODY></HTML>

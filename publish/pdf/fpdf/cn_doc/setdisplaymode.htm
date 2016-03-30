@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>SetDisplayMode</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="fpdf.css">
+</HEAD>
+<BODY>
+<H2>SetDisplayMode</H2>
+<TT>SetDisplayMode(<B>mixed</B> zoom [, <B>string</B> layout])</TT>
+<H4 CLASS='st'>版本</H4>
+1.2
+<H4 CLASS='st'>内容</H4>
+定义文件在显示出来的模式。可以设定(缩小放大)的级数：使到显示出来的页面为全画面、窗口的全宽度、使用真正的大小、安比例(缩小放大)或使用默认值(已Acrobat作为标准定义)。 还可以具体规划页面：只有一页、连续显示、两个字段或浏览程序的默认值。
+默认值：文件使用全宽度和连续显示模式。
+<H4 CLASS='st'>参数</H4>
+<TT><U>zoom</U></TT>
+<BLOCKQUOTE>
+使用(缩小放大)功能。这个功能可以使用已下的数值：
+<UL>
+<LI><TT>fullpage:</TT> 使到显示出来的页面为全画面
+<LI><TT>fullwidth:</TT> 窗口的全宽度(用窗口的最大宽度)
+<LI><TT>real:</TT> 使用真正的大小 (相等于 100% (缩小放大))
+<LI><TT>default:</TT> 使用浏览程序的默认值
+</UL>
+或用数值来定义(缩小放大)参数
+</BLOCKQUOTE>
+<TT><U>layout</U></TT>
+<BLOCKQUOTE>
+页面规划。这个功能可以使用已下的数值：
+<UL>
+<LI><TT>single:</TT> 只有一页
+<LI><TT>continuous:</TT> 连续显示
+<LI><TT>two:</TT> 显示两页在两个字段上
+<LI><TT>default:</TT> 使用浏览程序的默认值
+</UL>
+默认值：连续显示
+</BLOCKQUOTE>
+<H6></H6>
+<HR>
+<DIV ALIGN="CENTER"><A HREF="index.htm">索引</A></DIV>
+</BODY>
+</HTML>

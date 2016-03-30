@@ -1,0 +1,116 @@
+<include: file="header.html">
+<script language="JavaScript">
+function prepareSubmit(){
+		select_submit('clientform', 'TargetPermissionReadG', 'data_PermissionReadG');
+ 
+
+		return true;
+}
+
+function show(MenuID)
+{
+ if(MenuID=="local")
+ {
+  local.style.display="";
+  ftp.style.display="none";
+  ftp1.style.display="none";
+  ftp2.style.display="none";
+  ftp3.style.display="none";
+ }
+ else if(MenuID=="ftp")
+ {
+  local.style.display="none";
+  ftp.style.display="";
+  ftp1.style.display="";
+  ftp2.style.display="";
+  ftp3.style.display="";
+ }	
+}
+
+
+</script>
+  <table border="0" cellspacing="1" cellpadding="4" width="98%"  align=center class="table_border">
+<form action='[$base_url]o=add_submit' method='post' enctype="multipart/form-data" name='clientform' id=clientform >
+    <tr> 
+      <td colspan="8" class="table_header">{lang:topic}</td>
+    </tr>
+    <tr> 
+      <td class="table_td1">{lang:psn_name}:</td>
+      <td colspan=6 class="table_td2"><input name='Name' type='text' class='flat' id="Name" tabindex='8'> 
+        &nbsp;</td>
+    </tr>
+    <tr> 
+      <td width="20%" class="table_td1" >{lang:psn_type}:</td>
+      <td colspan=6 class="table_td2"><select name="psnType" id="select3" onchange="show(document.clientform.psnType.options[document.clientform.psnType.selectedIndex].value)">
+          <option value="local" selected>{lang:psn_local}</option>
+          <option value="ftp">{lang:psn_ftp}</option>
+        </select>
+        &nbsp;</td>
+    </tr>
+  <tr id=local > 
+      <td class="table_td1">{lang:local_path}:</td>
+      <td colspan=6 class="table_td2"><input name='localPath' type='text' class='flat' id="localPath" tabindex='8' size="50">
+        &nbsp; </td>
+    </tr>
+   <tr id=ftp style='display:none'> 
+      <td class="table_td1">{lang:ftp_host}:</td>
+      <td colspan=6 class="table_td2"><input name='ftp_host' type='text' class='flat' id="ftp_host" tabindex='8'>
+        &nbsp;{lang:ftp_port}: 
+        <input name='ftp_port' type='text' class='flat' id="ftp_port" tabindex='8' value="21" size="6"></td>
+    </tr>
+	 <tr id=ftp1 style='display:none'> 
+      <td class="table_td1">{lang:ftp_user}:</td>
+      <td colspan=6 class="table_td2"><input name='ftp_user' type='text' class='flat' id="ftp_user" tabindex='8'>
+        &nbsp; </td>
+    </tr>
+	 <tr id=ftp2 style='display:none'> 
+      <td class="table_td1">{lang:ftp_pass}:</td>
+      <td colspan=6 class="table_td2"><input name='ftp_pass' type='password' class='flat' id="ftp_pass" tabindex='8'>
+        &nbsp; </td>
+    </tr>
+	 <tr id=ftp3 style='display:none'> 
+      <td class="table_td1">{lang:ftp_path}:</td>
+      <td colspan=6 class="table_td2"><input name='ftp_path' type='text' class='flat' id="ftp_path" tabindex='8'>
+        &nbsp; </td>
+    </tr>
+     <tr> 
+      <td class="table_td1">{lang:url}:</td>
+      <td colspan=6 class="table_td2"><input name='URL' type='text' class='flat' id="URL" tabindex='8' size="50"> 
+        &nbsp;</td>
+    </tr>
+ <!--{{{ PermissionReadG -->
+    <tr> 
+      <td class="table_td1">{lang:ReadG}:</td>
+      <td class="table_td2"> 
+<table> 
+<tr> 
+<td>{lang:src_group}<br><select name="SrcPermissionReadG"  onDblClick="select_move_to(this.form, 'SrcPermissionReadG', 'TargetPermissionReadG')" size="10" style="width:100px;">
+          <loop name="SrcPermissionReadG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> </select></td> 
+<td><input type="button" value="=>" onClick="select_move_to(this.form, 'SrcPermissionReadG', 'TargetPermissionReadG')"><br><br><input type="button" value="<=" onClick="select_move_to(this.form, 'TargetPermissionReadG', 'SrcPermissionReadG')"><br><br><input type="button" value="{lang:select_all}" onClick="select_move_all_to(this.form, 'SrcPermissionReadG', 'TargetPermissionReadG')"><br><input type="button" value="{lang:del_all}" onClick="select_move_all_to(this.form, 'TargetPermissionReadG', 'SrcPermissionReadG')"></td> 
+<td>{lang:select_group}<br><select name="TargetPermissionReadG" size="10" style="width:100px;" onDblClick="select_move_to(this.form, 'TargetPermissionReadG', 'SrcPermissionReadG')">
+<loop name="TargetPermissionReadG" var="var"> 
+          <option value="[$var.gId]">[$var.gName]</option>
+          </loop> 
+</select></td> 
+</tr> 
+</table> 
+	  
+	  
+	   </td>
+    </tr>
+<!-- PermissionReadG }}}-->
+    <tr> 
+      <td class="table_td1">{lang:info}:</td>
+      <td colspan=6 class="table_td2"><textarea name="Description" cols="50" rows="5" class="flat" id="fieldname2" tabindex="8"></textarea> 
+        &nbsp;</td>
+    </tr>
+     <tr> 
+      <td colspan="8" class="table_td2" align=center><input type='submit' name='submit' value='{lang::global:submit_value}' tabindex='13' onClick="return prepareSubmit();"> <INPUT TYPE="hidden" name="data_PermissionReadG">
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="{lang::global:reset_value}"></td>
+    </tr>
+</form>
+  </table>
+</BODY>
+<include: file="footer.html">

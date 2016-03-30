@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>CMSware演示网站 － Powered By CMSware</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=utf-8"><LINK 
+href="[$PUBLISH_URL]images/style.css" rel=stylesheet>
+<style>
+
+div.titleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 165;
+	text-overflow: ellipsis;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;			
+}	
+input{
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+			
+}	
+</style>
+
+<META content="MSHTML 6.00.3790.118" name=GENERATOR></HEAD>
+<BODY bgColor=#999999 leftMargin=0 background="[$PUBLISH_URL]images/bg.gif" topMargin=5>
+<table width="50%"  border="0" align="center">
+  <tr>
+    <td>你没有访问该页面的权限！</td>
+  </tr>
+</table>
+<br>
+<table width="50%"  border="0" align="center" cellspacing="5">
+<form method="post" action="[$BBS_Login]">
+  <tr>
+    <td>用户:</td>
+    <td><input type="text" name="[$BBS_Username]" size="30" maxlength="40" tabindex="1"></td>
+    </tr>
+  <tr>
+    <td>密码:</td>
+    <td><input type="password" name="[$BBS_Pass]" size="30" tabindex="2"></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="loginsubmit" value=" 登 录 ">
+      <input type="hidden"   name="cookietime" value="2592000">
+	  <input type='hidden' value='[$URL_SELF]' name='jumpurl'>
+<input type='hidden'  name='cktime' value='3600'> 
+<input name=hideid type='hidden' value='0'  > 
+<input type='hidden' value='2' name='step'>
+
+      <span class="smalltxt"><a href="[$BBS_Register]">立即注册</a>&nbsp;<a href="[$BBS_LostPass]">取回密码</a></span></td>
+    </tr>
+  </form>
+</table>
+</BODY></HTML>

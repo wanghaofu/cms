@@ -1,0 +1,31 @@
+/* CSS Document */
+@import url(http://sesoe.com/skin/sesoe/css/comm.css);  
+.main-div{width:1000px;text-align:left;clear:both;background-color:#FFFFFF;padding:5px 0px;}
+.main-left{width:250px;float:left;background-color:#f3f2ed;}
+.list1-title{background-color:#d1c8b7;padding:5px 10px;font-weight:bold;}
+.list2-title{padding:5px 5px;font-weight:bold;}
+.list-div{}  
+
+.main-right{width:744px;float:right;border-left:solid 6px #eeeeee;}
+ .navpath{text-align:left;background-color:#f2e2c6;height:18px;padding:3px 5px;}
+	.navpathleft{float:left;}
+	.navpathright{float:right;}
+
+.list1 , .list ul li{list-style-image:url(../images/arrow3.gif);border-bottom:1px dotted #eeeeee;padding:2px 0px;}
+.listtitle , .list0-title{padding-top:15px;padding-left:25px;font-weight:bold;font-size:12px;background-image:url(/images/bg_AllTitle.gif);}	
+.list2-title{padding-top:15px;padding-left:25px;font-weight:bold;font-size:12px;background-image:url(/images/bg_AllTitle2.gif);}	
+	.list2-title{background-color:#cccccc}	
+	.list1 , .list{padding:5px 5px;}
+	.list1 table{border:3px solid #ececec;}
+	.list1 td{padding:5px 5px;width:100px;height:100px;}
+	.list a:hover{text-decoration:underline;color:#66CC00;}
+
+.left{float:left;width:369px;border-right:6px solid #f2efe3;}
+.right{float:right;width:369px;}
+.list-left{float:left;text-align:left;width:100px;}	
+.list-left p{padding:0px 0px;}
+.list-left img{margin:3px 3px;}
+.list-right{float:right;text-align:left;width:263px;}
+.list-left ul , .list-right ul{margin-left:20px;}
+.list3 , .list-left ul li , .list-right ul li{list-style-image:url(/images/arrow3.gif);border-bottom:1px dotted #eeeeee;padding:0px 0px;margin:0px 0px;padding:2px 0px;}
+.cr{font-size:12px;}

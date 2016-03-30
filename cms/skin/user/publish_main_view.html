@@ -1,0 +1,81 @@
+<include: file="header.html">
+<style type="text/css">
+<!--
+.tablebg {
+	background-color: #F5F5F5;
+}
+-->
+</style>
+<script language="javascript">
+function mytext_zoomin(){	mytext.style.fontSize="10.5pt";}function mytext_zoomout(){	mytext.style.fontSize="9pt";}
+
+function MM_openBrWindow(theURL,winName,features) { 
+  window.open(theURL,winName,features);
+}
+
+</script>
+
+<table width="98%" border="0" align="center">
+  <tr>
+    <td><table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td height="1" bgcolor="#0099cc"></td>
+        </tr>
+        <tr> 
+          <td align="center" class="tablebg" height="25"><b><font size=4 >[$pInfo.mTitle]</font></b></td>
+        </tr>
+        <tr> 
+          <td height="1" bgcolor="#0099cc"></td>
+        </tr>
+      </table>
+      <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr> 
+          <td height="2"></td>
+        </tr>
+        <tr bgcolor="#6699CC" height="25"> 
+          <td align="center" ><font color="#FFFFFF">[$pInfo.mAuthor]&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#FFFFFF">[$pInfo.mPublishTime@dateformat::Y-m-d H:i:s]</font></td>
+        </tr>
+      </table>
+      <table width="100%" border="0">
+        <tr> 
+          <td align="right"> 
+            <table border="0" cellspacing="0" cellpadding="0" bordercolordark="#FFFFFF" align="left">
+              <tr> 
+                <td width="100"> <a href="javascript:history.go(-1);" >&raquo;{lang:fanhui}</a>  </td>
+                <td>  </td>
+                <td> 
+                  <input type="radio" name="daxiao" value="radiobutton" onClick="mytext_zoomout();" checked id="h1">
+				  <label for="h1">{lang:xiaozi}</label>
+                </td>
+                <td align="right"> &nbsp;</td>
+                <td> 
+                  <input type="radio" name="daxiao" value="radiobutton" onClick="mytext_zoomin();" id="h2">
+                 <label for="h2">{lang:dazi}</label>
+				</td>
+        </tr>
+      </table>
+            {lang:guanjianzi}：[$pInfo.mKeywords] </td>
+        </tr>
+        <tr> 
+          <td height="1" bgcolor="#0099cc"></td>
+        </tr>
+        <tr>
+          <td class="tablebg"><table width="98%" border="0" align="center">
+              <tr> 
+                <td ><div align="left"  id="mytext" name="mytext">[$pInfo.mContent]</div></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td height="1" bgcolor="#0099cc"></td>
+        </tr>
+        <tr> 
+          <td>{lang:tigongzhe}:[$pInfo.mOfferUser] </td>
+        </tr>
+        <tr> 
+          <td align="right"><a href="javascript:history.go(-1);" >&raquo;{lang:fanhui}</a> </td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<include: file="footer.html">

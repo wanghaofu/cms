@@ -1,0 +1,35 @@
+<table border="0" cellspacing="2" cellpadding="2" >
+		        	<CMS action="LIST" return="List" NodeID="" Num="9" TableID="1" where=" c.Photo!='' and i.Pink>0 "  Orderby="rand()" />
+                                                     <op exp="$i=0" />  
+													 <tr>
+                                              <LOOP name="List" var="var" key="key">
+										<if test="$i<6">
+                                              <if test="$var.Photo != ''"> 	
+											        	<op exp="$i++" /> 
+											        <if test="strtoupper(substr($var.Photo,0,4))!='HTTP' "> 
+                                                    <op exp="$var.Photo=$SITE_URL . $var.Photo" /> 
+												     </if>											      
+                                                        <td width="81" style="padding:3px 3px;text-align:center;font-size:3px;">
+                                                       <a href="[$var.URL]"> <img src="[@AutoMini($var.Photo,'81*81',$var)]" border="0" width="81px" height="81px"></a> <br/>
+                                                    <a href="[$var.URL]" >[@CsubStr($var.Title,0,6,'')]</a>                 
+                                                         </td>
+											     <else>
+                                                    <if test="HavePhoto($var.Content,1)!=''"> 
+													     <op exp="$i++" /> 													   
+													    <if test="strtoupper(substr($var.Photo,0,4))!='HTTP' "> 
+                                                         <op exp="$var.Photo=$SITE_URL . $var.Photo" /> 
+														 </if>
+                                                         <op exp="$var.Photo= HavePhoto($var.Content,1)"/> 
+                                                                <td width="81" style="padding:3px 3px;text-align:center;">
+                                              <a href="[$var.URL]"><img src="[@AutoMini($var.Photo,'81*81',$var)]" border="0" width="81px" height="81px"></a><br/>
+                                                                <a href="[$var.URL]">[@CsubStr($var.Title,0,6,'')]</a>                 
+                                                            </td>
+                                                           
+										        </if>
+													  
+									      </if>
+											</if>
+											<if test="$i % 3 ==0"></tr><tr> 
+                                            </if>
+                                           </loop>
+				</tr> </table>		    

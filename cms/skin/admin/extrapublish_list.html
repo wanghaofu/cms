@@ -1,0 +1,135 @@
+<include: file="header_init.html">
+<SCRIPT language=JavaScript>
+ 
+function mhHover(tbl, idx, cls)
+{
+	var t, d;
+	if (document.getElementById)
+		t = document.getElementById(tbl);
+	else
+		t = document.all(tbl);
+	if (t == null) return;
+	if (t.getElementsByTagName)
+		d = t.getElementsByTagName("TD");
+	else
+		d = t.all.tags("TD");
+	if (d == null) return;
+	if (d.length <= idx) return;
+	d[idx].className = cls;
+}
+
+function doing(action)
+{
+	switch(action) {
+		case 'extrapublish_add':
+			var url = urlencode(document.location);
+			document.location = "admin_extrapublish.php?sId=[$sId]&o=add&NodeID=[$NodeInfo.NodeID]&referer=" + url;
+			break;
+		case 'refresh_all':
+			document.location = "admin_extrapublish.php?sId=[$sId]&o=refreshall&NodeID=[$NodeInfo.NodeID]";
+			break;
+	}
+}
+
+function refresh(PublishID)
+{
+
+	top.CrawlerTaskFrame.addThread("admin_task.php?sId=[$sId]&o=refreshExtra&mode=running&TaskID=refreshExtra"+ PublishID +"&PublishID=" + PublishID +"&NodeID=[$NodeInfo.NodeID]", "refreshExtra"+ PublishID);
+
+}
+
+
+
+</script>
+<style>
+body,tr,td,select {
+	color: #000000;
+	font-size: 11px; font-family: Tahoma, Arial;
+	
+}
+
+div.imagespacer {
+	width: [$width];
+	height: 18;
+	text-align: left;			
+	float: left;
+	font: 10pt verdana;
+	margin: 0px;
+	overflow: hidden;
+}
+div.imageholder {
+	margin: 0px;
+	height: 16;
+	padding: 0px;
+	cursor: default;
+}
+
+div.titleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 100;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;			
+}		
+.3d {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #FFFFFF;
+	border-right-color: #808080;
+	border-bottom-color: #808080;
+	border-left-color: #FFFFFF;
+	background-color: #D4D0C8;
+}
+</style>
+<body   topmargin="0" leftmargin="0"   >
+<div id="msviLocalToolbar">
+  <table cellpadding="0" cellspacing="2"   height="19" border="0">
+    <tr> 
+      <td   height="20" nowrap="nowrap"    ></td>
+      <td><span class="ltsep"></span></td>
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 2, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 2, 'lt0')" onclick="doing('extrapublish_add')">{lang:extrapublish_add}</td>
+       <!--<td><span class="ltsep">|</span></td>
+        
+      <td class="lt0" nowrap="nowrap" onmouseover="mhHover('msviLocalToolbar', 4, 'lt1')" onmouseout="mhHover('msviLocalToolbar', 4, 'lt0')" onclick="doing('refresh_all')">{lang:refresh_all_extrapublish}</td>
+-->
+      
+    </tr>
+  </table>
+</div>
+<TABLE border="0" cellpadding="1" cellspacing="0" width=100% >
+  <tr>
+<td colspan="3"  class="3d" height=15>&nbsp;&nbsp;{lang::global:name}</td>
+ <td class="3d">&nbsp;&nbsp;{lang:modify_date}</td>
+<td class="3d">&nbsp;&nbsp;{lang:modify_user}</td>
+<td class="3d">&nbsp;&nbsp;{lang::global:execute_op}</td>
+</tr>
+
+<loop name="list" key="key" var="var">
+ 			<TR onmouseover='this.style.backgroundColor="#F1F1F1"' 
+                    onmouseout='this.style.backgroundColor=""'>
+      <td width=10 ><input type='checkbox' name='pData[]' value='[$var.name]' id="p_[$key]" ></td>
+				<TD width=16 height=16><A HREF="[$base_url]o=view&PublishID=[$var.PublishID]&NodeID=[$var.NodeID]" target="_blank"><img src="../html/images/icon/html.gif" width="16" height="16" border="0" ></a></TD>
+				<TD>
+				 <A HREF="[$base_url]o=view&PublishID=[$var.PublishID]&NodeID=[$var.NodeID]" target="_blank">[$var.PublishName]</a>
+				</TD>
+ <td>&nbsp;&nbsp;[@date('Y-m-d H:i', $var.ModifiedDate)]</td>
+<td>&nbsp;&nbsp;[$var.LastModifiedUser]</td>
+<td>&nbsp;&nbsp;<A HREF="javascript:refresh('[$var.PublishID]');">{lang::global:refresh}</A>&nbsp;&nbsp;<A HREF="[$base_url]o=edit&PublishID=[$var.PublishID]&NodeID=[$var.NodeID]">{lang::global:edit}</A>
+&nbsp;&nbsp;<A HREF="[$base_url]o=del&PublishID=[$var.PublishID]&NodeID=[$var.NodeID]" onclick="return confirm('{lang::global:confirm_del}');">{lang::global:del}</A></td>
+</TR>
+ 
+
+
+</loop>
+   
+  </table>
+		
+</BODY>
+<include: file="footer.html">

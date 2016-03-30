@@ -1,0 +1,74 @@
+<include: file="header.html">
+
+<table border="0" cellspacing="1" cellpadding="4" width="95%"  align=center class="table_border">
+<form action='[$base_url]o=fieldReplace_submit' method='post' enctype="multipart/form-data" name='clientform' id=clientform  >
+
+    <tr> 
+      <td colspan="2" class="table_header">{lang:topic}</td>
+    </tr>
+     <tr > 
+      <td class="table_td1" width=100> {lang:content_model}</td>
+      <td class="table_td2"> <select name="TableID" id="TableID"  class='flat' onchange="javascript:document.location ='[$base_url]o=fieldReplace&TableID=' + this.value">
+          <loop $tableInfo key=key var=var>
+		  <if  $TableID == $var.TableID >
+          <option value="[$var.TableID]" selected>[$var.Name]</option>
+		  <else>
+          <option value="[$var.TableID]">[$var.Name]</option>
+		  </if>
+		  
+ 		 
+          </loop> </select>
+        </td>
+    </tr>
+
+     <tr > 
+      <td class="table_td1"> {lang:field}</td>
+      <td class="table_td2"> 
+	  <select name="Fields[]" id="Fields"  class='flat' size=8 multiple>
+ <loop name="fieldsInfo" var="var" key="key">
+ <if test="$key == 0">
+ <option value="[$var.FieldName]" selected>[$var.FieldTitle]</option>
+ <else>
+  <option value="[$var.FieldName]">[$var.FieldTitle]</option>
+</if>
+ </loop>		
+
+</select>
+  </td>
+    </tr>
+
+
+
+
+  <tr>
+ <td class="table_td2" align="center">{lang:node}
+  </td>
+
+<td class="table_td1">
+<select  name="NodeIDs[]" id = "NodeIDs"  size="10" multiple>
+<option value="" selected>{lang:all_node}</option>
+ <loop $NODE_LIST var=var>
+ <if test="$var.TableID == $TableID">
+ <option value="[$var.NodeID]">[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+ </if>
+ 
+ </loop>
+ </select>
+ </td>
+ </tr>
+ 
+     <tr > 
+      <td class="table_td1"> {lang:op}</td>
+      <td class="table_td2"> 
+	  {lang:op_input}
+  </td>
+    </tr>
+
+     <tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value='{lang:submit_replace}' tabindex='13'> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="{lang::global:reset_value}"></td>
+    </tr>
+</form>
+</table>
+
+<include: file="footer.html">

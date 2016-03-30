@@ -1,0 +1,182 @@
+<include: file="header.html">
+<script type="text/javascript" language="javascript">
+function check(){
+ 	if(document.clientform.gName.value == ''){	
+
+	 		alert("{lang:error_gname_null}");
+ 			document.clientform.gName.focus();
+			return false;
+	}else {
+		return true;
+	}
+	
+}
+</script>
+   
+
+  <table border="0" cellspacing="1" cellpadding="4" width="95%"  align=center class="table_border">
+<form name='clientform' id=clientform method='post' action='[$base_url]o=add_submit'  >
+      <tr> 
+      <td colspan="2" class="table_header">{lang:topic} </td>
+    </tr>
+    <tr> 
+      <td class="table_td1" width=180>{lang:group_name}:</td>
+      <td class="table_td2"><input name='gName' type='text' class='flat' id="username" tabindex='8'    size='25' value="[$gInfo.gName]"></td>
+    </tr>
+	<!--
+    <tr> 
+      <td class="table_td1">{lang:publish_auth}:</td>
+      <td class="table_td2"> <select name="gPublishAuth[]" size="8" multiple>
+    <loop $pAuthInfo var=var> 
+          <option value="[$var.pId]">[$var.pName]</option>
+          </loop>
+                <option value=""></option>
+		  
+		  </select></td>
+    </tr>-->
+    <tr> 
+      <td class="table_td1">{lang:can_admin_login}:</td>
+      <td class="table_td2"> <input name="canLoginAdmin" type="radio" id="hawking3" value="1" > 
+        <label for="hawking3"  >{lang::global:yes}</label> <input name="canLoginAdmin" type="radio" id="hawking5" value="0" checked > 
+        <label for="hawking5"  >{lang::global:no}</label></td>
+    </tr>
+
+ <tr> 
+      <td colspan="2" class="table_header"> &nbsp;</td>
+    </tr> 
+	<!--{{{-->
+
+ <tr> 
+      <td class="table_td1">{lang:parent_group}:</td>
+      <td class="table_td2"> <select name="ParentGID"  >
+               <loop $groupsInfo var=var> 
+
+
+		 <if test="$gInfo.ParentGID == $var.gId ">
+			<if test="$var.gId ==0">
+          <option value="[$var.gId]" selected>{lang:root_group}</option>
+			<else>
+          <option value="[$var.gId]" selected>[$var.gName]</option>
+			</if>
+		  <else>
+
+			<if test="$var.gId ==0">
+          <option value="[$var.gId]"  >{lang:root_group}</option>
+			<else>
+          <option value="[$var.gId]"  >[$var.gName]</option>
+			</if>
+	  
+	  </if>
+          </loop>
+		  
+		  </select></td>
+    </tr>
+
+  <tr> 
+      <td class="table_td1">{lang:mk_group}:</td>
+      <td class="table_td2"> 
+	    <if $gInfo.canMakeG == 1>
+	  <input name="canMakeG" type="radio" id="canMakeG33" value="1" checked > 
+        <label for="canMakeG33"  >{lang::global:yes}</label> 
+        <input name="canMakeG" type="radio" value="0" id="canMakeG53" > 
+        <label for="canMakeG53"  >{lang::global:no}</label>
+	  <else>
+	  <input name="canMakeG" type="radio" id="canMakeG32" value="1"  > 
+        <label for="canMakeG32"  >{lang::global:yes}</label> 
+        <input name="canMakeG" type="radio" value="0" id="canMakeG52" checked> 
+        <label for="canMakeG52"  >{lang::global:no}</label>
+	</if>
+	  </td>
+    </tr>
+
+	 <tr> 
+      <td class="table_td1">{lang:mk_user}:</td>
+      <td class="table_td2"> 
+	    <if $gInfo.canMakeU == 1>
+	  <input name="canMakeU" type="radio" id="canMakeU33" value="1" checked > 
+        <label for="canMakeU33"  >{lang::global:yes}</label> 
+        <input name="canMakeU" type="radio" value="0" id="canMakeU53" > 
+        <label for="canMakeU53"  >{lang::global:no}</label>
+	  <else>
+	  <input name="canMakeU" type="radio" id="canMakeU32" value="1"  > 
+        <label for="canMakeU32"  >{lang::global:yes}</label> 
+        <input name="canMakeU" type="radio" value="0" id="canMakeU52" checked> 
+        <label for="canMakeU52"  >{lang::global:no}</label>
+	</if>
+	  </td>
+    </tr>
+	<!--}}}-->
+<if test="$session.sGIsAdmin == 1">
+
+     <tr> 
+      <td colspan="2" class="table_header">{lang:other_auth}</td>
+    </tr>
+    <tr> 
+      <td class="table_td1"><span class=highlight>{lang:is_admin}:</span></td>
+      <td class="table_td2"> <input type="radio" name="isAdmin" value="1" id="hawking1" onclick="accessPermission('yes')"> 
+        <label for="hawking1"  >{lang::global:yes}</label> <input name="isAdmin" type="radio" value="0" checked id="hawking2" onclick="accessPermission('no')"> 
+        <label for="hawking2"  >{lang::global:no}</label></td>
+    </tr>
+    <tr> 
+      <td class="table_td1">{lang:site_admin}:</td>
+      <td class="table_td2"><input name="canNode" type="radio" id="hawking21" value="1" > 
+        <label for="hawking21"  >{lang::global:yes}</label> <input name="canNode" type="radio" id="hawking22" value="0" checked > 
+        <label for="hawking22"  >{lang::global:no}</label> </td>
+    </tr>
+    <tr> 
+      <td class="table_td1">{lang:tpl_admin}:</td>
+      <td class="table_td2"><input name="canTpl" type="radio" id="hawking23" value="1" > 
+        <label for="hawking23"  >{lang::global:yes}</label> <input name="canTpl" type="radio" id="hawking25" value="0" checked > 
+        <label for="hawking25"  >{lang::global:no}</label> </td>
+    </tr>
+	    <tr> 
+      <td class="table_td1">{lang:collection_admin}:</td>
+      <td class="table_td2">
+		  <input name="canCollection" type="radio" id="canCollection23" value="1"> 
+        <label for="canCollection23"  >{lang::global:yes}</label> <input name="canCollection" type="radio" id="canCollection25" value="0"  checked > 
+        <label for="canCollection25"  >{lang::global:no}</label> 
+	  
+</td>
+    </tr>
+</if>
+
+    <tr> 
+      <td class="table_td1">{lang:group_info}:</td>
+      <td class="table_td2"> <textarea name="gInfo" cols="50" rows="5" class='flat' id="groupinfo" >[$gInfo.gInfo]</textarea></td>
+    </tr>
+    <tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value='{lang::global:submit_value}' tabindex='13' onClick="return check();"> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value="{lang::global:reset_value}"></td>
+    </tr>
+</form>
+  </table>
+<!-------------->            
+					<script language='Javascript1.1'>
+				<!--
+				
+		
+
+				function accessPermission(mode) {
+					var f = document.clientform;
+
+					if(mode == 'no') {
+			
+					} else {
+						if(confirm("{lang:warning_set_admin}")) {
+				
+
+						} else {
+					
+							eval( 'f.hawking2.checked= true' );
+
+							return false;
+						}
+
+					}
+				}
+
+		//-->
+				</script>
+					
+		</BODY>
+<include: file="footer.html">

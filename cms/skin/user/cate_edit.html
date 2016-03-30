@@ -1,0 +1,93 @@
+<include: file="header.html">
+<form action='[$base_url]o=edit_submit&CateID=[$CateInfo.CateID]' method='post' enctype="multipart/form-data" name='clientform' id=clientform onSubmit='return cate_submit(this);'>
+  <table border="0" cellspacing="1" cellpadding="4" width="95%"  align=center class="table_border">
+    <tr> 
+      <td colspan="2" class="table_header">{lang:fenleiguanli-bianjifenlei}</td>
+    </tr>
+
+    <tr > 
+      <td width="20%" class="table_td1">{lang:fenleimingcheng}:</td>
+      <td class="table_td2"> <INPUT name=data_Name id="data_Name" size=15  class='flat' value="[$CateInfo.Name]"></td>
+    </tr>
+    <tr id="makedir1"> 
+      <td class="table_td1"> {lang:neirongmoxingtaoyong}:</td>
+      <td class="table_td2"> <select name="data_TableID" id="data_TableID"  class='flat' disabled>
+          <loop $tableInfo key=key var=var> <if  $CateInfo.TableID == $var.TableID > 
+          <option value="[$var.TableID]" selected>[$var.Name]</option>
+          <else> 
+          <option value="[$var.TableID]">[$var.Name]</option>
+          </if> </loop> </select> </td>
+    </tr>
+<tr class='tablelist'> 
+              <td class="table_td1">{lang:morentougaoxulianjiejiedian}:</td>
+              <td class="table_td2"><select  name="TargetNodeID" id = "TargetNodeID">
+<loop $NODE_LIST var=var>
+<if $var.WorkFlow != 0 && $CateInfo.TableID == $var.TableID>
+<if $CateInfo.NodeID == $var.NodeID >
+<option value="[$var.NodeID]" selected>[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+<else>
+<option value="[$var.NodeID]">[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+</if>
+</if>
+
+ </loop></select>
+ 
+</td>
+</tr>
+<tr class='tablelist'> 
+              <td  class="table_td1">{lang:morentougaoxulianjiejiedian}:</td>
+              <td class="table_td2">
+<select  name="SubTargetNodeID[]" id = "SubTargetNodeID"  size="10" multiple>
+<option value="" >{lang:wu}</option>
+ <loop $NODE_LIST var=var>
+<if $var.WorkFlow != 0 && $CateInfo.TableID == $var.TableID>
+<if in_array(  $var.NodeID ,  $CateInfo.SubNodeIDs )>
+<option value="[$var.NodeID]" selected>[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+<else>
+<option value="[$var.NodeID]">[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+</if>
+</if>
+
+ </loop>
+ </select>		          	  
+			  
+			  </td>
+</tr>  
+
+
+<tr class='tablelist'> 
+              <td  class="table_td1">{lang:morentougaosuoyinlianjiejiedianjiedian}:</td>
+              <td class="table_td2">
+<select  name="IndexTargetNodeID[]" id = "IndexTargetNodeID"  size="10" multiple>
+<option value="" >{lang:wu}</option>
+ <loop $NODE_LIST var=var >
+<if $var.WorkFlow != 0 && $CateInfo.TableID == $var.TableID>
+<if in_array(  $var.NodeID ,  $CateInfo.IndexNodeIDs )>
+<option value="[$var.NodeID]" selected>[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+<else>
+<option value="[$var.NodeID]">[@str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var.cHeader)] - &nbsp;[$var.Name]</option>
+</if>
+</if>
+
+ </loop>
+ </select>		          	  
+			  
+			  </td>
+</tr>  
+
+<tr> 
+      <td colspan="2" class="table_td2" align=center><input type='submit' name='submit' value=' {lang:tijiao}  ' tabindex='13'> 
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="reset" name="Submit" value=" {lang:chongzhi}"></td>
+    </tr>
+  </table>
+</form>
+
+<script language='JavaScript'>
+
+function cate_submit(form)
+{
+	
+	//form.Submit();
+}					
+</script> 		
+<include: file="footer.html">

@@ -1,0 +1,66 @@
+<include: file="header.html">
+<script>
+function tplSelect(tpl,form, element) 
+{
+	//showModalDialog
+	var arr = showModalDialog("admin_select.php?sId=[$sId]&o=tpl&tpl=" + tpl,"color","dialogWidth:428px;dialogHeight:266px;help:0;status:0;scroll:no");
+	if(arr != null) {
+		with(form){
+
+			eval(element + ".value= '" +  arr + "'")
+
+		}
+
+
+	}
+	 //window.open("admin_select.php?sId=[$sId]&o=psn&psn=" + psn,"psnselect","toolbar=0,resizable=yes,width=415,height=235,scrollbars=no")
+	 // if (arr != null) format('forecolor',arr);
+	 // else idEdit.focus();
+}
+</script>
+<TABLE width="95%" border=0 align=center cellSpacing=0 cellPadding=0  >
+  <form name="add_cate" method="post" action="[$base_url]o=index::setting_submit">
+    <TBODY>
+<TR>
+        <TD vAlign=top align=middle width="50%">
+		<TABLE cellspacing="1" cellpadding="4" width="100%"  border=0 class="table_border">
+            <TBODY>
+              <TR class="table_header" > 
+                <TD height=25 colSpan=2 id=id2 ><strong>{lang:topic}</strong></TD>
+              </TR><!--
+              <TR class="table_td1" > 
+                <TD  > {lang:foreground_path}<br>
+                  <em>{lang:foreground_path_help}</em></TD>
+                <TD  id=id2> <input name="ForegroundPath" type="text" class="button" id="ForegroundPath" value="[$Info.ForegroundPath]" size="40"> 
+                  </TD>
+              </TR>-->
+              <TR class="table_td1" > 
+                <TD  id=id2>{lang:bbs}<br>
+                <em>{lang:bbs_help}</em></TD>
+                <TD  id=id2>
+				<select name="BBS" id="BBS">
+				<option value="" ></option>
+				<loop $supportBBS  var=var key=key>
+				<if $Info.BBS == $var>
+				<option value="[$var]" selected>[$var]</option>
+				<else>
+				<option value="[$var]" >[$var]</option>
+				</if>
+				</loop>
+				</select>
+                </TD>
+              </TR>
+			     <tr > 
+      <td class="table_td1">{lang:deny_tpl}</td>
+      <td class="table_td2"> <INPUT name=DenyTpl id="DenyTpl" size=50  class='flat'  value="[$Info.DenyTpl]">
+        <input type='button' tabindex='13' value='...' onclick="tplSelect('[$Info.DenyTpl]',this.form,'DenyTpl')"> </td>
+    </tr>
+              <TR class="table_td1"> 
+                <TD height=30 colSpan=2 align=middle > <INPUT name="submit" type=submit value="{lang::global:submit_value}" class="button"> 
+                  &nbsp;&nbsp; <INPUT name="reset" type=reset value="{lang::global:reset_value}"  class="button"> 
+                </TD>
+              </TR>
+            </TBODY>
+          </TABLE></TD>
+      </TR></TBODY><INPUT type=hidden value=edit_submit name=action></form></TABLE>
+<include: file="footer.html">

@@ -1,0 +1,22 @@
+/* CSS Document */
+@import url(http://sesoe.com/skin/sesoe/css/comm.css);   
+ .main-div{width:1000px;text-align:left;clear:both;background-color:#FFFFFF;padding:5px 0px;}
+.main-left{width:745px;float:left;border-right:solid 5px #eeeeee;}
+ .navpath{text-align:left;background-color:#f2e2c6;height:18px;padding:3px 5px;}
+	.navpathleft{float:left;}
+	.navpathright{float:right;}
+.main-right{width:250px;float:right;background-color:#f3f2ed;}
+.list1-title{background-color:#d1c8b7;padding:5px 10px;font-weight:bold;}
+.list2-title{padding:5px 5px;font-weight:bold;}
+.list-div{}  
+.page{text-align:right;padding:5px 5px;font-size:12px;}
+.bold{}
+.red{}
+.list1 , .list ul li{list-style-image:url(../../images/arrow3.gif);border-bottom:1px dotted #eeeeee;padding:2px 0px;}
+.list0-title{padding-top:18px;padding-left:25px;font-weight:bold;font-size:12px;background-image:url(/images/bg_AllTitle.gif);}	
+	.list2-title{background-color:#cccccc}	
+	.list1 , .list{padding:5px 5px;}
+	.list1 table{border:3px solid #ececec;}
+	.list1 td{padding:5px 5px;width:100px;height:100px;}
+	.list a:hover{text-decoration:underline;color:#66CC00;}
+	

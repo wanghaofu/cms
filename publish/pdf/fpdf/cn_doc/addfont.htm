@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>AddFont</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="fpdf.css">
+</HEAD>
+<BODY>
+<H2>AddFont</H2>
+<TT>AddFont(<B>string</B> family [, <B>string</B> style [, <B>string</B> file]])</TT>
+<H4 CLASS='st'>版本</H4>
+1.5
+<H4 CLASS='st'>内容</H4>
+汇入一个 TrueType 或 Type1 字型，并且另到这个字型可以运作。必需要先行利用 makefont.php 这个程序来产生一个字型定义档案。
+<BR>
+这个定义档案 (and the font file itself when embedding) 一定要放在目前使用中的目录或利用一些指令<TT>FPDF_FONTPATH</TT>来提供路径。如果找不这个定义档，就会出现错误讯息 "Could not include font definition file"。
+<H4 CLASS='st'>参数</H4>
+<TT><U>family</U></TT>
+<BLOCKQUOTE>
+字型家族(family)： 你可以任意选择字型名称。 如果这个字型是一个标准字型家族名称，将会不理符合的字型。
+</BLOCKQUOTE>
+<TT><U>style</U></TT>
+<BLOCKQUOTE>
+字型风格(style)：
+<UL>
+<LI>空白：标准
+<LI><TT>B</TT>：粗体
+<LI><TT>I</TT>：斜体
+<LI><TT>BI</TT> or <TT>IB</TT>: 粗斜体
+</UL>
+默认值为标准。
+</BLOCKQUOTE>
+<TT><U>file</U></TT>
+<BLOCKQUOTE>
+字型定义档案。
+<BR>
+基本上是用字型家族和字型风格作为文件名称，而且应该为小写英文字和没有空间的。
+</BLOCKQUOTE>
+<H4 CLASS='st'>例子</H4>
+<TABLE WIDTH="100%" BGCOLOR="#E0E0E0"><TR><TD>
+<TT>
+$pdf-&gt;AddFont('Comic','I');
+</TT>
+</TD></TR></TABLE><BR>
+是相当于：
+<BR>
+<BR>
+<TABLE WIDTH="100%" BGCOLOR="#E0E0E0"><TR><TD>
+<TT>
+$pdf-&gt;AddFont('Comic','I','comici.php');
+</TT>
+</TD></TR></TABLE><BR>
+<H4 CLASS='st'>参见</H4>
+<A HREF="setfont.htm">SetFont()</A>.
+<H6></H6>
+<HR>
+<DIV ALIGN="CENTER"><A HREF="index.htm">索引</A></DIV>
+</BODY>
+</HTML>

@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[$Title]</title>
+<style>
+body {
+    background: none repeat scroll 0 0 #FFFFFF;	
+	color:#666;
+	font-size:12px;
+	line-height:22px;
+	margin: 0;
+	padding: 0;
+}
+a {
+	color:#999;
+	text-decoration: none;
+	border:0
+}
+img {
+	border:none;
+}
+.left {
+	float:left;
+}
+.right {
+	float:right;
+}
+.clear {
+	clear:both;
+}
+.all {
+	margin:0 auto;
+	width:1000px;
+	padding-top:34px;
+	
+}
+.bg_01 {
+	width:987px;
+	height:40px;
+}
+.bg_02 {
+	width:990px;
+	margin-top:12px
+}
+.bg {
+	background:url(/skin/siyuan/bg.jpg);
+	background-repeat:repeat-x;
+	
+}
+.bg_left {
+	background:url(/skin/siyuan/bg_left.jpg);
+	background-repeat:no-repeat;
+	height:362px;
+	width:9px;
+}
+.bg_right {
+	background:url(/skin/siyuan/bg_right.jpg);
+	background-repeat:no-repeat;
+	height:362px;
+	width:9px;
+}
+.bg_mid {
+	background:url(/skin/siyuan/bg_mid.jpg);
+	background-repeat:repeat-x;
+	height:335px;
+	padding:0 0;
+	width:972px;
+}
+.dh {
+	width:500px;
+	height:16px;
+	margin:10px 100px 0 100px;
+}
+strong a {
+	float: left;
+	list-style: none outside none;
+	padding:0px 15px;
+	color:#CCC;
+	font-size:14px;
+}
+.bottom_bg {
+	background:url(/skin/siyuan/bg02.jpg);
+	background-repeat:repeat-x;
+	height:42px;
+	scroll:0 0;
+}
+.bottom_dh {
+	background:url(/skin/siyuan/dh02.jpg);
+	background-repeat:repeat-x;
+	height:32px;
+	margin:auto
+}
+.nobr {
+	width:430px;
+	margin:0 auto;
+	line-height:32px;
+	over-flow:hidden;
+}
+
+.bottom_ba {
+	background:url(/skin/siyuan/bg03.gif) repeat scroll 0 0 transparent;
+	height:150px;
+	margin:0 auto;
+}
+
+.xw{width:930px;padding:25px 20px 0 5px}
+.xw_lb{width:180px;height:270px;background:url(/skin/siyuan/xw_lb.png);background-repeat:no-repeat;padding:5px 0 0 20px;}
+.xw_lb ul li{line-height:30px;
+	font-size:12px;
+	display:inline-block;
+	margin:0 0;padding:0 0;
+	list-style:none;}
+	
+.xw_wz{width:700px;}
+
+
+
+.xw_wz h1{
+	font-size:14px;
+	color:#999;
+	font-weight:bold;	
+	margin:10px 0px 5px 0px;
+}
+.xw_wz p {
+	color:#666666
+	font-size:14px;
+	line-height:24px;
+	margin:0px 0px;
+	padding:0px 0px;
+	text-indent:2em;
+}
+</style>
+</head>
+<body>
+<div>
+  <div class="bg" style="height:1000px;">
+    <div class="all">
+      <div class="bg_01">
+        <div class="left"><a href="#"><img  src="/skin/siyuan/logo.jpg"></a></div>
+        <div class="dh left"> <strong>    <CMS action="NODELIST" return="List" Type="sub" NodeID="0"  />
+    
+    <loop name="List" key="key" var="var" >
+     <a href="[$var.NodeURL]">[$var.NodeName]</a>
+      </loop> </strong> </div>
+        <div class="left"><img src="/skin/siyuan/tel.png"></div>
+        <div class="clear"></div>
+      </div>
+      <div class="bg_02">
+        <div class="bg_left left"></div>
+        <div class="bg_mid left"> <img style="margin-top:8px" src="/skin/siyuan/news01.jpg"> 
+        <div class="xw">
+            <div class="left xw_lb">
+            <ul>
+            <li>网站建设运营</li>
+            <li>网站营销推广</li>
+            <li>BTC电子网站</li>
+            <li>企业网站</li>
+            <li>网页设计</li>
+            </ul>
+            </div>
+            
+            
+            
+            <div class="right xw_wz">
+                <img src="/skin/siyuan/news_title.jpg">
+                <div>
+                    <h1>[$Title]</h1> 
+                    <p>[$Content]
+
+</p>
+                    
+                    
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        </div>
+        <div class="bg_right right"></div>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="bottom_bg"></div>
+    <div class="bottom_dh">
+      <div class="nobr"><strong>    <CMS action="NODELIST" return="List" Type="sub" NodeID="0"  />
+    
+    <loop name="List" key="key" var="var" >
+     <a href="[$var.NodeURL]">[$var.NodeName]</a>
+      </loop> </strong> </div>
+    </div>
+    <div class="bottom_ba">
+      <div style="width:565px;margin:0 auto;padding-top:30px"><img  src="/skin/siyuan/bt_tel.png"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>Cell</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="fpdf.css">
+</HEAD>
+<BODY>
+<H2>Cell</H2>
+<TT>Cell(<B>float</B> w [, <B>float</B> h [, <B>string</B> txt [, <B>mixed</B> border [, <B>int</B> ln [, <B>string</B> align [, <B>int</B> fill [, <B>mixed</B> link]]]]]]])</TT>
+<H4 CLASS='st'>版本</H4>
+1.0
+<H4 CLASS='st'>内容</H4>
+显示一个储存格 (长方形范围)，同时，也提供其它功能选项，包括(边框、背景颜色、字符串)。储存格左上角的位置为目前位置。文字可以除意排列或置中。则行这个命令之后，目前位置便会向右移或移到下一行。它可以会在文字上建立一个连结。若果已经启动自动分页功能，当内容超出了储存格的限制，输出数据之前会自动执行分页功能。
+<H4 CLASS='st'>参数</H4>
+<TT><U>w</U></TT>
+<BLOCKQUOTE>
+储存格宽度。 若为：0，这个储存格会延伸至页的右边边缘。
+</BLOCKQUOTE>
+<TT><U>h</U></TT>
+<BLOCKQUOTE>
+储存格高度。默认值为：0.
+</BLOCKQUOTE>
+<TT><U>txt</U></TT>
+<BLOCKQUOTE>
+字符串显示。默认值为：空白
+</BLOCKQUOTE>
+<TT><U>border</U></TT>
+<BLOCKQUOTE>
+若果要围绕储存格边缘显示边框，可用下面的数值：
+<UL>
+<LI><TT>0</TT>: 没有边框
+<LI><TT>1</TT>: 边框
+</UL>
+或包含以下一些或所有字符串(在任何指示下)：
+<UL>
+<LI><TT>L</TT>: 左边边线
+<LI><TT>T</TT>: 顶部边线
+<LI><TT>R</TT>: 右边边线
+<LI><TT>B</TT>: 底部边线
+</UL>
+默认值为：0
+</BLOCKQUOTE>
+<TT><U>ln</U></TT>
+<BLOCKQUOTE>
+则行这个功能之后，目前位置应在那里。<br>
+可用下面的数值：
+<UL>
+<LI><TT>0</TT>: 往右边移
+<LI><TT>1</TT>: 到下一行的开端
+<LI><TT>2</TT>: 往下面
+</UL>
+默认值为：0
+</BLOCKQUOTE>
+<TT><U>align</U></TT>
+<BLOCKQUOTE>
+允许排列文字置中。可用下面的数值：
+<UL>
+<LI><TT>L</TT> 或空格符：左边排列 (默认值)
+<LI><TT>C</TT>: 中间排列
+<LI><TT>R</TT>: 右边排列
+</UL>
+</BLOCKQUOTE>
+<TT><U>fill</U></TT>
+<BLOCKQUOTE>
+可使到储存格的背景不是透明(1)或透明(0). 默认值为：0
+</BLOCKQUOTE>
+<TT><U>link</U></TT>
+<BLOCKQUOTE>
+由 AddLink() 回报 URL 或 识别符。
+</BLOCKQUOTE>
+<H4 CLASS='st'>例子</H4>
+<TABLE WIDTH="100%" BGCOLOR="#E0E0E0"><TR><TD>
+<TT>
+//Set font<BR>
+$pdf-&gt;SetFont('Arial','B',16);<BR>
+//Move to 8 cm to the right<BR>
+$pdf-&gt;Cell(80);<BR>
+//Centered text in a framed 20*10 mm cell and line break<BR>
+$pdf-&gt;Cell(20,10,'Title',1,1,'C');
+</TT>
+</TD></TR></TABLE><BR>
+<H4 CLASS='st'>参见</H4>
+<A HREF="setfont.htm">SetFont()</A>,
+<A HREF="setdrawcolor.htm">SetDrawColor()</A>,
+<A HREF="setfillcolor.htm">SetFillColor()</A>,
+<A HREF="settextcolor.htm">SetTextColor()</A>,
+<A HREF="setlinewidth.htm">SetLineWidth()</A>,
+<A HREF="addlink.htm">AddLink()</A>,
+<A HREF="ln.htm">Ln()</A>,
+<A HREF="multicell.htm">MultiCell()</A>,
+<A HREF="write.htm">Write()</A>,
+<A HREF="setautopagebreak.htm">SetAutoPageBreak()</A>.
+<H6></H6>
+<HR>
+<DIV ALIGN="CENTER"><A HREF="index.htm">索引</A></DIV>
+</BODY>
+</HTML>

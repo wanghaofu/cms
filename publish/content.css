@@ -1,0 +1,100 @@
+/* CSS Document */
+@import url(http://sesoe.com/skin/sesoe/css/comm.css);
+body{
+font-size:12px;
+text-align:center;
+}
+table{clear:both;}
+ul{margin:0px 0px;padding:0 0 0 15px;list-style-image:url(/images/i6.gif);text-align:left;}
+/*li{height:18px;}*/
+li a{color:#333333;}
+li a:visted{color:#333333;}
+p{text-align:left;}
+table{
+text-align:left;
+}
+a{
+font-size:12px;
+text-decoration:none;
+color:#333333;
+}
+
+table{font-size:14px;}
+
+/*style*/
+
+.ad1{width:1000px;font-size:0px;background-color:#ffffff;}
+.main-div{width:1000px;text-align:left;clear:both;background-color:#FFFFFF;padding:5px 0px;margin-left:auto;
+margin-right:auto;}
+.main-left{width:1000px;float:left;border-left:double 0px #eeeeee;background-color:#FFFFFF;}
+    .navpath{text-align:left;background-color:#91ae97;height:18px;padding:3px 5px;}
+	.navpathleft{float:left;}
+	.navpathright{float:right;}
+	.navpathjian{color:green;}
+	.navpathxing{color:#009999;}
+    .title{text-align:center;}
+    .title h1{font-size:25px;font-weight:bold;}
+    .author{text-align:center;padding:5px 5px;border-bottom:1px dotted #99CCCC;color:#333333;}
+	         
+             .author span{color:#99CCCC}
+    .content{padding-left:10px;padding-top:5px;text-align:left;font-family:宋体,;font-size:13px;}
+	     
+			 
+             .ad1{}
+             .ad2{width:300px;padding:0px 0px;float:right;padding-right:0px;}
+			 .ad3{text-align:center;padding:0px 0px;padding-right:0px;}
+			 .ad2 a{font-size:14px;font-weight:bold;}
+			 #article{text-align:left;overflow:hidden;line-height:1.5;text-indent:40px;font-size:14px;padding:10px 10px;}
+					 .article p{}
+             .ad3{padding:0px;clear:both;float:left;}
+    .content-bottom{text-align:right;clear:both;padding:10px;}
+	.pages { height: 20px; TEXT-ALIGN: right;}
+	.pageview{float:right;margin:5px 5px;padding:5px 5px;font-size:12px;botder-bottom:1px solid #ececec;}	
+	.pageview b{display:inline;}
+	.pageview SPAN {
+	BORDER-RIGHT: #90aab4 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #cee3ea 1px solid; DISPLAY: inline; PADDING-LEFT: 5px; BACKGROUND: #ffffff; FLOAT: left; PADDING-BOTTOM: 0px; BORDER-LEFT: #cee3ea 1px solid; LINE-HEIGHT: 20px; MARGIN-RIGHT: 3px; PADDING-TOP: 0px; BORDER-BOTTOM: #90aab4 1px solid
+}
+	 SPAN.pageview-current {
+	FONT-WEIGHT: bold; BORDER-LEFT-COLOR: #0a0; BACKGROUND: #f90; BORDER-BOTTOM-COLOR: #060; COLOR: #fff; BORDER-TOP-COLOR: #0a0; BORDER-RIGHT-COLOR: #060;display:inline;
+}
+SPAN.pageview-totlerecord {
+	COLOR: #090
+}
+SPAN.pageview-totlepages {
+	COLOR: #090
+}
+SPAN.pageview-totlerecord {
+	MARGIN-RIGHT: 0px; BORDER-RIGHT-STYLE: none
+}
+	.pageview a{
+	BORDER-RIGHT: #90aab4 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #cee3ea 1px solid; DISPLAY: inline; PADDING-LEFT: 5px; BACKGROUND: #ffffff; FLOAT: left; PADDING-BOTTOM: 0px; BORDER-LEFT: #cee3ea 1px solid; LINE-HEIGHT: 20px; MARGIN-RIGHT: 3px; PADDING-TOP: 0px; BORDER-BOTTOM: #90aab4 1px solid
+}
+
+	.prpage{text-align:left;padding:5px 5px;font-size:12px;}
+	.nextpage{text-align:left;padding:5px 5px;font-size:12px;}	
+	.list-1{}
+	.list0-title{padding-top:8px;padding-left:15px;font-weight:bold;font-size:12px;background-repeat:repeat-x;}	
+	.list2-title{background-color:#cccccc}	
+	.list-img tr td {width:14%;}
+	.list-img tr td p{padding:2px 3px;text-align:center;}
+	.list0{padding:5px 5px;}
+	.pinglun-title{font-size:14px;}
+	.pinglun-title a{font-size:14px;}
+	.pinglun-content{padding:0px 5px;font-size:12px;}
+.main-right{width:500px;clear:both;background-color:#f3f2ed;background-color:#FFFFFF;padding:5px 200px;border-left:0px solid #d88497;border-right:0px solid #d88497;text-align:center;}
+.list1-title{background-color:#d1c8b7;padding:5px 10px;font-weight:bold;}
+.list2-title{padding:5px 5px;font-weight:bold;}
+.list-div{float:left;width:250px;text-align:center;}
+.list-div a:hover{text-decoration:underline;}
+   .ad5{width:230px;background-color:#FFFFFF;padding:5px 5px;text-align:center;}
+.list0 , .list{padding:5px 5px;}
+.list0 ul li , .list ul li{list-style-image:url(/images/article_common.gif);margin-left:10px;padding:2px 0px;}
+
+
+  
+  
+
+
+
+
+

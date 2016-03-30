@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[$SITE_NAME] - [$NodeInfo.Name]</title>
+<link href="[$SKIN_URL]huati/css/style.css" rel="stylesheet" type="text/css" />
+<!--#CW#模板资源路径[$SKIN_URL]可在CMSWARE后台-系统管理-模板变量设置中设置#CW#-->
+<link href="[$SKIN_URL]common/css/style.css" rel="stylesheet" type="text/css" />
+<script language="jscript" src="[$SKIN_URL]huati/js/js.js"></script>
+</head>
+<body>
+<include file="../common/header.html" />
+<div class="content">
+	<div class="left">
+        <!---左边样式1-->
+		<div class="topside01">
+			<div class="topside01_l"></div>
+			<div class="topside01_c"></div>
+			<div class="topside01_r"></div>
+		</div>
+		<div class="center01" id="newsfocus">
+
+			<div class="focus"><a href="#">话题列表</a></div><div class="morefocuslink">[<a href="[$PUBLISH_URL]content_v.php/16,0.html">创建新话题</a>]</div>
+          	<div class="sonfocus">
+            <CMS action="LIST" return="List" NodeID="self" Num="page-20" />
+            <loop name="List" var="var" key="key">
+            <div class="com">
+			<table width="100%" cellpadding="0" cellspacing="0">
+				<tr>
+                	<td width="10%" rowspan="3" align="center" valign="middle"><img src="[$SKIN_URL]huati/img/Light_Blog_icons_002.png" height="45" width="45" /></td>
+                    <td width="3%"><img src="[$SKIN_URL]huati/img/cm_Star0.gif" /></td>
+                    <td width="87%"><span class="com_1"><a href="[$var.URL]">[$var.Title]</a></span></td>
+			  </tr>
+              <tr>
+              	<td colspan="2"><div class="com_2">作者: <span class="au">[$var.Author]</span> | 浏览数([$var.Hits_Total]) | 回复数([$var.CommentNum]) | 发布时间 [@date('y-m-d h:m:s',$var.PublishDate)] | <a href="[$PUBLISH_URL]content_v.php/17,0,[$NodeInfo.NodeID],[$var.IndexID].html" class="fcom">发布回复</a></div></td>
+              </tr>
+              <tr>
+                <td height="31" colspan="2"><div class="com_3">[$var.Intro]</div></td>
+              </tr>
+            </table>	
+            </div>  
+            </loop>  
+  	  	  </div>
+            </div>
+		<div class="bottomside01">
+			<div class="bottomside01_l">&nbsp;</div>
+			<div class="bottomside01_c">&nbsp;</div>
+			<div class="bottomside01_r">&nbsp;</div>
+		</div>
+        <!--左边样式2-->
+        <div class="topside02">
+			<div class="topside02_l">&nbsp;</div>
+			<div class="topside02_c">&nbsp;</div>
+			<div class="topside02_r">&nbsp;</div>
+		</div> 
+		<div class="center02">
+       		<div class="photo_page" style="text-align:center">页次：<font color=red><b>[$PageInfo.CurrentPage]</b></font>/<B>[$PageInfo.TotalPage]</B> 每页<B>20</B> 共<B>[$PageInfo.TotalNum]</B> 分页：[@list_page( $PageInfo.TotalPage, $PageInfo.CurrentPage, $PageInfo.URL)]</div>
+		</div>
+		<div class="bottomside02">
+			<div class="bottomside02_l">&nbsp;</div>
+			<div class="bottomside02_c">&nbsp;</div>
+			<div class="bottomside02_r">&nbsp;</div>
+		</div>
+	</div>
+
+	<!--右边列开始-->
+	<div class="right">	
+		<!--右边样式2-->
+        <div class="topside05">
+			<div class="topside05_l">&nbsp;</div>
+			<div class="topside05_c">&nbsp;</div>
+			<div class="topside05_r">&nbsp;</div>
+		</div>
+		<div class="center05">
+        	<div class="photo_fous">热门话题</div>
+			<CMS action="LIST" return="List" NodeID="59" Num="10" OrderBy="Hits_Total" />
+            <loop name="List" var="var" key="key">
+            <a href="[$var.URL]">[@CsubStr($var.Title,0,12,'')]</a><span class="photo_hot"><font class="hot">[$var.Hits_Total]</font></span><br />
+            </loop>
+		</div>
+		<div class="bottomside05">
+			<div class="bottomside05_l">&nbsp;</div>
+			<div class="bottomside05_c">&nbsp;</div>
+			<div class="bottomside05_r">&nbsp;</div>
+		</div>
+        
+        <div class="topside04">
+			<div class="topside04_l">&nbsp;</div>
+			<div class="topside04_c">&nbsp;</div>
+			<div class="topside04_r">&nbsp;</div>
+		</div>
+		<div class="center04">
+        	<div class="photo_fous">回复最多</div>
+			<CMS action="LIST" return="List" NodeID="59" Num="10" OrderBy="CommentNum" />
+            <loop name="List" var="var" key="key">
+            <a href="[$var.URL]">[@CsubStr($var.Title,0,12,'')]</a><span class="photo_hot"><font class="hot">[$var.CommentNum]</font></span><br />
+            </loop>
+		</div>
+		<div class="bottomside04">
+			<div class="bottomside04_l">&nbsp;</div>
+			<div class="bottomside04_c">&nbsp;</div>
+			<div class="bottomside04_r">&nbsp;</div>
+		</div>
+	</div>
+</div>
+<include file="../common/footer.html" />
+</body>
+</html>

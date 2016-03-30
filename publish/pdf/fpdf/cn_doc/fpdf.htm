@@ -1,0 +1,53 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>FPDF</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="fpdf.css">
+</HEAD>
+<BODY>
+<H2>FPDF</H2>
+<TT>FPDF([<B>string</B> orientation [, <B>string</B> unit [, <B>mixed</B> format]]])</TT>
+<H4 CLASS='st'>版本</H4>
+1.0
+<H4 CLASS='st'>内容</H4>
+制造PDF文件的核心建设程序。它容许你设定页面的格式。尺寸单位和页面方向等所有东西都是需要用这个功能。(除了字号外)
+<H4 CLASS='st'>参数</H4>
+<TT><U>orientation</U></TT>
+<BLOCKQUOTE>
+定义整页的方向。可用下面的数值：
+<UL>
+<LI><TT>P or Portrait</TT>: 直向
+<LI><TT>L or Landscape</TT>: 横向
+</UL>
+默认值为：P (直向)
+</BLOCKQUOTE>
+<TT><U>unit</U></TT>
+<BLOCKQUOTE>
+定义使用尺寸的单位。可用下面的数值：
+<UL>
+<LI><TT>pt</TT>: 点
+<LI><TT>mm</TT>: 公厘，毫米
+<LI><TT>cm</TT>: 公分
+<LI><TT>in</TT>: 寸
+</UL>
+一点等于 1/72 吋，同时也等于 0.35mm(因为一吋等于 2.54 cm)。在印刷技术方面，这是一个通用的单位，字号就是用这个单位来表示。
+<br><br>
+默认值为：mm (公厘，毫米)
+</BLOCKQUOTE>
+<TT><U>format</U></TT>
+<BLOCKQUOTE>
+定义页的格式大小。可用下面任何一个数值：
+<UL>
+<LI><TT>A3</TT>
+<LI><TT>A4</TT>
+<LI><TT>A5</TT>
+<LI><TT>Letter</TT>
+<LI><TT>Legal</TT>
+</UL>
+或由两个数组(two-element array)来决定宽度和高度，定义使用者自定页的大小。(尺寸的单位是由 unit 来决定)
+</BLOCKQUOTE>
+<H6></H6>
+<HR>
+<DIV ALIGN="CENTER"><A HREF="index.htm">索引</A></DIV>
+</BODY>
+</HTML>

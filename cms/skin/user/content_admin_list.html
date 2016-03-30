@@ -1,0 +1,471 @@
+<include: file="header.html">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<BODY  style="PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px">
+<style>
+
+div.titleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 200;
+	text-overflow: ellipsis;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;			
+}		
+div.subtitleholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	
+	text-overflow: ellipsis;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;			
+}
+div.timeholder {
+	font-family: ms sans serif, arial;
+	font-size: 8pt;
+	width: 90;
+	text-overflow: ellipsis;
+	margin: 0px;
+	overflow: hidden;
+	white-space: nowrap;			
+}	
+</style>
+<script language='JavaScript'>
+var doImage = doImage;
+var TType = TType;
+
+function mhHover(tbl, idx, cls)
+{
+	var t, d;
+	if (document.getElementById)
+		t = document.getElementById(tbl);
+	else
+		t = document.all(tbl);
+	if (t == null) return;
+	if (t.getElementsByTagName)
+		d = t.getElementsByTagName("TD");
+	else
+		d = t.all.tags("TD");
+	if (d == null) return;
+	if (d.length <= idx) return;
+	d[idx].className = cls;
+}
+function refreshWorkArea()
+{
+ document.location =  document.location
+
+}
+
+</script>
+<SCRIPT>
+var elo;
+var loadmenuok=false;
+var type = 'main';
+var CateID = '[$CateInfo.CateID]';
+function initrightmenu(){
+	loadmenuok = true;
+}
+ 
+function doing(action, ContributionID) {
+	switch(action) {
+		case 'viewpublish':
+			eval('var mPath = URL_' + ContributionID + '.href');
+			window.open(mPath,"","")
+
+			break;
+		case 'edit':
+			var leftPos = (screen.availWidth-800) / 2
+			var topPos = (screen.availHeight-600) / 2 
+			 window.open('[$base_url]o=content_editor_frameset&extra=edit&CateID='+CateID  + '&ContributionID=' + ContributionID,'','width=800,height=600,scrollbars=no,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+
+			break;
+		case 'del':
+			if(confirm("{lang:querenshanchuma}")) {
+				document.documentlist.referer.value = document.location;
+				document.documentlist.action = '[$base_url]' + 'o=' + action + '&type=' + type + '&ContributionID=' + ContributionID + '&CateID=' + CateID  ;
+				document.documentlist.submit();
+				
+			}
+		case 'viewNote':
+			var leftPos = (screen.availWidth-800) / 2
+			var topPos = (screen.availHeight-600) / 2 
+			 window.open('[$base_url]o=viewNote&CateID='+CateID  + '&ContributionID=' + ContributionID,'','width=400,height=300,scrollbars=yes,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+
+			break;
+		case 'view':
+			var leftPos = (screen.availWidth-800) / 2
+			var topPos = (screen.availHeight-600) / 2 
+			 window.open('[$base_url]o=view&CateID='+CateID  + '&ContributionID=' + ContributionID,'','width=800,height=600,scrollbars=yes,resizable=yes,titlebar=0,top=' + topPos + ',left=' + leftPos);
+
+			break;
+		case 'cut':
+			var targetCateID = showMeDialog("admin_select.php?sId=[$sId]&o=targetCateWindow","color","dialogWidth:324px;dialogHeight:331px;help:0;status:0;scroll:no");
+			
+			if(targetCateID != null && targetCateID != '') {
+				document.documentlist.referer.value = document.location;
+				document.documentlist.action = '[$base_url]' + 'o=' + action + '&type=' + type + '&ContributionID=' + ContributionID + '&CateID=' + CateID + '&targetCateID=' + targetCateID  ;
+				document.documentlist.submit();
+			
+			}
+
+			break;
+		case 'copy':
+			var targetCateID = showMeDialog("admin_select.php?sId=[$sId]&o=targetCateWindow","color","dialogWidth:324px;dialogHeight:331px;help:0;status:0;scroll:no");
+			
+			if(targetCateID != null && targetCateID != '') {
+				document.documentlist.referer.value = document.location;
+				document.documentlist.action = '[$base_url]' + 'o=' + action + '&type=' + type + '&ContributionID=' + ContributionID + '&CateID=' + CateID + '&targetCateID=' + targetCateID  ;
+				document.documentlist.submit();
+			
+			}
+
+			break;
+		case 'createLink':
+			
+			var targetCateID = showMeDialog("admin_select.php?sId=[$sId]&o=targetNodeWindow","color","dialogWidth:324px;dialogHeight:331px;help:0;status:0;scroll:no");
+			
+			if(targetCateID != null && targetCateID != '') {
+				document.documentlist.referer.value = document.location;
+				document.documentlist.action = '[$base_url]' + 'o=' + action + '&type=' + type + '&ContributionID=' + ContributionID + '&CateID=' + CateID + '&targetCateID=' + targetCateID  ;
+				document.documentlist.submit();
+				//alert(ContributionID + '-' + targetCateID)
+			}
+			break;
+		case 'publish':
+			document.documentlist.referer.value = document.location;
+			document.documentlist.action = '[$base_url]' + 'o=' + action + '&type=' + type + '&ContributionID=' + ContributionID + '&CateID=' + CateID + '&targetCateID=' + targetCateID  ;
+			document.documentlist.submit();
+				//alert(ContributionID + '-' + targetCateID)
+		
+			break;
+		case 'unpublish':
+			document.documentlist.referer.value = document.location;
+			document.documentlist.action = '[$base_url]' + 'o=' + action + '&type=' + type + '&ContributionID=' + ContributionID + '&CateID=' + CateID + '&targetCateID=' + targetCateID  ;
+			document.documentlist.submit();
+				//alert(ContributionID + '-' + targetCateID)
+		
+			break;
+		case 'refresh':
+			document.documentlist.referer.value = document.location;
+			document.documentlist.action = '[$base_url]' + 'o=' + action + '&type=' + type + '&ContributionID=' + ContributionID + '&CateID=' + CateID + '&targetCateID=' + targetCateID  ;
+			document.documentlist.submit();
+			break;
+		default:
+			document.location = document.location;
+
+	}
+	//sId=6891856b84ee23f2330ee8359cd3f60d&o=view&pId=41&cId=4
+}
+
+
+
+function rightMenu(pId, State, Type) {
+	var toolMenu = new WebFXMenu;
+
+
+	if(Type == '1') {
+		toolMenu.add(new WebFXMenuItem('{lang:chakan}','javascript:doing("view","'+ pId +'")','{lang:chakanwendang}'));
+	toolMenu.add(new WebFXMenuItem('{lang:bianji}','javascript:going("edit","'+ pId +'")','{lang:bianjiwendang}'));
+	toolMenu.add(new WebFXMenuItem('{lang:shanchu}','javascript:going("del","'+ pId +'")', '{lang:shanchuwendang}'));
+		toolMenu.add(new WebFXMenuItem('{lang:zhuanyi}','javascript:doing("cut","'+ pId +'")', '{lang:zhuanyiwendang}'));
+		toolMenu.add(new WebFXMenuItem('{lang:chuangjianxulianjie}','javascript:doing("createLink","'+ pId +'")', '{lang:fuzhiwendang}'));
+	
+	} else {
+		toolMenu.add(new WebFXMenuItem('{lang:chakan}','javascript:doing("view","'+ pId +'")','{lang:chakanwendang}'));
+		toolMenu.add(new WebFXMenuItem('{lang:shanchu}','javascript:going("del","'+ pId +'")', '{lang:shanchuwendang}'));
+		toolMenu.add(new WebFXMenuItem('{lang:zhuanyi}','javascript:doing("cut","'+ pId +'")', '{lang:zhuanyiwendang}'));
+
+	
+	
+	}
+	//toolMenu.add(new WebFXMenuItem('{lang:zhantie}','#bottom', 'zhantiewendang'));
+
+
+ 
+	menudata.innerHTML = toolMenu 
+
+	elo=window.event.srcElement;
+	toolMenu.left = window.event.clientX;
+	toolMenu.top = window.event.clientY+document.body.scrollTop;
+	toolMenu.show();
+
+	//initrightmenu();
+
+}
+</SCRIPT>
+
+<SCRIPT language=JavaScript>
+<!--
+
+function changelocation(locationid)
+    {
+    document.frmHeaderList.dmsys_class_id.length = 0;
+    var locationid=locationid;
+    var i;
+    for (i=0;i < onecount; i++)
+        {
+            if (subcat[i][1] == locationid)
+            {
+                document.frmHeaderList.dmsys_class_id.options[document.frmHeaderList.dmsys_class_id.length] = new Option(subcat[i][0], subcat[i][2]);
+            }
+        }
+       
+    }
+
+
+function CheckAll(form)  {
+  for (var i=0;i<form.elements.length;i++)    {
+    var e = form.elements[i];
+    if (e.name != 'chkall' && e.name !='copy')       e.checked = form.chkall.checked; 
+   }
+  }
+
+function delselect(form) {
+		if(!confirm("{lang:querenpiliangshanchuma}")) return false;
+		form.action+="&o=del&multi=1";
+		form.submit();
+		return;	
+		
+}
+
+function refreshselect(form) {
+	
+	 
+		form.action+="&o=refresh&multi=1";
+		form.submit();
+		return;	
+		
+}
+
+function publishselect(form) {
+	
+		if(!confirm("{lang:querenpiliangfabuma}")) return false;
+	 
+		form.action+="&o=publish&multi=1";
+		form.submit();
+		return;	
+		
+}
+function checkselect() {
+	
+	dm2=document.documentlist;
+		dm2.action+="?target=multiple";
+		dm2.action+="&action=check";
+		dm2.submit();
+		return;	
+
+}
+function MoveTo(form) {
+	
+		if(!confirm("{lang:querenpiliangfuzhizhuanyifabuma}")) return false;
+	 
+		form.action+="&o=changeC";
+		form.submit();
+		return;	
+		
+}//-->
+
+
+</script>
+<script>
+var mousemovecolor="#D4D4D4";
+var selectcolor ="#DDDDDD";
+var oldcolor;
+
+function GetRow(oElem)
+{
+	while (oElem)
+	{	//alert(oElem.tagName.toLowerCase())
+		if (oElem.tagName.toLowerCase() == "tr" || oElem.parentElement.tagName.toLowerCase() == "tbody") 
+		    return oElem;
+		if (oElem.tagName.toLowerCase() == "table" || oElem.tagName.toLowerCase() == "th") return false;
+		oElem = oElem.parentElement;
+	}
+}
+
+
+function selected()
+{	//alert(pid)
+
+	var trstyle = GetRow( window.event.srcElement );
+	var a;
+	if( !trstyle )
+		return false;
+
+	if( trstyle.style.backgroundColor.toLowerCase() == selectcolor.toLowerCase())
+	{
+		trstyle.style.backgroundColor = "";
+		a=eval("p_"+ trstyle.id);	
+		//alert(trstyle.id)
+		if (a!=null || a.checked) 
+			a.checked=false
+		oldcolor = "";
+	}
+	else
+	{		
+		trstyle.style.backgroundColor = selectcolor;
+		a=eval("p_"+ trstyle.id);
+		//alert(trstyle.id)
+		if (a!=null) 
+			a.checked=true
+		oldcolor = selectcolor;
+
+	
+	}
+}
+
+function going(form, o)
+{
+	document.documentlist.referer.value = document.location;
+
+	with(form) {
+		switch(o) {
+			case 'contribution':
+				document.documentlist.referer.value = document.location;
+				document.documentlist.action = '[$base_url]' + '&multi=1&o=' + o + '&type=' + type +  '&CateID=' + CateID  ;
+				document.documentlist.submit();
+				break;
+			case 'uncontribution':
+				document.documentlist.referer.value = document.location;
+				document.documentlist.action = '[$base_url]' + '&multi=1&o=' + o + '&type=' + type +  '&CateID=' + CateID  ;
+				document.documentlist.submit();
+				break;
+			case 'copy':
+				var targetCateID = showMeDialog("admin_select.php?sId=[$sId]&o=targetCateWindow","color","dialogWidth:324px;dialogHeight:331px;help:0;status:0;scroll:no");
+				
+				if(targetCateID != null && targetCateID != '') {
+					document.documentlist.referer.value = document.location;
+					document.documentlist.action = '[$base_url]' + 'o=' + o + '&type=' + type + '&CateID=' + CateID + '&multi=1&targetCateID=' + targetCateID  ;
+					document.documentlist.submit();
+					//alert(ContributionID + '-' + targetCateID)
+				}
+
+				break;
+			case 'move':
+				//alert('a')
+				var targetCateID = showMeDialog("admin_select.php?sId=[$sId]&o=targetCateWindow","color","dialogWidth:324px;dialogHeight:331px;help:0;status:0;scroll:no");
+				
+				if(targetCateID != null && targetCateID != '') {
+					document.documentlist.referer.value = document.location;
+					document.documentlist.action = '[$base_url]' + 'o=cut&type=' + type + '&CateID=' + CateID + '&multi=1&targetCateID=' + targetCateID  ;
+					document.documentlist.submit();
+					//alert(ContributionID + '-' + targetCateID)
+				}
+				break;
+			case 'del':
+				if(confirm("{lang:querenpiliangshanchuma}")) {
+					action = action + '&o=del&multi=1';
+					
+					submit();
+				}
+				break;
+			
+		}
+	
+	}
+}
+</script>
+<div id="menudata"></div>
+<table width="100%" border="0" align="center" cellpadding="2" cellspacing="1"  class="table_border" >
+  <TBODY>
+  <form method="post" action="[$base_url]CateID=[$CateInfo.CateID]" name="documentlist" >
+
+    <tr class="table_td2"> 
+      <td> </td>
+      <td align="center">ID</td>
+	  <loop $DisplayItem key=key var=var>
+		<td align="center">[$var.FieldTitle]</td>
+	  </loop>
+      <td align="center">{lang:riqi}</td>
+      <td align="center">{lang:tougaojiedian}</td>
+      <td align="center">{lang:zhuangtai}</td>
+      <td colspan="5" align="center">{lang:zhixingcaozuo}</td>
+    </tr>
+
+
+<loop $pList key=key var=var>
+<!------onmouseover='this.style.backgroundColor="#FFFFFF"' 
+                    onmouseout='this.style.backgroundColor=""'------>
+    <tr class="table_td1" id="[$var.ContributionID]" onmouseover='this.style.backgroundColor="#FFFFFF"' 
+                    onmouseout='this.style.backgroundColor=""'> 
+      <td noWrap > <input type='checkbox' name='pData[]' value='[$var.ContributionID]' id="p_[$var.ContributionID]" ></td>
+      <td align="center" noWrap   >[$var.ContributionID]</td>
+	 <loop $DisplayItem key=keyIn var=varIn>
+	
+		<if $keyIn == 0>
+      <td   noWrap  style="cursor:hand" id="[$var.pId]"><div class="titleholder">&nbsp;&nbsp;<A HREF="javascript:void(0);" onclick="doing('view','[$var.ContributionID]')" style="cursor:hand"   oncontextmenu="rightMenu('[$var.ContributionID]', '[$var.State]','[$var.Type]');return false;" title="<?php  echo    $this->_tpl_vars["var"]["{$this->_tpl_vars["varIn"]["FieldName"]}"]?>"><?php  echo    $this->_tpl_vars["var"]["{$this->_tpl_vars["varIn"]["FieldName"]}"]?> </A></div></td>
+
+		<else>
+      <td   noWrap   id="[$var.pId]"><div class="subtitleholder">&nbsp;&nbsp;<?php  echo    $this->_tpl_vars["var"]["{$this->_tpl_vars["varIn"]["FieldName"]}"]?> </div></td>
+
+		</if>
+
+	 </loop>
+      <td align="center" noWrap ><div class="timeholder">[@date('Y-m-d H:i',$var.CreationDate)]</div></td>
+      <td align="center" noWrap ><div class="timeholder">[$var.Name]</div></td>
+      <td align="center" noWrap  >
+	  <div class="subtitleholder">
+
+	   
+<if $var.State == 0>
+{lang:weitou}
+<elseif $var.State == 1> 
+<FONT  COLOR="#336600">{lang:yitougao}</FONT>
+<elseif $var.State == 2> 
+<FONT  COLOR="#3300CC">{lang:yiluyong}</FONT>
+<elseif $var.State == 3> 
+ <FONT  COLOR="#FF6600">{lang:tuihui}</FONT> 
+<else>
+{lang:shenhezhong}
+</if> 
+</div></td>
+     <td colspan="5" align="center" noWrap>
+	  <if  $var.State == 0 || $var.State == 3 >
+	  <A HREF="[$base_url]o=contribution&ContributionID=[$var.ContributionID]&CateID=[$CateInfo.CateID]" >{lang:tougao}</A> 
+	  <A HREF="javascript:void(0);" onclick="doing('edit','[$var.ContributionID]')">{lang:bianji}</A>
+	  <A HREF="[$base_url]o=del&ContributionID=[$var.ContributionID]&CateID=[$CateInfo.CateID]" onclick="return confirm('{lang:querenshanchuwendanma}')">{lang:shanchu}</A> 
+		
+	  <elseif $var.State == 1 >
+	  <A HREF="[$base_url]o=uncontribution&ContributionID=[$var.ContributionID]&CateID=[$CateInfo.CateID]" onclick="return confirm('{lang:querenchehuigaitougaowendanma}？')">{lang:chehui}</A> 
+	  </if>
+	
+<A HREF="javascript:void(0);" onclick="doing('viewNote','[$var.ContributionID]')"> {lang:pizhu} </a>	  
+
+	  
+	  </td>
+    </tr>
+
+</loop>
+
+    <tr class="Tablelistbg"> 
+      <td colspan="11" align="left" bgcolor="#F5F5F5"> <table border="0" align="center"  cellpadding="0" cellspacing="0" width="100%">
+          <tr> 
+            <td align=left> 
+            <input type="checkbox" name="chkall" value="on" onclick="CheckAll(this.form)" id="chkall"  > 
+              <label for="chkall" >{lang:quanxuan}</label>&nbsp;&nbsp;
+			               
+			 <select name="actionMap" id="actionMap" > 
+            <option value="contribution">{lang:tougao}</option>
+          <option value="uncontribution">{lang:chehuitougao}</option>
+            <option value="move">{lang:zhuanyi}</option>
+          <option value="del">{lang:shanchu}</option>
+       
+
+			  </select>
+
+			  <input type="button" value="Go" class=button onclick="going(this.form,actionMap.options[actionMap.selectedIndex].value)"> 
+         
+            </td>
+          </tr>
+        </table></td>
+    </tr>
+	<INPUT TYPE="hidden" name="referer" value ="" >
+  </form>
+  <tr class="Tablelistbg"> 
+    <td colspan="11" align=right> [$pagelist]&nbsp; </td>
+  </tr>
+  </tbody> 
+</table>
+
+<include: file="footer.html">

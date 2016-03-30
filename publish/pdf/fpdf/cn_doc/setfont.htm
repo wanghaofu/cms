@@ -1,0 +1,85 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+<TITLE>SetFont</TITLE>
+<LINK TYPE="text/css" REL="stylesheet" HREF="fpdf.css">
+</HEAD>
+<BODY>
+<H2>SetFont</H2>
+<TT>SetFont(<B>string</B> family [, <B>string</B> style [, <B>float</B> size]])</TT>
+<H4 CLASS='st'>版本</H4>
+1.0
+<H4 CLASS='st'>内容</H4>
+设定字符串的字型。在文字或整篇文章显示之前，最小需要用一次这个功能来决定使用的字型。<br>
+字型方面，你可以选择使用标准字型或用 AddFont()功能加入的字型。标准字型是用 Windows encoding cp1252 (西欧 Western Europe)。<br>
+这个功能可以在一页建立之前则行，而且字型是可以一直保持下去，在另一页时也不需要从新使用这功能。<br>
+如果你只是希望改变目前字型的大小，最简单的方法就是使用 SetFontSize()。<br><br>
+<B>注意：</b>为了标准字型，这个字型公用档案一定要符合三个原则。
+<UL>
+<LI>它们需要在目前使用的目录里面 (代表你的程序在那里则行就要那里有)
+<LI>它们在同一个目录里，由 include_path 参数决定它们的位置
+<LI>它们在目录里，由 FPDF_FONTPATH 定义的参数是不变的
+</UL>
+最后一个原则的例子：
+<BR>
+<BR>
+<TABLE WIDTH="100%" BGCOLOR="#E0E0E0"><TR><TD>
+<TT>
+define('FPDF_FONTPATH','/home/www/font/');<BR>
+require('fpdf.php');
+</TT>
+</TD></TR></TABLE><BR>
+
+如果字型找不到符合需求的档案，便会产生一个错误讯息 "Could not include font metric file"
+<H4 CLASS='st'>参数</H4>
+<TT><U>family</U></TT>
+<BLOCKQUOTE>
+家族字型(Family font)。它可以使用 AddFont()定义字型名称或用标准的家族字型：
+<UL>
+<LI>Courier (固定宽度)
+<LI>Helvetica or Arial (synonymous; sans serif)
+<LI>Times (serif)
+<LI>Symbol (符号)
+<LI>ZapfDingbats (符号)
+</UL>
+它可能是一空白的字符串，在这个情况，当前使用的字型家族便会保留下来。
+</BLOCKQUOTE>
+<TT><U>style</U></TT>
+<BLOCKQUOTE>
+字型风格。已下是可使用的值：
+<UL>
+<LI>空白字符串: 普通
+<LI><TT>B</TT>: 粗体
+<LI><TT>I</TT>: 斜体
+<LI><TT>U</TT>: 底线
+</UL>
+或任何一种的组合。默认值为(普通)。粗体和斜体不能够用在 Symbol 和 ZapfDingbats
+</BLOCKQUOTE>
+<TT><U>size</U></TT>
+<BLOCKQUOTE>
+适用的字号。默认值为目前的大小。如果没有预先为文件定义字型的大小，那么字型的大小便会设为12。
+</BLOCKQUOTE>
+<H4 CLASS='st'>例子</H4>
+<TABLE WIDTH="100%" BGCOLOR="#E0E0E0"><TR><TD>
+<TT>
+//Times regular 12<BR>
+$pdf-&gt;SetFont('Times');<BR>
+//Arial bold 14<BR>
+$pdf-&gt;SetFont('Arial','B',14);<BR>
+//Removes bold<BR>
+$pdf-&gt;SetFont('');<BR>
+//Times bold, italic and underlined 14<BR>
+$pdf-&gt;SetFont('Times','BIU');
+</TT>
+</TD></TR></TABLE><BR>
+<H4 CLASS='st'>参见</H4>
+<A HREF="addfont.htm">AddFont()</A>,
+<A HREF="setfontsize.htm">SetFontSize()</A>,
+<A HREF="cell.htm">Cell()</A>,
+<A HREF="multicell.htm">MultiCell()</A>,
+<A HREF="write.htm">Write()</A>.
+<H6></H6>
+<HR>
+<DIV ALIGN="CENTER"><A HREF="index.htm">索引</A></DIV>
+</BODY>
+</HTML>

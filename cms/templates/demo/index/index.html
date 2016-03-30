@@ -1,0 +1,446 @@
+<include file="TplConfig.html" /><!--#CW#将模板配置文件包含进本模板，以便调用其中设置的参数#CW#-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>[$SITE_NAME] - 首页</title>
+<link href="[$SKIN_URL]index/css/style.css" rel="stylesheet" type="text/css" /><!--#CW#模板资源路径[$SKIN_URL]可在CMSWARE后台-系统管理-模板变量设置中设置#CW#-->
+<link href="[$SKIN_URL]common/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<include file="../common/header.html" />
+<div class="content">
+	<div class="left">
+		<div class="topside01">
+			<div class="topside01_l">&nbsp;</div>
+			<div class="topside01_c">&nbsp;</div>
+			<div class="topside01_r">&nbsp;</div>
+		</div>
+		<div class="center01">
+			<!--幻灯代码开始-->
+			<CMS action="LIST" return="List" NodeID="{$Flash_NodeID}" Num="5" where=" c.Photo!='' " />
+			
+			<script type="text/javascript">
+			<!--
+			var pic_width=465;
+			var pic_height=269;
+			var text_height=0;
+			var swfpath = '[$SKIN_URL]index/flash/picviewer.swf';
+			var swf_height = pic_height+text_height;
+			
+			var pics='<loop name="List" var="var" key="key" >[$var.Photo][@(($key==sizeof($List)-1)?'':'|')]</loop>';
+			var links='<loop name="List" var="var" key="key" >[$var.Intro][@(($key==sizeof($List)-1)?'':'|')]</loop>';
+			var texts='<loop name="List" var="var" key="key" >[$var.Title][@(($key==sizeof($List)-1)?'':'|')]</loop>';
+			
+			document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ pic_width +'" height="'+ swf_height +'">');
+			document.write('<param name="allowScriptAccess" value="sameDomain"><param name="movie" value="'+swfpath+'"><param name="quality" value="high"><param name="bgcolor" value="#ffffff">');
+			document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+			document.write('<param name="FlashVars" value="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+pic_width+'&borderheight='+pic_height+'&textheight='+text_height+'">');
+			document.write('<embed src="'+swfpath+'" wmode="opaque" FlashVars="pics='+pics+'&links='+links+'&texts='+texts+'&borderwidth='+pic_width+'&borderheight='+pic_height+'&textheight='+text_height+'" menu="false" bgcolor="#ffffff" quality="high" width="'+ pic_width +'" height="'+ pic_height +'" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />');
+			document.write('</object>');
+			//-->
+			</script>
+			<!--幻灯代码结束-->
+		</div>
+		<div class="bottomside01">
+			<div class="bottomside01_l">&nbsp;</div>
+			<div class="bottomside01_c">&nbsp;</div>
+			<div class="bottomside01_r">&nbsp;</div>
+		</div>
+	</div>
+	<div class="right">
+		<div class="topside01">
+			<div class="topside01_l">&nbsp;</div>
+			<div class="topside01_c">&nbsp;</div>
+			<div class="topside01_r">&nbsp;</div>
+		</div>
+		<CMS action="NODE" return="NewsNodeVar" NodeID="{$News_MainNodeID}" />
+		<CMS action="LIST" return="List" NodeID="{$News_AllNodeID}" Num="2" where="i.Pink > 0 AND CHAR_LENGTH(c.Photo) > 0" />
+		<CMS action="LIST" return="List1" NodeID="{$News_AllNodeID}" Num="10" where="i.Pink > 0" />
+		<div class="center01">
+			<div class="newstitle"><span class="title_link_2"><a href="[$NewsNodeVar.URL]" target="_blank">推荐新闻</a></span></div>
+			<div class="list01">
+				<div class="photonews"><a href="[$List.0.URL]" target="_blank"><img src="[@AutoMini2($List.0.Photo,'144*75',$List.0,'1','1')]" width="144" height="75" border="0" alt="[$List.0.Title]" /></a><span class="photonewstitle"><a href="[$List.0.URL]" target="_blank" title="[$List.0.Title]"><if test="empty($List.0.ShortTitle)">[@Csubstr($List.0.Title,0,12,'')]<else>[@Csubstr($List.0.ShortTitle,0,12,'')]</if></a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key>5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]新闻</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]"><if test="empty($var.ShortTitle)">[@Csubstr($var.Title,0,16,'')]<else>[$var.ShortTitle]</if></a></li>
+				</loop>
+				</ul>
+			</div>
+			<div class="blankrow">&nbsp;</div>
+			<div class="list01">
+				<div class="photonews"><a href="[$List.1.URL]" target="_blank"><img src="[@AutoMini2($List.1.Photo,'144*75',$List.1,'1','1')]" width="144" height="75" border="0" alt="[$List.1.Title]" /></a><span class="photonewstitle"><a href="[$List.1.URL]" target="_blank" title="[$List.1.Title]"><if test="empty($List.1.ShortTitle)">[@Csubstr($List.1.Title,0,12,'')]<else>[@Csubstr($List.1.ShortTitle,0,12,'')]</if></a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key<=5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]新闻</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]"><if test="empty($var.ShortTitle)">[@Csubstr($var.Title,0,16,'')]<else>[$var.ShortTitle]</if></a></li>
+				</loop>
+				</ul>
+			</div>
+		</div>
+		<div class="bottomside01">
+			<div class="bottomside01_l">&nbsp;</div>
+			<div class="bottomside01_c">&nbsp;</div>
+			<div class="bottomside01_r">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="left">
+		<div class="topside01">
+			<div class="topside01_l">&nbsp;</div>
+			<div class="topside01_c">&nbsp;</div>
+			<div class="topside01_r">&nbsp;</div>
+		</div>
+		<CMS action="LIST" return="List" NodeID="{$News_AllNodeID}" Num="2" where="i.Pink = 0 AND CHAR_LENGTH(c.Photo) > 0" />
+		<CMS action="LIST" return="List1" NodeID="{$News_AllNodeID}" Num="10" where="i.Pink = 0" />
+		<div class="center01">
+		<div class="newstitle"><span class="title_link_3"><a href="[$NewsNodeVar.URL]" target="_blank">最新新闻</a></span></div>
+		<div class="list01">
+				<div class="photonews"><a href="[$List.0.URL]" target="_blank"><img src="[@AutoMini2($List.0.Photo,'144*75',$List.0,'1','1')]" width="144" height="75" border="0" alt="[$List.0.Title]" /></a><span class="photonewstitle"><a href="[$List.0.URL]" target="_blank" title="[$List.0.Title]"><if test="empty($List.0.ShortTitle)">[@Csubstr($List.0.Title,0,12,'')]<else>[@Csubstr($List.0.ShortTitle,0,12,'')]</if></a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key>5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]新闻</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]"><if test="empty($var.ShortTitle)">[@Csubstr($var.Title,0,16,'')]<else>[$var.ShortTitle]</if></a></li>
+				</loop>
+				</ul>
+			</div>
+			<div class="blankrow">&nbsp;</div>
+			<div class="list01">
+				<div class="photonews"><a href="[$List.1.URL]" target="_blank"><img src="[@AutoMini2($List.1.Photo,'144*75',$List.1,'1','1')]" width="144" height="75" border="0" alt="[$List.1.Title]" /></a><span class="photonewstitle"><a href="[$List.1.URL]" target="_blank" title="[$List.1.Title]"><if test="empty($List.1.ShortTitle)">[@Csubstr($List.1.Title,0,12,'')]<else>[@Csubstr($List.1.ShortTitle,0,12,'')]</if></a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key<=5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]新闻</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]"><if test="empty($var.ShortTitle)">[@Csubstr($var.Title,0,16,'')]<else>[$var.ShortTitle]</if></a></li>
+				</loop>
+				</ul>
+			</div>
+		</div>
+		<div class="bottomside01">
+			<div class="bottomside01_l">&nbsp;</div>
+			<div class="bottomside01_c">&nbsp;</div>
+			<div class="bottomside01_r">&nbsp;</div>
+		</div>
+	</div>
+	<div class="right">
+		<div class="topside01">
+			<div class="topside01_l">&nbsp;</div>
+			<div class="topside01_c">&nbsp;</div>
+			<div class="topside01_r">&nbsp;</div>
+		</div>
+		<CMS action="LIST" return="List" NodeID="{$News_AllNodeID}" Num="2" where="CHAR_LENGTH(c.Photo) > 0" orderby="Hits_Total" />
+		<CMS action="LIST" return="List1" NodeID="{$News_AllNodeID}" Num="10" orderby="Hits_Total" />
+		<div class="center01">
+		<div class="newstitle"><a href="[$NewsNodeVar.URL]" target="_blank">热门新闻</a></div>
+		<div class="list01">
+				<div class="photonews"><a href="[$List.0.URL]" target="_blank"><img src="[@AutoMini2($List.0.Photo,'144*75',$List.0,'1','1')]" width="144" height="75" border="0" alt="[$List.0.Title]" /></a><span class="photonewstitle"><a href="[$List.0.URL]" target="_blank" title="[$List.0.Title]"><if test="empty($List.0.ShortTitle)">[@Csubstr($List.0.Title,0,12,'')]<else>[@Csubstr($List.0.ShortTitle,0,12,'')]</if></a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key>5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]新闻</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]"><if test="empty($var.ShortTitle)">[@Csubstr($var.Title,0,16,'')]<else>[$var.ShortTitle]</if></a></li>
+				</loop>
+				</ul>
+			</div>
+			<div class="blankrow">&nbsp;</div>
+			<div class="list01">
+				<div class="photonews"><a href="[$List.1.URL]" target="_blank"><img src="[@AutoMini2($List.1.Photo,'144*75',$List.1,'1','1')]" width="144" height="75" border="0" alt="[$List.1.Title]" /></a><span class="photonewstitle"><a href="[$List.1.URL]" target="_blank" title="[$List.1.Title]"><if test="empty($List.1.ShortTitle)">[@Csubstr($List.1.Title,0,12,'')]<else>[@Csubstr($List.1.ShortTitle,0,12,'')]</if></a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key<=5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]新闻</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]"><if test="empty($var.ShortTitle)">[@Csubstr($var.Title,0,16,'')]<else>[$var.ShortTitle]</if></a></li>
+				</loop>
+				</ul>
+			</div>
+		</div>
+		<div class="bottomside01">
+			<div class="bottomside01_l">&nbsp;</div>
+			<div class="bottomside01_c">&nbsp;</div>
+			<div class="bottomside01_r">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="left1">
+		<div class="topside06">
+			<div class="topside06_l">&nbsp;</div>
+			<div class="topside06_c">&nbsp;</div>
+			<div class="topside06_r">&nbsp;</div>
+		</div>
+		<CMS action="NODE" return="PhotoNodeVar" NodeID="{$Photo_MainNodeID}" />
+		<CMS action="LIST" return="List" NodeID="{$Photo_AllNodeID}" Num="8" />
+		<div class="center06">
+			<div class="newstitle"><span class="title_link_7"><a href="[$PhotoNodeVar.URL]" target="_blank">最新图片</a></span></div>
+			<loop name="List" key="key" var="var" start="1">
+			<div class="photolist"><a href="[$var.URL]" target="_blank"><img src="[@AutoMini2(HavePhoto($var.Content,1),'134*89',$var,'1','1')]" width="134" height="89" border="0" alt="[$var.Title]" /></a><span class="photolisttitle"><a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,11,'')]</a></span></div>
+			<if test="$key==4"><div class="blankrow">&nbsp;</div></if>
+			</loop>
+		</div>
+		<div class="bottomside06">
+			<div class="bottomside06_l">&nbsp;</div>
+			<div class="bottomside06_c">&nbsp;</div>
+			<div class="bottomside06_r">&nbsp;</div>
+		</div>
+	</div>
+	<div class="right1">
+		<div class="topside03">
+			<div class="topside03_l">&nbsp;</div>
+			<div class="topside03_c">&nbsp;</div>
+			<div class="topside03_r">&nbsp;</div>
+		</div>
+		<CMS action="LIST" return="List" NodeID="{$Photo_AllNodeID}" Num="12" OrderBy="Hits_Total" />
+		<div class="center03">
+			<div class="newstitle"><span class="title_link_5"><a href="[$PhotoNodeVar.URL]" target="_blank">热门图片</a></span></div>
+			<div class="topnews">
+				<loop name="List" key="key" var="var">
+				<a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,17,'')]</a>&nbsp;[[$var.Hits_Total]]<br />
+				</loop>
+			</div>
+		</div>
+		<div class="bottomside03">
+			<div class="bottomside03_l">&nbsp;</div>
+			<div class="bottomside03_c">&nbsp;</div>
+			<div class="bottomside03_r">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="left">
+		<div class="topside01">
+			<div class="topside01_l">&nbsp;</div>
+			<div class="topside01_c">&nbsp;</div>
+			<div class="topside01_r">&nbsp;</div>
+		</div>
+		<CMS action="NODE" return="DownloadNodeVar" NodeID="{$Download_MainNodeID}" />
+		<CMS action="LIST" return="List" NodeID="{$Download_AllNodeID}" Num="2" where="CHAR_LENGTH(c.Photo) > 0" />
+		<CMS action="LIST" return="List1" NodeID="{$Download_AllNodeID}" Num="10" />
+		<div class="center01">
+		<div class="newstitle"><span class="title_link_3"><a href="[$DownloadNodeVar.URL]" target="_blank">最新下载</a></span></div>
+		<div class="list01">
+				<div class="photonews"><a href="[$List.0.URL]" target="_blank"><img src="[@AutoMini2($List.0.Photo,'144*75',$List.0,'1','2')]" width="144" height="75" border="0" alt="[$List.0.Title]" /></a><span class="photonewstitle"><a href="[$List.0.URL]" target="_blank" title="[$List.0.Title]">[@Csubstr($List.0.Title,0,12,'')]</a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key>5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,16,'')]</a></li>
+				</loop>
+				</ul>
+			</div>
+			<div class="blankrow">&nbsp;</div>
+			<div class="list01">
+				<div class="photonews"><a href="[$List.1.URL]" target="_blank"><img src="[@AutoMini2($List.1.Photo,'144*75',$List.1,'1','1')]" width="144" height="75" border="0" alt="[$List.1.Title]" /></a><span class="photonewstitle"><a href="[$List.1.URL]" target="_blank" title="[$List.1.Title]">[@Csubstr($List.1.Title,0,12,'')]</a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key<=5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,16,'')]</a></li>
+				</loop>
+				</ul>
+			</div>
+		</div>
+		<div class="bottomside01">
+			<div class="bottomside01_l">&nbsp;</div>
+			<div class="bottomside01_c">&nbsp;</div>
+			<div class="bottomside01_r">&nbsp;</div>
+		</div>
+	</div>
+	<div class="right">
+		<div class="topside01">
+			<div class="topside01_l">&nbsp;</div>
+			<div class="topside01_c">&nbsp;</div>
+			<div class="topside01_r">&nbsp;</div>
+		</div>
+		<CMS action="LIST" return="List" NodeID="{$Download_AllNodeID}" Num="2" where="CHAR_LENGTH(c.Photo) > 0" orderby="Hits_Total" />
+		<CMS action="LIST" return="List1" NodeID="{$Download_AllNodeID}" Num="10" orderby="Hits_Total" />
+		<div class="center01">
+		<div class="newstitle"><span class="title_link_4"><a href="[$DownloadNodeVar.URL]" target="_blank">热门下载</a></span></div>
+		<div class="list01">
+				<div class="photonews"><a href="[$List.0.URL]" target="_blank"><img src="[@AutoMini2($List.0.Photo,'144*75',$List.0,'1','1')]" width="144" height="75" border="0" alt="[$List.0.Title]" /></a><span class="photonewstitle"><a href="[$List.0.URL]" target="_blank" title="[$List.0.Title]">[@Csubstr($List.0.Title,0,12,'')]</a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key>5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,16,'')]</a></li>
+				</loop>
+				</ul>
+			</div>
+			<div class="blankrow">&nbsp;</div>
+			<div class="list01">
+				<div class="photonews"><a href="[$List.1.URL]" target="_blank"><img src="[@AutoMini2($List.1.Photo,'144*75',$List.1,'1','1')]" width="144" height="75" border="0" alt="[$List.1.Title]" /></a><span class="photonewstitle"><a href="[$List.1.URL]" target="_blank" title="[$List.1.Title]">[@Csubstr($List.1.Title,0,12,'')]</a></span></div>
+				<ul class="listnews">
+				<loop name="List1" var="var" key="key" start="1">
+				<if test="$key<=5"><?php continue; ?></if>
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,16,'')]</a></li>
+				</loop>
+				</ul>
+			</div>
+		</div>
+		<div class="bottomside01">
+			<div class="bottomside01_l">&nbsp;</div>
+			<div class="bottomside01_c">&nbsp;</div>
+			<div class="bottomside01_r">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="left1">
+		<div class="topside06">
+			<div class="topside06_l">&nbsp;</div>
+			<div class="topside06_c">&nbsp;</div>
+			<div class="topside06_r">&nbsp;</div>
+		</div>
+		<CMS action="NODE" return="MovieNodeVar" NodeID="{$Movie_MainNodeID}" />
+		<CMS action="LIST" return="List" NodeID="{$Movie_AllNodeID}" Num="8" where="CHAR_LENGTH(c.Photo) > 0" />
+		<div class="center06">
+			<div class="newstitle"><span class="title_link_10"><a href="[$MovieNodeVar.URL]" target="_blank">最新影视</a></span></div>
+			<loop name="List" key="key" var="var" start="1">
+			<div class="photolist"><a href="[$var.URL]" target="_blank"><img src="[@AutoMini2($var.Photo,'134*89',$var,'1','1')]" width="134" height="89" border="0" alt="[$var.Title]" /></a><span class="photolisttitle"><a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,11,'')]</a></span></div>
+			<if test="$key==4"><div class="blankrow">&nbsp;</div></if>
+			</loop>
+		</div>
+		<div class="bottomside06">
+			<div class="bottomside06_l">&nbsp;</div>
+			<div class="bottomside06_c">&nbsp;</div>
+			<div class="bottomside06_r">&nbsp;</div>
+		</div>
+	</div>
+	<div class="right1">
+		<div class="topside03">
+			<div class="topside03_l">&nbsp;</div>
+			<div class="topside03_c">&nbsp;</div>
+			<div class="topside03_r">&nbsp;</div>
+		</div>
+		<CMS action="LIST" return="List" NodeID="{$Movie_AllNodeID}" Num="12" OrderBy="Hits_Total" />
+		<div class="center03">
+			<div class="newstitle"><span class="title_link_3"><a href="[$MovieNodeVar.URL]" target="_blank">热门影视</a></span></div>
+			<div class="topnews">
+				<loop name="List" key="key" var="var">
+				<a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,17,'')]</a>&nbsp;[[$var.Hits_Total]]<br />
+				</loop>
+			</div>
+		</div>
+		<div class="bottomside03">
+			<div class="bottomside03_l">&nbsp;</div>
+			<div class="bottomside03_c">&nbsp;</div>
+			<div class="bottomside03_r">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="left2">
+		<div class="topside07">
+			<div class="topside07_l">&nbsp;</div>
+			<div class="topside07_c">&nbsp;</div>
+			<div class="topside07_r">&nbsp;</div>
+		</div>
+		<CMS action="NODE" return="GqxxNodeVar" NodeID="{$Gqxx_MainNodeID}" />
+		<CMS action="LIST" return="List" NodeID="{$Gqxx_AllNodeID}" Num="12" where="c.GqType = 1" />
+		<div class="center07">
+			<div class="newstitle"><span class="title_link_7"><a href="[$GqxxNodeVar.URL]" target="_blank">最新供应</a></span></div>
+			<ul class="listnews">
+				<loop name="List" var="var" key="key">
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,18,'')]</a> ([@date('m-d',$var.PublishDate)])</li>
+				</loop>
+				</ul>
+		</div>
+		<div class="bottomside07">
+			<div class="bottomside07_l">&nbsp;</div>
+			<div class="bottomside07_c">&nbsp;</div>
+			<div class="bottomside07_r">&nbsp;</div>
+		</div>
+	</div>
+	<div class="middle2">
+		<div class="topside07">
+			<div class="topside07_l">&nbsp;</div>
+			<div class="topside07_c">&nbsp;</div>
+			<div class="topside07_r">&nbsp;</div>
+		</div>
+		<CMS action="LIST" return="List" NodeID="{$Gqxx_AllNodeID}" Num="12" where="c.GqType = 2" />
+		<div class="center07">
+			<div class="newstitle"><span class="title_link_8"><a href="[$GqxxNodeVar.URL]" target="_blank">最新需求</a></span></div>
+			<ul class="listnews">
+				<loop name="List" var="var" key="key">
+					<li>[<a href="[$var.NodeInfo.URL]" target="_blank">[$var.NodeInfo.Name]</a>] <a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,18,'')]</a> ([@date('m-d',$var.PublishDate)])</li>
+				</loop>
+				</ul>
+			</ul>
+		</div>
+		<div class="bottomside07">
+			<div class="bottomside07_l">&nbsp;</div>
+			<div class="bottomside07_c">&nbsp;</div>
+			<div class="bottomside07_r">&nbsp;</div>
+		</div>
+	</div>
+	<div class="right1">
+		<div class="topside03">
+			<div class="topside03_l">&nbsp;</div>
+			<div class="topside03_c">&nbsp;</div>
+			<div class="topside03_r">&nbsp;</div>
+		</div>
+		<CMS action="LIST" return="List" NodeID="{$Gqxx_AllNodeID}" Num="12" OrderBy="Hits_Total" />
+		<div class="center03">
+			<div class="newstitle"><span class="title_link_9"><a href="[$GqxxNodeVar.URL]" target="_blank">热门供求</a></span></div>
+			<div class="topnews">
+				<loop name="List" key="key" var="var">
+				<a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,17,'')]</a>&nbsp;[[$var.Hits_Total]]<br />
+				</loop>
+			</div>
+		</div>
+		<div class="bottomside03">
+			<div class="bottomside03_l">&nbsp;</div>
+			<div class="bottomside03_c">&nbsp;</div>
+			<div class="bottomside03_r">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<div class="content">
+	<div class="left1">
+		<div class="topside06">
+			<div class="topside06_l">&nbsp;</div>
+			<div class="topside06_c">&nbsp;</div>
+			<div class="topside06_r">&nbsp;</div>
+		</div>
+		<CMS action="NODE" return="ProdNodeVar" NodeID="{$Prod_MainNodeID}" />
+		<CMS action="LIST" return="List" NodeID="{$Prod_AllNodeID}" Num="8" />
+		<div class="center06">
+			<div class="newstitle"><span class="title_link_1"><a href="[$ProdNodeVar.URL]" target="_blank">最新产品</a></span></div>
+			<loop name="List" key="key" var="var" start="1">
+			<div class="photolist"><a href="[$var.URL]" target="_blank"><img src="[@AutoMini2($var.Photo,'144*75',$var,'1','1')]" width="134" height="89" border="0" alt="[$var.Title]" /></a><span class="photolisttitle"><a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,11,'')]</a></span></div>
+			<if test="$key==4"><div class="blankrow">&nbsp;</div></if>
+			</loop>
+		</div>
+		<div class="bottomside06">
+			<div class="bottomside06_l">&nbsp;</div>
+			<div class="bottomside06_c">&nbsp;</div>
+			<div class="bottomside06_r">&nbsp;</div>
+		</div>
+	</div>
+	<div class="right1">
+		<div class="topside03">
+			<div class="topside03_l">&nbsp;</div>
+			<div class="topside03_c">&nbsp;</div>
+			<div class="topside03_r">&nbsp;</div>
+		</div>
+		<CMS action="LIST" return="List" NodeID="{$Prod_AllNodeID}" Num="12" OrderBy="Hits_Total" />
+		<div class="center03">
+			<div class="newstitle"><span class="title_link_4"><a href="[$ProdNodeVar.URL]" target="_blank">热门产品</a></span></div>
+			<div class="topnews">
+				<loop name="List" key="key" var="var">
+					<a href="[$var.URL]" target="_blank" title="[$var.Title]">[@Csubstr($var.Title,0,17,'')]</a>&nbsp;[[$var.Hits_Total]]<br />
+				</loop>
+			</div>
+		</div>
+		<div class="bottomside03">
+			<div class="bottomside03_l">&nbsp;</div>
+			<div class="bottomside03_c">&nbsp;</div>
+			<div class="bottomside03_r">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+<include file="../common/footer.html" />
+</body>
+</html>

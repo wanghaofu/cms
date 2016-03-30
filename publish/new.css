@@ -1,0 +1,679 @@
+BODY {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 12px; BACKGROUND: url(/skin/sesoe/images/default/bg_img.jpg) #fbf0f6; repeat-x; PADDING-BOTTOM: 0px; MARGIN: 0px; COLOR: #464646; PADDING-TOP: 5px; FONT-FAMILY: Verdana, Tahoma, Arial, sans-serif
+}
+A:active {
+	COLOR: #464646
+}
+A:visited {
+	COLOR: #464646; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: #929292; TEXT-DECORATION: none
+}
+A:link {
+	COLOR: #464646; TEXT-DECORATION: none
+}
+#header {
+	BACKGROUND: #ffffff; WIDTH:100px; HEIGHT: 106px
+}
+#header .header_bg {
+/*	BACKGROUND: url(/skin/sesoe/images/default/header_bg.jpg) #b60307; WIDTH: 955px; HEIGHT: 65px; TEXT-ALIGN: left*/
+	background:url(/skin/sesoe/images/top_logo.gif);WIDTH: 955px; HEIGHT: 106px; TEXT-ALIGN: left
+}
+#header .header_bg .header_corner_left {
+	/*BACKGROUND: url(/skin/sesoe/images/default/header_corner_left.jpg); FLOAT: left; WIDTH: 4px; HEIGHT: 65px*/
+}
+#header .header_bg .header_corner_right {
+	/*BACKGROUND: url(/skin/sesoe/images/default/header_corner_right.jpg); FLOAT: right; WIDTH: 4px; HEIGHT: 65px*/
+}
+#header .header_bg .header_logo {
+	/*BACKGROUND: url(/skin/sesoe/images/default/header_logo.jpg); FLOAT: left; WIDTH: 200px; HEIGHT: 65px*/
+}
+#header .header_bg .header_logo .header_name {
+	MARGIN-TOP: 26px; FONT-SIZE: 14px; FLOAT: right; COLOR: #fff; MARGIN-RIGHT: 4px
+}
+#header .header_bg .header_bill {
+	MARGIN-TOP: 8px; PADDING-LEFT: 100px; FLOAT: left; WIDTH: 600px; HEIGHT: 50px
+}
+#header .header_menu {
+	BACKGROUND: url(/skin/sesoe/images/default/header_b_bg.jpg) #ebebeb; MARGIN: 4px; WIDTH: 945px; HEIGHT: 28px; TEXT-ALIGN: left
+}
+#header .header_menu .header_menu_left {
+	BACKGROUND: url(/skin/sesoe/images/default/header_corner_b_left.jpg); FLOAT: left; WIDTH: 6px; HEIGHT: 28px
+}
+#header .header_menu .header_menu_right {
+	BACKGROUND: url(/skin/sesoe/images/default/header_corner_b_right.jpg); FLOAT: right; WIDTH: 6px; HEIGHT: 28px
+}
+#header .header_menu .header_menu_text {
+	FONT-SIZE: 12px; FLOAT: left; WIDTH: 933px; COLOR: #4d4d4d; LINE-HEIGHT: 28px; HEIGHT: 28px
+}
+#header .header_menu .header_menu_text UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+#header .header_menu .header_menu_text LI {
+	PADDING-RIGHT: 8px; PADDING-LEFT: 8px; BACKGROUND: url(/skin/sesoe/images/default/header_b_line.gif) no-repeat right center; FLOAT: left; PADDING-BOTTOM: 0px; PADDING-TOP: 0px
+}
+#current {
+	MARGIN: -10px 0px 0px 5px; POSITION: absolute
+}
+#new {
+	MARGIN: -10px 0px 0px 312px; POSITION: absolute
+}
+#footer {
+	CLEAR: both; BORDER-TOP: #e8e8e8 1px solid; MARGIN-TOP: 10px; BACKGROUND: #ffffff; WIDTH: 955px
+}
+#footer .footer_logo {
+	BORDER-TOP: #f2f2f2 5px solid; PADDING-LEFT: 200px; BACKGROUND: url(/skin/sesoe/images/default/arting365_logo.gif) #ffffff no-repeat left top; FLOAT: left; WIDTH: 800px; HEIGHT: 65px; TEXT-ALIGN: left
+}
+#footer .footer_bug {
+	BORDER-TOP: #f2f2f2 5px solid; BACKGROUND: #ffffff; FLOAT: right; WIDTH: 155px; LINE-HEIGHT: 65px; HEIGHT: 65px; TEXT-ALIGN: center
+}
+#footer .footer_bug IMG {
+	MARGIN-TOP: 20px
+}
+#footer .footer_logo P {
+	PADDING-LEFT: 10px; FONT-SIZE: 12px; MARGIN: 15px 0px -12px; BORDER-LEFT: #c5c5d8 1px solid; COLOR: #666
+}
+#allbody {
+	BACKGROUND: url(/skin/sesoe/images/default/allbodybg.jpg) #f5f5f5 repeat-x 50% top; WIDTH: 955px
+}
+#main {
+	WIDTH: 945px; TEXT-ALIGN: left
+}
+#nav_bar {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 2px; PADDING-TOP: 4px
+}
+#main_position {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 2px; PADDING-TOP: 2px
+}
+#left_main {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 4px; WIDTH: 700px; PADDING-TOP: 0px
+}
+#left_box {
+	BORDER-RIGHT: #c6c6c6 1px solid; BORDER-TOP: #c6c6c6 1px solid; BACKGROUND: url(/skin/sesoe/images/default/box_right.gif) #fff no-repeat right top; FLOAT: left; OVERFLOW-X: hidden; BORDER-LEFT: #c6c6c6 1px solid; WIDTH: 700px; BORDER-BOTTOM: #c6c6c6 1px solid
+}
+.content_title {
+	FONT-WEIGHT: bold; FONT-SIZE: 18px; FLOAT: left; OVERFLOW: hidden; WIDTH: 695px; COLOR: #000; LINE-HEIGHT: 40px; PADDING-TOP: 20px; FONT-FAMILY: 'Verdana', '新宋体', '宋体'; HEIGHT: 55px; TEXT-ALIGN: center
+}
+#content_title_describe {
+	CLEAR: both; BORDER-TOP: #eaeaea 1px solid; FONT-SIZE: 12px; BACKGROUND: #f7f7f7; PADDING-BOTTOM: 3px; MARGIN: 5px; COLOR: #999999; LINE-HEIGHT: 15px; PADDING-TOP: 3px; HEIGHT: 15px; TEXT-ALIGN: center
+}
+.pagelink {
+	CLEAR: both; FONT-SIZE: 12px; MARGIN: 0px 0px 8px; FONT-FAMILY: "宋体"; TEXT-ALIGN: center
+}
+.pageLink B {
+	BORDER-RIGHT: #c2c2c2 1px solid; PADDING-RIGHT: 6px; BORDER-TOP: #ffffff 1px solid; DISPLAY: inline-block; PADDING-LEFT: 6px; FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND: #dfdfdf; PADDING-BOTTOM: 4px; BORDER-LEFT: #ffffff 1px solid; COLOR: #fff; PADDING-TOP: 4px; BORDER-BOTTOM: #c2c2c2 1px solid; FONT-FAMILY: "宋体"; HEIGHT: 18px; TEXT-ALIGN: center
+}
+.pageLink A {
+	BORDER-RIGHT: #c2c2c2 1px solid; PADDING-RIGHT: 6px; BORDER-TOP: #ffffff 1px solid; DISPLAY: inline-block; PADDING-LEFT: 6px; FONT-SIZE: 12px; BACKGROUND: #f5f5f5; PADDING-BOTTOM: 4px; VERTICAL-ALIGN: top; BORDER-LEFT: #ffffff 1px solid; PADDING-TOP: 4px; BORDER-BOTTOM: #c2c2c2 1px solid; FONT-FAMILY: "宋体"; HEIGHT: 18px; TEXT-ALIGN: center
+}
+#content_text {
+	CLEAR: both; PADDING-RIGHT: 19px; PADDING-LEFT: 19px; FONT-SIZE: 14px; OVERFLOW-X: hidden; PADDING-BOTTOM: 0px; WORD-BREAK: break-all; LINE-HEIGHT: 160%; PADDING-TOP: 0px; TEXT-ALIGN: left; TEXT-DECORATION: none; WORD-WRAP: break-word; widht: 660px
+}
+#content_text IMG {
+	BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; ; WIDTH: expression(this.width > 650 ? 650: true); BORDER-BOTTOM: medium none; max-width: 650px
+}
+#content_text UL {
+	FONT-SIZE: 14px
+}
+#content_text LI {
+	CLEAR: both; PADDING-RIGHT: 12px; PADDING-LEFT: 12px; FONT-SIZE: 14px; PADDING-BOTTOM: 6px; LINE-HEIGHT: 23px; PADDING-TOP: 9px; TEXT-ALIGN: left
+}
+#content_text H2 {
+	FONT-SIZE: 14px; LINE-HEIGHT: 160%
+}
+#content_text P {
+	FONT-SIZE: 14px; LINE-HEIGHT: 160%
+}
+#content_text .icon {
+	BORDER-RIGHT: 0px; BORDER-TOP: 0px; MARGIN: 3px 0px 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px
+}
+#content_text TABLE {
+	TABLE-LAYOUT: fixed; FONT-SIZE: 14px
+}
+#content_text TD {
+	OVERFLOW: hidden; TEXT-OVERFLOW: ellipsis
+}
+#content_text A {
+	COLOR: #1f3a87; TEXT-DECORATION: underline
+}
+#content_text A:hover {
+	COLOR: #bc2931
+}
+#editor {
+	CLEAR: both; FONT-SIZE: 12px; MARGIN: 10px; COLOR: #999999; LINE-HEIGHT: 16px; HEIGHT: 18px; TEXT-ALIGN: right
+}
+#left_arttalk {
+	BORDER-RIGHT: #d1d1d1 1px solid; BORDER-TOP: #d1d1d1 1px solid; MARGIN-TOP: 4px; BACKGROUND: #fff; FLOAT: left; BORDER-LEFT: #d1d1d1 1px solid; WIDTH: 700px; BORDER-BOTTOM: #d1d1d1 1px solid
+}
+#left_comment {
+	BORDER-RIGHT: #d1d1d1 1px solid; BORDER-TOP: #d1d1d1 1px solid; MARGIN-TOP: 4px; FONT-WEIGHT: normal; FONT-SIZE: 12px; BACKGROUND: url(/skin/sesoe/images/default/box_right.gif) #fff no-repeat right top; FLOAT: left; BORDER-LEFT: #d1d1d1 1px solid; WIDTH: 700px; BORDER-BOTTOM: #d1d1d1 1px solid
+}
+#comment_title {
+	PADDING-RIGHT: 15px; PADDING-LEFT: 15px; FONT-WEIGHT: bold; FONT-SIZE: 14px; PADDING-BOTTOM: 15px; PADDING-TOP: 15px
+}
+#comment_title A {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; COLOR: #666666
+}
+#comment_main {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #efefef; FLOAT: left; PADDING-BOTTOM: 20px; WIDTH: 100%; PADDING-TOP: 20px; TEXT-ALIGN: center
+}
+#comment_content {
+	FLOAT: left; WIDTH: 500px; TEXT-ALIGN: right
+}
+#comment_visits {
+	FLOAT: right; WIDTH: 180px; TEXT-ALIGN: left
+}
+#comment_content TEXTAREA {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; FONT-SIZE: 12px; BACKGROUND: url(/skin/sesoe/images/default/combg.jpg) #fff no-repeat right center; BORDER-LEFT: #cccccc 1px solid; WIDTH: 460px; COLOR: #999999; BORDER-BOTTOM: #cccccc 1px solid; HEIGHT: 120px
+}
+#comment_visits .name_input {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; MARGIN: 2px; BORDER-LEFT: #cccccc 1px solid; WIDTH: 80px; BORDER-BOTTOM: #cccccc 1px solid; HEIGHT: 20px
+}
+#comment_visits .img_code {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; MARGIN: 2px; BORDER-LEFT: #cccccc 1px solid; WIDTH: 80px; BORDER-BOTTOM: #cccccc 1px solid; HEIGHT: 20px
+}
+#comment_visits .pic_code {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; MARGIN: 2px 2px 2px 47px; BORDER-LEFT: #cccccc 1px solid; BORDER-BOTTOM: #cccccc 1px solid
+}
+#comment_visits .comement_button {
+	BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #e8e8e8 1px solid; FONT-WEIGHT: normal; BACKGROUND: #f9f9f9; MARGIN: 2px 2px 2px 47px; BORDER-LEFT: #e8e8e8 1px solid; WIDTH: 80px; COLOR: #737373; PADDING-TOP: 3px; BORDER-BOTTOM: #999999 1px solid; HEIGHT: 22px
+}
+#right_main {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; FLOAT: right; WIDTH: 240px
+}
+#right_box {
+	WIDTH: 240px
+}
+.right_ad {
+	OVERFLOW: hidden; WIDTH: 240px
+}
+#right_relate {
+	BORDER-RIGHT: #d1d1d1 1px solid; BORDER-TOP: #d1d1d1 1px solid; MARGIN-TOP: 4px; BACKGROUND: #fff; FLOAT: left; OVERFLOW: hidden; BORDER-LEFT: #d1d1d1 1px solid; WIDTH: 240px; BORDER-BOTTOM: #d1d1d1 1px solid
+}
+.relate_title {
+	PADDING-LEFT: 5px; FONT-WEIGHT: bold; BACKGROUND: #eaeaea; LINE-HEIGHT: 25px; HEIGHT: 25px
+}
+.relate_content {
+	OVERFLOW-Y: scroll; OVERFLOW-X: hidden; MARGIN: 5px; HEIGHT: 300px; TEXT-ALIGN: left
+}
+.relate_content UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 210px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.relate_content LI {
+	PADDING-LEFT: 15px; BACKGROUND: url(/skin/sesoe/images/default/dot.gif) no-repeat 0px 6px; PADDING-BOTTOM: 4px; MARGIN-LEFT: 5px; OVERFLOW: hidden; LINE-HEIGHT: 20px; HEIGHT: 20px
+}
+#right_espread {
+	BORDER-RIGHT: #d1d1d1 1px solid; BORDER-TOP: #d1d1d1 1px solid; MARGIN-TOP: 4px; BACKGROUND: #fff; FLOAT: left; OVERFLOW: hidden; BORDER-LEFT: #d1d1d1 1px solid; WIDTH: 240px; BORDER-BOTTOM: #d1d1d1 1px solid
+}
+.espread_title {
+	PADDING-LEFT: 5px; FONT-WEIGHT: bold; BACKGROUND: #eaeaea; LINE-HEIGHT: 25px; HEIGHT: 25px
+}
+.espread_content {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; MARGIN: 5px; WIDTH: 220px; PADDING-TOP: 4px; TEXT-ALIGN: center
+}
+#left_espread {
+	CLEAR: both; MARGIN: 10px
+}
+.left_espread_content {
+	BORDER-RIGHT: #f6f6f6 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #f6f6f6 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; BORDER-LEFT: #f6f6f6 1px solid; WIDTH: 468px; PADDING-TOP: 5px; BORDER-BOTTOM: #f6f6f6 1px solid; HEIGHT: 42px
+}
+#sort_main {
+	BORDER-RIGHT: #c6c6c6 1px solid; BORDER-TOP: #c6c6c6 1px solid; BACKGROUND: #eaeaea; FLOAT: left; OVERFLOW-X: hidden; BORDER-LEFT: #c6c6c6 1px solid; WIDTH: 700px; BORDER-BOTTOM: #c6c6c6 1px solid
+}
+.sort_title {
+	MARGIN: 8px; WIDTH: 100%; LINE-HEIGHT: 22px
+}
+.sort_name {
+	FONT-SIZE: 20px; FONT-FAMILY: '黑体'
+}
+#sort_list {
+	FLOAT: right; WIDTH: 695px; TEXT-ALIGN: center
+}
+#sort_list UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none; TEXT-ALIGN: center
+}
+#sort_list LI {
+	BORDER-RIGHT: #ffffff 1px solid; PADDING-RIGHT: 4px; BORDER-TOP: #ffffff 1px solid; PADDING-LEFT: 4px; BACKGROUND: #f5f5f5; FLOAT: left; PADDING-BOTTOM: 4px; MARGIN: 4px; OVERFLOW: hidden; BORDER-LEFT: #ffffff 1px solid; WIDTH: 684px; PADDING-TOP: 4px; BORDER-BOTTOM: #c2c2c2 1px solid
+}
+.sort_list_left {
+	FLOAT: left; WIDTH: 120px
+}
+.sort_list_left IMG {
+	MARGIN-TOP: 2px
+}
+.sort_list_right {
+	FLOAT: right; WIDTH: 554px; TEXT-ALIGN: left
+}
+.sort_list_right_title {
+	FONT-WEIGHT: bold; FONT-SIZE: 14px; LINE-HEIGHT: 20px; HEIGHT: 20px
+}
+.sort_list_right_title_res {
+	FONT-SIZE: 12px; COLOR: #b4b4b4; LINE-HEIGHT: 20px; BORDER-BOTTOM: #acacac 1px dashed; HEIGHT: 20px
+}
+.sort_list_right_describe {
+	FONT-SIZE: 12px; COLOR: #6c6c6c; LINE-HEIGHT: 20px; PADDING-TOP: 5px
+}
+.sort_page {
+	CLEAR: both; PADDING-TOP: 4px
+}
+#sort_subject {
+	BORDER-RIGHT: #c6c6c6 1px solid; PADDING-RIGHT: 4px; BORDER-TOP: #c6c6c6 1px solid; PADDING-LEFT: 0px; BACKGROUND: url(/skin/sesoe/images/default/nav_top.gif) #eaeaea no-repeat left center; FLOAT: left; OVERFLOW-X: hidden; PADDING-BOTTOM: 8px; MARGIN: 0px 0px 4px; BORDER-LEFT: #c6c6c6 1px solid; WIDTH: 700px; PADDING-TOP: 4px; BORDER-BOTTOM: #c6c6c6 1px solid
+}
+.sort_nav {
+	FLOAT: right
+}
+.sort_nav UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none; TEXT-ALIGN: center
+}
+.sort_nav LI {
+	BORDER-RIGHT: #b2b2b2 1px solid; PADDING-RIGHT: 4px; BORDER-TOP: #fff 1px solid; PADDING-LEFT: 4px; BACKGROUND: #fffedf; FLOAT: left; PADDING-BOTTOM: 4px; MARGIN: 4px; BORDER-LEFT: #fff 1px solid; WIDTH: 120px; PADDING-TOP: 4px; BORDER-BOTTOM: #b2b2b2 1px solid
+}
+#right_pink {
+	BORDER-RIGHT: #d1d1d1 1px solid; BORDER-TOP: #d1d1d1 1px solid; MARGIN-TOP: 4px; BACKGROUND: #fff; FLOAT: left; OVERFLOW: hidden; BORDER-LEFT: #d1d1d1 1px solid; WIDTH: 240px; BORDER-BOTTOM: #d1d1d1 1px solid
+}
+.pink_title {
+	PADDING-LEFT: 5px; FONT-WEIGHT: bold; BACKGROUND: #eaeaea; LINE-HEIGHT: 25px; HEIGHT: 25px
+}
+.pink_content {
+	TEXT-ALIGN: center
+}
+.pink_content UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; MARGIN-BOTTOM: 5px; PADDING-BOTTOM: 0px; MARGIN-LEFT: 0px; WIDTH: 220px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.pink_content LI {
+	FLOAT: left; MARGIN-BOTTOM: 10px; WIDTH: 108px
+}
+.pink_img {
+	WIDTH: 98px
+}
+.pink_img_title {
+	OVERFLOW: hidden; WIDTH: 100px; LINE-HEIGHT: 20px; HEIGHT: 20px
+}
+.pink_img_title A {
+	COLOR: #888888
+}
+.pink_img_title A:visited {
+	COLOR: #888888
+}
+.pink_img_title A:hover {
+	COLOR: #2f2f2f
+}
+.pink_content LI IMG {
+	BORDER-RIGHT: #f3f3f3 1px solid; BORDER-TOP: #f3f3f3 1px solid; BACKGROUND: #fafafa; BORDER-LEFT: #f3f3f3 1px solid; BORDER-BOTTOM: #f3f3f3 1px solid
+}
+#right_arttalk {
+	BORDER-RIGHT: #d1d1d1 1px solid; BORDER-TOP: #d1d1d1 1px solid; MARGIN-TOP: 4px; BACKGROUND: #fff; FLOAT: left; PADDING-BOTTOM: 4px; OVERFLOW: hidden; BORDER-LEFT: #d1d1d1 1px solid; WIDTH: 240px; BORDER-BOTTOM: #d1d1d1 1px solid
+}
+.arttalk_bar {
+	PADDING-LEFT: 5px; FONT-WEIGHT: bold; BACKGROUND: #eaeaea; LINE-HEIGHT: 25px; HEIGHT: 25px
+}
+.arttalk_content {
+	PADDING-RIGHT: 4px; PADDING-LEFT: 4px; PADDING-BOTTOM: 4px; MARGIN: 5px; PADDING-TOP: 4px; TEXT-ALIGN: left
+}
+.search_left {
+	BORDER-RIGHT: medium none; BORDER-TOP: #9e9e9e 1px solid; FLOAT: left; BORDER-LEFT: #9e9e9e 1px solid; WIDTH: 180px; BORDER-BOTTOM: #9e9e9e 1px solid; HEIGHT: 20px
+}
+.search_left INPUT {
+	BORDER-RIGHT: medium none; PADDING-RIGHT: 0px; BORDER-TOP: medium none; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; BORDER-LEFT: medium none; WIDTH: 175px; PADDING-TOP: 0px; BORDER-BOTTOM: medium none; HEIGHT: 18px
+}
+.search_button {
+	BORDER-RIGHT: #9e9e9e 1px solid; BORDER-TOP: #9e9e9e 1px solid; FLOAT: left; BORDER-LEFT: medium none; WIDTH: 32px; BORDER-BOTTOM: #9e9e9e 1px solid; HEIGHT: 20px; TEXT-ALIGN: left
+}
+.search_keyword {
+	PADDING-RIGHT: 2px; PADDING-LEFT: 2px; FONT-WEIGHT: normal; FLOAT: left; PADDING-BOTTOM: 2px; WIDTH: 216px; PADDING-TOP: 2px
+}
+#menu_box UL LI H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H5 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H6 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+#menu_box {
+	BACKGROUND: #fff; OVERFLOW: hidden
+}
+.menu_content {
+	CLEAR: both; FONT-SIZE: 12px
+}
+.li_menu {
+	BORDER-RIGHT: #afafaf 1px solid; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/skin/sesoe/images/default/li_unactive_bg.jpg) #fff repeat-x center top; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 28px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.li_menu_header {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -280px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 28px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+.li_menu LI {
+	FLOAT: left; WIDTH: 96px; CURSOR: pointer; COLOR: #616161; TEXT-ALIGN: center
+}
+.li_menu LI H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; OVERFLOW: hidden; LINE-HEIGHT: 25px; PADDING-TOP: 0px; HEIGHT: 28px; TEXT-ALIGN: center
+}
+.redSize {
+	WIDTH: 518px
+}
+.redTopSize {
+	WIDTH: 518px
+}
+.redMainSize {
+	BORDER-RIGHT: #afafaf 1px solid; BORDER-TOP: medium none; BORDER-LEFT: #afafaf 1px solid; WIDTH: 518px; BORDER-BOTTOM: #afafaf 1px solid; HEIGHT: 300px
+}
+.li_red_header_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 50% top; COLOR: #fff; POSITION: relative
+}
+.li_red_header_over H3 {
+	COLOR: #fff! important
+}
+.li_red_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -28px; COLOR: #fff; POSITION: relative
+}
+.li_red_over H3 {
+	COLOR: #fff! important
+}
+.yellowSize {
+	WIDTH: 518px
+}
+.yellowTopSize {
+	WIDTH: 518px
+}
+.yellowMainSize {
+	BORDER-RIGHT: #afafaf 1px solid; BORDER-TOP: medium none; BORDER-LEFT: #afafaf 1px solid; WIDTH: 518px; BORDER-BOTTOM: #afafaf 1px solid; HEIGHT: 300px
+}
+.li_yellow_header_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -56px; COLOR: #fff; POSITION: relative
+}
+.li_yellow_header_over H3 {
+	COLOR: #fff! important
+}
+.li_yellow_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -84px; COLOR: #fff; POSITION: relative
+}
+.li_yellow_over H3 {
+	COLOR: #fff! important
+}
+.blueSize {
+	WIDTH: 518px
+}
+.blueTopSize {
+	WIDTH: 518px
+}
+.blueMainSize {
+	BORDER-RIGHT: #afafaf 1px solid; BORDER-TOP: medium none; BORDER-LEFT: #afafaf 1px solid; WIDTH: 518px; BORDER-BOTTOM: #afafaf 1px solid; HEIGHT: 300px
+}
+.li_blue_header_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -112px; COLOR: #fff; POSITION: relative
+}
+.li_blue_header_over H3 {
+	COLOR: #fff! important
+}
+.li_blue_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -140px; COLOR: #fff; POSITION: relative
+}
+.li_blue_over H3 {
+	COLOR: #fff! important
+}
+.greenSize {
+	WIDTH: 518px
+}
+.greenTopSize {
+	WIDTH: 518px
+}
+.greenMainSize {
+	BORDER-RIGHT: #afafaf 1px solid; BORDER-TOP: medium none; BORDER-LEFT: #afafaf 1px solid; WIDTH: 518px; BORDER-BOTTOM: #afafaf 1px solid; HEIGHT: 300px
+}
+.li_green_header_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -168px; COLOR: #fff; POSITION: relative
+}
+.li_green_header_over H3 {
+	COLOR: #fff! important
+}
+.li_green_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -196px; COLOR: #fff; POSITION: relative
+}
+.li_green_over H3 {
+	COLOR: #fff! important
+}
+.purpleSize {
+	WIDTH: 518px
+}
+.purpleTopSize {
+	WIDTH: 518px
+}
+.purpleMainSize {
+	BORDER-RIGHT: #afafaf 1px solid; BORDER-TOP: medium none; BORDER-LEFT: #afafaf 1px solid; WIDTH: 518px; BORDER-BOTTOM: #afafaf 1px solid; HEIGHT: 300px
+}
+.li_purple_header_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -224px; COLOR: #fff; POSITION: relative
+}
+.li_purple_header_over H3 {
+	COLOR: #fff! important
+}
+.li_purple_over {
+	BACKGROUND: url(/skin/sesoe/images/default/li_bg.jpg) #fff no-repeat 0px -252px; COLOR: #fff; POSITION: relative
+}
+.li_purple_over H3 {
+	COLOR: #fff! important
+}
+.ColumnContent {
+	CLEAR: both; FONT-SIZE: 12px; PADDING-BOTTOM: 6px; OVERFLOW: hidden
+}
+.columnBar {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/skin/sesoe/images/default/menublock.jpg) #fff repeat-x center bottom; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px 0px 4px; LINE-HEIGHT: 20px; PADDING-TOP: 0px; BORDER-BOTTOM: #8e8e8e 1px solid; LIST-STYLE-TYPE: none
+}
+.columnBar LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/skin/sesoe/images/default/menuline.gif) no-repeat right center; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: -1px 0px -1px -2px; CURSOR: pointer; PADDING-TOP: 2px; TEXT-ALIGN: center
+}
+.columnBar LI H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-WEIGHT: normal; FONT-SIZE: 12px; PADDING-BOTTOM: 0px; OVERFLOW: hidden; COLOR: #9e9e9e; LINE-HEIGHT: 22px; PADDING-TOP: 0px; HEIGHT: 20px; TEXT-ALIGN: center
+}
+.columnBarOver {
+	BORDER-RIGHT: #8e8e8e 1px solid; PADDING-RIGHT: 0px; BORDER-TOP: #8e8e8e 1px solid; PADDING-LEFT: 0px; BACKGROUND: url(/skin/sesoe/images/default/menuover.jpg) #fff repeat-x center top; PADDING-BOTTOM: 0px; MARGIN: -1px 0px -1px -2px; BORDER-LEFT: #8e8e8e 1px solid; LINE-HEIGHT: 20px; PADDING-TOP: 2px; BORDER-BOTTOM: #8e8e8e 0px solid; POSITION: relative
+}
+.columnBarOver H3 {
+	COLOR: #555555! important
+}
+.navigationSize {
+	WIDTH: 420px
+}
+.navigationBar LI {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: -1px 0px -1px -2px; WIDTH: 82px; PADDING-TOP: 2px
+}
+#navigationmain {
+	BORDER-RIGHT: #bfbfbf 1px solid; BORDER-TOP: #bfbfbf 1px solid; BACKGROUND: #fff; MARGIN: 6px 0px 0px; OVERFLOW: hidden; BORDER-LEFT: #bfbfbf 1px solid; BORDER-BOTTOM: #bfbfbf 1px solid
+}
+#navigationmain H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H5 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H6 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.hr_boxSize {
+	WIDTH: 420px
+}
+.hr_boxBar LI {
+	WIDTH: 135px
+}
+#hr_boxmain {
+	BORDER-RIGHT: #bfbfbf 1px solid; BORDER-TOP: #bfbfbf 1px solid; BACKGROUND: #fff; MARGIN: 6px 0px 0px; OVERFLOW: hidden; BORDER-LEFT: #bfbfbf 1px solid; BORDER-BOTTOM: #bfbfbf 1px solid; HEIGHT: 205px
+}
+#hr_boxmain H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H5 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H6 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.softwareSize {
+	WIDTH: 420px
+}
+.softwareBar LI {
+	WIDTH: 205px
+}
+#softwaremain {
+	BORDER-RIGHT: #bfbfbf 1px solid; BORDER-TOP: #bfbfbf 1px solid; BACKGROUND: #fff; MARGIN: 6px 0px 0px; OVERFLOW: hidden; BORDER-LEFT: #bfbfbf 1px solid; BORDER-BOTTOM: #bfbfbf 1px solid; HEIGHT: 205px
+}
+#softwaremain H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H5 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H6 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.booksSize {
+	WIDTH: 420px
+}
+.booksBar LI {
+	WIDTH: 205px
+}
+#booksmain {
+	BORDER-RIGHT: #bfbfbf 1px solid; BORDER-TOP: #bfbfbf 1px solid; BACKGROUND: #fff; MARGIN: 6px 0px 0px; OVERFLOW: hidden; BORDER-LEFT: #bfbfbf 1px solid; BORDER-BOTTOM: #bfbfbf 1px solid; HEIGHT: 205px
+}
+#booksmain H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H5 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H6 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.passportContent {
+	CLEAR: both; BORDER-RIGHT: #9a9a9a 1px solid; FONT-SIZE: 12px; BACKGROUND: #fff; OVERFLOW: hidden
+}
+.passportBar {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 35px; PADDING-TOP: 0px
+}
+.passportBar LI {
+	BACKGROUND: url(/skin/sesoe/images/default/pass_libg.gif) no-repeat center top; FLOAT: left; CURSOR: pointer; LIST-STYLE-TYPE: none; TEXT-ALIGN: center
+}
+.passportBar LI H3 {
+	FONT-WEIGHT: normal; FONT-SIZE: 12px; OVERFLOW: hidden; COLOR: #9e9e9e; LINE-HEIGHT: 35px; HEIGHT: 35px
+}
+.passportBarOver {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(/skin/sesoe/images/default/pass_libg_over.gif) #fff repeat-x center top; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 35px; PADDING-TOP: 0px; POSITION: relative
+}
+.passportBarOver H3 {
+	COLOR: #555555! important
+}
+.passportSize {
+	WIDTH: 405px
+}
+.passportBar LI {
+	WIDTH: 98px
+}
+#passportmain {
+	CLEAR: both; BACKGROUND: #e1e1e1; MARGIN: 6px 0px 0px; OVERFLOW: hidden
+}
+#passportmain H1 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H2 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H4 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H5 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+H6 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+FORM {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 20px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px
+}
+.SlideMainRoll {
+	FILTER: progid:DXImageTransform.Microsoft.Slide(slidestyle=SWAP,Bands=1); CURSOR: pointer
+}
+#SlideMain {
+	OVERFLOW: hidden; WIDTH: 410px; HEIGHT: 318px
+}
+#SlideMenu {
+	MARGIN: -60px 0px 0px 30px; WIDTH: 410px; POSITION: absolute; HEIGHT: 60px
+}
+#SlideMenu UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; LIST-STYLE-TYPE: none
+}
+#SlideMenu UL LI {
+	FLOAT: left; OVERFLOW: hidden; WIDTH: 60px; HEIGHT: 60px
+}
+#SlideMenu UL LI IMG {
+	BORDER-RIGHT: #171717 1px solid; BORDER-TOP: #c2c2c2 1px solid; OVERFLOW: hidden; BORDER-LEFT: #c2c2c2 1px solid; WIDTH: 50px; BORDER-BOTTOM: #171717 1px solid; HEIGHT: 50px
+}
+.SlideMenuOver {
+	FILTER: alpha(opacity=100); moz-opacity: 1
+}
+.SlideMenuOut {
+	FILTER: alpha(opacity=30); moz-opacity: 0.3
+}
