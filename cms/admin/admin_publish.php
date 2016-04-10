@@ -21,16 +21,14 @@ $site = new site_admin();
 
 //$db->setDebug(1);
 //if($IN[NodeID] == '') 	goback('error_NodeID_null');
-
 //权限验证
-/*
-if(!empty($IN[NodeID])) {
-		if(!$sys->canManagePublish($IN[o], $IN[NodeID])) {
-			goback($sys->returnMsg);
-		}
-		$NodeInfo = $iWPC->loadNodeInfo($IN[NodeID]);
-}
-*/
+// if(!empty($IN[NodeID])) {
+// 		if(!$sys->canManagePublish($IN[o], $IN[NodeID])) {
+// 			goback($sys->returnMsg);
+// 		}
+// 		$NodeInfo = $iWPC->loadNodeInfo($IN[NodeID]);
+// }
+
 
 if(!empty($IN[IndexID])) {
 	$IndexInfo = $publish->getIndexInfo($IN[IndexID]);

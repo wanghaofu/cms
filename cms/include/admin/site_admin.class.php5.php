@@ -286,14 +286,19 @@ class site_admin extends iData
 	{
 		global $sys;
 		global $iWPC;
+		
+		//管理员一律通过
 		if ( $sys->session['sGIsAdmin'] == 1 )
 		{
 			return true;
 		}
-		if ( $sys->Auth[canNode] )
+		
+		//节点啥权限
+		if ( $sys->Auth['canNode'] ) 
 		{
 			return true;
 		}
+		//创建用户 返回真
 		if ( $this->isCreationUser( $NodeInfo ) )
 		{
 			return true;
@@ -303,11 +308,13 @@ class site_admin extends iData
 			$ParentNodeInfo = $iWPC->loadNodeInfo( $NodeInfo['ParentID'] );
 			return $this->canAccess( $ParentNodeInfo, $mode );
 		}
+		//组管理权限查看
 		if ( !empty( $NodeInfo['PermissionManageG'] ) )
 		{
 			$posMG = strpos( ",".$NodeInfo['PermissionManageG'].",", ",".$sys->session['sGId']."," );
 			if ( $posMG === false )
 			{
+			    
 			}
 			else
 			{

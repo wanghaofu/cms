@@ -1,9 +1,4 @@
 <?php
-
-
-
-
-
 require_once( "common.php" );
 require_once( INCLUDE_PATH."admin/publishAdmin.class.php" );
 require_once( INCLUDE_PATH."admin/content_table_admin.class.php" );
@@ -19,8 +14,6 @@ require_once( INCLUDE_PATH."admin/publishAuthAdmin.class.php" );
 require_once( INCLUDE_PATH."admin/task.class.php" );
 require_once( INCLUDE_PATH."image.class.php" );
 require_once( INCLUDE_PATH."admin/extra_publish_admin.class.php" );
-
-
 
 switch ( $IN[o] )
 {
@@ -428,21 +421,22 @@ case "rePublishContent_unpublish" :
 	{
 		$Page = $IN[Page];
 	}
-	$IN[offset] = empty( $IN[offset] ) ? 20 : $IN[offset];
+	
+	$IN[offset] = empty( $IN[offset] ) ? 20 : $IN['offset'];
 	$start = 0;
-	$IndexIDs = $publish->getPublishLimit( $IN[NodeID], $start, $IN[offset] );
+	$IndexIDs = $publish->getPublishLimit( $IN['NodeID'], $start, $IN['offset'] );
 	$count = count( $IndexIDs );
 	$IN['unpublishmode'] = empty( $IN['unpublishmode'] ) ? 0 : 1;
 	foreach ( $IndexIDs as $key => $var )
 	{
-		$publish->unpublish( $var[IndexID], $IN['unpublishmode'] );
+		$publish->unpublish( $var['IndexID'], $IN['unpublishmode'] );
 		if ( $key == 0 )
 		{
-			$publishIndexs = $var[IndexID];
+			$publishIndexs = $var['IndexID'];
 		}
 		else
 		{
-			$publishIndexs .= ",".$var[IndexID];
+			$publishIndexs .= ",".$var['IndexID'];
 		}
 	}
 	++$Page;
@@ -450,7 +444,7 @@ case "rePublishContent_unpublish" :
 	{
 		if ( $IN['type'] == "nopublish" )
 		{
-			showmsg( sprintf( $_LANG_ADMIN['admin_task_rePublishContent_unpublish_finish_nopublish'], $publishIndexs, $publish->NodeInfo[Name] ), $IN[referer], 1 );
+			showmsg( sprintf( $_LANG_ADMIN['admin_task_rePublishContent_unpublish_finish_nopublish'], $publishIndexs, $publish->NodeInfo['Name'] ), $IN[referer], 1 );
 		}
 		else
 		{
@@ -459,7 +453,7 @@ case "rePublishContent_unpublish" :
 	}
 	else
 	{
-		showmsg( sprintf( $_LANG_ADMIN['admin_task_rePublishContent_unpublish_continue'], $publishIndexs, $publish->NodeInfo[Name] ), $base_url."o=rePublishContent_unpublish&NodeID=".$IN[NodeID]."&Page=".$Page."&offset=".$IN[offset]."&referer=".urlencode( $IN[referer] )."&type=".$IN['type']."&unpublishmode=".$IN['unpublishmode'], 1 );
+		showmsg( sprintf( $_LANG_ADMIN['admin_task_rePublishContent_unpublish_continue'], $publishIndexs, $publish->NodeInfo['Name'] ), $base_url."o=rePublishContent_unpublish&NodeID=".$IN['NodeID']."&Page=".$Page."&offset=".$IN[offset]."&referer=".urlencode( $IN['referer'] )."&type=".$IN['type']."&unpublishmode=".$IN['unpublishmode'], 1 );
 	}
 	break;
 }

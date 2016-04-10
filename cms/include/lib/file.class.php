@@ -89,7 +89,7 @@ class File
 		}
 	}
 
-	function autocopy( $_src, $_des )
+	static function autocopy( $_src, $_des )
 	{
 		global $SYS_CONFIG;
 		if ( $SYS_CONFIG['ftp_mode'] === 1 )

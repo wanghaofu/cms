@@ -1,6 +1,4 @@
 <?php
-
-
 function getPluginsList( )
 {
 	$dir = dir( SYS_PATH."plugins" );

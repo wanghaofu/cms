@@ -197,22 +197,32 @@ function de( $str ,$exit=false ,$trace=true){
     global $debugnum;
     $debugnum++;
     $debugInfo =  debug_backtrace();
-    echo "<div style='font-size:14px;background-color:#f1f6f7'>\n";
-    echo "<div style='font-size:16px;background-color:dfe5e6;color:#001eff;font-weight:bold'>\n";
+    if( php_sapi_name() === 'cli')
+    {
+        $cli=true;
+    }else{
+        $cli = false;
+     }
+     if($cli )
+     {
+         $break_line = "\n";
+     }
+    echo "<div style='font-size:14px;background-color:#f1f6f7'>{$brak_line}";
+    echo "<div style='font-size:16px;background-color:dfe5e6;color:#001eff;font-weight:bold'>{$brak_line}";
     foreach( $debugInfo as $key=>$value ){
         if($key==0 ){
-            echo "*** <span style='font-size:18px'>{$debugnum}</span> {$value['file']} (debug in file)  {$value['line']} (row) </br>\n";
+            echo "*** <span style='font-size:18px'>{$debugnum}</span> {$value['file']} (debug in file)  {$value['line']} (row) </br>{$brak_line}";
         } else {
             if ( $track )
             {
-                echo "&nbsp;&nbsp;<span style='font-size:12px;'>>> include in file:{$value['file']} line:{$value['line']} row </br></span>\n";
+                echo "&nbsp;&nbsp;<span style='font-size:12px;'>>> include in file:{$value['file']} line:{$value['line']} row </br></span>{$brak_line}";
             } else {
                 break;
             }
         }
     }
-    echo "</div>\n";
-    echo '<pre>\n';
+    echo "</div>{$brak_line}";
+    echo '<pre>{$brak_line}';
     if ( !isset( $str ) )
     {
         echo 'the vars in not set!';

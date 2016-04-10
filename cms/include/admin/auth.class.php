@@ -318,17 +318,17 @@ class Auth
 		case "content_header" :
 		case "list" :
 		case "IsRecordExists" :
-			if ( in_array( $NodeID, $this->Auth[publishAuth][NodeList] ) )
+			if ( in_array( $NodeID, $this->Auth['publishAuth']['NodeList'] ) )
 			{
 				return true;
 			}
 			else
 			{
 				$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
-				$ParentNodeID = explode( "%", $NodeInfo[ParentNodeID] );
+				$ParentNodeID = explode( "%", $NodeInfo['ParentNodeID'] );
 				foreach ( $ParentNodeID as $var )
 				{
-					if ( in_array( $var, $this->Auth[publishAuth][NodeList] ) && in_array( $var, $this->Auth[publishAuth][AuthInherit] ) )
+					if ( in_array( $var, $this->Auth['publishAuth']['NodeList'] ) && in_array( $var, $this->Auth['publishAuth']['AuthInherit'] ) )
 					{
 						return true;
 					}
@@ -337,7 +337,7 @@ class Auth
 				return false;
 			}
 		case "extrapublish" :
-			if ( in_array( $NodeID, $this->Auth[publishAuth][NodeExtraPublish] ) )
+			if ( in_array( $NodeID, $this->Auth['publishAuth']['NodeExtraPublish'] ) )
 			{
 				return true;
 			}

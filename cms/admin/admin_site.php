@@ -67,7 +67,7 @@ $Plugin = new Plugin( );
 switch ( $IN['o'] )
 {
 case "view" :
-	if ( !$sys->isAdmin( ) && !$sys->Auth[canNode] )
+	if ( !$sys->isAdmin( ) && !$sys->Auth['canNode'] )
 	{
 		goback( "access_deny_module_cate" );
 	}
