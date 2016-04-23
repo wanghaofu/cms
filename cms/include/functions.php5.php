@@ -1362,13 +1362,6 @@ function AutoMini($srcFile, $pixel, &$List, $_quality = 75, $_cut = 1, $_urlhead
 		ImageDestroy($_im);
 		ImageDestroy($newimg);
 		//}}}
-
-
-
-
-
-
-
 		//if(Image::makeMiniature($srcFile, $tmpFile, $pixelInfo[0], $pixelInfo[1])) {
 		if($_result) {
 			if(empty($List['NodeInfo'][ResourcePSN])) {//修复CMS::SQL调用时候无法PSN信息传递时导致的BUG
@@ -1385,11 +1378,8 @@ function AutoMini($srcFile, $pixel, &$List, $_quality = 75, $_cut = 1, $_urlhead
 			$psn->connect($psnInfo[PSN]);
 			$psn->sendVar[NodeID] = $List['NodeID'];
 			$psn->sendVar[ContentID] =  $List['ContentID'];
-					
 
 			$dataPath = Common::mkPublishResourcePath();
-			 
-
 			$destination = $dataPath.'/'.preg_replace("/\.([A-Za-z0-9]+)$/isU", '_'.$pixelInfo[0].'x'.$pixelInfo[1].".\\1", $pathInfo['basename']);
 
 			$publishURL = Common::PsnUrl2Url($List['NodeInfo']['ResourceURL']).'/'.$destination;
@@ -1401,11 +1391,7 @@ function AutoMini($srcFile, $pixel, &$List, $_quality = 75, $_cut = 1, $_urlhead
 		} else {
 			return $srcFile;
 		}		
-			
-	
 	}
-				
-
 }
 
 
@@ -2938,6 +2924,15 @@ $replace = array ("",
                   "chr(\\1)");
 
 $text = preg_replace ($search, $replace, $document);
+// $text=$document;
+// foreach($search as $key=>$value)
+// {
+// $text = preg_replace_callback($search[$key],
+//     function() use($key,$replace) {  
+//      return $replace[$key];  
+//     },
+//     $txt);
+// }
 return $text;
 }
 

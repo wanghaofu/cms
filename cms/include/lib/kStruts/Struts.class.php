@@ -1,9 +1,6 @@
 <?php
-
-
 class Struts
 {
-
 	var $TPL = NULL;
 	var $config = NULL;
 	var $request = NULL;

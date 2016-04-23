@@ -50,7 +50,7 @@ class publishAdmin extends iData
 		global $table;
 		global $db;
 		$result = $db->getRow( "select IndexID from {$table->content_index} where NodeID='{$NodeID}' AND ContentID='{$ContentID}' and Type=0 and State!='-1'" );
-		if ( empty( $result[IndexID] ) )
+		if ( empty( $result['IndexID'] ) )
 		{
 			return false;
 		}
@@ -79,7 +79,7 @@ class publishAdmin extends iData
 			$Type = "AND i.Type={$Type}";
 		}
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
-		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 		$sql = "SELECT i2.NodeID,i2.ContentID,i.State,i.Top,i.Pink,i.Sort,i2.URL,i.IndexID,i.PublishDate,i.Type,c.*,u.uName as CreationUser FROM {$table->content_index} i,{$table->content_index} i2 ,{$table_name} c,{$table->site} s , {$table->user} u  where u.uId=c.CreationUserID AND i.NodeID='{$NodeID}' AND i.ParentIndexID=i2.IndexID AND i.ContentID =c.ContentID AND s.NodeID='{$NodeID}' AND i.State{$State} {$Type}   ORDER BY i.Top , i.Sort  , i.PublishDate   LIMIT {$start}, {$offset}";
 		$result = $db->Execute( $sql );
 		while ( !$result->EOF )
@@ -129,8 +129,8 @@ class publishAdmin extends iData
 			}
 			$this->dataDel( $table->content_index, "ParentIndexID", $IndexInfo['IndexID'], "=" );
 			$this->destoryResource( $IndexID );
-			$NodeInfo = $iWPC->loadNodeInfo( $IndexInfo[NodeID] );
-			$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+			$NodeInfo = $iWPC->loadNodeInfo( $IndexInfo['NodeID'] );
+			$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 			return $this->dataDel( $table_name, "ContentID", $IndexInfo['ContentID'], "=" );
 		}
 		else
@@ -150,16 +150,16 @@ class publishAdmin extends iData
 		$result = $db->Execute( "SELECT * FROM {$table->resource_ref}\tWHERE IndexID='{$IndexID}'" );
 		while ( !$result->EOF )
 		{
-			$num_result = $db->getRow( "SELECT COUNT(*) as nr FROM {$table->resource_ref}  WHERE ResourceID='{$result->fields[ResourceID]}'" );
-			if ( $num_result[nr] == 1 )
+			$num_result = $db->getRow( "SELECT COUNT(*) as nr FROM {$table->resource_ref}  WHERE ResourceID='{$result->fields['ResourceID']}'" );
+			if ( $num_result['nr'] == 1 )
 			{
-				$resource_result = $db->getRow( "SELECT Path FROM {$table->resource}  WHERE ResourceID='{$result->fields[ResourceID]}'" );
-				if ( file_exists( $SYS_ENV['ResourcePath']."/".$resource_result[Path] ) )
+				$resource_result = $db->getRow( "SELECT Path FROM {$table->resource}  WHERE ResourceID='{$result->fields['ResourceID']}'" );
+				if ( file_exists( $SYS_ENV['ResourcePath']."/".$resource_result['Path'] ) )
 				{
-					echo "Delete ".$SYS_ENV['ResourcePath']."/".$resource_result[Path]." ...<br/>";
-					unlink( $SYS_ENV['ResourcePath']."/".$resource_result[Path] );
+					echo "Delete ".$SYS_ENV['ResourcePath']."/".$resource_result['Path']." ...<br/>";
+					unlink( $SYS_ENV['ResourcePath']."/".$resource_result['Path'] );
 				}
-				$db->query( "DELETE FROM {$table->resource} WHERE ResourceID='{$result->fields[ResourceID]}'" );
+				$db->query( "DELETE FROM {$table->resource} WHERE ResourceID='{$result->fields['ResourceID']}'" );
 			}
 			$result->MoveNext( );
 		}
@@ -180,8 +180,8 @@ class publishAdmin extends iData
 				{
 					$this->dataDel( $table->content_index, "ParentIndexID", $var['IndexID'], "=" );
 					$this->destoryResource( $var['IndexID'] );
-					$NodeInfo = $iWPC->loadNodeInfo( $var[NodeID] );
-					$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+					$NodeInfo = $iWPC->loadNodeInfo( $var['NodeID'] );
+					$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 					$result = $this->dataDel( $table_name, "ContentID", $var['ContentID'], "=" );
 				}
 				else
@@ -227,7 +227,7 @@ class publishAdmin extends iData
 		global $iWPC;
 		global $db_config;
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
-		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 		$sql = "SELECT {$field} FROM {$table->content_index}  where State{$State} ";
 		$result = $db->Execute( $sql );
 		while ( !$result->EOF )
@@ -245,19 +245,19 @@ class publishAdmin extends iData
 		global $db;
 		$result = $this->getContentInfo( $IndexID );
 		$LinkState['self'] = $result;
-		$sql = "SELECT IndexID,NodeID  FROM {$table->content_index} WHERE ContentID='{$result[ContentID]}' AND Type=1  AND State!=-1";
+		$sql = "SELECT IndexID,NodeID  FROM {$table->content_index} WHERE ContentID='{$result['ContentID']}' AND Type=1  AND State!=-1";
 		$result_solid = $db->getRow( $sql );
-		$NodeInfo = $iWPC->loadNodeInfo( $result_solid[NodeID] );
+		$NodeInfo = $iWPC->loadNodeInfo( $result_solid['NodeID'] );
 		$LinkState['solid'] = array(
 			"Name" => $NodeInfo['Name'],
 			"NodeID" => $NodeInfo['NodeID'],
 			"IndexID" => $result_solid['IndexID']
 		);
-		$sql = "SELECT IndexID,NodeID  FROM {$table->content_index} WHERE ContentID='{$result[ContentID]}' AND Type=0 AND State!=-1";
+		$sql = "SELECT IndexID,NodeID  FROM {$table->content_index} WHERE ContentID='{$result['ContentID']}' AND Type=0 AND State!=-1";
 		$result_void = $db->Execute( $sql );
 		while ( !$result_void->EOF )
 		{
-			$NodeInfo = $iWPC->loadNodeInfo( $result_void->fields[NodeID] );
+			$NodeInfo = $iWPC->loadNodeInfo( $result_void->fields['NodeID'] );
 			$LinkState['void'][] = array(
 				"Name" => $NodeInfo['Name'],
 				"NodeID" => $NodeInfo['NodeID'],
@@ -265,11 +265,11 @@ class publishAdmin extends iData
 			);
 			$result_void->MoveNext( );
 		}
-		$sql = "SELECT IndexID,ParentIndexID,NodeID  FROM {$table->content_index} WHERE ContentID='{$result[ContentID]}' AND Type=2  AND State!=-1";
+		$sql = "SELECT IndexID,ParentIndexID,NodeID  FROM {$table->content_index} WHERE ContentID='{$result['ContentID']}' AND Type=2  AND State!=-1";
 		$result_index = $db->Execute( $sql );
 		while ( !$result_index->EOF )
 		{
-			$NodeInfo = $iWPC->loadNodeInfo( $result_index->fields[NodeID] );
+			$NodeInfo = $iWPC->loadNodeInfo( $result_index->fields['NodeID'] );
 			$LinkState['index'][] = array(
 				"Name" => $NodeInfo['Name'],
 				"NodeID" => $NodeInfo['NodeID'],
@@ -342,19 +342,19 @@ class publishAdmin extends iData
 		global $iWPC;
 		global $sys;
 		$contentInfo = $this->getContentInfo( $IndexID );
-		$NodeInfo = $iWPC->loadNodeInfo( $contentInfo[NodeID] );
-		$fieldInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+		$NodeInfo = $iWPC->loadNodeInfo( $contentInfo['NodeID'] );
+		$fieldInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 		$this->flushData( );
 		foreach ( $fieldInfo as $key => $var )
 		{
-			$this->addData( $var[FieldName], $contentInfo[$var[FieldName]] );
+			$this->addData( $var['FieldName'], $contentInfo[$var['FieldName']] );
 		}
 		$time = time( );
 		$this->addData( "CreationDate", $time );
 		$this->addData( "ModifiedDate", $time );
-		$this->addData( "CreationUserID", $sys->session[sUId] );
-		$this->addData( "LastModifiedUserID", $sys->session[sUId] );
-		$Info[PublishDate] = $contentInfo[PublishDate];
+		$this->addData( "CreationUserID", $sys->session['sUId'] );
+		$this->addData( "LastModifiedUserID", $sys->session['sUId'] );
+		$Info['PublishDate'] = $contentInfo['PublishDate'];
 		if ( $this->contentAdd( $targetNodeID, $Info ) )
 		{
 			return true;
@@ -370,9 +370,9 @@ class publishAdmin extends iData
 		global $iWPC;
 		$IndexInfo = $this->getIndexInfo( $IndexID );
 		$this->flushData( );
-		$this->addData( "ContentID", $IndexInfo[ContentID] );
+		$this->addData( "ContentID", $IndexInfo['ContentID'] );
 		$this->addData( "NodeID", $targetNodeID );
-		$this->addData( "TableID", $IndexInfo[TableID] );
+		$this->addData( "TableID", $IndexInfo['TableID'] );
 		$this->addData( "Type", 0 );
 		$this->addData( "PublishDate", time( ) );
 		if ( $this->indexAdd( ) )
@@ -383,7 +383,7 @@ class publishAdmin extends iData
 			if ( $this->indexEdit( $IndexID ) )
 			{
 				$NodeInfo = $iWPC->loadNodeInfo( $targetNodeID );
-				if ( $NodeInfo[AutoPublish] == 1 )
+				if ( $NodeInfo['AutoPublish'] == 1 )
 				{
 					$this->publish( $IndexID );
 				}
@@ -406,15 +406,15 @@ class publishAdmin extends iData
 		$IndexInfo = $this->getIndexInfo( $IndexID );
 		$this->flushData( );
 		$this->addData( "ParentIndexID", $IndexID );
-		$this->addData( "ContentID", $IndexInfo[ContentID] );
+		$this->addData( "ContentID", $IndexInfo['ContentID'] );
 		$this->addData( "NodeID", $targetNodeID );
-		$this->addData( "TableID", $IndexInfo[TableID] );
+		$this->addData( "TableID", $IndexInfo['TableID'] );
 		$this->addData( "Type", 2 );
 		$this->addData( "PublishDate", time( ) );
 		if ( $this->indexAdd( ) )
 		{
 			$NodeInfo = $iWPC->loadNodeInfo( $targetNodeID );
-			if ( $NodeInfo[AutoPublish] == 1 )
+			if ( $NodeInfo['AutoPublish'] == 1 )
 			{
 				$this->publish( $this->db_insert_id );
 			}
@@ -462,7 +462,7 @@ class publishAdmin extends iData
 		global $db;
 		$sql = "SELECT count(*) as nr FROM {$table->content_index}  WHERE ContentID='{$ContentID}' ";
 		$result = $db->getRow( $sql );
-		if ( 0 < $result[nr] )
+		if ( 0 < $result['nr'] )
 		{
 			return true;
 		}
@@ -502,11 +502,11 @@ class publishAdmin extends iData
 			}
 		}
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
-		if ( empty( $NodeInfo[TableID] ) )
+		if ( empty( $NodeInfo['TableID'] ) )
 		{
 			return false;
 		}
-		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 		if ( $NodeInfo['NodeType'] == 3 )
 		{
 			$table_user = $db_config['table_pre']."plugin_oas_user";
@@ -535,7 +535,7 @@ class publishAdmin extends iData
 		}
 		$sql = "SELECT COUNT(*) as nr  FROM {$table->content_index} WHERE NodeID='{$NodeID}'  AND State{$State} {$Type} ";
 		$result = $db->getRow( $sql );
-		return $result[nr];
+		return $result['nr'];
 	}
 
 	function getIndexInfo( $IndexID, $field = "*" )
@@ -582,15 +582,15 @@ class publishAdmin extends iData
 		else
 		{
 			$result = $this->getIndexInfo( $IndexID );
-			$NodeInfo = $iWPC->loadNodeInfo( $result[NodeID] );
-			if ( empty( $NodeInfo[TableID] ) )
+			$NodeInfo = $iWPC->loadNodeInfo( $result['NodeID'] );
+			if ( empty( $NodeInfo['TableID'] ) )
 			{
 				return false;
 			}
-			$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
-			$sql = "SELECT i2.NodeID,i2.ContentID,i2.State,i2.Top,i2.Pink,i2.Sort,i2.URL,i2.SelfTemplate ,i2.SelfPSN,i2.SelfURL,i2.SelfPSNURL,i2.SelfPublishFileName,i.IndexID,i.PublishDate,i.Type,c.*,u.uName as CreationUser FROM {$table->content_index} i LEFT JOIN {$table->content_index} i2 ON  i2.IndexID=i.ParentIndexID   LEFT JOIN {$table_name} c ON   c.ContentID = i.ContentID LEFT JOIN {$table->site} s ON s.NodeID='{$result[NodeID]}' LEFT JOIN {$table->user} u ON u.uId=c.CreationUserID where i.NodeID='{$result[NodeID]}'   AND i.IndexID='{$IndexID}'";
+			$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
+			$sql = "SELECT i2.NodeID,i2.ContentID,i2.State,i2.Top,i2.Pink,i2.Sort,i2.URL,i2.SelfTemplate ,i2.SelfPSN,i2.SelfURL,i2.SelfPSNURL,i2.SelfPublishFileName,i.IndexID,i.PublishDate,i.Type,c.*,u.uName as CreationUser FROM {$table->content_index} i LEFT JOIN {$table->content_index} i2 ON  i2.IndexID=i.ParentIndexID   LEFT JOIN {$table_name} c ON   c.ContentID = i.ContentID LEFT JOIN {$table->site} s ON s.NodeID='{$result['NodeID']}' LEFT JOIN {$table->user} u ON u.uId=c.CreationUserID where i.NodeID='{$result['NodeID']}'   AND i.IndexID='{$IndexID}'";
 			$result = $db->getRow( $sql );
-			$result['TableID'] = $NodeInfo[TableID];
+			$result['TableID'] = $NodeInfo['TableID'];
 			$Cache_ContentInfo[$IndexID] = $result;
 			return $result;
 		}
@@ -609,9 +609,9 @@ class publishAdmin extends iData
 		else
 		{
 			$result = $this->getIndexInfo( $IndexID );
-			$NodeInfo = $iWPC->loadNodeInfo( $result[NodeID] );
-			$table_publish = $db_config['table_pre'].$db_config['table_publish_pre']."_".$NodeInfo[TableID];
-			$table_content = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+			$NodeInfo = $iWPC->loadNodeInfo( $result['NodeID'] );
+			$table_publish = $db_config['table_pre'].$db_config['table_publish_pre']."_".$NodeInfo['TableID'];
+			$table_content = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 			$plugin_table['oas']['user'] = $db_config['table_pre']."plugin_oas_user";
 			if ( $NodeInfo['NodeType'] == 3 )
 			{
@@ -635,13 +635,13 @@ class publishAdmin extends iData
 		global $CONTENT_MODEL_INFO;
 		$sql = "SELECT ContentID,NodeID FROM {$table->content_index}  WHERE IndexID='{$IndexID}'";
 		$result = $db->getRow( $sql );
-		$NodeInfo = $iWPC->loadNodeInfo( $result[NodeID] );
-		$TableID =& $NodeInfo[TableID];
+		$NodeInfo = $iWPC->loadNodeInfo( $result['NodeID'] );
+		$TableID =& $NodeInfo['TableID'];
 		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$TableID;
 		$TitleField = $CONTENT_MODEL_INFO[$TableID]['TitleField'];
 		$sql = "SELECT i.IndexID, i.URL,c.{$TitleField} FROM {$table->content_index} i, {$table_name} c where i.ContentID =c.ContentID  AND i.IndexID='{$IndexID}'";
 		$result = $db->getRow( $sql );
-		$result[TableID] = $TableID;
+		$result['TableID'] = $TableID;
 		return $result;
 	}
 
@@ -679,15 +679,15 @@ class publishAdmin extends iData
 		global $iWPC;
 		global $db;
 		global $table;
-		$NodeInfo = $iWPC->loadNodeInfo( $params[NodeID] );
-		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
-		if ( $params[o] == "add" )
+		$NodeInfo = $iWPC->loadNodeInfo( $params['NodeID'] );
+		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
+		if ( $params['o'] == "add" )
 		{
-			$sql = "SELECT t.{$params['FieldName']} FROM {$table_name} t, {$table->content_index} i WHERE t.{$params[FieldName]}='{$params[FieldValue]}' AND i.NodeID={$params[NodeID]} AND i.ContentID=t.ContentID AND i.State!=-1";
+			$sql = "SELECT t.{$params['FieldName']} FROM {$table_name} t, {$table->content_index} i WHERE t.{$params['FieldName']}='{$params['FieldValue']}' AND i.NodeID={$params['NodeID']} AND i.ContentID=t.ContentID AND i.State!=-1";
 		}
-		else if ( $params[o] == "edit" )
+		else if ( $params['o'] == "edit" )
 		{
-			$sql = "SELECT t.{$params['FieldName']},t.ContentID as tContentID,i.* FROM {$table_name} t, {$table->content_index} i WHERE t.{$params[FieldName]}='{$params[FieldValue]}'  AND i.ContentID=t.ContentID AND i.IndexID!={$params[IndexID]} AND i.NodeID={$params[NodeID]} AND i.State!=-1";
+			$sql = "SELECT t.{$params['FieldName']},t.ContentID as tContentID,i.* FROM {$table_name} t, {$table->content_index} i WHERE t.{$params['FieldName']}='{$params['FieldValue']}'  AND i.ContentID=t.ContentID AND i.IndexID!={$params['IndexID']} AND i.NodeID={$params['NodeID']} AND i.State!=-1";
 		}
 		$result = $db->getRow( $sql );
 		if ( empty( $result[$params['FieldName']] ) )
@@ -706,9 +706,9 @@ class publishAdmin extends iData
 		global $iWPC;
 		global $IN;
 		
-		$PublishDate = empty( $IndexInfo[PublishDate] ) ? time( ) : $IndexInfo[PublishDate];
+		$PublishDate = empty( $IndexInfo['PublishDate'] ) ? time( ) : $IndexInfo['PublishDate'];
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
-		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 //		echo $table_name.'<br/>';
 //		exit();
 		if ( $this->dataInsert( $table_name ) )
@@ -718,7 +718,7 @@ class publishAdmin extends iData
 			$this->addData( "NodeID", $NodeID );
 			$this->addData( "PublishDate", $PublishDate );
 			$this->addData( "Type", 1 );
-			$this->addData( "TableID", $NodeInfo[TableID] );
+			$this->addData( "TableID", $NodeInfo['TableID'] );
 			if ( $this->indexAdd( ) )  
 			{
 				$IndexID = $this->db_insert_id;
@@ -726,9 +726,9 @@ class publishAdmin extends iData
 				$this->flushData( );
 				$this->addData( "ParentIndexID", $IndexID );
 				$this->addData( $IndexInfo );
-				if ( !empty( $IndexInfo[SelfURL] ) )
+				if ( !empty( $IndexInfo['SelfURL'] ) )
 				{
-					$this->addData( "URL", $IndexInfo[SelfURL] );
+					$this->addData( "URL", $IndexInfo['SelfURL'] );
 					$this->addData( "Type", 4 );
 				}
 				else
@@ -739,7 +739,7 @@ class publishAdmin extends iData
 				$this->delData( "IndexTargetNodeID" );
 				$this->indexEdit( $IndexID ); //出错点
 				$db_insert_id = $this->db_insert_id;
-				if ( $NodeInfo[AutoPublish] == 1 )
+				if ( $NodeInfo['AutoPublish'] == 1 )
 				{
 					$this->publish( $this->db_insert_id );
 				}
@@ -756,16 +756,16 @@ class publishAdmin extends iData
 						$this->createLink( $IndexID, $var );
 					}
 				}
-				if ( !empty( $IndexInfo[SubTargetNodeID] ) )
+				if ( !empty( $IndexInfo['SubTargetNodeID'] ) )
 				{
-					foreach ( $IndexInfo[SubTargetNodeID] as $key => $var )
+					foreach ( $IndexInfo['SubTargetNodeID'] as $key => $var )
 					{
 						$this->createLink( $IndexID, $var );
 					}
 				}
-				if ( !empty( $IndexInfo[IndexTargetNodeID] ) )
+				if ( !empty( $IndexInfo['IndexTargetNodeID'] ) )
 				{
-					foreach ( $IndexInfo[IndexTargetNodeID] as $key => $var )
+					foreach ( $IndexInfo['IndexTargetNodeID'] as $key => $var )
 					{
 						$this->createIndexLink( $IndexID, $var );
 					}
@@ -788,7 +788,7 @@ class publishAdmin extends iData
 		global $db_config;
 		global $iWPC;
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
-		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 		if ( $this->dataInsert( $table_name ) )
 		{
 			$this->flushData( );
@@ -821,10 +821,10 @@ class publishAdmin extends iData
 		global $db_config;
 		global $iWPC;
 		$indexInfo = $this->getIndexInfo( $IndexID );
-		$ContentID = $indexInfo[ContentID];
-		$NodeID = $indexInfo[NodeID];
+		$ContentID = $indexInfo['ContentID'];
+		$NodeID = $indexInfo['NodeID'];
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
-		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo[TableID];
+		$table_name = $db_config['table_pre'].$db_config['table_content_pre']."_".$NodeInfo['TableID'];
 		$where = "where ContentID=".$ContentID;
 		if ( $this->dataUpdate( $table_name, $where ) )
 		{
@@ -833,9 +833,9 @@ class publishAdmin extends iData
 			{
 				$this->addData( $IndexInfo );
 			}
-			if ( !empty( $IndexInfo[SelfURL] ) )
+			if ( !empty( $IndexInfo['SelfURL'] ) )
 			{
-				$this->addData( "URL", $IndexInfo[SelfURL] );
+				$this->addData( "URL", $IndexInfo['SelfURL'] );
 				$this->addData( "Type", 4 );
 			}
 			else
@@ -844,7 +844,7 @@ class publishAdmin extends iData
 			}
 			if ( $this->indexEdit( $IndexID ) )
 			{
-				if ( $NodeInfo[AutoPublish] == "1" )
+				if ( $NodeInfo['AutoPublish'] == "1" )
 				{
 					$this->refresh( $IndexID );
 				}
@@ -883,13 +883,13 @@ class publishAdmin extends iData
 		global $db;
 		global $db_config;
 		$info = $this->getIndexInfo( $IndexID );
-		psn_admin::isvalid( );
-		$NodeInfo = $iWPC->loadNodeInfo( $info[NodeID] );
-		if ( $info[State] == 1 )
+		psn_admin::isvalid();
+		$NodeInfo = $iWPC->loadNodeInfo( $info['NodeID'] );
+		if ( $info['State'] == 1 )
 		{
 			return true;
 		}
-		else if ( $info[Type] == 2 )
+		else if ( $info['Type'] == 2 )
 		{
 			$this->flushData( );
 			$this->addData( "State", 1 );
@@ -903,7 +903,7 @@ class publishAdmin extends iData
 				return false;
 			}
 		}
-		else if ( $info[Type] == 4 )
+		else if ( $info['Type'] == 4 )
 		{
 			if ( $this->publishURL( $IndexID ) )
 			{
@@ -924,7 +924,7 @@ class publishAdmin extends iData
 				return false;
 			}
 		}
-		switch ( $NodeInfo[PublishMode] )
+		switch ( $NodeInfo['PublishMode'] )
 		{
 		case "0" :
 			return true;
@@ -934,6 +934,8 @@ class publishAdmin extends iData
 			{
 				$this->flushData( );
 				$this->addData( "State", 1 );
+				$time=time();
+				$this->addData( "PublishDate", $time );
 				$where = "where IndexID=".$IndexID;
 				if ( $this->dataUpdate( $table->content_index, $where ) )
 				{
@@ -978,8 +980,8 @@ class publishAdmin extends iData
 		global $db_config;
 		global $Plugin;
 		$info = $this->getIndexInfo( $IndexID );
-		$NodeInfo = $iWPC->loadNodeInfo( $info[NodeID] );
-		if ( $info[Type] == 2 || $info[Type] == 4 )
+		$NodeInfo = $iWPC->loadNodeInfo( $info['NodeID'] );
+		if ( $info['Type'] == 2 || $info['Type'] == 4 )
 		{
 			$this->flushData( );
 			$this->addData( "State", 0 );
@@ -998,7 +1000,7 @@ class publishAdmin extends iData
 		$where = "where IndexID=".$IndexID;
 		if ( $this->dataUpdate( $table->content_index, $where ) )
 		{
-			if ( $info[Type] == 1 || $info[Type] == 0 || $info[Type] == 3 )
+			if ( $info['Type'] == 1 || $info['Type'] == 0 || $info['Type'] == 3 )
 			{
 				$this->clearPublishedItem( $info['ContentID'], $info['NodeID'], $mode );
 			}
@@ -1031,8 +1033,8 @@ class publishAdmin extends iData
 		$result = $db->Execute( $sql );
 		while ( !$result->EOF )
 		{
-			$psn->connect( $result->fields[PSN] );
-			$psn->delFile( "", $result->fields[FileName] );
+			$psn->connect( $result->fields['PSN'] );
+			$psn->delFile( "", $result->fields['FileName'] );
 			$result->MoveNext( );
 		}
 		$sql = "DELETE  FROM {$table->publish_log}  WHERE ContentID='{$ContentID}' AND NodeID='{$NodeID}' ";
@@ -1053,20 +1055,21 @@ class publishAdmin extends iData
 		global $db;
 		global $db_config;
 		$info = $this->getIndexInfo( $IndexID );
-		$NodeInfo = $iWPC->loadNodeInfo( $info[NodeID] );
-		if ( $info[State] == 0 )
+		$NodeInfo = $iWPC->loadNodeInfo( $info['NodeID'] );
+		
+		if ( $info['State'] == 0 )
 		{
 			return true;
 		}
-		else if ( $info[Type] == 2 )
+		else if ( $info['Type'] == 2 )
 		{
 			return true;
 		}
-		else if ( $info[Type] == 4 )
+		else if ( $info['Type'] == 4 )
 		{
 			return $this->publishURL( $IndexID );
 		}
-		switch ( $NodeInfo[PublishMode] )
+		switch ( $NodeInfo['PublishMode'] )
 		{
 		case "0" :
 			return true;
@@ -1098,7 +1101,7 @@ class publishAdmin extends iData
 		global $SYS_ENV;
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
 		$this->NodeInfo =& $NodeInfo;
-		switch ( $NodeInfo[PublishMode] )
+		switch ( $NodeInfo['PublishMode'] )
 		{
 		case "0" :
 			return true;
@@ -1116,7 +1119,7 @@ class publishAdmin extends iData
 		}
 		$filename = formatpublishfile( $filename );
 		$template = new kTemplate( );
-		$template->template_dir = $SYS_ENV[templatePath];
+		$template->template_dir = $SYS_ENV['templatePath'];
 		$template->compile_dir = SYS_PATH."sysdata/templates_c/";
 		$template->assign( "NodeInfo", $NodeInfo );
 		$template->assign( "cms_version", CMSWARE_VERSION );
@@ -1163,8 +1166,8 @@ class publishAdmin extends iData
 		$output = $template->fetch( $tplname, 1 );
 		$output = restorexmlheader( $output );
 		$this->IndexID = 0;
-		$this->publishInfo[NodeID] = $NodeID;
-		$this->publishInfo[ContentID] = 0;
+		$this->publishInfo['NodeID'] = $NodeID;
+		$this->publishInfo['ContentID'] = 0;
 		if ( $this->_publishing( $filename, $output ) )
 		{
 			return true;
@@ -1189,9 +1192,9 @@ class publishAdmin extends iData
 			$NodeInfo['NodeID'] = 0;
 		}
 		$this->NodeInfo =& $NodeInfo;
-		$tplname = empty( $templatefilename ) ? $NodeInfo[IndexTpl] : $templatefilename;
+		$tplname = empty( $templatefilename ) ? $NodeInfo['IndexTpl'] : $templatefilename;
 		$template = new kTemplate( );
-		$template->template_dir = empty( $template_dir ) ? $SYS_ENV[templatePath] : $template_dir;
+		$template->template_dir = empty( $template_dir ) ? $SYS_ENV['templatePath'] : $template_dir;
 		$template->compile_dir = SYS_PATH."sysdata/templates_c/";
 		$template->assign( "NodeInfo", $NodeInfo );
 		$template->assign( "cms_version", CMSWARE_VERSION );
@@ -1265,8 +1268,8 @@ class publishAdmin extends iData
 		$this->NodeInfo =& $NodeInfo;
 		$this->publishInfo = $publishInfo;
 		$this->flushData( );
-		$this->addData( "URL", $publishInfo[SelfURL] );
-		$this->URL = $publishInfo[SelfURL];
+		$this->addData( "URL", $publishInfo['SelfURL'] );
+		$this->URL = $publishInfo['SelfURL'];
 		$right = $this->indexEdit( $IndexID );
 		$publishInfo[$mainContentLabel] = $this->ReplaceKeywords( $publishInfo[$mainContentLabel] );
 		foreach ( $publishInfo as $key => $var )
@@ -1275,7 +1278,7 @@ class publishAdmin extends iData
 			$this->htmlPhotoPublish( $publishInfo[$key] );
 			$this->psnPublish( $publishInfo[$key] );
 		}
-		$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+		$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 		$this->flushData( );
 		foreach ( $FieldsInfo as $key => $var )
 		{
@@ -1283,12 +1286,12 @@ class publishAdmin extends iData
 			{
 				continue;
 			}
-			$this->addData( $var[FieldName], $publishInfo[$var[FieldName]] );
+			$this->addData( $var['FieldName'], $publishInfo[$var['FieldName']] );
 		}
-		$this->addData( "IndexID", $publishInfo[IndexID] );
-		$this->addData( "ContentID", $publishInfo[ContentID] );
-		$this->addData( "NodeID", $publishInfo[NodeID] );
-		$this->addData( "PublishDate", $publishInfo[PublishDate] );
+		$this->addData( "IndexID", $publishInfo['IndexID'] );
+		$this->addData( "ContentID", $publishInfo['ContentID'] );
+		$this->addData( "NodeID", $publishInfo['NodeID'] );
+		$this->addData( "PublishDate", $publishInfo['PublishDate'] );
 		$this->addData( "URL", $this->URL );
 		$publishInfo['URL'] = $this->URL;
 		$this->publishUpdate( $NodeInfo['TableID'] );
@@ -1312,7 +1315,7 @@ class publishAdmin extends iData
 		$NodeID = $this->getIndexInfo( $IndexID, $field = "NodeID" );
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
 		$publishInfo = $this->getContentInfo( $IndexID );
-		$fieldInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+		$fieldInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 		foreach ( $fieldInfo as $key => $var )
 		{
 			if ( !empty( $var['EnablePublish'] ) )
@@ -1347,9 +1350,9 @@ class publishAdmin extends iData
 		$this->addData( "URL", $publishFileName );
 		$this->URL = $publishFileName;
 		$right = $this->indexEdit( $IndexID );
-		if ( $this->publishInfo[Type] == 1 || $this->publishInfo[Type] == 0 || $this->publishInfo[Type] == 3 )
+		if ( $this->publishInfo['Type'] == 1 || $this->publishInfo['Type'] == 0 || $this->publishInfo['Type'] == 3 )
 		{
-			$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+			$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 			$TPL->clear_cache( $NodeInfo['ContentTpl'], $IndexID."0".$NodeInfo['ContentTpl'] );
 			$this->flushData( );
 			foreach ( $FieldsInfo as $key => $var )
@@ -1358,12 +1361,12 @@ class publishAdmin extends iData
 				{
 					continue;
 				}
-				$this->addData( $var[FieldName], $publishInfo[$var[FieldName]] );
+				$this->addData( $var['FieldName'], $publishInfo[$var['FieldName']] );
 			}
-			$this->addData( "IndexID", $publishInfo[IndexID] );
-			$this->addData( "ContentID", $publishInfo[ContentID] );
-			$this->addData( "NodeID", $publishInfo[NodeID] );
-			$this->addData( "PublishDate", $publishInfo[PublishDate] );
+			$this->addData( "IndexID", $publishInfo['IndexID'] );
+			$this->addData( "ContentID", $publishInfo['ContentID'] );
+			$this->addData( "NodeID", $publishInfo['NodeID'] );
+			$this->addData( "PublishDate", $publishInfo['PublishDate'] );
 			$this->addData( "URL", $this->URL );
 			$publishInfo['URL'] = $this->URL;
 			$this->publishUpdate( $NodeInfo['TableID'] );
@@ -1435,7 +1438,7 @@ class publishAdmin extends iData
 		$IN['NodeID'] = empty( $IN['NodeID'] ) ? $NodeID : $IN['NodeID'];
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
 		$publishInfo = $this->getContentInfo( $IndexID );
-		$fieldInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+		$fieldInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 		foreach ( $fieldInfo as $key => $var )
 		{
 			if ( !empty( $var['EnablePublish'] ) )
@@ -1480,24 +1483,24 @@ class publishAdmin extends iData
 				}
 			}
 		}
-		if ( $this->publishInfo[Type] == 3 )
+		if ( $this->publishInfo['Type'] == 3 )
 		{
-			$template->template_dir = $SYS_ENV[templatePath];
-			if ( !file_exists( $template->template_dir.$this->NodeInfo[ImageTpl] ) )
+			$template->template_dir = $SYS_ENV['templatePath'];
+			if ( !file_exists( $template->template_dir.$this->NodeInfo['ImageTpl'] ) )
 			{
-				new Error( "Error: The Image template {$template->template_dir}{$this->NodeInfo[ImageTpl]} you have set  for your Image does not exists, system now use the default template \"{$SYS_ENV[templatePath]}/default/image.html\" to run." );
+				new Error( "Error: The Image template {$template->template_dir}{$this->NodeInfo['ImageTpl']} you have set  for your Image does not exists, system now use the default template \"{$SYS_ENV['templatePath']}/default/image.html\" to run." );
 				$tplname = "image.html";
-				$template->template_dir = $SYS_ENV[templatePath]."/default/";
+				$template->template_dir = $SYS_ENV['templatePath']."/default/";
 			}
 			else
 			{
-				$tplname = $this->NodeInfo[ImageTpl];
-				$template->template_dir = $SYS_ENV[templatePath];
+				$tplname = $this->NodeInfo['ImageTpl'];
+				$template->template_dir = $SYS_ENV['templatePath'];
 			}
 		}
-		else if ( !empty( $this->publishInfo[SelfTemplate] ) )
+		else if ( !empty( $this->publishInfo['SelfTemplate'] ) )
 		{
-			if ( preg_match( "/\\{TID:([0-9]+)\\}/isU", $this->publishInfo[SelfTemplate], $matches ) )
+			if ( preg_match( "/\\{TID:([0-9]+)\\}/isU", $this->publishInfo['SelfTemplate'], $matches ) )
 			{
 				require_once( INCLUDE_PATH."admin/cate_tpl_admin.class.php" );
 				if ( !isset( $cate_tpl ) )
@@ -1505,34 +1508,34 @@ class publishAdmin extends iData
 					$cate_tpl = new cate_tpl_admin( );
 					$TID = $matches[1];
 					$TInfo = $cate_tpl->getInfo( $TID );
-					$this->publishInfo[SelfTemplate] = "/ROOT/".$TInfo[TCID]."/".$TInfo[TID].".tpl";
+					$this->publishInfo['SelfTemplate'] = "/ROOT/".$TInfo['TCID']."/".$TInfo['TID'].".tpl";
 				}
 			}
-			$tplname = $this->publishInfo[SelfTemplate];
-			$template->template_dir = $SYS_ENV[templatePath];
-			if ( !file_exists( $template->template_dir.$this->publishInfo[SelfTemplate] ) )
+			$tplname = $this->publishInfo['SelfTemplate'];
+			$template->template_dir = $SYS_ENV['templatePath'];
+			if ( !file_exists( $template->template_dir.$this->publishInfo['SelfTemplate'] ) )
 			{
-				new Error( "Error: The content template {$template->template_dir}{$this->publishInfo[Template]} you have set alone for your content does not exists, system now use the default template \"{$SYS_ENV[templatePath]}/default/content.html\" to run." );
+				new Error( "Error: The content template {$template->template_dir}{$this->publishInfo['Template']} you have set alone for your content does not exists, system now use the default template \"{$SYS_ENV['templatePath']}/default/content.html\" to run." );
 				$tplname = "content.html";
-				$template->template_dir = $SYS_ENV[templatePath]."/default/";
+				$template->template_dir = $SYS_ENV['templatePath']."/default/";
 			}
 		}
-		else if ( !empty( $this->NodeInfo[ContentTpl] ) )
+		else if ( !empty( $this->NodeInfo['ContentTpl'] ) )
 		{
-			$tplname = $this->NodeInfo[ContentTpl];
-			$template->template_dir = $SYS_ENV[templatePath];
-			if ( !file_exists( $template->template_dir.$this->NodeInfo[ContentTpl] ) )
+			$tplname = $this->NodeInfo['ContentTpl'];
+			$template->template_dir = $SYS_ENV['templatePath'];
+			if ( !file_exists( $template->template_dir.$this->NodeInfo['ContentTpl'] ) )
 			{
-				new Error( "Error: The content template {$template->template_dir}{$this->NodeInfo[ContentTpl]} does not exists, system now use the default template \"{$SYS_ENV[templatePath]}/default/content.html\" to run." );
+				new Error( "Error: The content template {$template->template_dir}{$this->NodeInfo['ContentTpl']} does not exists, system now use the default template \"{$SYS_ENV['templatePath']}/default/content.html\" to run." );
 				$tplname = "content.html";
-				$template->template_dir = $SYS_ENV[templatePath]."/default/";
+				$template->template_dir = $SYS_ENV['templatePath']."/default/";
 			}
 		}
 		else
 		{
-			new Error( "Warning: You haven\\'t set the content template, system now use the default template \"{$SYS_ENV[templatePath]}/default/content.html\" to run." );
+			new Error( "Warning: You haven\\'t set the content template, system now use the default template \"{$SYS_ENV['templatePath']}/default/content.html\" to run." );
 			$tplname = "content.html";
-			$template->template_dir = $SYS_ENV[templatePath]."/default/";
+			$template->template_dir = $SYS_ENV['templatePath']."/default/";
 		}
 		$template->compile_dir = SYS_PATH."sysdata/templates_c/";
 		$template->registerPreFilter( "CMS_Parser" );
@@ -1553,7 +1556,7 @@ class publishAdmin extends iData
 			$template->assign( $key, $publishInfo[$key] );
 		}
 		$PublishFileFormat = formatpublishfile( $PublishFileFormat );
-		$publishInfo[NodeInfo] = $NodeInfo;
+		$publishInfo['NodeInfo'] = $NodeInfo;
 		$template->assign_by_ref( "Publish", $publishInfo );
 		$template->assign( "Navigation", $Navigation );
 		$template->assign( "sysRelateDoc", $RelateDoc );
@@ -1563,11 +1566,11 @@ class publishAdmin extends iData
 		//前边没有生成页面
 		
 		
-		if ( empty( $this->NodeInfo[Pager] ) )
+		if ( empty( $this->NodeInfo['Pager'] ) )
 		{
-			$this->NodeInfo[Pager] = "default.php";
+			$this->NodeInfo['Pager'] = "default.php";
 		}
-		include( SETTING_DIR."pager/".$this->NodeInfo[Pager] );
+		include( SETTING_DIR."pager/".$this->NodeInfo['Pager'] );
 		
 
   //已经生成完成
@@ -1634,7 +1637,7 @@ class publishAdmin extends iData
 			foreach ( $matches[0] as $key => $var )
 			{
 				$psnInfo = $psn->getPSNInfo( $matches[1][$key] );
-				$content = str_replace( $matches[0][$key], $psnInfo[URL], $content );
+				$content = str_replace( $matches[0][$key], $psnInfo['URL'], $content );
 			}
 		}
 		unset( $psn );
@@ -1650,7 +1653,7 @@ class publishAdmin extends iData
 		{
 			$sql = "SELECT varValue as num FROM {$table->sys} WHERE  varName ='publishResourceNum'";
 			$row = $db->getRow( $sql );
-			$this->publish_num = $row[num];
+			$this->publish_num = $row['num'];
 			$localImgArray = $this->_resourcePublishing( $ImgArray );
 			if ( $localImgArray )
 			{
@@ -1714,22 +1717,22 @@ class publishAdmin extends iData
 		}
 		$isUploadResources = array( );
 		$psn =& $this->beanFactory->getBean( "psn" );
-		$publishLog = $this->getPublishLog( $this->publishInfo[ContentID], $this->publishInfo[NodeID] );
+		$publishLog = $this->getPublishLog( $this->publishInfo['ContentID'], $this->publishInfo['NodeID'] );
 		$patt = "/{PSN:([0-9]+)}([\\S]*)/is";
-		preg_match( $patt, $this->NodeInfo[ResourcePSN], $matches );
+		preg_match( $patt, $this->NodeInfo['ResourcePSN'], $matches );
 		$PSNID = $matches[1];
 		$publish_path = $matches[2];
 		$psnInfo = $psn->getPSNInfo( $PSNID );
-		$psn->connect( $psnInfo[PSN] );
-		$psn->sendVar[IndexID] = $this->IndexID;
-		$psn->sendVar[NodeID] = $this->publishInfo[NodeID];
-		$psn->sendVar[ContentID] = $this->publishInfo[ContentID];
+		$psn->connect( $psnInfo['PSN'] );
+		$psn->sendVar['IndexID'] = $this->IndexID;
+		$psn->sendVar['NodeID'] = $this->publishInfo['NodeID'];
+		$psn->sendVar['ContentID'] = $this->publishInfo['ContentID'];
 		foreach ( $ImgArray as $key => $var )
 		{
 			$pathinfo = pathinfo( $var );
 			$sql = "select Name,Path  from {$table->resource} where Name = '{$pathinfo['basename']}'";
 			$result = $db->getRow( $sql );
-			$filename = $SYS_ENV['ResourcePath']."/".$result[Path];
+			$filename = $SYS_ENV['ResourcePath']."/".$result['Path'];
 			if ( empty( $result['Name'] ) )
 			{
 				$saveFile[$key] = $var;
@@ -1751,7 +1754,7 @@ class publishAdmin extends iData
 				$destination = $dataPath."/".$pathinfo['basename'];
 				$saveFile[$key] = $this->getResourceURL( )."/".$destination;
 				$psn->upload( $filename, $publish_path."/".$destination, $saveFile[$key] );
-				if ( !psn_admin::logexits( $psn->sendVar[ContentID], $psnInfo[PSN], $publish_path."/".$destination ) )
+				if ( !psn_admin::logexits( $psn->sendVar['ContentID'], $psnInfo['PSN'], $publish_path."/".$destination ) )
 				{
 					$this->Counter( );
 				}
@@ -1796,7 +1799,7 @@ class publishAdmin extends iData
 		foreach ( $_Image_Pattern as $key => $var )
 		{
 			$datakey = $var['dataKey'];
-			if ( preg_match_all( $var[pattern], $content, $match, PREG_PATTERN_ORDER ) )
+			if ( preg_match_all( $var['pattern'], $content, $match, PREG_PATTERN_ORDER ) )
 			{
 				$matches = array_merge( $match[$datakey], $matches );
 			}
@@ -1813,17 +1816,17 @@ class publishAdmin extends iData
 	function _imgLocalFilter( $img_data )
 	{
 		global $SYS_ENV;
-		preg_match_all( "/{([^}]+)}/siU", $SYS_ENV[localImgIgnoreURL], $matches );
+		preg_match_all( "/{([^}]+)}/siU", $SYS_ENV['localImgIgnoreURL'], $matches );
 		$ignoreURLs = $matches[1];
 		foreach ( $img_data as $var )
 		{
 			$urlinfo = parse_url( $var );
-			$urlinfo[host] = strtolower( $urlinfo[host] );
-			if ( in_array( $urlinfo[host], $ignoreURLs ) )
+			$urlinfo['host'] = strtolower( $urlinfo['host'] );
+			if ( in_array( $urlinfo['host'], $ignoreURLs ) )
 			{
 				$return[] = $var;
 			}
-			else if ( empty( $urlinfo[host] ) )
+			else if ( empty( $urlinfo['host'] ) )
 			{
 				$return[] = $var;
 			}
@@ -1843,21 +1846,21 @@ class publishAdmin extends iData
 	{
 		$psn =& $this->beanFactory->getBean( "psn" );
 		$patt = "/{PSN:([0-9]+)}([\\S]*)/is";
-		if ( !empty( $this->publishInfo[SelfPSN] ) )
+		if ( !empty( $this->publishInfo['SelfPSN'] ) )
 		{
-			preg_match( $patt, $this->publishInfo[SelfPSN], $matches );
+			preg_match( $patt, $this->publishInfo['SelfPSN'], $matches );
 		}
 		else
 		{
-			preg_match( $patt, $this->NodeInfo[ContentPSN], $matches );
+			preg_match( $patt, $this->NodeInfo['ContentPSN'], $matches );
 		}
 		$PSNID = $matches[1];
 		$publish_path = $matches[2];
 		$psnInfo = $psn->getPSNInfo( $PSNID );
-		$psn->connect( $psnInfo[PSN] );
-		$psn->sendVar[IndexID] = $this->IndexID;
-		$psn->sendVar[NodeID] = $this->publishInfo[NodeID];
-		$psn->sendVar[ContentID] = $this->publishInfo[ContentID];
+		$psn->connect( $psnInfo['PSN'] );
+		$psn->sendVar['IndexID'] = $this->IndexID;
+		$psn->sendVar['NodeID'] = $this->publishInfo['NodeID'];
+		$psn->sendVar['ContentID'] = $this->publishInfo['ContentID'];
 		$filename = $publish_path."/".$filename;
 		if ( $psn->put( $filename, $content ) )
 		{
@@ -1874,13 +1877,13 @@ class publishAdmin extends iData
 	function getResourceURL( )
 	{
 		$patt = "/{PSN-URL:([0-9]+)}([\\S]*)/is";
-		$ResourceURL = str_replace( "{NodeID}", $this->NodeInfo['NodeID'], $this->NodeInfo[ResourceURL] );
+		$ResourceURL = str_replace( "{NodeID}", $this->NodeInfo['NodeID'], $this->NodeInfo['ResourceURL'] );
 		if ( preg_match( $patt, $ResourceURL, $matches ) )
 		{
 			$PSNID = $matches[1];
 			$publish_path = $matches[2];
 			$psnInfo = psn_admin::getpsninfo( $PSNID );
-			$url = $psnInfo[URL].$publish_path;
+			$url = $psnInfo['URL'].$publish_path;
 		}
 		else
 		{
@@ -1897,7 +1900,7 @@ class publishAdmin extends iData
 			foreach ( $matches[0] as $key => $var )
 			{
 				$psnInfo = psn_admin::getpsninfo( $matches[1][$key] );
-				$_str = str_replace( $var, $psnInfo[URL], $_str );
+				$_str = str_replace( $var, $psnInfo['URL'], $_str );
 			}
 		}
 		return $_str;
@@ -1906,12 +1909,12 @@ class publishAdmin extends iData
 	function getPSNURL( )
 	{
 		$patt = "/{PSN-URL:([0-9]+)}([\\S]*)/is";
-		$ResourceURL = str_replace( "{NodeID}", $this->NodeInfo['NodeID'], $this->NodeInfo[ResourceURL] );
+		$ResourceURL = str_replace( "{NodeID}", $this->NodeInfo['NodeID'], $this->NodeInfo['ResourceURL'] );
 		if ( preg_match( $patt, $ResourceURL, $matches ) )
 		{
 			$PSNID = $matches[1];
 			$psnInfo = psn_admin::getpsninfo( $PSNID );
-			$url = $psnInfo[URL];
+			$url = $psnInfo['URL'];
 		}
 		else
 		{
@@ -1924,29 +1927,29 @@ class publishAdmin extends iData
 	{
 		$patt = "/{PSN-URL:([0-9]+)}([\\S]*)/is";
 		$publishFileName = formatpublishfile( $publishFileName );
-		if ( !empty( $this->publishInfo[SelfPSNURL] ) )
+		if ( !empty( $this->publishInfo['SelfPSNURL'] ) )
 		{
-			if ( preg_match( $patt, $this->publishInfo[SelfPSNURL], $matches ) )
+			if ( preg_match( $patt, $this->publishInfo['SelfPSNURL'], $matches ) )
 			{
 				$PSNID = $matches[1];
 				$publish_path = $matches[2];
 				$psnInfo = psn_admin::getpsninfo( $PSNID );
-				$url = $psnInfo[URL].$publish_path."/".$publishFileName;
+				$url = $psnInfo['URL'].$publish_path."/".$publishFileName;
 			}
 			else
 			{
-				$url = $this->publishInfo[SelfURL]."/".$publishFileName;
+				$url = $this->publishInfo['SelfURL']."/".$publishFileName;
 			}
 		}
 		else
 		{
-			$ContentURL = str_replace( "{NodeID}", $this->NodeInfo['NodeID'], $this->NodeInfo[ContentURL] );
+			$ContentURL = str_replace( "{NodeID}", $this->NodeInfo['NodeID'], $this->NodeInfo['ContentURL'] );
 			if ( preg_match( $patt, $ContentURL, $matches ) )
 			{
 				$PSNID = $matches[1];
 				$publish_path = $matches[2];
 				$psnInfo = psn_admin::getpsninfo( $PSNID );
-				$url = $psnInfo[URL].$publish_path."/".$publishFileName;
+				$url = $psnInfo['URL'].$publish_path."/".$publishFileName;
 			}
 			else
 			{
@@ -2051,7 +2054,7 @@ class publishAdmin extends iData
 		$from = intval( $from );
 		$to = intval( $to );
 		$to -= $from;
-		$keywords = array_unique( explode( ",", $ContentInfo[KeyWords] ) );
+		$keywords = array_unique( explode( ",", $ContentInfo['KeyWords'] ) );
 		if ( !is_array( $keywords ) )
 		{
 			return false;

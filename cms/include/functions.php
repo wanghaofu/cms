@@ -203,26 +203,26 @@ function de( $str ,$exit=false ,$trace=true){
     }else{
         $cli = false;
      }
-     if($cli )
+     if($cli)
      {
          $break_line = "\n";
      }
-    echo "<div style='font-size:14px;background-color:#f1f6f7'>{$brak_line}";
-    echo "<div style='font-size:16px;background-color:dfe5e6;color:#001eff;font-weight:bold'>{$brak_line}";
+    echo "<div style='font-size:14px;background-color:#f1f6f7'>{$break_line}";
+    echo "<div style='font-size:16px;background-color:dfe5e6;color:#001eff;font-weight:bold'>{$break_line}";
     foreach( $debugInfo as $key=>$value ){
         if($key==0 ){
-            echo "*** <span style='font-size:18px'>{$debugnum}</span> {$value['file']} (debug in file)  {$value['line']} (row) </br>{$brak_line}";
+            echo "*** <span style='font-size:18px'>{$debugnum}</span> {$value['file']} (debug in file)  {$value['line']} (row) </br>{$break_line}";
         } else {
             if ( $track )
             {
-                echo "&nbsp;&nbsp;<span style='font-size:12px;'>>> include in file:{$value['file']} line:{$value['line']} row </br></span>{$brak_line}";
+                echo "&nbsp;&nbsp;<span style='font-size:12px;'>>> include in file:{$value['file']} line:{$value['line']} row </br></span>{$break_line}";
             } else {
                 break;
             }
         }
     }
-    echo "</div>{$brak_line}";
-    echo '<pre>{$brak_line}';
+    echo "</div>";
+    echo "<pre>{$break_line}";
     if ( !isset( $str ) )
     {
         echo 'the vars in not set!';
