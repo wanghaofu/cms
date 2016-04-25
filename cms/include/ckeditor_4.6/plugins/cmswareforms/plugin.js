@@ -3,7 +3,7 @@
 	CKEDITOR.plugins.add(title,
 	{
 		requires : [ 'panelbutton', 'floatpanel', 'styles' ],
-		
+		icons:'cmswareforms',
 		init : function( editor ){
 			var config = editor.config,lang = editor.lang;
 	

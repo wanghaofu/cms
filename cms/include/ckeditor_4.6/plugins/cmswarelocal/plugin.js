@@ -1,5 +1,6 @@
 ﻿CKEDITOR.plugins.add('cmswarelocal',
 {
+	icons: 'cmswarelocal',
 	init : function( editor ){
 		var config = editor.config,lang = editor.lang;
 		

@@ -2,6 +2,7 @@
 {
 CKEDITOR.plugins.add( 'cmswarepagebreak',
 {
+	icons:'cmswarepagebreak',
 	init : function( editor )
 	{
 		var pluginName = 'cmswarepagebreak';

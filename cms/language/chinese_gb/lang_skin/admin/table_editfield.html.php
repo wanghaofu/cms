@@ -25,6 +25,7 @@ $_LANG_SKIN = array (
   'field_input_password' => 'password',
   'field_input_RichEditor' => 'RichEditor',
   'field_input_CKEditor' => 'CKEditor',
+  'field_input_CKEditor_3_6_2' => 'CKEditor_3_6_2',
   'is_deploy' => '是否部署发布',
   'field_default_value' => '字段可选值',
   'field_default_value_help' => '多个可选值之间以;分隔',

@@ -14,7 +14,6 @@ require_once INCLUDE_PATH."admin/publishAuthAdmin.class.php";
 require_once INCLUDE_PATH."admin/task.class.php";
 require_once INCLUDE_PATH.'image.class.php';
 $Plugin = new Plugin();
-
 $publish = new publishAdmin();
 $psn = new psn_admin();
 $psnInfo[PSN] = 'file::'.CACHE_DIR."tmp";
@@ -45,7 +44,6 @@ if(empty($IN[NodeID]) && empty($IN[TCID])) {
 			$psn->close();
 
 			$content = $publish->fetchIndex($IN[NodeID], CACHE_DIR."tmp/", $tempFileName."v");
-
 		}
 
 	} else {
@@ -58,27 +56,16 @@ if(empty($IN[NodeID]) && empty($IN[TCID])) {
 
 		} else {
 			//Get the original template file
-			 
 			$content_src = "";
-			 
-
-
 			$psn->connect($psnInfo[PSN]);
 			$psn->isLog = false;
 			$content_view = make_include_readable($content_src);
 			$psn->put($IN[PATH].'/'.$tempFileName, $content_src);
 			$psn->put($IN[PATH].'/'.$tempFileName."v", $content_view);
 			$psn->close();
-
 			$content = "";
-
 		}
-	
 	}
-
-
-
-
 } elseif(!empty($IN[TCID])) {
 	$IN[NodeID] = empty($IN[NodeID]) ? $_SESSION['targetNodeID'] : $IN[NodeID];
 	$IN[IndexID] = empty($IN[IndexID]) ? $_SESSION['IndexID'] : $IN[IndexID];
@@ -91,25 +78,16 @@ if(empty($IN[NodeID]) && empty($IN[TCID])) {
 			$content = $publish->fetchIndex($IN[NodeID], CACHE_DIR."tmp/", $tempFileName."v");
 
 	} else {
-			 
 			//Get the original template file
-			 
 			$content_src = "";
-			 
-
-
 			$psn->connect($psnInfo[PSN]);
 			$psn->isLog = false;
 			$content_view = make_include_readable($content_src);
 			$psn->put('/'.$tempFileName, $content_src);
 			$psn->put('/'.$tempFileName."v", $content_view);
 			$psn->close();
-
 			$content = "";
-
 	}
-
-
 } else {
 	$publish->NodeInfo = $iWPC->loadNodeInfo($IN[NodeID]);
 	$tempFileName = substr($IN['sId'], 15) .substr(md5($publish->NodeInfo[IndexTpl]), 15).".tmp";
@@ -121,13 +99,10 @@ if(empty($IN[NodeID]) && empty($IN[TCID])) {
 		$content = $publish->fetchIndex($IN[NodeID], CACHE_DIR."tmp/", $tempFileName."v");
 
 	} else {
-		 
 		//Get the original template file
 		$psn->connect('file::'.$SYS_ENV['templatePath']);
 		$content_src = $psn->read($IN[PATH],$publish->NodeInfo[IndexTpl]);
 		$psn->close();
-
-
 		$psn->connect($psnInfo[PSN]);
 		$psn->isLog = false;
 		$content_view = make_include_readable($content_src);
@@ -142,18 +117,12 @@ if(empty($IN[NodeID]) && empty($IN[TCID])) {
 }
 
 
-
-
-
-
-
 function cms_block_parse(&$content, $output) {
 	$pattern = "/".preg_quote("<!---{CMS-BLOCK}--->","/")."(.*)".preg_quote("<!---{/CMS-BLOCK}--->","/")."/isU";
 	//echo $pattern;
 	if(preg_match_all($pattern,$content,$matches)) {
 		foreach($matches[0] as $key=>$var)  {
 			//$id = md5($matches[1][$key]).$key;
-
 			$replace = "<div oncontextmenu=\"showContextMenu('{$output[$key]['id']}');\" style=\"cursor: hand;\"   onmouseout=\"mouseout(this);\" onmouseover=\"mouseover(this);\" title='点击操作此区块' onclick=\"javascript:showContextMenu('{$output[$key]['id']}');\">".$matches[1][$key]."</div>";//showPopupText('d".$id."');
 			$content = str_replace($matches[0][$key], $replace, $content);
 			//$output[$key] = array('id'=>$id, 'data'=>'');
@@ -174,8 +143,6 @@ function cms_block_parse_src(&$content) {
 	}
 	return $output;
 }
-
-
 function cms_block_get_by_id(&$content, $id) {
 	$pattern = "/".preg_quote("<!---{CMS-BLOCK}--->","/")."(.*)".preg_quote("<!---{/CMS-BLOCK}--->","/")."/isU";
 	//echo $pattern;
@@ -187,7 +154,6 @@ function cms_block_get_by_id(&$content, $id) {
 	}
 	return false;
 }
-
 function cms_block_update_by_id(&$content, $id, $updatedata) {
 	$pattern = "/".preg_quote("<!---{CMS-BLOCK}--->","/")."(.*)".preg_quote("<!---{/CMS-BLOCK}--->","/")."/isU";
 	if(preg_match_all($pattern,$content,$matches, PREG_OFFSET_CAPTURE)) {
@@ -199,15 +165,12 @@ function cms_block_update_by_id(&$content, $id, $updatedata) {
 				$content = $start . $middle . $end;
 				return $content;
 			}
-			 
- 			
 		}
 	}
 	return $content;
 }
 function format_cms_tag($string) {//&quot;LIST&quot;
    $string = preg_replace( "/([a-zA-Z0-9]*)(=&quot;.*&quot;)/isU" , "<B>\\1</B>\\2", $string );                  //</CMS> tags
-	  
 	return $string;
 }
 
@@ -264,7 +227,6 @@ function cms_block_syntax_check(&$str)
 
 	preg_match_all("#&lt;/Loop&gt;#isU", $str, $matches);
 	$loop_end_num = count($matches[0]);
-
 	
 	if($loop_start_num !=$loop_end_num) {
 		$include_loop_error = true;
@@ -273,34 +235,26 @@ function cms_block_syntax_check(&$str)
 	
 	}
 
-
 	preg_match_all("/&lt;if&nbsp;(.*)&gt;/isU", $str, $matches);
 	$if_start_num = count($matches[0]);
 
 	preg_match_all("#&lt;/if&gt;#isU", $str, $matches);
 	$if_end_num = count($matches[0]);
-
 	
 	if($if_start_num !=$if_end_num) {
 		$include_if_error = true;
 		$str = preg_replace("/&lt;if&nbsp;(.*)&gt;/isU" , "<div style=\"width:100%;BACKGROUND-COLOR:  #ffff00\">\\0</div>", $str );                  //</CMS> tags
 		$str = preg_replace("#&lt;/if&gt;#isU" , "<div style=\"width:100%;BACKGROUND-COLOR:  #ffff00\">\\0</div>", $str );                  //</CMS> tags
-	
 	}
-
 
 	$old_syntax_search = array(
 		"'&lt;/CMS&gt;'is",
 		"'&lt;cms::(.*)&gt;'isU",
-		 
-	
 	);
 
 	$old_syntax_replace = array(
 		"<div style=\"width:100%;BACKGROUND-COLOR:#FFFF99\">\\0</div>",
 		"<div style=\"width:100%;BACKGROUND-COLOR: #FFFF99\">\\0</div>",
-		
-	
 	);
 
 	$str = preg_replace($old_syntax_search , $old_syntax_replace, $str );                  //</CMS> tags
@@ -444,8 +398,6 @@ if($IN['o'] == 'edit') {
 	echo preg_replace("/<div onclick=\"if\(tplerror.*<\/div>/isU","",$html);
 	exit;
 } else {
-
-
 	$highlight = cms_block_parse_src($content_src ); 
 	cms_block_parse($content,$highlight); 
 	 

@@ -52,15 +52,12 @@ var o = '<?=$IN[o]?>';
 	if (menu == "tableMenu")
 	{
 		moveMe = 0
-
-
 	}
 
 	var HTMLContent = eval(menu).innerHTML
 	oPopBody.innerHTML = HTMLContent
 	oPopup.show(lefter - leftoff - 2 - moveMe, topper - topoff + 18, width, height, document.body);
 	//oPopup.document.body.innerHTML =  '' ;
-
 	return false;
 	}
 
@@ -744,8 +741,16 @@ function showFlatCalendar() {
 <?php
 $UseCkeditor = false;
 foreach($tableInfo as $var){
-	if($var["FieldName"] == "Content" && $var["FieldInput"]=="CKEditor"){
+	if($var["FieldName"] == "Content" && ( $var["FieldInput"]=="CKEditor" ||  $var["FieldInput"]=="CKEditor_3_6_2")){
 		$UseCkeditor=true;
+		
+		if($var["FieldInput"] =="CKEditor_3_6_2" )
+		{
+		    $editor_cke='editor_cke_3_6_2.php';
+		}else{
+		    $editor_cke= 'editor_cke.php';
+		}
+		
 		break;
 	}
 }
@@ -759,7 +764,13 @@ function prepareSubmit()
  <tr class='tablelist'> 
               <td align=right  width=80>内容:</td>
               <td valign='middle'>
-<?php include(ADMIN_PATH."/modules/editor_cke.php");?>
+              
+<?php 
+
+include(ADMIN_PATH."/modules/{$editor_cke}");
+
+?>
+
  </td> </tr> 
 <?php else:?>
 <script src="ui.php?sId=<?=$IN[sId]?>&o=editor__edit_source.js"></script>

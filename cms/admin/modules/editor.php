@@ -55,7 +55,7 @@ with(form){
 	var sep=seperator.value
 	for(i=1;i<mdoc.length;i++) {
 		var addtime=''
-		stringToSplit=mdoc.options[i].value
+		stringToSplit=mdoc.options['i'].value
 		arrayOfStrings=stringToSplit.split('%@%')
 		
 		dateToSplit=arrayOfStrings[1]
@@ -82,7 +82,7 @@ with(form){
 			addtime=addtime+' '+arrayOfDate[3]+':'+arrayOfDate[4]
 		}
 
-		selectValue.value+=icon + ' <A href=\"'+arrayOfStrings[0]+'\" target=\"_blank\">'+mdoc.options[i].text+'</A>    <FONT id=\"ADDTIME\">'+addtime+'</FONT><BR>\n'
+		selectValue.value+=icon + ' <A href=\"'+arrayOfStrings[0]+'\" target=\"_blank\">'+mdoc.options['i'].text+'</A>    <FONT id=\"ADDTIME\">'+addtime+'</FONT><BR>\n'
 	}
 		window.returnValue = selectValue.value;
 		window.close();
@@ -94,7 +94,7 @@ function moveUp(obj)
 	with (obj){
 		try {
 			if(selectedIndex==0){
-				options[length]=new Option(options[0].text,options[0].value)
+				options['length']=new Option(options[0].text,options[0].value)
 				options[0]=null
 				selectedIndex=length-1
 				}
@@ -122,7 +122,7 @@ function GoSelect(obj)
 {
 	try {
 		with (obj){
-			var IndexID = options[selectedIndex].value;
+			var IndexID = options['selectedIndex'].value;
 			window.open("admin_publish.php?sId=" + sId + "&o=viewpublish&IndexID=" + IndexID + "&NodeID=" + NodeID,'')
 			
 		}	
@@ -138,14 +138,14 @@ function moveDown(obj)
 	with (obj){
 		try {
 			if(selectedIndex==length-1){
-				var otext=options[selectedIndex].text
-				var ovalue=options[selectedIndex].value
+				var otext=options['selectedIndex'].text
+				var ovalue=options['selectedIndex'].value
 				for(i=selectedIndex; i>0; i--){
-					options[i].text=options[i-1].text
-					options[i].value=options[i-1].value
+					options['i'].text=options[i-1].text
+					options['i'].value=options[i-1].value
 				}
-				options[i].text=otext
-				options[i].value=ovalue
+				options['i'].text=otext
+				options['i'].value=ovalue
 				selectedIndex=0
 				}
 			else if(selectedIndex<length-1) moveG(obj,+1)		
@@ -159,12 +159,12 @@ function moveG(obj,offset)
 {
 	with (obj){
 		desIndex=selectedIndex+offset
-		var otext=options[desIndex].text
-		var ovalue=options[desIndex].value
-		options[desIndex].text=options[selectedIndex].text
-		options[desIndex].value=options[selectedIndex].value
-		options[selectedIndex].text=otext
-		options[selectedIndex].value=ovalue
+		var otext=options['desIndex'].text
+		var ovalue=options['desIndex'].value
+		options['desIndex'].text=options['selectedIndex'].text
+		options['desIndex'].value=options['selectedIndex'].value
+		options['selectedIndex'].text=otext
+		options['selectedIndex'].value=ovalue
 		selectedIndex=desIndex
 	}
 }
@@ -177,9 +177,9 @@ function setContentLinkValue(fieldName)
 	with(obj) {
  		for(i=0; i <  obj.length ; i++){
 			if(i==0) {
-				returnValue = options[i].value;
+				returnValue = options['i'].value;
 			} else {
-				returnValue = returnValue + ',' + options[i].value;
+				returnValue = returnValue + ',' + options['i'].value;
 			}
  		} 
  		
@@ -204,7 +204,7 @@ function add(fieldName, param_index_id,param_title) {
 			var data1 = data
 		}*/
  
-		options[length]=new Option(param_title,param_index_id)
+		options['length']=new Option(param_title,param_index_id)
 		
 	}
 	
@@ -227,7 +227,7 @@ function del(obj1) {
 	
 	with(obj1) {
 		try {
-			options[selectedIndex]=null
+			options['selectedIndex']=null
 			selectedIndex=length-1		
 		} catch(e) {
 		
@@ -459,7 +459,7 @@ var calendar = null; // remember the calendar object so that we reuse it and
 // code from http://www.meyerweb.com -- change the active stylesheet.
 function setActiveStyleSheet(title) {
   var i, a, main;
-  for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+  for(i=0; (a = document.getElementsByTagName("link")['i']); i++) {
     if(a.getAttribute("rel").indexOf("style") != -1 && a.getAttribute("title")) {
       a.disabled = true;
       if(a.getAttribute("title") == title) a.disabled = false;
@@ -667,15 +667,15 @@ function prepareSubmit()
 <?php
 //--------------------------------------------------------
 foreach( $tableInfo as $key=>$var) {
-	//if($var[IsMainField] == 1) continue;
-	if(($var[FieldInput] == 'text' || $var[FieldInput] == 'textaera'|| $var[FieldInput] == 'RichEditor') && $var[FieldInputPicker] != 'url_content' && $IN[o] == 'add' && !empty($var[FieldInputTpl])) {
+	//if($var['IsMainField'] == 1) continue;
+	if(($var['FieldInput'] == 'text' || $var['FieldInput'] == 'textaera'|| $var['FieldInput'] == 'RichEditor') && $var['FieldInputPicker'] != 'url_content' && $IN['o'] == 'add' && !empty($var['FieldInputTpl'])) {
 		
 		require_once INCLUDE_PATH."admin/psn_admin.class.php";
 		$psn = new psn_admin();
-		$psnInfo[PSN] = 'file::'.$SYS_ENV['templatePath'];
+		$psnInfo['PSN'] = 'file::'.$SYS_ENV['templatePath'];
 
-		$pathInfo = pathinfo($var[FieldInputTpl]);
-		$psn->connect($psnInfo[PSN]);
+		$pathInfo = pathinfo($var['FieldInputTpl']);
+		$psn->connect($psnInfo['PSN']);
 		$content = $psn->read($pathInfo['dirname'], $pathInfo['basename']);
 		$psn->close();
 
@@ -684,15 +684,15 @@ foreach( $tableInfo as $key=>$var) {
 
 
 		echo " <tr class='tablelist'> 
-              <td align=right  width=80>{$var[FieldTitle]}:</td>
+              <td align=right  width=80>{$var['FieldTitle']}:</td>
               <td valign='middle'>";
 	
 	
 	//关联数据源
-	if($var[FieldInputPicker] == 'dsn_content') {
-		echo "<select name='data_{$var[FieldName]}'>";
+	if($var['FieldInputPicker'] == 'dsn_content') {
+		echo "<select name='data_{$var['FieldName']}'>";
 		//FieldDescription
-		if(preg_match("/<sql>(.*)<\/sql>/isU", $var[FieldDescription], $match)) {
+		if(preg_match("/<sql>(.*)<\/sql>/isU", $var['FieldDescription'], $match)) {
 			$resultDSN = $db->Execute($match[1]);
 			//echo $match[1];
 			//print_r($resultDSN->fields);
@@ -700,15 +700,15 @@ foreach( $tableInfo as $key=>$var) {
 
 			while(!$resultDSN->EOF) {
 				if($pInfo[$var['FieldName']] == $resultDSN->fields['value']) {
-					echo "<option value='{$resultDSN->fields[value]}' selected>{$resultDSN->fields[title]}</option>";
+					echo "<option value='{$resultDSN->fields['value']}' selected>{$resultDSN->fields['title']}</option>";
 				} else {
-					echo "<option value='{$resultDSN->fields[value]}'>{$resultDSN->fields[title]}</option>";
+					echo "<option value='{$resultDSN->fields['value']}'>{$resultDSN->fields['title']}</option>";
 				}
 			
 				$resultDSN->MoveNext();
 			}
-		} else if(preg_match("/<List>(.*)<\/List>/isU", $var[FieldDescription], $match)) {
-			if(preg_match_all("/<var>(.*)<\/var>/isU", $var[FieldDescription], $matches)) {
+		} else if(preg_match("/<List>(.*)<\/List>/isU", $var['FieldDescription'], $match)) {
+			if(preg_match_all("/<var>(.*)<\/var>/isU", $var['FieldDescription'], $matches)) {
 				foreach($matches[1] as $dsnkey=>$dsnvalue) {
 					preg_match("/<title>(.*)<\/title>/isU", $dsnvalue, $titleMatch);
 					preg_match("/<value>(.*)<\/value>/isU", $dsnvalue, $valueMatch);
@@ -727,36 +727,36 @@ foreach( $tableInfo as $key=>$var) {
 		continue;
 	}
 
-	if($var[FieldInput] == 'text' && $var[FieldType] != 'contentlink') { //单行文本
+	if($var['FieldInput'] == 'text' && $var['FieldType'] != 'contentlink') { //单行文本
 		$pInfo[$var['FieldName']] = htmlspecialchars($pInfo[$var['FieldName']]);
-		if($var[FieldInputFilter] == 'num_letter') {
-			echo "<input name='data_{$var[FieldName]}' type='text' value=\"{$pInfo[$var['FieldName']]}\" size=100%     onkeyup=\"value=value.replace(/[\W]/g,'') \" onbeforepaste=\"clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))\">";
+		if($var['FieldInputFilter'] == 'num_letter') {
+			echo "<input name='data_{$var['FieldName']}' type='text' value=\"{$pInfo[$var['FieldName']]}\" size=100%     onkeyup=\"value=value.replace(/[\W]/g,'') \" onbeforepaste=\"clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))\">";
 		
-		} elseif($var[FieldInputFilter] == 'num') {
-			echo "<input name='data_{$var[FieldName]}' type='text' value=\"{$pInfo[$var['FieldName']]}\" size=100%   onkeydown=\"onlyNum();\">";
+		} elseif($var['FieldInputFilter'] == 'num') {
+			echo "<input name='data_{$var['FieldName']}' type='text' value=\"{$pInfo[$var['FieldName']]}\" size=100%   onkeydown=\"onlyNum();\">";
 		
 		}else {
-			echo "<input name='data_{$var[FieldName]}' type='text' value=\"{$pInfo[$var['FieldName']]}\" size=100%  >";
+			echo "<input name='data_{$var['FieldName']}' type='text' value=\"{$pInfo[$var['FieldName']]}\" size=100%  >";
 		
 		}
 
-		if(!empty($var[selectValue])) {
-				echo "&nbsp;&nbsp;&nbsp;&nbsp;<select name='{$var[FieldName_select]}'  onchange=\"if(this.options[this.selectedIndex].value != '') { this.form.data_{$var[FieldName]}.value= this.options[this.selectedIndex].value;}\"> 				<option value=''>". $_LANG_SKIN['selectvalue'].":</option>";
+		if(!empty($var['selectValue'])) {
+				echo "&nbsp;&nbsp;&nbsp;&nbsp;<select name='{$var[FieldName_select]}'  onchange=\"if(this.options[this.selectedIndex].value != '') { this.form.data_{$var['FieldName']}.value= this.options[this.selectedIndex].value;}\"> 				<option value=''>". $_LANG_SKIN['selectvalue'].":</option>";
 
-				foreach($var[selectValue] as $var) {
+				foreach($var['selectValue'] as $var) {
 					echo "<option value='$var'>$var</option>";			
 				}
 				echo "</select>";
 		
-		} elseif(!empty($var[FieldInputPicker])) {
-			if($var[FieldInputPicker] == 'upload') {
- 				echo ' <img  style="position: relative;left:0px;top: 4px;" src="../html/images/menu_open.gif" class="Dtoolbutton" onmouseover="this.className=\'Dtoolbutton\';" onmouseout="this.className=\'Dtoolbutton\';" onclick="this.className=\'Ctoolbutton\';commonInputPicker(this,\'img\', \'document.FM\', \'data_'.$var[FieldName].'\')" title="" hspace="0" vspace="0">';
-			} elseif($var[FieldInputPicker] == 'upload_attach') {
- 				 	echo ' <img  style="position: relative;left:0px;top: 4px;" src="../html/images/menu_open.gif" class="Dtoolbutton" onmouseover="this.className=\'Dtoolbutton\';" onmouseout="this.className=\'Dtoolbutton\';" onclick="this.className=\'Ctoolbutton\';commonInputPicker(this,\'attach\', \'document.FM\', \'data_'.$var[FieldName].'\')" title="" hspace="0" vspace="0">';
-			} elseif($var[FieldInputPicker] == 'flash') {
- 				 	echo ' <img  style="position: relative;left:0px;top: 4px;" src="../html/images/menu_open.gif" class="Dtoolbutton" onmouseover="this.className=\'Dtoolbutton\';" onmouseout="this.className=\'Dtoolbutton\';" onclick="this.className=\'Ctoolbutton\';commonInputPicker(this,\'flash\', \'document.FM\', \'data_'.$var[FieldName].'\')" title="" hspace="0" vspace="0">';
+		} elseif(!empty($var['FieldInputPicker'])) {
+			if($var['FieldInputPicker'] == 'upload') {
+ 				echo ' <img  style="position: relative;left:0px;top: 4px;" src="../html/images/menu_open.gif" class="Dtoolbutton" onmouseover="this.className=\'Dtoolbutton\';" onmouseout="this.className=\'Dtoolbutton\';" onclick="this.className=\'Ctoolbutton\';commonInputPicker(this,\'img\', \'document.FM\', \'data_'.$var['FieldName'].'\')" title="" hspace="0" vspace="0">';
+			} elseif($var['FieldInputPicker'] == 'upload_attach') {
+ 				 	echo ' <img  style="position: relative;left:0px;top: 4px;" src="../html/images/menu_open.gif" class="Dtoolbutton" onmouseover="this.className=\'Dtoolbutton\';" onmouseout="this.className=\'Dtoolbutton\';" onclick="this.className=\'Ctoolbutton\';commonInputPicker(this,\'attach\', \'document.FM\', \'data_'.$var['FieldName'].'\')" title="" hspace="0" vspace="0">';
+			} elseif($var['FieldInputPicker'] == 'flash') {
+ 				 	echo ' <img  style="position: relative;left:0px;top: 4px;" src="../html/images/menu_open.gif" class="Dtoolbutton" onmouseover="this.className=\'Dtoolbutton\';" onmouseout="this.className=\'Dtoolbutton\';" onclick="this.className=\'Ctoolbutton\';commonInputPicker(this,\'flash\', \'document.FM\', \'data_'.$var['FieldName'].'\')" title="" hspace="0" vspace="0">';
 			} else {
-				echo "&nbsp;<input style=\"width:20px;padding-left:2px;text-align:center\" name=\"button5\" type='button' tabindex='13' value='...' onclick=\"FieldInputTpl='{$var[FieldInputTpl]}';FieldDefaultValue='{$var[FieldDefaultValue]}';InputPicker('{$var[FieldInputPicker]}',this.form,'data_{$var[FieldName]}')\" />";
+				echo "&nbsp;<input style=\"width:20px;padding-left:2px;text-align:center\" name=\"button5\" type='button' tabindex='13' value='...' onclick=\"FieldInputTpl='{$var['FieldInputTpl']}';FieldDefaultValue='{$var['FieldDefaultValue']}';InputPicker('{$var['FieldInputPicker']}',this.form,'data_{$var['FieldName']}')\" />";
 			
 			}
 
@@ -765,45 +765,45 @@ foreach( $tableInfo as $key=>$var) {
 
 
 
-	} elseif($var[FieldInput] == 'textaera' && $var[FieldType] != 'contentlink') { //多行文本
+	} elseif($var['FieldInput'] == 'textaera' && $var['FieldType'] != 'contentlink') { //多行文本
 		$pInfo[$var['FieldName']] = htmlspecialchars($pInfo[$var['FieldName']]);
-		if($var[FieldInputFilter] == 'num_letter') {
-			echo "<textarea name='data_{$var[FieldName]}' class='button' id='{$var[FieldName]}' style='height:150px;width:100%;overflow:auto; background-color:#FFFFFF;' onkeyup=\"value=value.replace(/[\W]/g,'') \" onbeforepaste=\"clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))\">{$pInfo[$var['FieldName']]}</textarea>";
+		if($var['FieldInputFilter'] == 'num_letter') {
+			echo "<textarea name='data_{$var['FieldName']}' class='button' id='{$var['FieldName']}' style='height:150px;width:100%;overflow:auto; background-color:#FFFFFF;' onkeyup=\"value=value.replace(/[\W]/g,'') \" onbeforepaste=\"clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))\">{$pInfo[$var['FieldName']]}</textarea>";
 		
-		} elseif($var[FieldInputFilter] == 'num') {
-			echo "<textarea name='data_{$var[FieldName]}' class='button' id='{$var[FieldName]}' style='height:150px;width:100%;overflow:auto; background-color:#FFFFFF;' onkeydown=\"onlyNum();\">{$pInfo[$var['FieldName']]}</textarea>";
+		} elseif($var['FieldInputFilter'] == 'num') {
+			echo "<textarea name='data_{$var['FieldName']}' class='button' id='{$var['FieldName']}' style='height:150px;width:100%;overflow:auto; background-color:#FFFFFF;' onkeydown=\"onlyNum();\">{$pInfo[$var['FieldName']]}</textarea>";
 		
 		} else {
-			echo "<textarea name='data_{$var[FieldName]}' class='button' id='{$var[FieldName]}' style='height:150px;width:100%;overflow:auto; background-color:#FFFFFF;' >{$pInfo[$var['FieldName']]}</textarea>";
+			echo "<textarea name='data_{$var['FieldName']}' class='button' id='{$var['FieldName']}' style='height:150px;width:100%;overflow:auto; background-color:#FFFFFF;' >{$pInfo[$var['FieldName']]}</textarea>";
 		
 		}
 
-	} elseif($var[FieldInput] == 'checkbox' && $var[FieldType] != 'contentlink') { //多选
-		foreach($var[selectValue] as $key=>$varln) {
+	} elseif($var['FieldInput'] == 'checkbox' && $var['FieldType'] != 'contentlink') { //多选
+		foreach($var['selectValue'] as $key=>$varln) {
 			if(strpos('hll'.$pInfo[$var['FieldName']], $varln)) {
-				echo "<input type='checkbox' name='data_{$var[FieldName]}[]' value='{$varln}' id='{$var[FieldName]}_{$key}' checked ><label for='{$var[FieldName]}_{$key}'>{$varln}</label>";
+				echo "<input type='checkbox' name='data_{$var['FieldName']}[]' value='{$varln}' id='{$var['FieldName']}_{$key}' checked ><label for='{$var['FieldName']}_{$key}'>{$varln}</label>";
 			
 			} else {
-				echo "<input type='checkbox' name='data_{$var[FieldName]}[]' value='{$varln}' id='{$var[FieldName]}_{$key}' ><label for='{$var[FieldName]}_{$key}'  >{$varln}</label> ";
+				echo "<input type='checkbox' name='data_{$var['FieldName']}[]' value='{$varln}' id='{$var['FieldName']}_{$key}' ><label for='{$var['FieldName']}_{$key}'  >{$varln}</label> ";
 			
 			}
 		}
-	} elseif($var[FieldInput] == 'radio' && $var[FieldType] != 'contentlink') { //单选
-		foreach($var[selectValue] as $key=>$varln) {
+	} elseif($var['FieldInput'] == 'radio' && $var['FieldType'] != 'contentlink') { //单选
+		foreach($var['selectValue'] as $key=>$varln) {
 
 			if($pInfo[$var['FieldName']] == $varln) {
-				echo "<input type='radio' name='data_{$var[FieldName]}' value='{$varln}' id='{$var[FieldName]}_{$key}' checked ><label for='{$var[FieldName]}_{$key}'>{$varln}</label>";
+				echo "<input type='radio' name='data_{$var['FieldName']}' value='{$varln}' id='{$var['FieldName']}_{$key}' checked ><label for='{$var['FieldName']}_{$key}'>{$varln}</label>";
 			
 			} else {
-				echo "<input type='radio' name='data_{$var[FieldName]}' value='{$varln}' id='{$var[FieldName]}_{$key}' ><label for='{$var[FieldName]}_{$key}'  >{$varln}</label> ";
+				echo "<input type='radio' name='data_{$var['FieldName']}' value='{$varln}' id='{$var['FieldName']}_{$key}' ><label for='{$var['FieldName']}_{$key}'  >{$varln}</label> ";
 			
 			}
 		}
 
-	} elseif($var[FieldInput] == 'select' && $var[FieldType] != 'contentlink') { //下拉菜单选择
-		echo "<select name='data_{$var[FieldName]}'>";
+	} elseif($var['FieldInput'] == 'select' && $var['FieldType'] != 'contentlink') { //下拉菜单选择
+		echo "<select name='data_{$var['FieldName']}'>";
 
-		foreach($var[selectValue] as $keyIn=>$varIn) {
+		foreach($var['selectValue'] as $keyIn=>$varIn) {
 			if($pInfo[$var['FieldName']] == $varIn) {
 				echo "<option value='{$varIn}' selected>{$varIn}</option>";
 			} else {
@@ -814,12 +814,12 @@ foreach( $tableInfo as $key=>$var) {
 
 		echo "</select>";
 
-	} elseif($var[FieldInput] == 'password' && $var[FieldType] != 'contentlink') { //密码
-		echo "<input name='data_{$var[FieldName]}' type='password' >";
+	} elseif($var['FieldInput'] == 'password' && $var['FieldType'] != 'contentlink') { //密码
+		echo "<input name='data_{$var['FieldName']}' type='password' >";
 
-	} elseif($var[FieldType] == 'contentlink') { //
+	} elseif($var['FieldType'] == 'contentlink') { //
 	
-		echo "<table   border=0  cellPadding=2 cellSpacing=0 ><tr><td ><select name='data_{$var[FieldName]}' name='select' size='10'>";
+		echo "<table   border=0  cellPadding=2 cellSpacing=0 ><tr><td ><select name='data_{$var['FieldName']}' name='select' size='10'>";
 		
 		$Links = explode(',', $pInfo[$var['FieldName']]);
 		//print_r($Links);
@@ -834,12 +834,12 @@ foreach( $tableInfo as $key=>$var) {
 		
 		
  
-		echo "</select><INPUT TYPE='hidden' name='data_{$var[FieldName]}_value'></td>";
-		echo "<td class='line_height'>&nbsp;<input name='button5' type='button' tabindex='13'  style='font:9pt;font-family: Verdana, Arial, Helvetica, sans-serif;'  value='".$_LANG_SKIN['icon_del']."' onclick=del(this.form.data_{$var[FieldName]})><br><br>&nbsp;<input name='button5' type='button' tabindex='13' value='".$_LANG_SKIN['icon_up']."' onclick=moveUp(this.form.data_{$var[FieldName]})><br>&nbsp;<input name='button5' type='button' tabindex='13' value='".$_LANG_SKIN['icon_down']."' onclick=moveDown(this.form.data_{$var[FieldName]})><br><br>&nbsp;<input name=\"button5\" type='button' tabindex='13' value='...' onclick=editContentLink('{$var[FieldName]}')>";
-		echo "</td><td>&nbsp;<input name='button5' type='button' tabindex='13' value='&nbsp;Go&nbsp;' onclick=GoSelect(this.form.data_{$var[FieldName]})></td></tr></table>";
+		echo "</select><INPUT TYPE='hidden' name='data_{$var['FieldName']}_value'></td>";
+		echo "<td class='line_height'>&nbsp;<input name='button5' type='button' tabindex='13'  style='font:9pt;font-family: Verdana, Arial, Helvetica, sans-serif;'  value='".$_LANG_SKIN['icon_del']."' onclick=del(this.form.data_{$var['FieldName']})><br><br>&nbsp;<input name='button5' type='button' tabindex='13' value='".$_LANG_SKIN['icon_up']."' onclick=moveUp(this.form.data_{$var['FieldName']})><br>&nbsp;<input name='button5' type='button' tabindex='13' value='".$_LANG_SKIN['icon_down']."' onclick=moveDown(this.form.data_{$var['FieldName']})><br><br>&nbsp;<input name=\"button5\" type='button' tabindex='13' value='...' onclick=editContentLink('{$var['FieldName']}')>";
+		echo "</td><td>&nbsp;<input name='button5' type='button' tabindex='13' value='&nbsp;Go&nbsp;' onclick=GoSelect(this.form.data_{$var['FieldName']})></td></tr></table>";
 
 	
-	} elseif($var[FieldInput] == 'RichEditor') { //可视化编辑器
+	} elseif($var['FieldInput'] == 'RichEditor') { //可视化编辑器
 	$LibType = true;
 	// Create a new DevEdit class object
 	$myDE = new devedit;
@@ -847,14 +847,14 @@ foreach( $tableInfo as $key=>$var) {
 	$myDE->Libtype=$LibType;
 	
 	// Set the name of this DevEdit class
-	$myDE->SetName("data_{$var[FieldName]}");
+	$myDE->SetName("data_{$var['FieldName']}");
 
 	// Set the path to the de folder
 	//$DevEditPath_Full = "/admin/editor";
 	SetDevEditPath( INCLUDE_PATH."editor");
 	//$DevEditPath = "editor/";
 	$a = pathinfo($_SERVER["PHP_SELF"]);
-	$myDE->AdminPath = $a[dirname];
+	$myDE->AdminPath = $a['dirname'];
 	$myDE->sId = $IN['sId'];
  	// Set the path to the folder that contains the flash files for the flash manager
 	//$myDE->SetFlashPath("/icms/site_image/$parent/flash");
@@ -963,14 +963,14 @@ foreach( $tableInfo as $key=>$var) {
 	if($myDE->GetValue(false) == ""){
 		/*$Tplsql = "SELECT TplPath FROM $tbl_article_type WHERE Parent=$parent and Id=$LibType";
 		$Tplrow = DBQueryAndFetchRow($Tplsql);
-		if ($Tplrow[TplPath] && !$row[Content]){
-		$tpl = fopen("../templates/".$parent."_tpl/$Tplrow[TplPath]", "r");
+		if ($Tplrow['TplPath'] && !$row['Content']){
+		$tpl = fopen("../templates/".$parent."_tpl/$Tplrow['TplPath']", "r");
 		$tpl = fread($tpl, 200000);
 		$val = $tpl;
 		} else {
-		$val = $row[Content];
+		$val = $row['Content'];
 		}*/
-		$val = $pInfo[$var[FieldName]];
+		$val = $pInfo[$var['FieldName']];
 	}else{
 		$val = $myDE->GetValue(false);
 	}
@@ -1012,10 +1012,12 @@ foreach( $tableInfo as $key=>$var) {
 	//Display the rest of the form
 
 	}
-	elseif($var[FieldInput] == 'CKEditor') {
+	elseif($var['FieldInput'] == 'CKEditor') {
 		include("editor_cke.php");
-	}    
-	elseif($var[FieldInput] == 'BBCode') {
+	}  
+    elseif($var['FieldInput'] == 'CKEditor_3_6_2') {
+		include("editor_cke_3_6_2.php");
+	} elseif($var['FieldInput'] == 'BBCode') {
 		include("editor_bbcode.php");
 	}
 echo " </td> </tr>";
@@ -1030,7 +1032,7 @@ echo " </td> </tr>";
 <!--3-->
 <DIV id=tabContent__2 style="DISPLAY: none; VISIBILITY: hidden">
 <table  border=0   cellPadding=0 cellSpacing=5 >
-<?php if($IN[o] == 'add'):?>
+<?php if($IN['o'] == 'add'):?>
 <tr class='tablelist'> 
               <td align=right ><?php echo $_LANG_SKIN['create_link']; ?></td>
               <td valign=top>
@@ -1045,9 +1047,9 @@ echo " </td> </tr>";
 <option value='' ><?php echo $_LANG_SKIN['null']; ?></option>
 <?php
 foreach($NODE_LIST as $key=>$var) {
-	if($var[TableID]!=$NodeInfo[TableID]) continue;
+	if($var['TableID']!=$NodeInfo['TableID']) continue;
 
-		echo "<option value='{$var[NodeID]}'>".str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var[cHeader])." - &nbsp;{$var[Name]}</option>";	
+		echo "<option value='{$var['NodeID']}'>".str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var['cHeader'])." - &nbsp;{$var['Name']}</option>";	
 }
 
  ?>
@@ -1059,9 +1061,9 @@ foreach($NODE_LIST as $key=>$var) {
 <option value='' ><?php echo $_LANG_SKIN['null']; ?></option>
 <?php
 foreach($NODE_LIST as $key=>$var) {
-	if($var[TableID]!=$NodeInfo[TableID]) continue;
+	if($var['TableID']!=$NodeInfo['TableID']) continue;
 
-		echo "<option value='{$var[NodeID]}'>".str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var[cHeader])." - &nbsp;{$var[Name]}</option>";	
+		echo "<option value='{$var['NodeID']}'>".str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $var['cHeader'])." - &nbsp;{$var['Name']}</option>";	
 }
 
  ?>

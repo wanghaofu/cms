@@ -22,12 +22,12 @@ $site = new site_admin();
 //$db->setDebug(1);
 //if($IN['NodeID'] == '') 	goback('error_NodeID_null');
 //权限验证
-// if(!empty($IN['NodeID'])) {
-// 		if(!$sys->canManagePublish($IN['o'], $IN['NodeID'])) {
-// 			goback($sys->returnMsg);
-// 		}
-// 		$NodeInfo = $iWPC->loadNodeInfo($IN['NodeID']);
-// }
+if(!empty($IN['NodeID'])) {
+		if(!$sys->canManagePublish($IN['o'], $IN['NodeID'])) {
+			goback($sys->returnMsg);
+		}
+		$NodeInfo = $iWPC->loadNodeInfo($IN['NodeID']);
+}
 
 
 if(!empty($IN['IndexID'])) {
@@ -229,8 +229,6 @@ switch($IN['o']) {
 								$value = $varIn;
 							else
 								$value .= ';'.$varIn;
-
-
 						}
 					} elseif($var['FieldInput'] == 'RichEditor') {
 						$field = 'data_'.$var['FieldName'].'_html';
@@ -242,11 +240,9 @@ switch($IN['o']) {
 							$result = $ImgAutoLocalize->execute($value);
 							if($result)
 								$value = $result;
-
-							
 						} 
 						//echo $value;exit;
-					} elseif($var['FieldInput'] == 'CKEditor'){
+					} elseif($var['FieldInput'] == 'CKEditor' || $var['FieldInput'] == 'CKEditor_3_6_2'){
 						//debug($IN);
 						$value = preg_replace("/<span [^<>]*contenteditable=\"?false\"?[^<>]*><font [^<>]*color=\"?\#888888\"?[^<>]*>\[Page\:([^<>]*) ?\]<\/font><\/span>/isU","<H3><FONT color=#888888>[Page:$1 ]</FONT></H3>",$IN[$field]);
 						if( $IN['data_'.$var['FieldName'].'_ImgAutoLocalize'] == '1' ) {
@@ -424,8 +420,7 @@ switch($IN['o']) {
 							if($result)
 								$value = $result;
 						} 
-					} elseif( $var['FieldInput'] == 'CKEditor' ){
-						//debug($IN);
+					} elseif( $var['FieldInput'] == 'CKEditor' || $var['FieldInput'] == 'CKEditor_3_6_2'){
 						$value = preg_replace("/<span [^<>]*contenteditable=\"?false\"?[^<>]*><font [^<>]*color=\"?\#888888\"?[^<>]*>\[Page\:([^<>]*) ?\]<\/font><\/span>/isU","<H3><FONT color=#888888>[Page:$1 ]</FONT></H3>",$IN[$field]);
 						if($IN['data_'.$var['FieldName'].'_ImgAutoLocalize'] == '1') {
 							//echo $result;

@@ -3,12 +3,12 @@ if(!defined('IN_IWPC')) {
  	exit('Access Denied');
 }
 if(!class_exists("CKEditor")){
-	include_once(INCLUDE_PATH."ckeditor-4.6/ckeditor.php");
+	include_once(INCLUDE_PATH."ckeditor_3.6.2/ckeditor.php");
 }
 // Create a class instance.
 $CKEditor = new CKEditor();
 // Path to the CKEditor directory.
-$CKEditor->basePath = INCLUDE_PATH.'/ckeditor-4.6/';
+$CKEditor->basePath = INCLUDE_PATH.'/ckeditor_3.6.2/';
 $CKEditor->config['width'] = "100%";
 $CKEditor->config['height'] = 500;
 $CKEditor->config['skin'] = "v2";

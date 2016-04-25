@@ -1047,7 +1047,7 @@ class publishAdmin extends iData
 			return false;
 		}
 	}
-
+   /** 发布**/
 	function refresh( $IndexID )
 	{
 		global $iWPC;
@@ -1438,6 +1438,7 @@ class publishAdmin extends iData
 		$IN['NodeID'] = empty( $IN['NodeID'] ) ? $NodeID : $IN['NodeID'];
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
 		$publishInfo = $this->getContentInfo( $IndexID );
+		
 		$fieldInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 		foreach ( $fieldInfo as $key => $var )
 		{
@@ -1539,7 +1540,7 @@ class publishAdmin extends iData
 		}
 		$template->compile_dir = SYS_PATH."sysdata/templates_c/";
 		$template->registerPreFilter( "CMS_Parser" );
-		include( SETTING_DIR."content.ini.php" );   //分页开始  初始参数
+		include( SETTING_DIR."content.ini.php" );   //手动分页开始  初始参数
 		$PublishFileFormat = $NodeInfo['PublishFileFormat'];
 		foreach ( $filenameFormatMap as $key => $var )
 		{

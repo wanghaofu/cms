@@ -1,5 +1,6 @@
 ﻿CKEDITOR.plugins.add('cmswarecss',
 {
+	icons:'cmswarecss',
 	init : function( editor ){
 		var config = editor.config;
 		editor.addCommand( 'cmswarecss', new CKEDITOR.CMSWareCss() );
