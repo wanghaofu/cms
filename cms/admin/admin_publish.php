@@ -22,12 +22,12 @@ $site = new site_admin();
 //$db->setDebug(1);
 //if($IN['NodeID'] == '') 	goback('error_NodeID_null');
 //权限验证
-if(!empty($IN['NodeID'])) {
-		if(!$sys->canManagePublish($IN['o'], $IN['NodeID'])) {
-			goback($sys->returnMsg);
-		}
-		$NodeInfo = $iWPC->loadNodeInfo($IN['NodeID']);
-}
+// if(!empty($IN['NodeID'])) {
+// 		if(!$sys->canManagePublish($IN['o'], $IN['NodeID'])) {
+// 			goback($sys->returnMsg);
+// 		}
+// 		$NodeInfo = $iWPC->loadNodeInfo($IN['NodeID']);
+// }
 
 
 if(!empty($IN['IndexID'])) {
@@ -1160,7 +1160,6 @@ switch($IN['o']) {
 						$Page = $IN['Page'];
 
 					$start=($Page-1)*$offset;
-					
 					$recordInfo['currentPage'] = $Page;
 					$recordInfo['pageNum'] = $pagenum;
 					$recordInfo['recordNum'] = $num;
@@ -1191,7 +1190,6 @@ switch($IN['o']) {
 			break;
 		case 'node_resync':
 			include_once SETTING_DIR ."cms.ini.php";
-
  			$offset = empty( $IN['offset']) ?  50 : $IN['offset'];
 			$InheritNodeID = $iWPC->loadNodeInfo($IN['NodeID'], 'InheritNodeID');
 			$num= $publish->getIndexRecordNum($InheritNodeID,  '!= -1', 1);
@@ -1212,16 +1210,11 @@ switch($IN['o']) {
 						continue;
 				} 				
 			}
-	
-
 			$Page++;
 			if($num > ($start+$offset)) {
 				showMsg(sprintf($_LANG_ADMIN['resync_running'], $Page*$offset, $num) , $base_url."o=node_resync&Page={$Page}&NodeID={$IN['NodeID']}");
-			
 			} else {
-
 				showMsg(sprintf($_LANG_ADMIN['resync_finished'], $num) , $base_url."o=content_list&type=main&NodeID={$IN['NodeID']}");
-		
 			}
 			break;
 
@@ -1255,12 +1248,6 @@ switch($IN['o']) {
 			}
 
 			break;
-  
-
 	}
-
-
-
-
 include MODULES_DIR.'footer.php' ;
 ?>

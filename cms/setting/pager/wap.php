@@ -6,35 +6,35 @@ $PageNum = count( $contentArray );
 $pagenum_pre = 0;
 foreach ( $contentArray as $key => $var )
 {
-	if ( $publishInfo[SelfPublishFileName] != "" )
+	if ( $publishInfo['SelfPublishFileName'] != "" )
 	{
-		$publishFileName = $publishInfo[SelfPublishFileName];
+		$publishFileName = $publishInfo['SelfPublishFileName'];
 	}
 	else
 	{
 		eval( "\$publishFileName = \"{$PublishFileFormat}\";" );
 	}
 	$pagelist = wap_page( $PageNum, $key + 1, $publishFileName );
-	if ( !empty( $this->NodeInfo[SubDir] ) && empty( $publishInfo[SelfPSNURL] ) )
+	if ( !empty( $this->NodeInfo['SubDir'] ) && empty( $publishInfo['SelfPSNURL'] ) )
 	{
-		if ( $this->NodeInfo[SubDir] == "auto" )
+		if ( $this->NodeInfo['SubDir'] == "auto" )
 		{
 			$publishFileName = $this->makeIndexSavePath( $IndexID )."/".$publishFileName;
 		}
 		else
 		{
-			$publishFileName = date( $this->NodeInfo[SubDir], $this->publishInfo[CreationDate] )."/".$publishFileName;
+			$publishFileName = date( $this->NodeInfo['SubDir'], $this->publishInfo['CreationDate'] )."/".$publishFileName;
 		}
 	}
-	else if ( !empty( $publishInfo[SelfPSNURL] ) )
+	else if ( !empty( $publishInfo['SelfPSNURL'] ) )
 	{
 		$publishFileName = $publishFileName;
 	}
 	$realURL = $this->getHtmlURL( $publishFileName );
 	$template->assign( "URL", $realURL );
-	if ( $key == 0 && ( $this->publishInfo[Type] == 1 || $this->publishInfo[Type] == 0 || $this->publishInfo[Type] == 3 ) )
+	if ( $key == 0 && ( $this->publishInfo['Type'] == 1 || $this->publishInfo['Type'] == 0 || $this->publishInfo['Type'] == 3 ) )
 	{
-		$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+		$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 		$this->flushData( );
 		foreach ( $FieldsInfo as $keyIn => $varIn )
 		{
@@ -42,12 +42,12 @@ foreach ( $contentArray as $key => $var )
 			{
 				continue;
 			}
-			$this->addData( $varIn[FieldName], $publishInfo[$varIn[FieldName]] );
+			$this->addData( $varIn['FieldName'], $publishInfo[$varIn['FieldName']] );
 		}
-		$this->addData( "IndexID", $publishInfo[IndexID] );
-		$this->addData( "ContentID", $publishInfo[ContentID] );
-		$this->addData( "NodeID", $publishInfo[NodeID] );
-		$this->addData( "PublishDate", $publishInfo[PublishDate] );
+		$this->addData( "IndexID", $publishInfo['IndexID'] );
+		$this->addData( "ContentID", $publishInfo['ContentID'] );
+		$this->addData( "NodeID", $publishInfo['NodeID'] );
+		$this->addData( "PublishDate", $publishInfo['PublishDate'] );
 		$this->addData( "URL", $realURL );
 		$publishInfo['URL'] = $realURL;
 		$this->publishUpdate( $NodeInfo['TableID'] );
@@ -81,19 +81,19 @@ foreach ( $contentArray as $key => $var )
 	}
 	++$pagenum_pre;
 }
-if ( $publishInfo[SelfPublishFileName] != "" )
+if ( $publishInfo['SelfPublishFileName'] != "" )
 {
-	$publishFileName = $publishInfo[SelfPublishFileName];
+	$publishFileName = $publishInfo['SelfPublishFileName'];
 }
 else
 {
 	eval( "\$publishFileName = \"{$PublishFileFormat}\";" );
 }
-if ( !empty( $this->NodeInfo[SubDir] ) && empty( $publishInfo[SelfPSNURL] ) )
+if ( !empty( $this->NodeInfo['SubDir'] ) && empty( $publishInfo['SelfPSNURL'] ) )
 {
-	$publishFileName = date( $this->NodeInfo[SubDir], $this->publishInfo[CreationDate] )."/".$publishFileName;
+	$publishFileName = date( $this->NodeInfo['SubDir'], $this->publishInfo['CreationDate'] )."/".$publishFileName;
 }
-else if ( !empty( $publishInfo[SelfPSNURL] ) )
+else if ( !empty( $publishInfo['SelfPSNURL'] ) )
 {
 	$publishFileName = $publishFileName;
 }

@@ -16,7 +16,7 @@
 				checked : config.Localize,
 				additional : '<input name="'+ editor.element.getNameAtt() + '_ImgAutoLocalize" type="hidden" value="' + (config.Localize?1:0) +'">',
 				execute : function(instance){
-					document.getElementById(instance.id).firstChild.value=document.getElementById(instance.id+'_cmswarelocal').checked?1:0;
+					document.getElementById(instance.id).firstChild.value=document.getElementById(instance.id+'_cmswarelocalize').checked?1:0;
 					return false;
 				}
 			} );

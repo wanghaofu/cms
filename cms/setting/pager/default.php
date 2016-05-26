@@ -7,7 +7,7 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 		$contentArray = array_slice( $contentArray, 1 );
 		$pagenum = count( $contentArray );
 		$pagenum_pre = $pagenum;
-		$this->mDoc[PageNum] = $pagenum;
+		$this->mDoc['PageNum'] = $pagenum;
 		$totalnum = $pagenum;
 		--$pagenum;
 		--$pagenum_pre;
@@ -17,7 +17,7 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 	{
 		$pagenum = count( $contentArray );
 		$pagenum_pre = $pagenum;
-		$this->mDoc[PageNum] = $pagenum;
+		$this->mDoc['PageNum'] = $pagenum;
 		$totalnum = $pagenum;
 		--$pagenum;
 		--$pagenum_pre;
@@ -33,9 +33,9 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 			$sign = "_".$pagenum_pre;
 		}
 
-		if ( $publishInfo[SelfPublishFileName] != "" )
+		if ( $publishInfo['SelfPublishFileName'] != "" )
 		{
-			$publishFileName = $publishInfo[SelfPublishFileName];
+			$publishFileName = $publishInfo['SelfPublishFileName'];
 		}
 		else
 		{
@@ -70,9 +70,9 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 		$pagenumlist = $totalnum;
 		--$pagenumlist;
 		$pagelist = "";
-		if ( $publishInfo[SelfPublishFileName] != "" )
+		if ( $publishInfo['SelfPublishFileName'] != "" )
 		{
-			$publishFileName = $publishInfo[SelfPublishFileName];
+			$publishFileName = $publishInfo['SelfPublishFileName'];
 		}
 		else
 		{
@@ -107,35 +107,35 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 		{
 			$sign = "_".$pagenum;
 		}
-		if ( $publishInfo[SelfPublishFileName] != "" )
+		if ( $publishInfo['SelfPublishFileName'] != "" )
 		{
-			$publishFileName = $publishInfo[SelfPublishFileName];
+			$publishFileName = $publishInfo['SelfPublishFileName'];
 		}
 		else
 		{
 			eval( "\$publishFileName = \"{$PublishFileFormat}\";" );
 		}
-		if ( !empty( $this->NodeInfo[SubDir] ) && empty( $publishInfo[SelfPSNURL] ) )
+		if ( !empty( $this->NodeInfo['SubDir'] ) && empty( $publishInfo['SelfPSNURL'] ) )
 		{
-			if ( $this->NodeInfo[SubDir] == "auto" )
+			if ( $this->NodeInfo['SubDir'] == "auto" )
 			{
 				$publishFileName = $this->makeIndexSavePath( $IndexID )."/".$publishFileName;
 			}
 			else
 			{
-				$publishFileName = date( $this->NodeInfo[SubDir], $this->publishInfo[CreationDate] )."/".$publishFileName;
+				$publishFileName = date( $this->NodeInfo['SubDir'], $this->publishInfo['CreationDate'] )."/".$publishFileName;
 			}
 		}
-		else if ( !empty( $publishInfo[SelfPSNURL] ) )
+		else if ( !empty( $publishInfo['SelfPSNURL'] ) )
 		{
 			$publishFileName = $publishFileName;
 		}
 		$realURL = $this->getHtmlURL( $publishFileName );
 		$template->assign( "URL", $realURL );
 		$publishFileName = preg_replace( "/\\.([A-Za-z0-9]+)\$/isU", $sign.".\\1", $publishFileName );
-		if ( $pagenum == 0 && ( $this->publishInfo[Type] == 1 || $this->publishInfo[Type] == 0 || $this->publishInfo[Type] == 3 ) )
+		if ( $pagenum == 0 && ( $this->publishInfo['Type'] == 1 || $this->publishInfo['Type'] == 0 || $this->publishInfo['Type'] == 3 ) )
 		{
-			$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+			$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 			$this->flushData( );
 			foreach ( $FieldsInfo as $key => $var )
 			{
@@ -143,12 +143,12 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 				{
 					continue;
 				}
-				$this->addData( $var[FieldName], $publishInfo[$var[FieldName]] );
+				$this->addData( $var['FieldName'], $publishInfo[$var['FieldName']] );
 			}
-			$this->addData( "IndexID", $publishInfo[IndexID] );
-			$this->addData( "ContentID", $publishInfo[ContentID] );
-			$this->addData( "NodeID", $publishInfo[NodeID] );
-			$this->addData( "PublishDate", $publishInfo[PublishDate] );
+			$this->addData( "IndexID", $publishInfo['IndexID'] );
+			$this->addData( "ContentID", $publishInfo['ContentID'] );
+			$this->addData( "NodeID", $publishInfo['NodeID'] );
+			$this->addData( "PublishDate", $publishInfo['PublishDate'] );
 			$this->addData( "URL", $realURL );
 			$publishInfo['URL'] = $realURL;
 			$this->publishUpdate( $NodeInfo['TableID'] );
@@ -181,7 +181,7 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 		$contentArray = array_slice( $contentArray, 1 );
 		$pagenum = count( $contentArray );
 		$pagenum_pre = $pagenum;
-		$this->mDoc[PageNum] = $pagenum;
+		$this->mDoc['PageNum'] = $pagenum;
 		$totalnum = $pagenum;
 		--$pagenum;
 		--$pagenum_pre;
@@ -191,7 +191,7 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 	{
 		$pagenum = count( $contentArray );
 		$pagenum_pre = $pagenum;
-		$this->mDoc[PageNum] = $pagenum;
+		$this->mDoc['PageNum'] = $pagenum;
 		$totalnum = $pagenum;
 		--$pagenum;
 		--$pagenum_pre;
@@ -207,9 +207,9 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 		{
 			$sign = "_".$pagenum_pre;
 		}
-		if ( $publishInfo[SelfPublishFileName] != "" )
+		if ( $publishInfo['SelfPublishFileName'] != "" )
 		{
-			$publishFileName = $publishInfo[SelfPublishFileName];
+			$publishFileName = $publishInfo['SelfPublishFileName'];
 		}
 		else
 		{
@@ -244,9 +244,9 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 		$pagenumlist = $totalnum;
 		--$pagenumlist;
 		$pagelist = "";
-		if ( $publishInfo[SelfPublishFileName] != "" )
+		if ( $publishInfo['SelfPublishFileName'] != "" )
 		{
-			$publishFileName = $publishInfo[SelfPublishFileName];
+			$publishFileName = $publishInfo['SelfPublishFileName'];
 		}
 		else
 		{
@@ -273,35 +273,35 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 		{
 			$sign = "_".$pagenum;
 		}
-		if ( $publishInfo[SelfPublishFileName] != "" )
+		if ( $publishInfo['SelfPublishFileName'] != "" )
 		{
-			$publishFileName = $publishInfo[SelfPublishFileName];
+			$publishFileName = $publishInfo['SelfPublishFileName'];
 		}
 		else
 		{
 			eval( "\$publishFileName = \"{$PublishFileFormat}\";" );
 		}
-		if ( !empty( $this->NodeInfo[SubDir] ) && empty( $publishInfo[SelfPSNURL] ) )
+		if ( !empty( $this->NodeInfo['SubDir'] ) && empty( $publishInfo['SelfPSNURL'] ) )
 		{
-			if ( $this->NodeInfo[SubDir] == "auto" )
+			if ( $this->NodeInfo['SubDir'] == "auto" )
 			{
 				$publishFileName = $this->makeIndexSavePath( $IndexID )."/".$publishFileName;
 			}
 			else
 			{
-				$publishFileName = date( $this->NodeInfo[SubDir], $this->publishInfo[CreationDate] )."/".$publishFileName;
+				$publishFileName = date( $this->NodeInfo['SubDir'], $this->publishInfo['CreationDate'] )."/".$publishFileName;
 			}
 		}
-		else if ( !empty( $publishInfo[SelfPSNURL] ) )
+		else if ( !empty( $publishInfo['SelfPSNURL'] ) )
 		{
 			$publishFileName = $publishFileName;
 		}
 		$publishFileName = preg_replace( "/\\.([A-Za-z0-9]+)\$/isU", $sign.".\\1", $publishFileName );
 		$realURL = $this->getHtmlURL( $publishFileName );
 		$template->assign( "URL", $realURL );
-		if ( $pagenum == 0 && ( $this->publishInfo[Type] == 1 || $this->publishInfo[Type] == 0 || $this->publishInfo[Type] == 3 ) )
+		if ( $pagenum == 0 && ( $this->publishInfo['Type'] == 1 || $this->publishInfo['Type'] == 0 || $this->publishInfo['Type'] == 3 ) )
 		{
-			$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+			$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 			$this->flushData( );
 			foreach ( $FieldsInfo as $key => $var )
 			{
@@ -309,12 +309,12 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 				{
 					continue;
 				}
-				$this->addData( $var[FieldName], $publishInfo[$var[FieldName]] );
+				$this->addData( $var['FieldName'], $publishInfo[$var['FieldName']] );
 			}
-			$this->addData( "IndexID", $publishInfo[IndexID] );
-			$this->addData( "ContentID", $publishInfo[ContentID] );
-			$this->addData( "NodeID", $publishInfo[NodeID] );
-			$this->addData( "PublishDate", $publishInfo[PublishDate] );
+			$this->addData( "IndexID", $publishInfo['IndexID'] );
+			$this->addData( "ContentID", $publishInfo['ContentID'] );
+			$this->addData( "NodeID", $publishInfo['NodeID'] );
+			$this->addData( "PublishDate", $publishInfo['PublishDate'] );
 			$this->addData( "URL", $realURL );
 			$publishInfo['URL'] = $realURL;
 			$this->publishUpdate( $NodeInfo['TableID'] );
@@ -341,34 +341,34 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 	} while ( $pagenum-- );
 } else {
 	$template->assign( $mainContentLabel, $publishInfo[$mainContentLabel] );
-	if ( $publishInfo[SelfPublishFileName] != "" )
+	if ( $publishInfo['SelfPublishFileName'] != "" )
 	{
-		$publishFileName = $publishInfo[SelfPublishFileName];
+		$publishFileName = $publishInfo['SelfPublishFileName'];
 	}
 	else
 	{
 		eval( "\$publishFileName = \"{$PublishFileFormat}\";" );
 	}
-	if ( !empty( $this->NodeInfo[SubDir] ) && empty( $publishInfo[SelfPSNURL] ) )
+	if ( !empty( $this->NodeInfo['SubDir'] ) && empty( $publishInfo['SelfPSNURL'] ) )
 	{
-		if ( $this->NodeInfo[SubDir] == "auto" )
+		if ( $this->NodeInfo['SubDir'] == "auto" )
 		{
 			$publishFileName = $this->makeIndexSavePath( $IndexID )."/".$publishFileName;
 		}
 		else
 		{
-			$publishFileName = date( $this->NodeInfo[SubDir], $this->publishInfo[CreationDate] )."/".$publishFileName;
+			$publishFileName = date( $this->NodeInfo['SubDir'], $this->publishInfo['CreationDate'] )."/".$publishFileName;
 		}
 	}
-	else if ( !empty( $publishInfo[SelfPSNURL] ) )
+	else if ( !empty( $publishInfo['SelfPSNURL'] ) )
 	{
 		$publishFileName = $publishFileName;
 	}
 	$realURL = $this->getHtmlURL( $publishFileName );
 	$template->assign( "URL", $realURL );
-	if ( $this->publishInfo[Type] == 1 || $this->publishInfo[Type] == 0 || $this->publishInfo[Type] == 3 )
+	if ( $this->publishInfo['Type'] == 1 || $this->publishInfo['Type'] == 0 || $this->publishInfo['Type'] == 3 )
 	{
-		$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo[TableID] );
+		$FieldsInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 		$this->flushData( );
 		foreach ( $FieldsInfo as $key => $var )
 		{
@@ -376,12 +376,12 @@ if ( preg_match_all( $patt, $publishInfo[$mainContentLabel], $match ) )
 			{
 				continue;
 			}
-			$this->addData( $var[FieldName], $publishInfo[$var[FieldName]] );
+			$this->addData( $var['FieldName'], $publishInfo[$var['FieldName']] );
 		}
-		$this->addData( "IndexID", $publishInfo[IndexID] );
-		$this->addData( "ContentID", $publishInfo[ContentID] );
-		$this->addData( "NodeID", $publishInfo[NodeID] );
-		$this->addData( "PublishDate", $publishInfo[PublishDate] );
+		$this->addData( "IndexID", $publishInfo['IndexID'] );
+		$this->addData( "ContentID", $publishInfo['ContentID'] );
+		$this->addData( "NodeID", $publishInfo['NodeID'] );
+		$this->addData( "PublishDate", $publishInfo['PublishDate'] );
 		$this->addData( "URL", $realURL );
 		$publishInfo['URL'] = $realURL;
 		$this->publishUpdate( $NodeInfo['TableID'] );

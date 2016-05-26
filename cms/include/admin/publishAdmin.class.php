@@ -374,7 +374,8 @@ class publishAdmin extends iData
 		$this->addData( "NodeID", $targetNodeID );
 		$this->addData( "TableID", $IndexInfo['TableID'] );
 		$this->addData( "Type", 0 );
-		$this->addData( "PublishDate", time( ) );
+// 		$this->addData( "PublishDate", time( ) );
+		$this->addData( "PublishDate", $IndexInfo['PublishDate'] );
 		if ( $this->indexAdd( ) )
 		{
 			$IndexID = $this->db_insert_id;
@@ -935,7 +936,7 @@ class publishAdmin extends iData
 				$this->flushData( );
 				$this->addData( "State", 1 );
 				$time=time();
-				$this->addData( "PublishDate", $time );
+// 				$this->addData( "PublishDate", $time );
 				$where = "where IndexID=".$IndexID;
 				if ( $this->dataUpdate( $table->content_index, $where ) )
 				{
@@ -1438,7 +1439,6 @@ class publishAdmin extends iData
 		$IN['NodeID'] = empty( $IN['NodeID'] ) ? $NodeID : $IN['NodeID'];
 		$NodeInfo = $iWPC->loadNodeInfo( $NodeID );
 		$publishInfo = $this->getContentInfo( $IndexID );
-		
 		$fieldInfo = content_table_admin::gettablefieldsinfo( $NodeInfo['TableID'] );
 		foreach ( $fieldInfo as $key => $var )
 		{

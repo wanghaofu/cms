@@ -2,7 +2,23 @@
 {
 CKEDITOR.plugins.add( 'cmswarepagebreak',
 {
-	icons:'cmswarepagebreak',
+	icons: 'pagebreak',
+	hidpi: true, // %REMOVE_LINE_CORE%
+	onLoad: function() {
+		var cssStyles = (
+				'background:url(' + CKEDITOR.getUrl( this.path + 'images/pagebreak.gif' ) + ') no-repeat center center;' +
+				'clear:both;' +
+				'width:100%;' +
+				'border-top:#999 1px dotted;' +
+				'border-bottom:#999 1px dotted;' +
+				'padding:0;' +
+				'height:7px;' +
+				'cursor:default;'
+			).replace( /;/g, ' !important;' ); // Increase specificity to override other styles, e.g. block outline.
+
+		// Add the style that renders our placeholder.
+		CKEDITOR.addCss( 'div.cke_pagebreak{' + cssStyles + '}' );
+	},
 	init : function( editor )
 	{
 		var pluginName = 'cmswarepagebreak';
@@ -30,7 +46,7 @@ CKEDITOR.plugins.add( 'cmswarepagebreak',
 				if ( CKEDITOR.plugins.cmswarepagebreak.getSelectedPagebreak( editor ) )
 					evt.data.dialog = 'editpagebreak';
 			});
-		editor.addCss(
+		CKEDITOR.addCss(
 			'.cke_pagebreak' +
 			'{' +
 			'font-size: 20px;' +

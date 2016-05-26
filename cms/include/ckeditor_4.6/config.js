@@ -7,7 +7,8 @@ CKEDITOR.editorConfig = function( config ) {
 	
 	// %REMOVE_START%
 	// The configuration options below are needed when running CKEditor from source files.
-	config.plugins = 'dialogui,dialog,about,a11yhelp,dialogadvtab,basicstyles,bidi,blockquote,clipboard,button,panelbutton,panel,floatpanel,colorbutton,colordialog,templates,menu,contextmenu,div,resize,toolbar,elementspath,enterkey,entities,popup,filebrowser,find,fakeobjects,flash,floatingspace,listblock,richcombo,font,forms,format,horizontalrule,htmlwriter,iframe,wysiwygarea,image,indent,indentblock,indentlist,smiley,justify,menubutton,language,link,list,liststyle,magicline,maximize,newpage,pagebreak,pastetext,pastefromword,preview,print,removeformat,save,selectall,showblocks,showborders,sourcearea,specialchar,scayt,stylescombo,tab,table,tabletools,undo,wsc';
+	config.plugins = 'dialogui,dialog,about,a11yhelp,dialogadvtab,basicstyles,bidi,blockquote,clipboard,button,panelbutton,panel,floatpanel,colorbutton,colordialog,templates,menu,contextmenu,div,resize,toolbar,elementspath,enterkey,entities,popup,filebrowser,find,fakeobjects,flash,floatingspace,listblock,richcombo,font,forms,format,horizontalrule,htmlwriter,iframe,wysiwygarea,image,indent,indentblock,indentlist,smiley,justify,menubutton,language,link,list,liststyle,magicline,maximize,newpage,pastetext,pastefromword,preview,print,removeformat,save,selectall,showblocks,showborders,sourcearea,specialchar,scayt,stylescombo,tab,table,tabletools,undo,wsc';
+	
 	config.skin = 'moono';
 	// %REMOVE_END%
 
@@ -42,6 +43,10 @@ CKEDITOR.editorConfig = function( config ) {
 				"showdisplay" : "显示多媒体信息",
 				"loop" : "循环播放",
 			}			};	
+	
+	
+	
+	
 	config.image_plus = {
 			'changeName' : {
 					'type' : 'checkbox',
@@ -109,7 +114,6 @@ CKEDITOR.editorConfig = function( config ) {
 			
 	};
 	
-//  config.language = 'fr';
 //  config.uiColor = '#AADC6E';
 
 config.width = "100%";
@@ -121,8 +125,17 @@ config.removePlugins = "pagebreak"; //移除插件
 //config.audiopreset = array(300,68);
 //config.downicon = "<?php TplVarsAdmin::getValue('PUBLISH_URL') ?>/images/icon/%s.gif";
 //扩展插件！
+config.extraPlugins = "checkbox,addhtml,cmswarecss,cmswarepagebreak,cmswarelocal,";
+//config.extraPlugins = "checkbox,addhtml,cmswarecss,cmswarelocal,cmswarepagebreak";
 //config.extraPlugins = "checkbox,cmswareforms,cmswarelocal,addhtml,cmswarecss,cmswarepagebreak,cmswareattach";
-//config.extraPlugins = "checkbox,cmswareforms,cmswarelocal,addhtml,cmswarecss,cmswarepagebreak,cmswareattach";
+/**
+ * 目前有问题的两个插件
+ * cmswareforms cmswareattach 是因为依赖的style插件有问题 但是styles插件是什么却是不清楚
+ * 0 break 问题
+ * 	已经修复 缺少图标新的系统逻辑修改
+ * 1 cmswarelocal也是有问题的 说是找不到那个checked 
+ * 		问题已经修复 id不匹配 不知道什么原因 可能是新老版本的差异吧 ，已经修正 13:30:54
+ */
 
 //config.enterMode = "CKEDITOR.ENTER_BR";
 //config.shiftEnterMode = "CKEDITOR.ENTER_P";
@@ -133,39 +146,40 @@ config.toolbarGroups = [
              		{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
              		{ name: 'forms', groups: [ 'forms' ] },
              		{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-             		'/',
              		{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
              		{ name: 'styles', groups: [ 'styles' ] },
              		{ name: 'colors', groups: [ 'colors' ] },
              		{ name: 'insert', groups: [ 'insert' ] },
              		{ name: 'links', groups: [ 'links' ] },
-             		{ name: 'others', groups: [ 'others' ] },
+             		{ name: 'others', groups: [ 'others' ]},
+             		{name:'cmswarepagebreak',groups:['PageBreak','cmswarelocal']}
              	];
 
-config.removeButtons = 'ShowBlocks,Save,Templates,NewPage,Print,Preview,Replace,SelectAll,RemoveFormat,NumberedList,BulletedList,Indent,Outdent,Blockquote,CreateDiv,BidiLtr,Language,BidiRtl,Smiley,Iframe,About';
+config.removeButtons = 'pagebreak,ShowBlocks,Save,Templates,NewPage,Print,Preview,Replace,SelectAll,RemoveFormat,NumberedList,BulletedList,Indent,Outdent,Blockquote,CreateDiv,BidiLtr,Language,BidiRtl,Smiley,Iframe,About';
+
 };
 
-
-CKEDITOR.on('ariaWidget', function( ev )
-		{
-	if(!ev.data.getFrameDocument){return;}
-	var doc=ev.data.getFrameDocument();
-	if(!doc.getBody){return;}
-	var body=doc.getBody();
-	if(body.data('cssappend')!='1'){
-		body.setAttribute('data-cssappend','1');
-		if(doc.$.createStyleSheet){
-			var sheet = doc.$.createStyleSheet();
-			sheet.addRule('.cke_label','font-size:12px;');
-		}else{
-			var style=doc.createElement('style'),
-				cssText=doc.createText('.cke_label{font-size:12px;}');
-			style.setAttribute('type','text/css');
-			style.append(cssText);
-			style.insertAfter(body.getFirst());
-		}
-	}
-},null,null,1);
+//
+//CKEDITOR.on('ariaWidget', function( ev )
+//		{
+//	if(!ev.data.getFrameDocument){return;}
+//	var doc=ev.data.getFrameDocument();
+//	if(!doc.getBody){return;}
+//	var body=doc.getBody();
+//	if(body.data('cssappend')!='1'){
+//		body.setAttribute('data-cssappend','1');
+//		if(doc.$.createStyleSheet){
+//			var sheet = doc.$.createStyleSheet();
+//			sheet.addRule('.cke_label','font-size:12px;');
+//		}else{
+//			var style=doc.createElement('style'),
+//				cssText=doc.createText('.cke_label{font-size:12px;}');
+//			style.setAttribute('type','text/css');
+//			style.append(cssText);
+//			style.insertAfter(body.getFirst());
+//		}
+//	}
+//},null,null,1);
 
 CKEDITOR.on('dialogDefinition', function( ev )
 		{

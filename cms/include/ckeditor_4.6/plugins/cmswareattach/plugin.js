@@ -29,7 +29,7 @@ function createFakeElement( editor, realElement )
 CKEDITOR.plugins.add(title,
 {
 	requires : [ 'panelbutton', 'floatpanel', 'styles', 'fakeobjects' ],
-	
+//	requires : [ 'panelbutton', 'floatpanel',  'fakeobjects' ],
 	init : function( editor ){
 		var config = editor.config,lang = editor.lang;
 
@@ -63,7 +63,7 @@ CKEDITOR.plugins.add(title,
 				}
 			});
 
-			editor.addCss(
+		CKEDITOR.addCss(
 				'img.cke_media' +
 				'{' +
 					'background-image: url(' + CKEDITOR.getUrl( this.path + 'images/placeholder.png' ) + ');' +
